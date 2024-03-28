@@ -3,6 +3,9 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": ["warn", { "singleQuote": true }],
+    "import/prefer-default-export": "off",
+    "import/extensions": "off",
+    "global-require": "off",
     "react/jsx-filename-extension": [
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
