@@ -1,0 +1,5 @@
+{
+  "(apps|packages)/**/*.{js,ts,jsx,tsx}": ["prettier --write", "eslint --fix"],
+  "*.json": ["prettier --write"],
+  "packages/database/schema.prisma": ["prisma format"]
+}
