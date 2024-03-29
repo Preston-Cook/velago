@@ -12,7 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Earth } from 'lucide-react';
 
 export default function LanguageDropDown() {
   const [position, setPosition] = React.useState('English');

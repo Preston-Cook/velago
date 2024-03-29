@@ -1,14 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import Container from './ui/Container';
-import { Button } from './ui/Button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { Button } from './ui/Button';
 import LanguageDropDown from './LanguageDropDown';
 
-const Header = () => {
+function Header() {
   const { theme, setTheme } = useTheme();
   const routes = [
     {
@@ -20,7 +19,7 @@ const Header = () => {
       label: 'Contact',
     },
     {
-      href: '/',
+      href: '#faq',
       label: 'FAQ',
     },
   ];
@@ -34,10 +33,15 @@ const Header = () => {
           </Link>
         </div>
         <nav className="space-x-6 hidden max-w-400px justify-end md:flex ml-auto">
-          {routes.map((route, i) => (
-            <Button key={i} asChild variant="ghost" className="sm:px-2 lg:px-4">
+          {routes.map((route) => (
+            <Button
+              key={`${route.label}${route.href}`}
+              asChild
+              variant="ghost"
+              className="sm:px-2 lg:px-4"
+            >
               <Link
-                key={i}
+                key={`${route.href}${route.label}`}
                 href={route.href}
                 className="text-sm font-medium transition-colors"
               >
@@ -46,7 +50,7 @@ const Header = () => {
             </Button>
           ))}
         </nav>
-        <div className="flex items-center justify-around">
+        <div className="flex items-center justify-end">
           <Button
             variant="ghost"
             size="icon"
@@ -60,7 +64,7 @@ const Header = () => {
           </Button>
           <LanguageDropDown />
           <Button
-            className="mx-4 md:mx-6 w-fit py-2 px-4"
+            className="mx-4 md:ml-6 w-fit py-2 px-4"
             variant="default"
             size="icon"
             aria-label="Toggle Theme"
@@ -73,9 +77,9 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent side="left" className="w-[300px] sm:w-[400px]">
               <nav className="flex flex-col gap-4">
-                {routes.map((route, i) => (
+                {routes.map((route) => (
                   <Link
-                    key={i}
+                    key={`${route.href}${route.label}`}
                     href={route.href}
                     className="block px-2 py-1 text-lg"
                   >
@@ -89,6 +93,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+}
 
 export default Header;

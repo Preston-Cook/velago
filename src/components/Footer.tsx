@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Button } from './ui/Button';
-import Container from './ui/Container';
 
 const links = [
   {
@@ -13,7 +12,7 @@ const links = [
   },
   {
     text: 'FAQ',
-    route: '/faq',
+    route: '#faq',
   },
   {
     text: 'Privacy Policy',
@@ -36,18 +35,16 @@ export default function Footer() {
           </a>
           . All Rights Reserved.
         </span>
-        <ul className="flex flex-wrap justify-center md:justify-start items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400">
-          {links.map((link, i) => {
-            return (
-              <li key={i}>
-                <Link href={link.route}>
-                  <Button className="pl-0" variant="link">
-                    {link.text}
-                  </Button>
-                </Link>
-              </li>
-            );
-          })}
+        <ul className="flex flex-wrap justify-center sm:justify-start items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400">
+          {links.map((link) => (
+            <li key={`${link.text}${link.route}`}>
+              <Link href={link.route}>
+                <Button className="pl-0" variant="link">
+                  {link.text}
+                </Button>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </footer>
