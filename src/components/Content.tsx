@@ -31,7 +31,7 @@ export default function Content() {
         <div className="px-4 mx-auto max-w-screen-xl lg:py-8 lg:px-6">
           <div className="sm:text-lg">
             <h2 className="mb-4 text-4xl text-center text-primary tracking-tight font-bold ">
-              Revolutionizing Access: Empowering Healthcare for All
+              Revolutionizing Access for All
             </h2>
             <p className="my-8 font-light">
               Welcome to Velago, where we are revolutionizing access to
