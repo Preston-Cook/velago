@@ -18,11 +18,11 @@ export default function CallToAction() {
 
   return (
     <section>
-      <div className="py-4 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-        <h1 className="mb-4 text-4xl font-bold tracking-tight leading-none  md:text-5xl lg:text-6xl text-primary">
+      <div className="py-4 px-4 mx-auto max-w-screen-xl text-center lg:pt-16 lg:px-12 lg:pb-10">
+        <h1 className="mb-12 text-4xl font-bold tracking-tight leading-none  md:text-5xl lg:text-5xl text-primary">
           Find Resources Near You
         </h1>
-        <p className="mb-8 text-lg font-normal lg:text-xl sm:px-16 xl:px-48 ">
+        <p className="mb-12 text-lg font-normal lg:text-xl sm:px-16 xl:px-48 ">
           Use Velago to search for healthcare providers and charitable
           organizations near you
         </p>

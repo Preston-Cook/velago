@@ -35,11 +35,11 @@ export default function Footer() {
           </a>
           . All Rights Reserved.
         </span>
-        <ul className="flex flex-wrap justify-center sm:justify-start items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400">
+        <ul className="flex flex-wrap justify-center sm:justify-start items-center mt-3 text-sm font-medium">
           {links.map((link) => (
             <li key={`${link.text}${link.route}`}>
               <Link href={link.route}>
-                <Button className="pl-0" variant="link">
+                <Button className="sm:pl-0" variant="link">
                   {link.text}
                 </Button>
               </Link>

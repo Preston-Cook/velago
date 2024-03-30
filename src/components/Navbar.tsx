@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { Separator } from '@radix-ui/react-separator';
 import { Button } from './ui/Button';
 import LanguageDropDown from './LanguageDropDown';
 
@@ -76,6 +77,10 @@ function Header() {
               <Menu className="md:hidden" />
             </SheetTrigger>
             <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+              <h2 className="px-2 py-4 text-2xl text-primary font-bold">
+                Velago
+              </h2>
+              <Separator className="bg-primary h-[1px] mb-4" />
               <nav className="flex flex-col gap-4">
                 {routes.map((route) => (
                   <Link
