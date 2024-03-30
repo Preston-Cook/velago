@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 import '@/styles/globals.css';
 import { cn } from '@/lib/utils';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import { ThemeProvider } from '@/context/ThemeProvider';
 import Header from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Locale, i18n } from '@/i18n.config';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,13 +17,19 @@ const fontSans = FontSans({
   variable: '--font-sans',
 });
 
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }));
+}
+
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { lang: Locale };
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={params.lang} suppressHydrationWarning>
       <body
         className={cn(
           'min-h-screen flex flex-col bg-background font-sans antialiased',
