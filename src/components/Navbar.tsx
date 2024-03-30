@@ -11,16 +11,16 @@ function Header() {
   const { theme, setTheme } = useTheme();
   const routes = [
     {
-      href: '/',
-      label: 'About',
+      href: '/search',
+      label: 'Search',
     },
     {
-      href: '/',
+      href: '/contact',
       label: 'Contact',
     },
     {
-      href: '#faq',
-      label: 'FAQ',
+      href: '/about',
+      label: 'About',
     },
   ];
 

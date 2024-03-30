@@ -26,8 +26,9 @@ export default function CallToAction() {
           Use Velago to search for healthcare providers and charitable
           organizations near you
         </p>
-        <div className="flex w-full max-w-sm items-center space-x-2 mx-auto mt-10">
+        <div className="flex max-w-md items-center space-x-2 mx-auto mt-10">
           <Input
+            className="w-[1000px]"
             type="text"
             placeholder={`${searchPlaceholders[randomIndex]}...`}
           />

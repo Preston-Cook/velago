@@ -5,11 +5,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useTheme } from 'next-themes';
 
 export default function Login() {
-  const { theme } = useTheme();
-
   return (
     <div className="w-full lg:grid lg:min-h-[700px] lg:grid-cols-2 xl:min-h-[800px] px-4">
       <div className="flex items-center justify-center py-12">
@@ -49,7 +46,7 @@ export default function Login() {
             <Button variant="outline" className="w-full flex gap-2">
               <div>
                 <svg
-                  fill={theme === 'dark' ? 'white' : 'black'}
+                  className="dark:invert"
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
                   y="0px"

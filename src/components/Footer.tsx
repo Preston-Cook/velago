@@ -3,16 +3,16 @@ import { Button } from './ui/Button';
 
 const links = [
   {
-    text: 'About',
-    route: '/about',
+    text: 'Search',
+    route: '/search',
   },
   {
     text: 'Contact',
     route: '/contact',
   },
   {
-    text: 'FAQ',
-    route: '#faq',
+    text: 'About',
+    route: '/about',
   },
   {
     text: 'Privacy Policy',
