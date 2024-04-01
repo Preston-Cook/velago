@@ -6,7 +6,7 @@ interface CallToActionProps {
   lang: Locale;
 }
 
-export default async function CallToAction({ lang }: CallToActionProps) {
+export default async function Cta({ lang }: CallToActionProps) {
   const dic = (await getDictionary(lang)).pages.home.callToAction;
   const searchPlaceholders = dic.placeholders;
 

@@ -19,7 +19,7 @@ async function Header({ lang }: HeaderProps) {
       <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between w-full">
         <div className="flex items-center">
           <Link href="/">
-            <h1 className="text-xl font-bold text-primary">Velago</h1>
+            <h1 className="text-2xl font-bold text-primary">Velago</h1>
           </Link>
         </div>
         <nav className="space-x-6 hidden max-w-400px justify-end md:flex ml-auto">

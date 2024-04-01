@@ -10,6 +10,7 @@ export interface Header {
 
 export interface Footer {
   legal: string;
+  description: string;
   links: string[];
 }
 
