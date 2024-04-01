@@ -12,7 +12,11 @@ export default function FaqSection() {
         <h2 className="mb-6 lg:mb-8 text-3xl lg:text-4xl font-bold text-center text-primary">
           Frequently Asked Questions (FAQ)
         </h2>
-        <Accordion type="single" collapsible>
+        <Accordion
+          type="single"
+          collapsible
+          className="bg-secondary p-4 rounded-md border"
+        >
           <AccordionItem value="item-1">
             <AccordionTrigger className="text-sm md:text-base">
               How can I find healthcare providers or charities near me?

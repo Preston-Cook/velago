@@ -28,7 +28,7 @@ export default function CallToAction() {
         </p>
         <div className="flex max-w-md items-center space-x-2 mx-auto mt-10">
           <Input
-            className="w-[1000px]"
+            className="w-[1000px] bg-secondary"
             type="text"
             placeholder={`${searchPlaceholders[randomIndex]}...`}
           />

@@ -3,7 +3,7 @@ import { Inter as FontSans } from 'next/font/google';
 import '@/styles/globals.css';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/context/ThemeProvider';
-import Header from '@/components/Navbar';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Locale, i18n } from '@/i18n.config';
 
@@ -37,9 +37,9 @@ export default function RootLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system">
-          <Header />
+          <Header lang={params.lang} />
           <main className="flex-1">{children}</main>
-          <Footer />
+          <Footer lang={params.lang} />
         </ThemeProvider>
       </body>
     </html>

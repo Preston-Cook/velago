@@ -1,6 +1,7 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import redirectedPathName from '@/lib/redirectedPathName';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import {
   DropdownMenu,
@@ -11,28 +12,29 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Locale } from '@/i18n.config';
 
 export default function LanguageDropDown() {
   const pathName = usePathname();
   const router = useRouter();
-  const locale = pathName.split('/')[1];
+  const { lang } = useParams<{ lang: Locale }>();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="w-[80px]" asChild>
-        <Button variant="outline">
-          {locale === 'en' ? 'English' : 'Español'}
+        <Button className="hover:bg-primary hover:text-white" variant="outline">
+          {lang === 'en' ? 'English' : 'Español'}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="center">
-        <DropdownMenuLabel> Language</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {lang === 'en' ? 'Language' : 'Idioma'}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup
-          value={locale}
+          value={lang}
           onValueChange={(e) => {
-            const pathPieces = pathName.split('/');
-            pathPieces[1] = e;
-            const newPath = pathPieces.join('/');
+            const newPath = redirectedPathName(e, pathName);
             router.push(newPath);
           }}
         >
