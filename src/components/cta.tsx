@@ -1,0 +1,26 @@
+import { Locale } from '@/i18n.config';
+import { getDictionary } from '@/lib/dictionary';
+import SearchBar from './SearchBar';
+
+interface CallToActionProps {
+  lang: Locale;
+}
+
+export default async function CallToAction({ lang }: CallToActionProps) {
+  const dic = (await getDictionary(lang)).pages.home.callToAction;
+  const searchPlaceholders = dic.placeholders;
+
+  return (
+    <section>
+      <div className="py-4 px-4 mx-auto max-w-screen-xl text-center lg:pt-16 lg:px-12 lg:pb-10">
+        <h1 className="mb-12 text-4xl font-bold tracking-tight leading-none  md:text-5xl lg:text-5xl text-primary">
+          {dic.title}
+        </h1>
+        <p className="mb-12 text-lg font-normal lg:text-xl sm:px-16 xl:px-48 ">
+          {dic.description}
+        </p>
+        <SearchBar searchPlaceholders={searchPlaceholders} />
+      </div>
+    </section>
+  );
+}

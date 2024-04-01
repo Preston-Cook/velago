@@ -21,13 +21,12 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default function RootLayout({
-  children,
-  params,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
   params: { lang: Locale };
-}>) {
+}
+
+export default function RootLayout({ children, params }: RootLayoutProps) {
   return (
     <html lang={params.lang} suppressHydrationWarning>
       <body

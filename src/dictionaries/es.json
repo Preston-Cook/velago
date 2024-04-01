@@ -16,7 +16,7 @@
     ],
     "signUp": "Registrarse"
   },
-  "page": {
+  "pages": {
     "home": {
       "callToAction": {
         "title": "Encuentra Recursos Cerca de Ti",

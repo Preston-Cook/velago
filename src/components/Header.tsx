@@ -15,7 +15,7 @@ async function Header({ lang }: HeaderProps) {
   const dic = await getDictionary(lang);
 
   return (
-    <header className="sm:flex sm:justify-between py-3 px-4 border-b ">
+    <header className="sm:flex sm:justify-between py-3 px-4 border-b bg-secondary">
       <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between w-full">
         <div className="flex items-center">
           <Link href="/">
@@ -41,7 +41,9 @@ async function Header({ lang }: HeaderProps) {
           ))}
         </nav>
         <div className="flex items-center justify-end">
-          <DarkModeToggle />
+          <div className="hidden md:inline-flex mx-6">
+            <DarkModeToggle />
+          </div>
           <LanguageDropDown />
           <Button
             className="mx-4 md:ml-6 w-fit py-2 px-4"
@@ -49,7 +51,7 @@ async function Header({ lang }: HeaderProps) {
             size="icon"
             aria-label="Toggle Theme"
           >
-            Sign Up
+            {dic.header.signUp}
           </Button>
           <HamburgerMenu links={dic.header.links} />
         </div>

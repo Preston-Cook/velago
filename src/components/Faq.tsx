@@ -8,7 +8,7 @@ import {
 export default function FaqSection() {
   return (
     <section id="faq">
-      <div className="mx-auto max-w-screen-xl py-8">
+      <div className="mx-auto max-w-screen-xl py-6">
         <h2 className="mb-6 lg:mb-8 text-3xl lg:text-4xl font-bold text-center text-primary">
           Frequently Asked Questions (FAQ)
         </h2>
@@ -53,7 +53,7 @@ export default function FaqSection() {
             <AccordionTrigger className="text-sm md:text-base">
               Can I search for specific types of resources?
             </AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="font-base">
               Yes, you can refine your search by specifying the type of
               healthcare provider (e.g., clinics, hospitals, pharmacies) or the
               focus area of charitable organizations (e.g., healthcare,

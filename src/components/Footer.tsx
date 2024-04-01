@@ -12,7 +12,7 @@ export default async function Footer({ lang }: FooterProps) {
   const dic = await getDictionary(lang);
 
   return (
-    <footer className="border-t sm:flex sm:justify-between py-3 px-4 border-b bg-secondary">
+    <footer className="border-t sm:flex sm:justify-between py-3 px-4 border-b bg-secondary mt-6">
       <div className="px-4 sm:px-6 lg:px-8">
         <span className="text-sm  sm:text-center ">
           © 2024 Velago {dic.footer.legal}
