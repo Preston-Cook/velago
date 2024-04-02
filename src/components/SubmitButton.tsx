@@ -3,16 +3,20 @@ import Spinner from './Spinner';
 
 interface SubmitButtonProps {
   isLoading: boolean;
+  children: React.ReactNode;
 }
 
-export default function SubmitButton({ isLoading }: SubmitButtonProps) {
+export default function SubmitButton({
+  isLoading,
+  children,
+}: SubmitButtonProps) {
   return (
     <Button
       className="w-full sm:w-[40%] mt-8"
       type="submit"
       disabled={isLoading}
     >
-      {isLoading ? <Spinner /> : 'Submit'}
+      {isLoading ? <Spinner /> : children}
     </Button>
   );
 }

@@ -26,8 +26,8 @@ export default async function FaqSection({ lang }: FaqSectionProps) {
           collapsible
           className="bg-secondary p-4 rounded-md border"
         >
-          {dic.questions.map((q) => (
-            <AccordionItem key={uuidv4()} value="item-1">
+          {dic.questions.map((q, i) => (
+            <AccordionItem key={uuidv4()} value={`item-${i + 1}`}>
               <AccordionTrigger className="text-sm md:text-base">
                 {q.question}
               </AccordionTrigger>

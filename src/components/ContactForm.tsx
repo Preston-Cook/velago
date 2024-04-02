@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import formatPhone from '@/lib/formatPhone';
-import contactFormSchema from '@/schemas/contactSchema';
 import { useToast } from '@/components/ui/use-toast';
 import {
   Form,
@@ -19,32 +18,105 @@ import { useState } from 'react';
 import { Textarea } from './ui/textarea';
 import SubmitButton from './SubmitButton';
 
-const fieldObjs = [
-  {
-    name: 'firstName',
-    label: 'First Name',
-    placeholder: 'Aaron',
-  },
-  {
-    name: 'lastName',
-    label: 'Last Name',
-    placeholder: 'Schwartz',
-  },
-  {
-    name: 'email',
-    label: 'Email',
-    placeholder: 'example@velago.com',
-  },
-  {
-    name: 'phone',
-    label: 'Phone',
-    placeholder: '(123) 456-7890',
-  },
-];
+interface ContactFormProps {
+  validation: {
+    firstName: {
+      min: string;
+      max: string;
+    };
+    lastName: {
+      min: string;
+      max: string;
+    };
+    phone: {
+      refine: string;
+    };
+    email: {
+      email: string;
+    };
+    message: {
+      min: string;
+      max: string;
+    };
+  };
+  dic: {
+    title: string;
+    description: string;
+    labels: string[];
+    messagePlaceholder: string;
+    toast: {
+      success: {
+        title: string;
+        description: string;
+      };
+      error: {
+        title: string;
+        description: string;
+      };
+    };
+    submit: string;
+  };
+}
 
-export default function ContactForm() {
+export default function ContactForm({ validation, dic }: ContactFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { toast } = useToast();
+
+  const fieldObjs = [
+    {
+      name: 'firstName',
+      label: dic.labels[0],
+      placeholder: 'Aaron',
+    },
+    {
+      name: 'lastName',
+      label: dic.labels[1],
+      placeholder: 'Schwartz',
+    },
+    {
+      name: 'email',
+      label: dic.labels[2],
+      placeholder: 'example@velago.com',
+    },
+    {
+      name: 'phone',
+      label: dic.labels[3],
+      placeholder: '(123) 456-7890',
+    },
+  ];
+
+  const phoneRegExp = /^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
+
+  const contactFormSchema = z.object({
+    firstName: z
+      .string()
+      .min(2, {
+        message: validation.firstName.min,
+      })
+      .max(50, {
+        message: validation.firstName.max,
+      }),
+    lastName: z
+      .string()
+      .min(2, {
+        message: validation.lastName.min,
+      })
+      .max(50, {
+        message: validation.lastName.max,
+      }),
+    phone: z.string().refine((value) => phoneRegExp.test(value), {
+      message: validation.phone.refine,
+    }),
+    email: z.string().email(validation.email.email),
+    message: z
+      .string()
+      .min(10, {
+        message: validation.message.min,
+      })
+      .max(300, {
+        message: validation.message.max,
+      }),
+  });
 
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
@@ -68,15 +140,15 @@ export default function ContactForm() {
 
     if (res.status === 201) {
       toast({
-        title: 'Success!',
-        description: 'Your message has been sent to Velago!',
+        title: dic.toast.success.title,
+        description: dic.toast.success.description,
       });
       reset();
     } else {
       toast({
         className: 'bg-secondary',
-        title: 'Uh oh! Something went wrong.',
-        description: 'There was a problem with your request.',
+        title: dic.toast.error.title,
+        description: dic.toast.success.description,
         variant: 'destructive',
       });
     }
@@ -139,10 +211,10 @@ export default function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem className="mt-8">
-              <FormLabel>Message</FormLabel>
+              <FormLabel>{dic.labels[4]}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Enter Message Here"
+                  placeholder={dic.messagePlaceholder}
                   {...field}
                   rows={6}
                   className="block w-full bg-secondary"
@@ -154,7 +226,7 @@ export default function ContactForm() {
         />
         <div className="w-full" />
         <div className="text-center">
-          <SubmitButton isLoading={isLoading} />
+          <SubmitButton isLoading={isLoading}>{dic.submit}</SubmitButton>
         </div>
       </form>
     </Form>

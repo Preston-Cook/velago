@@ -82,17 +82,19 @@
     "contact": {
       "title": "Contact Us",
       "description": "Get in touch with us to learn more about our services, partnerships, or any inquiries you may have.",
-      "labels": [],
+      "labels": ["First Name", "Last Name", "Email", "Phone", "Message"],
+      "messagePlaceholder": "Enter message here",
       "toast": {
         "success": {
-          "title": "",
-          "description": ""
+          "title": "Success!",
+          "description": "Your message has been sent to Velago!"
         },
         "error": {
-          "title": "",
-          "description": ""
+          "title": "Uh oh! Something went wrong",
+          "description": "There was a problem with your request"
         }
-      }
+      },
+      "submit": "Submit"
     }
   },
   "footer": {
@@ -112,6 +114,9 @@
       },
       "phone": {
         "refine": "Invalid phone number"
+      },
+      "email": {
+        "email": "Invalid email"
       },
       "message": {
         "min": "Must be at least 10 characters",

@@ -82,17 +82,25 @@
     "contact": {
       "title": "Contacto con Nosotros",
       "description": "Póngase en contacto con nosotros para obtener más información sobre nuestros servicios, asociaciones o cualquier consulta que pueda tener.",
-      "labels": [],
+      "messagePlaceholder": "Introduzca el mensaje aquí",
+      "labels": [
+        "Nombre de pila",
+        "Apellido",
+        "Correo electrónico",
+        "Teléfono",
+        "Mensaje"
+      ],
       "toast": {
         "success": {
-          "title": "",
-          "description": ""
+          "title": "¡Éxito!",
+          "description": "¡Tu mensaje ha sido enviado a Velago!"
         },
         "error": {
-          "title": "",
-          "description": ""
+          "title": "¡Uh oh! Algo salió mal",
+          "description": "Hubo un problema con su solicitud"
         }
-      }
+      },
+      "submit": "Entregar"
     }
   },
   "footer": {
@@ -118,6 +126,9 @@
       },
       "phone": {
         "refine": "Numero de telefono invalido"
+      },
+      "email": {
+        "email": "Email inválido"
       },
       "message": {
         "min": "Debe tener al menos 10 caracteres.",
