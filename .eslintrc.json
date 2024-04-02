@@ -16,6 +16,7 @@
     "react/require-default-props": "off",
     "eslint-plugin-import/no-extraneous-dependencies": "off",
     "@typescript-eslint/no-unused-vars": "error",
+    "jsx-a11y/label-has-associated-control": "off",
     "react/jsx-filename-extension": [
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }

@@ -24,7 +24,12 @@ export function i18Middleware(middleware: CustomMiddleware) {
     event: NextFetchEvent,
     response: NextResponse,
   ) => {
-    const { pathname } = request.nextUrl;
+    const { pathname, href } = request.nextUrl;
+
+    if (href.split('/').includes('api')) {
+      return middleware(request, event, response);
+    }
+
     const pathnameIsMissingLocale = i18n.locales.every(
       (locale) =>
         !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,

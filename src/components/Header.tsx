@@ -3,7 +3,7 @@ import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
 import { v4 as uuidv4 } from 'uuid';
 import HamburgerMenu from './HamburgerMenu';
-import { Button } from './ui/Button';
+import { Button } from './ui/button';
 import LanguageDropDown from './LanguageDropDown';
 import DarkModeToggle from './DarkModeToggle';
 

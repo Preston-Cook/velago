@@ -3,7 +3,7 @@
 import { useTheme } from 'next-themes';
 import { Sun, Moon } from 'lucide-react';
 
-import { Button } from './ui/Button';
+import { Button } from './ui/button';
 
 export default function DarkModeToggle() {
   const { theme, setTheme } = useTheme();

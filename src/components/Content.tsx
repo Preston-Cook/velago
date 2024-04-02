@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import PartnerCard from './PartnerCard';
-import { Button } from './ui/Button';
+import { Button } from './ui/button';
 
 const description1 =
   'Partner with us to reach more patients in need. Showcase your services and contribute to improving healthcare accessibility. Explore partnership opportunities today!';
