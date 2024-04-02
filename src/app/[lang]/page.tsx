@@ -18,8 +18,8 @@ export default function Home({ params }: HomePageProps) {
       <div className="sm:px-6 lg:px-8 py-8 flex flex-col justify-around gap-10">
         <Cta lang={lang} />
         <Separator className="bg-primary w-[80%] min-w-[200px] mx-auto" />
-        <Content />
-        <FaqSection />
+        <Content lang={lang} />
+        <FaqSection lang={lang} />
       </div>
     </div>
   );

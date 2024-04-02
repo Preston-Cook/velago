@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import formatPhone from '@/lib/formatPhone';
 import contactFormSchema from '@/schemas/contactSchema';
-
+import { useToast } from '@/components/ui/use-toast';
 import {
   Form,
   FormControl,
@@ -44,6 +44,7 @@ const fieldObjs = [
 
 export default function ContactForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
@@ -56,18 +57,32 @@ export default function ContactForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof contactFormSchema>) {
-    console.log(JSON.stringify(values));
+  const { control, setValue, handleSubmit, reset } = form;
 
+  async function onSubmit(values: z.infer<typeof contactFormSchema>) {
     setIsLoading(true);
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contacts`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contacts`, {
       method: 'POST',
       body: JSON.stringify(values),
     });
+
+    if (res.status === 201) {
+      toast({
+        title: 'Success!',
+        description: 'Your message has been sent to Velago!',
+      });
+      reset();
+    } else {
+      toast({
+        className: 'bg-secondary',
+        title: 'Uh oh! Something went wrong.',
+        description: 'There was a problem with your request.',
+        variant: 'destructive',
+      });
+    }
     setIsLoading(false);
   }
 
-  const { control, setValue, handleSubmit } = form;
   return (
     <Form {...form}>
       <form

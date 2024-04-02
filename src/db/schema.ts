@@ -44,5 +44,5 @@ export const contacts = pgTable('contacts', {
   lastName: varchar('last-name').notNull(),
   email: varchar('email').notNull(),
   phone: varchar('phone').notNull(),
-  message: text('message'),
+  message: text('message').notNull(),
 });

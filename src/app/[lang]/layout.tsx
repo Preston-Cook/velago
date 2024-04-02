@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/context/ThemeProvider';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Locale, i18n } from '@/i18n.config';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -37,7 +38,8 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
       >
         <ThemeProvider attribute="class" defaultTheme="system">
           <Header lang={params.lang} />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 min-h-[90vh]">{children}</main>
+          <Toaster />
           <Footer lang={params.lang} />
         </ThemeProvider>
       </body>

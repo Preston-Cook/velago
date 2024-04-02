@@ -1,11 +1,8 @@
 import type { Locale } from '@/i18n.config';
-import { LanguageDictionary } from '@/types/LanguageDictionary';
 
 const dictionaries = {
   en: () => import('@/dictionaries/en.json').then((module) => module.default),
   es: () => import('@/dictionaries/es.json').then((module) => module.default),
 };
 
-export const getDictionary = async (
-  locale: Locale,
-): Promise<LanguageDictionary> => dictionaries[locale]();
+export const getDictionary = async (locale: Locale) => dictionaries[locale]();

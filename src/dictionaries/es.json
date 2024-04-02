@@ -14,7 +14,7 @@
         "text": "Acerca del Sitio"
       }
     ],
-    "signUp": "Registrarse"
+    "signUp": "Registrar"
   },
   "pages": {
     "home": {
@@ -45,13 +45,13 @@
             "description": "Únete a nosotros para marcar la diferencia. Lista tus servicios, comparte historias de impacto y participa con una comunidad solidaria. ¡Comienza tu viaje de asociación hoy!",
             "button": "Listar tu Organización"
           }
-        ]
-      },
-      "productDescription": {
-        "title": "Revolucionando el Acceso para Todos",
-        "paragraph1": "Bienvenido a Velago, donde estamos revolucionando el acceso a la atención médica y los servicios benéficos. Nuestra plataforma conecta a personas desfavorecidas con proveedores de atención médica que aceptan Medicare y organizaciones benéficas compasivas. A través de herramientas de búsqueda fáciles y listados completos, los usuarios pueden encontrar el apoyo que necesitan, mientras que los proveedores y organizaciones pueden llegar a una audiencia más amplia y tener un impacto duradero.",
-        "paragraph2": "Únete a nosotros para crear un mundo donde todos tengan acceso a servicios esenciales de atención médica y apoyo. Explora, conecta y marca la diferencia con Velago hoy.",
-        "link": "Saber más"
+        ],
+        "productDescription": {
+          "title": "Revolucionando el Acceso para Todos",
+          "paragraph1": "Bienvenido a Velago, donde estamos revolucionando el acceso a la atención médica y los servicios benéficos. Nuestra plataforma conecta a personas desfavorecidas con proveedores de atención médica que aceptan Medicare y organizaciones benéficas compasivas. A través de herramientas de búsqueda fáciles y listados completos, los usuarios pueden encontrar el apoyo que necesitan, mientras que los proveedores y organizaciones pueden llegar a una audiencia más amplia y tener un impacto duradero.",
+          "paragraph2": "Únete a nosotros para crear un mundo donde todos tengan acceso a servicios esenciales de atención médica y apoyo. Explora, conecta y marca la diferencia con Velago hoy.",
+          "link": "Saber más"
+        }
       },
       "faq": {
         "title": "Preguntas Frecuentes (FAQ)",
@@ -78,6 +78,21 @@
           }
         ]
       }
+    },
+    "contact": {
+      "title": "Contacto con Nosotros",
+      "description": "Póngase en contacto con nosotros para obtener más información sobre nuestros servicios, asociaciones o cualquier consulta que pueda tener.",
+      "labels": [],
+      "toast": {
+        "success": {
+          "title": "",
+          "description": ""
+        },
+        "error": {
+          "title": "",
+          "description": ""
+        }
+      }
     }
   },
   "footer": {
@@ -90,5 +105,24 @@
       "Política de Privacidad",
       "Descargo de Responsabilidad"
     ]
+  },
+  "validation": {
+    "contactSchema": {
+      "firstName": {
+        "min": "Debe tener al menos 2 caracteres",
+        "max": "Debe tener como máximo 50 caracteres"
+      },
+      "lastName": {
+        "min": "Debe tener al menos 2 caracteres",
+        "max": "Debe tener como máximo 50 caracteres"
+      },
+      "phone": {
+        "refine": "Numero de telefono invalido"
+      },
+      "message": {
+        "min": "Debe tener al menos 10 caracteres.",
+        "max": "Debe tener como máximo 300 caracteres"
+      }
+    }
   }
 }

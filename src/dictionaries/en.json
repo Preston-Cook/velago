@@ -45,13 +45,13 @@
             "description": "Join us in making a difference. List your services, share impact stories, and engage with a caring community. Start your partnership journey today!",
             "button": "List Your Organization"
           }
-        ]
-      },
-      "productDescription": {
-        "title": "Revolutionizing Access for All",
-        "paragraph1": "Welcome to Velago, where we are revolutionizing access to healthcare and charitable services. Our platform connects underprivileged individuals with Medicare-accepting healthcare providers and compassionate charitable organizations. Through easy search tools and comprehensive listings, users can find the support they need, while providers and organizations can reach a wider audience and make a lasting impact.",
-        "paragraph2": "Join us in creating a world where everyone has access to essential healthcare and support services. Explore, connect, and make a difference with Velago today.",
-        "link": "Learn more"
+        ],
+        "productDescription": {
+          "title": "Revolutionizing Access for All",
+          "paragraph1": "Welcome to Velago, where we are revolutionizing access to healthcare and charitable services. Our platform connects underprivileged individuals with Medicare-accepting healthcare providers and compassionate charitable organizations. Through easy search tools and comprehensive listings, users can find the support they need, while providers and organizations can reach a wider audience and make a lasting impact.",
+          "paragraph2": "Join us in creating a world where everyone has access to essential healthcare and support services. Explore, connect, and make a difference with Velago today.",
+          "link": "Learn more"
+        }
       },
       "faq": {
         "title": "Frequently Asked Questions (FAQ)",
@@ -78,11 +78,45 @@
           }
         ]
       }
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "Get in touch with us to learn more about our services, partnerships, or any inquiries you may have.",
+      "labels": [],
+      "toast": {
+        "success": {
+          "title": "",
+          "description": ""
+        },
+        "error": {
+          "title": "",
+          "description": ""
+        }
+      }
     }
   },
   "footer": {
     "legal": "All Rights Reserved",
     "description": "Empowering underprivileged individuals by connecting them with Medicare-accepting healthcare providers and charitable organizations.",
     "links": ["Search", "Contact", "About", "Privacy Policy", "Disclaimer"]
+  },
+  "validation": {
+    "contactSchema": {
+      "firstName": {
+        "min": "Must be at least 2 characters",
+        "max": "Must be at most 50 characters"
+      },
+      "lastName": {
+        "min": "Must be at least 2 characters",
+        "max": "Must be at most 50 characters"
+      },
+      "phone": {
+        "refine": "Invalid phone number"
+      },
+      "message": {
+        "min": "Must be at least 10 characters",
+        "max": "Must be at most 300 characters"
+      }
+    }
   }
 }

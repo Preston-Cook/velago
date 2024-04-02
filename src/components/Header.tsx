@@ -46,7 +46,7 @@ async function Header({ lang }: HeaderProps) {
           </div>
           <LanguageDropDown />
           <Button
-            className="mx-4 md:ml-6 w-fit py-2 px-4"
+            className="md:ml-6 w-fit py-2 px-4 mx-2"
             variant="default"
             size="icon"
             aria-label="Toggle Theme"

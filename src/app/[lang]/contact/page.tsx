@@ -1,6 +1,17 @@
 import ContactForm from '@/components/ContactForm';
+import { Locale } from '@/i18n.config';
+import { getDictionary } from '@/lib/dictionary';
 
-export default function Contact() {
+interface ContactPageProps {
+  params: {
+    lang: Locale;
+  };
+}
+
+export default async function Contact({ params }: ContactPageProps) {
+  const { lang } = params;
+  const dic = await getDictionary(lang);
+
   return (
     <section className="my-8">
       <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
@@ -9,8 +20,8 @@ export default function Contact() {
             Contact Us
           </h1>
           <p className="font-light sm:text-xl">
-            We use an agile approach to test assumptions and connect with the
-            needs of your audience early and often.
+            Get in touch with us to learn more about our services, partnerships,
+            or any inquiries you may have.
           </p>
         </div>
         <div className="mx-auto">

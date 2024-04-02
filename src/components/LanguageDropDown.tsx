@@ -22,7 +22,10 @@ export default function LanguageDropDown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="w-[80px]" asChild>
-        <Button className="hover:bg-primary hover:text-white" variant="outline">
+        <Button
+          className="hover:bg-primary hover:text-white py-5 px-4"
+          variant="outline"
+        >
           {lang === 'en' ? 'English' : 'Español'}
         </Button>
       </DropdownMenuTrigger>

@@ -1,7 +1,19 @@
-/* clients will request different datasets. Client requests specific data about housing aid, health, insurance, food banks, and more */
+interface ContactTemplateProps {
+  message: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+}
 
-// If they are just someone off the internet, then pre-select general datasets. They can use the sample phone messaging thing that texts them resources
+export default function ContactTemplate({
+  firstName,
+  lastName,
+  phone,
+  email,
+  message,
+}: ContactTemplateProps) {
+  console.log(firstName, lastName, phone, email, message);
 
-// asdfasdf. Get access to domain names
-
-// ;asldkfj;alskdjf
+  return <h1>Hello, world!</h1>;
+}

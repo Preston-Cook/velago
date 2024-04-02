@@ -15,6 +15,13 @@
       "when": 1712034788682,
       "tag": "0001_powerful_rictor",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1712068723322,
+      "tag": "0002_tearful_lord_tyger",
+      "breakpoints": true
     }
   ]
 }
