@@ -1,19 +1,45 @@
+import { Html, Tailwind, Font } from '@react-email/components';
+import * as React from 'react';
+import config from '../../tailwind.config';
+
 interface ContactTemplateProps {
-  message: string;
   firstName: string;
   lastName: string;
-  phone: string;
   email: string;
+  phone: string;
+  message: string;
 }
 
 export default function ContactTemplate({
   firstName,
   lastName,
-  phone,
   email,
+  phone,
   message,
 }: ContactTemplateProps) {
-  console.log(firstName, lastName, phone, email, message);
-
-  return <h1>Hello, world!</h1>;
+  return (
+    <Tailwind config={config}>
+      <Html lang="en" className="bg-secondary">
+        <Font
+          fontFamily="Roboto"
+          fallbackFontFamily="Verdana"
+          webFont={{
+            url: 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap',
+            format: 'embedded-opentype',
+          }}
+        />
+        <h1 className="font-base">
+          {firstName}
+          <br />
+          {lastName}
+          <br />
+          {email}
+          <br />
+          {phone}
+          <br />
+          {message}
+        </h1>
+      </Html>
+    </Tailwind>
+  );
 }
