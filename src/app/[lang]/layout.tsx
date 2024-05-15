@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
+import localFont from 'next/font/local';
+import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/context/ThemeProvider';
 import type { Locale } from '@/types/Locale';
-// import Header from '@/components/Header';
+import { Header } from '@/components/Header';
 // import Footer from '@/components/Footer';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
+import { Footer } from '@/components/Footer';
 import { i18n } from '../../../i18.config';
 // import { Toaster } from '@/components/ui/toaster';
 
@@ -19,6 +19,12 @@ export const metadata: Metadata = {
 const fontSans = FontSans({
   subsets: ['latin'],
   variable: '--font-sans',
+});
+
+// Font files can be colocated inside of `pages`
+const fontHeading = localFont({
+  src: '../../assets/fonts/CalSans-SemiBold.woff2',
+  variable: '--font-heading',
 });
 
 export async function generateStaticParams() {
@@ -39,12 +45,13 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
         className={cn(
           'min-h-screen flex flex-col bg-background font-sans antialiased',
           fontSans.variable,
+          fontHeading.variable,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system">
-          <Header lang={lang} />
+          <Header />
           <main className="flex-1 min-h-[90vh] py-3 px-4">{children}</main>
-          <Footer lang={lang} />
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
@@ -11,9 +10,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { v4 as uuid } from 'uuid';
+import { capitalizeString } from '@/lib/utils';
+
+const themes = ['light', 'dark', 'system'];
 
 export function DarkModeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
+
+  const currentTheme = theme || 'system';
 
   return (
     <DropdownMenu>
@@ -24,16 +29,16 @@ export function DarkModeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
-        </DropdownMenuItem>
+      <DropdownMenuContent className="border border-input" align="end">
+        {themes.map((themeType) => (
+          <DropdownMenuItem
+            className={`${themeType === currentTheme && 'bg-accent'}`}
+            key={uuid()}
+            onClick={() => setTheme(themeType)}
+          >
+            {capitalizeString(themeType)}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );
