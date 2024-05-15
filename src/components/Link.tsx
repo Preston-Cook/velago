@@ -7,7 +7,7 @@ interface CustomLinkProps {
   children: React.ReactNode;
 }
 
-export default function Link({ href, lang, ...props }: CustomLinkProps) {
+export default function CustomLink({ href, lang, ...props }: CustomLinkProps) {
   const isDefaultLang = lang === i18n.defaultLocale;
   const path = isDefaultLang ? href : `/${lang}${href}`;
   return <NextLink href={path} {...props} />;
