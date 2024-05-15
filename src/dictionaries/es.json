@@ -1,0 +1,139 @@
+{
+  "header": {
+    "links": [
+      {
+        "href": "/es/search",
+        "text": "Buscar"
+      },
+      {
+        "href": "/es/contact",
+        "text": "Contacto"
+      },
+      {
+        "href": "/es/about",
+        "text": "Acerca del Sitio"
+      }
+    ],
+    "signUp": "Registrar"
+  },
+  "pages": {
+    "home": {
+      "callToAction": {
+        "title": "Encuentra Recursos Cerca de Ti",
+        "description": "Utiliza Velago para buscar proveedores de atención médica y organizaciones benéficas cerca de ti",
+        "placeholders": [
+          "proveedores o organizaciones cerca de mí",
+          "atención médica o organizaciones cerca de mí",
+          "mi ubicación para servicios",
+          "proveedores locales o organizaciones cerca de mí",
+          "opciones de atención médica cercanas",
+          "proveedores de Medicare cerca de mí",
+          "organizaciones cercanas",
+          "servicios de atención médica cerca"
+        ]
+      },
+      "content": {
+        "title": "Asocíate con Nosotros",
+        "cards": [
+          {
+            "title": "Proveedores de Atención Médica",
+            "description": "Asóciate con nosotros para llegar a más pacientes necesitados. Muestra tus servicios y contribuye a mejorar la accesibilidad a la atención médica. ¡Explora las oportunidades de asociación hoy!",
+            "button": "Listar tu Proveedor"
+          },
+          {
+            "title": "Organizaciones",
+            "description": "Únete a nosotros para marcar la diferencia. Lista tus servicios, comparte historias de impacto y participa con una comunidad solidaria. ¡Comienza tu viaje de asociación hoy!",
+            "button": "Listar tu Organización"
+          }
+        ],
+        "productDescription": {
+          "title": "Revolucionando el Acceso para Todos",
+          "paragraph1": "Bienvenido a Velago, donde estamos revolucionando el acceso a la atención médica y los servicios benéficos. Nuestra plataforma conecta a personas desfavorecidas con proveedores de atención médica que aceptan Medicare y organizaciones benéficas compasivas. A través de herramientas de búsqueda fáciles y listados completos, los usuarios pueden encontrar el apoyo que necesitan, mientras que los proveedores y organizaciones pueden llegar a una audiencia más amplia y tener un impacto duradero.",
+          "paragraph2": "Únete a nosotros para crear un mundo donde todos tengan acceso a servicios esenciales de atención médica y apoyo. Explora, conecta y marca la diferencia con Velago hoy.",
+          "link": "Saber más"
+        }
+      },
+      "faq": {
+        "title": "Preguntas Frecuentes (FAQ)",
+        "questions": [
+          {
+            "question": "¿Cómo puedo encontrar proveedores de atención médica u organizaciones benéficas cerca de mí?",
+            "answer": "Puedes usar nuestra barra de búsqueda para ingresar tu ubicación y descubrir proveedores de atención médica cercanos que acepten Medicare y organizaciones benéficas."
+          },
+          {
+            "question": "¿Qué tipos de servicios ofrecen los proveedores de atención médica y las organizaciones benéficas?",
+            "answer": "Los proveedores de atención médica ofrecen una variedad de servicios médicos, que incluyen atención primaria, consultas especializadas y exámenes preventivos. Las organizaciones benéficas pueden proporcionar asistencia financiera, distribución de alimentos, refugio y otros servicios de apoyo."
+          },
+          {
+            "question": "¿Cómo sé si un proveedor de atención médica acepta Medicare?",
+            "answer": "Nuestra plataforma filtra los proveedores de atención médica según su aceptación de Medicare. Puedes identificar fácilmente los proveedores que aceptan Medicare en tus resultados de búsqueda."
+          },
+          {
+            "question": "¿Puedo buscar tipos específicos de recursos?",
+            "answer": "Sí, puedes refinar tu búsqueda especificando el tipo de proveedor de atención médica (por ejemplo, clínicas, hospitales, farmacias) o el área de enfoque de las organizaciones benéficas (por ejemplo, atención médica, educación, vivienda)."
+          },
+          {
+            "question": "¿Hay criterios de elegibilidad para acceder a servicios benéficos?",
+            "answer": "Los criterios de elegibilidad para servicios benéficos varían según la organización. Algunas pueden tener criterios basados en ingresos, mientras que otras priorizan ciertas demografías o condiciones específicas. Puedes contactar directamente a las organizaciones para obtener más información."
+          }
+        ]
+      }
+    },
+    "contact": {
+      "title": "Contacto con Nosotros",
+      "description": "Póngase en contacto con nosotros para obtener más información sobre nuestros servicios, asociaciones o cualquier consulta que pueda tener.",
+      "messagePlaceholder": "Introduzca el mensaje aquí",
+      "labels": [
+        "Nombre de pila",
+        "Apellido",
+        "Correo electrónico",
+        "Teléfono",
+        "Mensaje"
+      ],
+      "toast": {
+        "success": {
+          "title": "¡Éxito!",
+          "description": "¡Tu mensaje ha sido enviado a Velago!"
+        },
+        "error": {
+          "title": "¡Uh oh! Algo salió mal",
+          "description": "Hubo un problema con su solicitud"
+        }
+      },
+      "submit": "Entregar"
+    }
+  },
+  "footer": {
+    "legal": "Todos los Derechos Reservados",
+    "description": "Empoderando a personas desfavorecidas conectándolas con proveedores de atención médica que aceptan Medicare y organizaciones benéficas.",
+    "links": [
+      "Buscar",
+      "Contacto",
+      "Acerca del Sitio",
+      "Política de Privacidad",
+      "Descargo de Responsabilidad"
+    ]
+  },
+  "validation": {
+    "contactSchema": {
+      "firstName": {
+        "min": "Debe tener al menos 2 caracteres",
+        "max": "Debe tener como máximo 50 caracteres"
+      },
+      "lastName": {
+        "min": "Debe tener al menos 2 caracteres",
+        "max": "Debe tener como máximo 50 caracteres"
+      },
+      "phone": {
+        "refine": "Numero de telefono invalido"
+      },
+      "email": {
+        "email": "Email inválido"
+      },
+      "message": {
+        "min": "Debe tener al menos 10 caracteres.",
+        "max": "Debe tener como máximo 300 caracteres"
+      }
+    }
+  }
+}

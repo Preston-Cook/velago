@@ -10,9 +10,9 @@ export function i18Middleware(middleware: CustomMiddleware) {
     event: NextFetchEvent,
     response: NextResponse,
   ) => {
-    const { pathname, href } = request.nextUrl;
+    const { pathname } = request.nextUrl;
 
-    if (href.split('/').includes('api')) {
+    if (pathname.split('/').at(1) === 'api') {
       return middleware(request, event, response);
     }
 
