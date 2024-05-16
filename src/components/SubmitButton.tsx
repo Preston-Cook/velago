@@ -1,5 +1,5 @@
+import { Loader2 } from 'lucide-react';
 import { Button } from './ui/button';
-import Spinner from './Spinner';
 
 interface SubmitButtonProps {
   isLoading: boolean;
@@ -12,11 +12,11 @@ export default function SubmitButton({
 }: SubmitButtonProps) {
   return (
     <Button
-      className="w-full sm:w-[40%] mt-8"
+      className="w-[60%] max-w-[500px] mt-8"
       type="submit"
       disabled={isLoading}
     >
-      {isLoading ? <Spinner /> : children}
+      {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : children}
     </Button>
   );
 }

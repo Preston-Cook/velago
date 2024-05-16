@@ -5,7 +5,7 @@ import { Separator } from '@radix-ui/react-separator';
 import { Menu } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 import { Sheet, SheetTrigger, SheetContent } from './ui/sheet';
-import DarkModeToggle from './DarkModeToggle';
+import { DarkModeToggle } from './DarkModeToggle';
 
 export interface LinkProps {
   href: string;

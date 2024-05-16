@@ -1,24 +1,45 @@
 'use client';
 
+import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { Sun, Moon } from 'lucide-react';
 
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { v4 as uuid } from 'uuid';
+import { capitalizeString } from '@/lib/utils';
 
-export default function DarkModeToggle() {
-  const { theme, setTheme } = useTheme();
+const themes = ['light', 'dark', 'system'];
+
+export function DarkModeToggle() {
+  const { setTheme, theme } = useTheme();
+
+  const currentTheme = theme || 'system';
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      aria-label="Toggle Theme"
-      className="hover:border"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-    >
-      <Sun className="h-6 w-6 rotate-0 scale-100 transition-all hover:transition-none dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all  hover:transition-none dark:rotate-0 dark:scale-100" />
-      <span className="sr-only">Toggle Theme</span>
-    </Button>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="icon">
+          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100  dark:-rotate-90 dark:scale-0 transition-transform transition-colors-none" />
+          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-transform transition-colors-none dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="border border-input" align="start">
+        {themes.map((themeType) => (
+          <DropdownMenuItem
+            className={`${themeType === currentTheme && 'bg-accent'}`}
+            key={uuid()}
+            onClick={() => setTheme(themeType)}
+          >
+            {capitalizeString(themeType)}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

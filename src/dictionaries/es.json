@@ -11,10 +11,11 @@
       },
       {
         "href": "/es/about",
-        "text": "Acerca del Sitio"
+        "text": "Acerca"
       }
     ],
-    "signUp": "Registrar"
+    "signUp": "Registrar",
+    "signIn": "Iniciar Sesión"
   },
   "pages": {
     "home": {

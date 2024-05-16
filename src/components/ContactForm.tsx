@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { Textarea } from './ui/textarea';
 import SubmitButton from './SubmitButton';
+import { Contact, Contact2, ContactRound, Phone } from 'lucide-react';
 
 interface ContactFormProps {
   validation: {
@@ -71,7 +72,7 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
     {
       name: 'lastName',
       label: dic.labels[1],
-      placeholder: 'Schwartz',
+      placeholder: 'Swartz',
     },
     {
       name: 'email',
@@ -146,9 +147,8 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
       reset();
     } else {
       toast({
-        className: 'bg-secondary',
         title: dic.toast.error.title,
-        description: dic.toast.success.description,
+        description: dic.toast.error.description,
         variant: 'destructive',
       });
     }
