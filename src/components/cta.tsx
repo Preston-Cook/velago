@@ -22,7 +22,7 @@ export default async function Cta({ lang }: CallToActionProps) {
           {dic.description}
         </p>
 
-        <SearchBar searchPlaceholders={searchPlaceholders} />
+        <SearchBar lang={lang} searchPlaceholders={searchPlaceholders} />
       </div>
     </section>
   );
