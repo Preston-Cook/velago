@@ -56,6 +56,9 @@ dependencies:
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
+  cobe:
+    specifier: ^0.6.3
+    version: 0.6.3
   drizzle-orm:
     specifier: ^0.30.10
     version: 0.30.10(@types/pg@8.11.6)(@types/react@18.3.2)(pg@8.11.5)(postgres@3.4.4)(react@18.3.1)
@@ -2145,6 +2148,12 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  /cobe@0.6.3:
+    resolution: {integrity: sha512-WHr7X4o1ym94GZ96h7b1pNemZJacbOzd02dZtnVwuC4oWBaLg96PBmp2rIS1SAhUDhhC/QyS9WEqkpZIs/ZBTg==}
+    dependencies:
+      phenomenon: 1.6.0
+    dev: false
+
   /color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
@@ -4175,6 +4184,10 @@ packages:
     resolution: {integrity: sha512-FdW9r/jQZhSeohs1Z3sI1yxFQNFvMcnmfuj4WBMUTxOrAyLMaTcE1aAMBiTlbMNaXvBCQuVi0R7hd8udDSP7ug==}
     dependencies:
       split2: 4.2.0
+    dev: false
+
+  /phenomenon@1.6.0:
+    resolution: {integrity: sha512-7h9/fjPD3qNlgggzm88cY58l9sudZ6Ey+UmZsizfhtawO6E3srZQXywaNm2lBwT72TbpHYRPy7ytIHeBUD/G0A==}
     dev: false
 
   /picocolors@1.0.1:

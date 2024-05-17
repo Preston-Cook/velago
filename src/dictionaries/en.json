@@ -123,6 +123,11 @@
         "min": "Must be at least 10 characters",
         "max": "Must be at most 300 characters"
       }
+    },
+    "userSignInSchema": {
+      "phone": {
+        "refine": "Invalid phone number"
+      }
     }
   }
 }

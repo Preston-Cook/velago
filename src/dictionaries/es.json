@@ -135,6 +135,11 @@
         "min": "Debe tener al menos 10 caracteres.",
         "max": "Debe tener como máximo 300 caracteres"
       }
+    },
+    "userSignInSchema": {
+      "phone": {
+        "refine": "Numero de telefono invalido"
+      }
     }
   }
 }

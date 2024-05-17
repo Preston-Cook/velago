@@ -15,7 +15,7 @@ async function Header({ lang }: HeaderProps) {
   const dic = await getDictionary(lang);
 
   return (
-    <header className="sm:flex sm:justify-between py-3 border-b bg-secondary">
+    <header className="sm:flex sm:justify-between py-3 border-b bg-secondary border-primary">
       <div className="relative px-4 lg:px-8 flex h-16 items-center justify-between w-full">
         <HamburgerMenu links={dic.header.links} />
         <div className="items-center hidden md:flex">

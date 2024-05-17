@@ -12,7 +12,7 @@ export default async function Footer({ lang }: FooterProps) {
   const dic = await getDictionary(lang);
 
   return (
-    <footer className="border-t sm:flex sm:justify-between py-8 px-4 border-b bg-secondary mt-6">
+    <footer className="border-t border-primary sm:flex sm:justify-between py-8 px-4 bg-secondary">
       <div className="mx-auto max-w-screen-xl text-center">
         <Link lang={lang} href="/">
           <Button className="sm:pl-0 text-2xl font-semibold" variant="link">

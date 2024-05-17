@@ -28,6 +28,7 @@
     "@supabase/supabase-js": "^2.43.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "cobe": "^0.6.3",
     "drizzle-orm": "^0.30.10",
     "lucide-react": "^0.378.0",
     "negotiator": "^0.6.3",

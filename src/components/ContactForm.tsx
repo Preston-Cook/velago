@@ -17,7 +17,6 @@ import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { Textarea } from './ui/textarea';
 import SubmitButton from './SubmitButton';
-import { Contact, Contact2, ContactRound, Phone } from 'lucide-react';
 
 interface ContactFormProps {
   validation: {
