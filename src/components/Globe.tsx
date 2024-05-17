@@ -27,7 +27,7 @@ export function Globe() {
       markers: [],
       onRender: (state) => {
         state.phi = phi;
-        phi += 0.0005;
+        phi += 0.005;
       },
     });
 
@@ -38,7 +38,6 @@ export function Globe() {
 
   return (
     <canvas
-      className="mt-[15vh]"
       ref={canvasRef as LegacyRef<HTMLCanvasElement>}
       style={{ width: 600, height: 600, maxWidth: '100%', aspectRatio: 1 }}
     />

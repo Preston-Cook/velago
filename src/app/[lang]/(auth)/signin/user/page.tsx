@@ -30,9 +30,7 @@ export default async function SignInUser({ params }: SignInUserProps) {
               Enter your phone number below to login to your account
             </p>
           </div>
-
           <PhoneLoginForm />
-
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{' '}
             <Link href="#" className="underline">
@@ -43,7 +41,9 @@ export default async function SignInUser({ params }: SignInUserProps) {
       </div>
       <div className="hidden lg:block border border-l-primary">
         <div className="flex items-center justify-center">
-          <Globe />
+          <div className="mt-[15vh]">
+            <Globe />
+          </div>
         </div>
       </div>
     </div>
