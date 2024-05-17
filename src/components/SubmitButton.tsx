@@ -12,7 +12,7 @@ export default function SubmitButton({
 }: SubmitButtonProps) {
   return (
     <Button
-      className="w-[60%] max-w-[500px] mt-8"
+      className="w-[60%] max-w-[500px] mt-8 text-white"
       type="submit"
       disabled={isLoading}
     >

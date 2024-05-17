@@ -39,4 +39,5 @@ next-env.d.ts
 _/
 
 # ignore .env files
-.env*
+.env.development
+.env.production

@@ -26,9 +26,10 @@ export default function PartnerCard({
           {description}
         </CardDescription>
       </CardHeader>
-
       <CardFooter>
-        <Button className="w-[80%] mx-auto">{action}</Button>
+        <Button className="w-[80%] md:w-[60%] mx-auto text-white">
+          {action}
+        </Button>
       </CardFooter>
     </Card>
   );

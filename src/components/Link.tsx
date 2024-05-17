@@ -1,14 +1,25 @@
-import NextLink from 'next/link';
+import NextLink, { LinkProps as NextLinkProps } from 'next/link';
+import { ReactNode } from 'react';
 import { i18n } from '@/i18n.config';
 
-interface CustomLinkProps {
-  href: string;
+interface LangLinkProps extends NextLinkProps {
+  children: ReactNode;
   lang: string;
-  children: React.ReactNode;
+  className?: string;
 }
 
-export default function Link({ href, lang, ...props }: CustomLinkProps) {
+export default function LangLink({
+  href,
+  lang,
+  children,
+  className,
+  ...props
+}: LangLinkProps) {
   const isDefaultLang = lang === i18n.defaultLocale;
   const path = isDefaultLang ? href : `/${lang}${href}`;
-  return <NextLink href={path} {...props} />;
+  return (
+    <NextLink className={className} href={path} {...props}>
+      {children}
+    </NextLink>
+  );
 }
