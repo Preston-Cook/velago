@@ -32,7 +32,7 @@ export default async function FaqSection({ lang }: FaqSectionProps) {
               value={`item-${i + 1}`}
               className={`${i === dic.questions.length - 1 ? 'border border-l-0 border-r-0 border-t-0 border-b-0' : 'border border-l-0 border-r-0 border-t-0 border-b-primary'}`}
             >
-              <AccordionTrigger className="text-sm md:text-base">
+              <AccordionTrigger className="text-sm md:text-base hover:no-underline">
                 {q.question}
               </AccordionTrigger>
               <AccordionContent>{q.answer}</AccordionContent>

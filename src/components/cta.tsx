@@ -21,6 +21,7 @@ export default async function Cta({ lang }: CallToActionProps) {
         <p className="mb-12 text-lg font-normal lg:text-xl sm:px-16 xl:px-48 ">
           {dic.description}
         </p>
+
         <SearchBar searchPlaceholders={searchPlaceholders} />
       </div>
     </section>

@@ -19,8 +19,10 @@ export interface HamburgerMenuProps {
 export default function HamburgerMenu({ links }: HamburgerMenuProps) {
   return (
     <Sheet>
-      <SheetTrigger>
-        <Menu className="md:hidden" />
+      <SheetTrigger className="md:hidden">
+        <div className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 rounded-lg text-white">
+          <Menu />
+        </div>
       </SheetTrigger>
       <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-secondary">
         <h2 className="px-2 py-4 text-2xl text-primary font-bold">Velago</h2>

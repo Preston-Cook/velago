@@ -36,9 +36,7 @@ export default async function Content({ lang }: ContentProps) {
               {dic.productDescription.title}
             </h2>
             <p className="my-8">{dic.productDescription.paragraph1}</p>
-            <p className="mb-4 font-semibold">
-              {dic.productDescription.paragraph2}
-            </p>
+            <p className="mb-4">{dic.productDescription.paragraph2}</p>
             <Link
               href="/about"
               className="inline-flex items-center font-medium mt-4"
