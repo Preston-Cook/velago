@@ -6,6 +6,7 @@ import { Menu } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 import { Sheet, SheetTrigger, SheetContent } from './ui/sheet';
 import { DarkModeToggle } from './DarkModeToggle';
+import Image from 'next/image';
 
 export interface LinkProps {
   href: string;
@@ -25,7 +26,16 @@ export default function HamburgerMenu({ links }: HamburgerMenuProps) {
         </div>
       </SheetTrigger>
       <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-secondary">
-        <h2 className="px-2 py-4 text-2xl text-primary font-bold">Velago</h2>
+        <h2 className="px-2 py-4 text-2xl text-primary font-bold flex">
+          <Image
+            className="mr-2 dark:invert"
+            src="/images/logo-black.png"
+            height={25}
+            width={25}
+            alt="logo"
+          />
+          Velago
+        </h2>
         <nav className="flex flex-col gap-4">
           {links.map((route) => (
             <Link

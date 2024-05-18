@@ -3,6 +3,7 @@ import { getDictionary } from '@/lib/dictionary';
 import { v4 as uuidv4 } from 'uuid';
 import { Button } from './ui/button';
 import Link from './Link';
+import Image from 'next/image';
 
 interface FooterProps {
   lang: Locale;
@@ -15,7 +16,17 @@ export default async function Footer({ lang }: FooterProps) {
     <footer className="border-t border-primary sm:flex sm:justify-between py-8 px-4 bg-secondary">
       <div className="mx-auto max-w-screen-xl text-center">
         <Link lang={lang} href="/">
-          <Button className="sm:pl-0 text-2xl font-semibold" variant="link">
+          <Button
+            className="sm:pl-0 text-2xl font-semibold flex mx-auto"
+            variant="link"
+          >
+            <Image
+              className="mr-2 dark:invert"
+              src="/images/logo-black.png"
+              height={25}
+              width={25}
+              alt="logo"
+            />
             Velago
           </Button>
         </Link>

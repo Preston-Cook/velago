@@ -4,9 +4,10 @@ import { FilterButton } from './FilterButton';
 import { type ChangeEvent, useState } from 'react';
 import { SearchInput } from './SearchInput';
 import { AutoCompleteResponse, Suggestion } from '@/types/Suggestion';
+import OutsideAlerter from './OutsideAlerter';
 
 interface SearchBarProps {
-  searchPlaceholders: string[];
+  placeholder: string;
   lang: string;
 }
 
@@ -15,17 +16,11 @@ const GOOGLE_MAPS_API_KEY = process.env
 const GOOGLE_MAPS_AUTOCOMPLETE_ENDPOINT = process.env
   .NEXT_PUBLIC_GOOGLE_MAPS_AUTOCOMPLETE_ENDPOINT as string;
 
-export default function SearchBar({
-  searchPlaceholders,
-  lang,
-}: SearchBarProps) {
-  const randomIndex = Math.floor(Math.random() * searchPlaceholders.length);
+export default function SearchBar({ placeholder, lang }: SearchBarProps) {
   const [radius, setRadius] = useState(10);
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [error, setError] = useState<string | null>(null);
-
-  console.log(GOOGLE_MAPS_API_KEY);
 
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
     // get new value
@@ -60,23 +55,62 @@ export default function SearchBar({
 
       // set new suggestions
       const data = (await res.json()) as AutoCompleteResponse;
-      const { suggestions } = data;
-      setSuggestions((_prev) => suggestions);
+      const { suggestions: newSuggestions } = data;
+      setSuggestions((_prev) => newSuggestions);
+      return;
     }
+
+    setSuggestions([]);
   }
+
+  function selectValue(e: string) {
+    setQuery(e);
+    setSuggestions((_prev) => []);
+  }
+
+  async function handleFocus() {
+    if (!query) return;
+
+    const res = await fetch(GOOGLE_MAPS_AUTOCOMPLETE_ENDPOINT, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Goog-Api-Key': GOOGLE_MAPS_API_KEY,
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        input: query,
+        languageCode: lang,
+      }),
+    });
+    if (!res.ok) {
+      setError((_prev) => 'Something went wrong');
+      return;
+    }
+    // set new suggestions
+    const data = (await res.json()) as AutoCompleteResponse;
+    const { suggestions: newSuggestions } = data;
+    setSuggestions((_prev) => newSuggestions);
+  }
+
+  function handleBlur() {}
 
   return (
     <div className="flex max-w-md gap-2 mx-auto mt-10 justify-center items-center">
       <FilterButton radius={radius} />
-      <div className="relative mx-auto flex-1">
+      <div className="mx-auto flex-1">
         <div className="relative">
-          <SearchInput
-            error={error}
-            handleChange={handleChange}
-            query={query}
-            suggestions={suggestions}
-            placeholder={`${searchPlaceholders[randomIndex]}...`}
-          />
+          <OutsideAlerter func={() => setSuggestions([])}>
+            <SearchInput
+              handleUnfocus={handleBlur}
+              handleFocus={handleFocus}
+              selectValue={selectValue}
+              error={error}
+              handleChange={handleChange}
+              query={query}
+              suggestions={suggestions}
+              placeholder={`${placeholder}...`}
+            />
+          </OutsideAlerter>
         </div>
       </div>
     </div>

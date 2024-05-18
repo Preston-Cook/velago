@@ -11,6 +11,8 @@ interface CallToActionProps {
 export default async function Cta({ lang }: CallToActionProps) {
   const dic = (await getDictionary(lang)).pages.home.callToAction;
   const searchPlaceholders = dic.placeholders;
+  const randomIndex = Math.floor(Math.random() * searchPlaceholders.length);
+  const placeholder = searchPlaceholders[randomIndex];
 
   return (
     <section>
@@ -21,8 +23,7 @@ export default async function Cta({ lang }: CallToActionProps) {
         <p className="mb-12 text-lg font-normal lg:text-xl sm:px-16 xl:px-48 ">
           {dic.description}
         </p>
-
-        <SearchBar lang={lang} searchPlaceholders={searchPlaceholders} />
+        <SearchBar lang={lang} placeholder={placeholder} />
       </div>
     </section>
   );

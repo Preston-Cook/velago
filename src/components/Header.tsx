@@ -6,6 +6,8 @@ import { Button } from './ui/button';
 import LanguageDropDown from './LanguageDropDown';
 import { DarkModeToggle } from './DarkModeToggle';
 import LangLink from './Link';
+import Image from 'next/image';
+import { HeaderName } from './HeaderName';
 
 interface HeaderProps {
   lang: Locale;
@@ -18,11 +20,7 @@ async function Header({ lang }: HeaderProps) {
     <header className="sm:flex sm:justify-between py-3 border-b bg-secondary border-primary">
       <div className="relative px-4 lg:px-8 flex h-16 items-center justify-between w-full">
         <HamburgerMenu links={dic.header.links} />
-        <div className="items-center hidden md:flex">
-          <LangLink lang={lang} href="/">
-            <h1 className="text-2xl font-bold text-primary">Velago</h1>
-          </LangLink>
-        </div>
+        <HeaderName lang={lang} />
         <nav className="gap-2 ml-6 hidden max-w-400px md:flex mr-auto">
           {dic.header.links.map((link) => (
             <Button

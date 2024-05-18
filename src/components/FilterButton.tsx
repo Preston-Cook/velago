@@ -16,7 +16,7 @@ export function FilterButton({ radius }: FilterButtonProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className="text-white">
+        <Button className="text-white h-[45px]">
           <Filter />
         </Button>
       </PopoverTrigger>

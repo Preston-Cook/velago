@@ -15,6 +15,9 @@ interface SearchInputProps {
   suggestions: Suggestion[];
   placeholder: string;
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
+  selectValue(e: string): void;
+  handleFocus(): void;
+  handleUnfocus(): void;
 }
 
 export function SearchInput({
@@ -22,12 +25,16 @@ export function SearchInput({
   error,
   suggestions,
   placeholder,
+  selectValue,
   handleChange,
+  handleFocus,
 }: SearchInputProps) {
   return (
     <div className="absolute -top-[22px] w-full">
-      <Command className="rounded-lg border">
+      <Command className="rounded-lg border bg-secondary focus-within:border-primary">
         <CommandInput
+          name="q"
+          onFocus={handleFocus}
           placeholder={placeholder}
           value={query}
           onChangeCapture={handleChange}
@@ -41,9 +48,10 @@ export function SearchInput({
               Something went wrong
             </CommandItem>
           ) : (
-            suggestions.map((el) => (
+            suggestions?.map((el) => (
               <CommandItem
-                onSelect={(e) => console.log(el)}
+                className=" text-left"
+                onSelect={selectValue}
                 key={el.placePrediction.placeId}
               >
                 {el.placePrediction.text.text}
