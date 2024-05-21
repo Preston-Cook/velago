@@ -10,9 +10,10 @@ import { Slider } from './ui/slider';
 
 interface FilterButtonProps {
   radius: number;
+  handleChange(e: number[]): void;
 }
 
-export function FilterButton({ radius }: FilterButtonProps) {
+export function FilterButton({ handleChange, radius }: FilterButtonProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -30,9 +31,18 @@ export function FilterButton({ radius }: FilterButtonProps) {
           </div>
           <div className="grid gap-2">
             <div className="grid grid-cols-3 items-center gap-4">
-              <Label htmlFor="width">Radius: {radius}mi.</Label>
-
-              <Slider className="col-span-2" defaultValue={[10]} max={25} />
+              <Label className="text-sm text-left" htmlFor="width">
+                Radius: <br />
+                &lt; {radius}mi.
+              </Label>
+              <Slider
+                onValueChange={handleChange}
+                step={5}
+                className="col-span-2"
+                defaultValue={[10]}
+                max={25}
+                min={5}
+              />
             </div>
           </div>
         </div>

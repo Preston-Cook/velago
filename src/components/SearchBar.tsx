@@ -93,9 +93,13 @@ export default function SearchBar({ placeholder, lang }: SearchBarProps) {
     setSuggestions((_prev) => newSuggestions);
   }
 
+  function handleRadiusChange(e: number[]) {
+    setRadius(e[0]);
+  }
+
   return (
     <div className="flex max-w-md gap-2 mx-auto mt-10 justify-center items-center">
-      <FilterButton radius={radius} />
+      <FilterButton handleChange={handleRadiusChange} radius={radius} />
       <div className="mx-auto flex-1">
         <div className="relative">
           <OutsideAlerter func={() => setSuggestions([])}>
