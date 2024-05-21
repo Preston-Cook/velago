@@ -8,6 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Locale, i18n } from '@/i18n.config';
 import { Toaster } from '@/components/ui/toaster';
+import { LocationProvider } from '@/context/LocationProvider';
 
 export const metadata: Metadata = {
   title: 'Velago',
@@ -43,10 +44,12 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system">
-          <Header lang={params.lang} />
-          <main className="flex-1 min-h-[90vh]">{children}</main>
-          <Toaster />
-          <Footer lang={params.lang} />
+          <LocationProvider>
+            <Header lang={params.lang} />
+            <main className="flex-1 min-h-[91vh]">{children}</main>
+            <Toaster />
+            <Footer lang={params.lang} />
+          </LocationProvider>
         </ThemeProvider>
       </body>
     </html>

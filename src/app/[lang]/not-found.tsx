@@ -2,7 +2,6 @@
 
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { Locale } from '@/i18n.config';
 

@@ -1,10 +1,11 @@
 'use client';
 
 import { FilterButton } from './FilterButton';
-import { type ChangeEvent, useState } from 'react';
+import { type ChangeEvent, useState, FormEvent } from 'react';
 import { SearchInput } from './SearchInput';
 import { AutoCompleteResponse, Suggestion } from '@/types/Suggestion';
 import OutsideAlerter from './OutsideAlerter';
+import { useRouter } from 'next/navigation';
 
 interface SearchBarProps {
   placeholder: string;
@@ -17,6 +18,7 @@ const GOOGLE_MAPS_AUTOCOMPLETE_ENDPOINT = process.env
   .NEXT_PUBLIC_GOOGLE_MAPS_AUTOCOMPLETE_ENDPOINT as string;
 
 export default function SearchBar({ placeholder, lang }: SearchBarProps) {
+  const router = useRouter();
   const [radius, setRadius] = useState(10);
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
@@ -64,8 +66,7 @@ export default function SearchBar({ placeholder, lang }: SearchBarProps) {
   }
 
   function selectValue(e: string) {
-    setQuery(e);
-    setSuggestions((_prev) => []);
+    router.push(`/map?q=${encodeURI(e)}&radius=${radius}`);
   }
 
   async function handleFocus() {
@@ -92,8 +93,6 @@ export default function SearchBar({ placeholder, lang }: SearchBarProps) {
     setSuggestions((_prev) => newSuggestions);
   }
 
-  function handleBlur() {}
-
   return (
     <div className="flex max-w-md gap-2 mx-auto mt-10 justify-center items-center">
       <FilterButton radius={radius} />
@@ -101,7 +100,6 @@ export default function SearchBar({ placeholder, lang }: SearchBarProps) {
         <div className="relative">
           <OutsideAlerter func={() => setSuggestions([])}>
             <SearchInput
-              handleUnfocus={handleBlur}
               handleFocus={handleFocus}
               selectValue={selectValue}
               error={error}

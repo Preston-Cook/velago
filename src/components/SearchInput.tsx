@@ -17,7 +17,6 @@ interface SearchInputProps {
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
   selectValue(e: string): void;
   handleFocus(): void;
-  handleUnfocus(): void;
 }
 
 export function SearchInput({
