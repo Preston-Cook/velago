@@ -1,11 +1,14 @@
+import { MapDashboard } from '@/components/MapDashboard';
 import { Locale } from '@/i18n.config';
-import { useTheme } from 'next-themes';
-import MapContainer from '@/components/MapContainer';
 
 interface MapProps {
   params: { lang: Locale };
 }
 
-export default async function Map({ params }: MapProps) {
-  return <MapContainer />;
+export default async function Page({ params }: MapProps) {
+  return (
+    <div className="">
+      <MapDashboard />
+    </div>
+  );
 }

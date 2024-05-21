@@ -10,7 +10,7 @@ interface HomePageProps {
   };
 }
 
-export default function Home({ params }: HomePageProps) {
+export default function Page({ params }: HomePageProps) {
   const { lang } = params;
 
   return (

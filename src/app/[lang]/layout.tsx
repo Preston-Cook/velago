@@ -9,6 +9,8 @@ import Footer from '@/components/Footer';
 import { Locale, i18n } from '@/i18n.config';
 import { Toaster } from '@/components/ui/toaster';
 import { LocationProvider } from '@/context/LocationProvider';
+import Head from 'next/head';
+import 'leaflet/dist/leaflet.css';
 
 export const metadata: Metadata = {
   title: 'Velago',

@@ -12,7 +12,7 @@ interface SignInUserProps {
   };
 }
 
-export default async function SignInUser({ params }: SignInUserProps) {
+export default async function Page({ params }: SignInUserProps) {
   const { lang } = params;
   const dic = await getDictionary(lang);
   const { title, description } = dic.pages.contact;
