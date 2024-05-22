@@ -5,9 +5,7 @@ import {
   Filter,
   Home,
   LineChart,
-  Menu,
   Package,
-  Package2,
   Search,
   ShoppingCart,
   Users,
@@ -17,9 +15,15 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Spinner } from './Spinner';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { useLocation } from '@/context/LocationProvider';
+import { Address } from '@/types/Address';
+import { Label } from './ui/label';
+import { Slider } from './ui/slider';
+import { useQueryParams } from '@/hooks/useQueryParams';
 
 export function MapDashboard() {
   const Map = useMemo(
@@ -31,19 +35,61 @@ export function MapDashboard() {
     [],
   );
 
+  const { setQueryParam } = useQueryParams();
+  const searchParams = useSearchParams();
+  const loc = useLocation();
+
+  const q = searchParams.get('q');
+  const radius = searchParams.get('radius');
+
+  useEffect(function () {
+    if (!radius) {
+      setQueryParam('radius', '10');
+    }
+  }, []);
+
+  function handleRadiusChange(e: number[]) {
+    setQueryParam('radius', `${e[0]}`);
+  }
+
   return (
-    <div className="grid min-h-[90vh] w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-      <div className="hidden border-r bg-muted/40 md:block">
+    <div className="grid min-h-[91vh] w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+      <div className="hidden border-r border-primary bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
-          <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+          <div className="flex h-14 items-center border-b border-primary px-4 lg:h-[60px] lg:px-6">
             <div className="flex items-center gap-2 font-semibold ml-2">
               <Filter className="h-6 w-6" />
               <span className="text-xl">Filters</span>
             </div>
           </div>
-          {/* <div className="flex-1">
+
+          <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              <Link
+              {/* <Link
+                href="#"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              >
+                <Home className="h-4 w-4" />
+                Dashboard
+              </Link> */}
+              <div className="my-2">
+                <Label>Radius: 10 mi.</Label>
+                <Slider
+                  value={[Number(radius)]}
+                  name="radius"
+                  defaultValue={[10]}
+                  onValueChange={handleRadiusChange}
+                  min={1}
+                  max={25}
+                  step={5}
+                  className="mt-4"
+                />
+              </div>
+              <div className="mt-4">
+                <Label>Number of Resources: 4</Label>
+                <Slider className="mt-4" />
+              </div>
+              {/* <Link
                 href="#"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
@@ -80,13 +126,13 @@ export function MapDashboard() {
               >
                 <LineChart className="h-4 w-4" />
                 Analytics
-              </Link>
+              </Link> */}
             </nav>
-          </div> */}
+          </div>
         </div>
       </div>
       <div className="flex flex-col">
-        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+        <header className="flex h-14 items-center gap-4 border-b border-primary bg-muted/40 px-4 lg:h-[60px] lg:px-6">
           <Dialog>
             <DialogTrigger asChild>
               <Button

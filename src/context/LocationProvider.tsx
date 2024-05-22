@@ -14,6 +14,7 @@ interface LocationContextType {
   region: string | null;
   latitude: string | null;
   longitude: string | null;
+  countryCode: string | null;
 }
 
 interface LocationContextProviderProps {
@@ -26,6 +27,7 @@ const LocationContext = createContext<LocationContextType | null>({
   region: null,
   latitude: null,
   longitude: null,
+  countryCode: null,
 });
 
 export function useLocation() {
@@ -47,13 +49,21 @@ export function LocationProvider({ children }: LocationContextProviderProps) {
         }
         const data = await response.json();
 
-        const { ip, city, region, latitude, longitude } = data;
+        const {
+          ip,
+          city,
+          region,
+          latitude,
+          longitude,
+          country_code_iso3: countryCode,
+        } = data;
         setUserLocation({
           ip,
           city,
           region,
           latitude,
           longitude,
+          countryCode,
         });
       } catch (error) {
         console.error(error);
