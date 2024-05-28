@@ -6,7 +6,6 @@ import { Button } from './ui/button';
 import LanguageDropDown from './LanguageDropDown';
 import { DarkModeToggle } from './DarkModeToggle';
 import LangLink from './Link';
-import Image from 'next/image';
 import { HeaderName } from './HeaderName';
 
 interface HeaderProps {

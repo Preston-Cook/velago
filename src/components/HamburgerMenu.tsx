@@ -28,7 +28,7 @@ export default function HamburgerMenu({ links }: HamburgerMenuProps) {
       <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-secondary">
         <h2 className="px-2 py-4 text-2xl text-primary font-bold flex">
           <Image
-            className="mr-2 dark:invert"
+            className="mr-2 dark:invert h-auto w-auto"
             src="/images/logo-black.png"
             height={25}
             width={25}

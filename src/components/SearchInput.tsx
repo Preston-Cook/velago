@@ -49,7 +49,7 @@ export function SearchInput({
           ) : (
             suggestions?.map((el) => (
               <CommandItem
-                className=" text-left"
+                className="text-left"
                 onSelect={selectValue}
                 key={el.placePrediction.placeId}
               >

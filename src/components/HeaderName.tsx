@@ -15,7 +15,7 @@ export function HeaderName({ lang }: HeaderNameProps) {
     <div className="items-center hidden md:flex">
       <LangLink className="flex" lang={lang} href="/">
         <Image
-          className="mr-2 dark:invert"
+          className="mr-2 dark:invert w-auto h-auto"
           src="/images/logo-black.png"
           height={25}
           width={25}
