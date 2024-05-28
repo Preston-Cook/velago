@@ -13,12 +13,10 @@ import {
 import { v4 as uuid } from 'uuid';
 import { capitalizeString } from '@/lib/utils';
 
-const themes = ['light', 'dark', 'system'];
+const themes = ['light', 'dark'];
 
 export function DarkModeToggle() {
-  const { setTheme, theme } = useTheme();
-
-  const currentTheme = theme || 'system';
+  const { setTheme, resolvedTheme } = useTheme();
 
   return (
     <DropdownMenu>
@@ -29,10 +27,13 @@ export function DarkModeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="border border-input" align="start">
+      <DropdownMenuContent
+        className="border border-input flex flex-col gap-1"
+        align="start"
+      >
         {themes.map((themeType) => (
           <DropdownMenuItem
-            className={`${themeType === currentTheme && 'bg-accent'}`}
+            className={`${themeType === resolvedTheme && 'bg-accent'}`}
             key={uuid()}
             onClick={() => setTheme(themeType)}
           >
