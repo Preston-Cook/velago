@@ -46,8 +46,8 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
           fontHeading.variable,
         )}
       >
-        <ProgressBar />
         <ThemeProvider attribute="class" defaultTheme="system">
+          <ProgressBar />
           <LocationProvider>
             <Header lang={params.lang} />
             <main className="flex-1 min-h-[87.125vh]">{children}</main>
