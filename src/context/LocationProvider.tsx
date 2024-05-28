@@ -9,11 +9,8 @@ import {
 } from 'react';
 
 interface LocationContextType {
-  ip: string | null;
   city: string | null;
   region: string | null;
-  latitude: string | null;
-  longitude: string | null;
   countryCode: string | null;
 }
 
@@ -22,11 +19,8 @@ interface LocationContextProviderProps {
 }
 
 const LocationContext = createContext<LocationContextType | null>({
-  ip: null,
   city: null,
   region: null,
-  latitude: null,
-  longitude: null,
   countryCode: null,
 });
 
@@ -49,20 +43,10 @@ export function LocationProvider({ children }: LocationContextProviderProps) {
         }
         const data = await response.json();
 
-        const {
-          ip,
-          city,
-          region,
-          latitude,
-          longitude,
-          country_code_iso3: countryCode,
-        } = data;
+        const { city, region, country_code_iso3: countryCode } = data;
         setUserLocation({
-          ip,
           city,
           region,
-          latitude,
-          longitude,
           countryCode,
         });
       } catch (error) {

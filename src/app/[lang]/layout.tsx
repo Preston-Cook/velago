@@ -9,8 +9,9 @@ import Footer from '@/components/Footer';
 import { Locale, i18n } from '@/i18n.config';
 import { Toaster } from '@/components/ui/toaster';
 import { LocationProvider } from '@/context/LocationProvider';
-import Head from 'next/head';
 import 'leaflet/dist/leaflet.css';
+import NextTopLoader from 'nextjs-toploader';
+import { ProgressBar } from '@/components/ProgressBar';
 
 export const metadata: Metadata = {
   title: 'Velago',
@@ -45,10 +46,11 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
           fontHeading.variable,
         )}
       >
+        <ProgressBar />
         <ThemeProvider attribute="class" defaultTheme="system">
           <LocationProvider>
             <Header lang={params.lang} />
-            <main className="flex-1 min-h-[91vh]">{children}</main>
+            <main className="flex-1 min-h-[87.125vh]">{children}</main>
             <Toaster />
             <Footer lang={params.lang} />
           </LocationProvider>

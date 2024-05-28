@@ -6,6 +6,7 @@ import { SearchInput } from './SearchInput';
 import { AutoCompleteResponse, Suggestion } from '@/types/Suggestion';
 import OutsideAlerter from './OutsideAlerter';
 import { useRouter } from 'next/navigation';
+import { useLocation } from '@/context/LocationProvider';
 
 interface SearchBarProps {
   placeholder: string;
@@ -23,6 +24,7 @@ export default function SearchBar({ placeholder, lang }: SearchBarProps) {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const loc = useLocation();
 
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
     // get new value
@@ -70,7 +72,9 @@ export default function SearchBar({ placeholder, lang }: SearchBarProps) {
   }
 
   async function handleFocus() {
-    if (!query) return;
+    let q;
+
+    q = query ? query : `${loc?.city}, ${loc?.region}, ${loc?.countryCode}`;
 
     const res = await fetch(GOOGLE_MAPS_AUTOCOMPLETE_ENDPOINT, {
       headers: {
@@ -79,7 +83,7 @@ export default function SearchBar({ placeholder, lang }: SearchBarProps) {
       },
       method: 'POST',
       body: JSON.stringify({
-        input: query,
+        input: q,
         languageCode: lang,
       }),
     });

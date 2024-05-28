@@ -24,6 +24,7 @@ import { Address } from '@/types/Address';
 import { Label } from './ui/label';
 import { Slider } from './ui/slider';
 import { useQueryParams } from '@/hooks/useQueryParams';
+import { Point } from '@/types/Point';
 
 export function MapDashboard() {
   const Map = useMemo(
@@ -41,6 +42,8 @@ export function MapDashboard() {
 
   const q = searchParams.get('q');
   const radius = searchParams.get('radius');
+  const lat = searchParams.get('lat');
+  const lng = searchParams.get('lng');
 
   useEffect(function () {
     if (!radius) {
@@ -48,12 +51,45 @@ export function MapDashboard() {
     }
   }, []);
 
+  useEffect(
+    function () {
+      if (loc !== null) {
+        const { city, region, countryCode } = loc;
+
+        // set query if not exists
+        if (!q) {
+          setQueryParam('q', `${city}, ${region}, ${countryCode}`);
+        }
+
+        // set lat if not exists
+        if (!lat) {
+          setQueryParam('lat', '');
+        }
+
+        // set lng if not exists
+        if (!lng) {
+          setQueryParam('lng', '');
+        }
+      }
+    },
+    [loc],
+  );
+
+  // set lat in
+
+  // TODO: get lat and lng coords for address
+  // useEffect(function() {
+  //   if (q !== null && point === null) {
+
+  //   }
+  // }, [q, point])
+
   function handleRadiusChange(e: number[]) {
     setQueryParam('radius', `${e[0]}`);
   }
 
   return (
-    <div className="grid min-h-[91vh] w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+    <div className="grid min-h-[90.5vh] w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r border-primary bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b border-primary px-4 lg:h-[60px] lg:px-6">
