@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { LocationSearch } from './LocationSearch';
 import { useLocale } from '@/hooks/useLanguage';
 import { start as nprogressStart } from 'nprogress';
+import { getCoordinates } from '@/lib/geocodeAddress';
 
 interface SearchBarProps {
   placeholder: string;
@@ -21,9 +22,20 @@ export default function SearchBar({ placeholder, lang }: SearchBarProps) {
     setRadius(e[0]);
   }
 
-  function handleSelectValue(e: string) {
+  async function handleSelectValue(e: string) {
     nprogressStart();
-    router.push(`/map?q=${encodeURI(e)}&radius=${radius}`);
+    const { lat, lng, formattedAddress } = await getCoordinates(e);
+
+    const urlParams = new URLSearchParams({
+      lat: `${lat}`.slice(0, 7),
+      lng: `${lng}`.slice(0, 7),
+      address: formattedAddress,
+      radius: `${radius}`,
+    });
+
+    urlParams.sort();
+
+    router.push(`/map?${urlParams.toString()}`);
   }
 
   function handleQueryChagne(e: string) {

@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/command';
 import { ChangeEvent } from 'react';
 import { Suggestion } from '@/types/Suggestion';
-import Link from 'next/link';
 
 interface SearchInputProps {
   error: string | null;
@@ -16,7 +15,7 @@ interface SearchInputProps {
   suggestions: Suggestion[];
   placeholder: string;
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
-  selectValue(e: string): void | undefined;
+  selectValue(e: string): void;
   handleFocus(): void;
 }
 
@@ -48,15 +47,21 @@ export function SearchInput({
               Something went wrong
             </CommandItem>
           ) : (
-            suggestions?.map((el) => (
-              <CommandItem
-                className="text-left"
-                onSelect={selectValue}
-                key={el.placePrediction.placeId}
-              >
-                {el.placePrediction.text.text}
-              </CommandItem>
-            ))
+            suggestions?.map((el) => {
+              const {
+                placePrediction: { placeId },
+              } = el;
+
+              return (
+                <CommandItem
+                  className="text-left"
+                  onSelect={(_) => selectValue(placeId)}
+                  key={placeId}
+                >
+                  {el.placePrediction.text.text}
+                </CommandItem>
+              );
+            })
           )}
         </CommandList>
       </Command>

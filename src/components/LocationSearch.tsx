@@ -45,6 +45,9 @@ export function LocationSearch({
       lang,
       q,
     });
+
+    console.log(JSON.stringify(newSuggestions));
+
     setSuggestions((_prev) => newSuggestions);
   }
 
