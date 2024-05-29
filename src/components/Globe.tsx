@@ -13,8 +13,8 @@ export function Globe() {
 
     const globe = createGlobe(canvasRef.current as HTMLCanvasElement, {
       devicePixelRatio: 2,
-      width: 600 * 2,
-      height: 600 * 2,
+      width: 500 * 2,
+      height: 500 * 2,
       phi: 0,
       theta: 0,
       dark: 0,
@@ -38,8 +38,9 @@ export function Globe() {
 
   return (
     <canvas
+      className="w-auto"
       ref={canvasRef as LegacyRef<HTMLCanvasElement>}
-      style={{ width: 600, height: 600, maxWidth: '100%', aspectRatio: 1 }}
+      style={{ width: 500, height: 500, maxWidth: '100%', aspectRatio: 1 }}
     />
   );
 }

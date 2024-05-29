@@ -72,7 +72,7 @@ export default function PhoneLoginForm() {
       <Button className="w-full mt-2 text-white" type="submit">
         Login
       </Button>
-      <Button variant="outline" className="w-full">
+      <Button variant="outline" className="w-full bg-secondary">
         <span className="mr-2">
           <Image
             src="/images/google-logo.png"

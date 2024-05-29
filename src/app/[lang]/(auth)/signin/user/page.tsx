@@ -21,7 +21,7 @@ export default async function Page({ params }: SignInUserProps) {
   } = dic;
 
   return (
-    <div className="w-full lg:grid min-h-[91vh] lg:grid-cols-2 ">
+    <div className="w-full lg:grid min-h-[90.5vh] lg:grid-cols-2 ">
       <div className="flex items-center  justify-center py-12 mt-[20%] md:mt-[10%] lg:mt-0">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
@@ -41,7 +41,7 @@ export default async function Page({ params }: SignInUserProps) {
       </div>
       <div className="hidden lg:block border border-l-primary">
         <div className="flex items-center justify-center">
-          <div className="mt-[15vh]">
+          <div className="mt-[18vh]">
             <Globe />
           </div>
         </div>
