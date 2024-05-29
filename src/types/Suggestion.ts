@@ -6,7 +6,3 @@ export interface Suggestion {
     };
   };
 }
-
-export interface AutoCompleteResponse {
-  suggestions: Suggestion[];
-}

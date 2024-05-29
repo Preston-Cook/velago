@@ -5,7 +5,7 @@ import HamburgerMenu from './HamburgerMenu';
 import { Button } from './ui/button';
 import LanguageDropDown from './LanguageDropDown';
 import { DarkModeToggle } from './DarkModeToggle';
-import LangLink from './Link';
+import { LocaleLink } from './LocaleLink';
 import { HeaderName } from './HeaderName';
 
 interface HeaderProps {
@@ -27,14 +27,13 @@ async function Header({ lang }: HeaderProps) {
               variant="outline"
               className="sm:px-2 lg:px-4"
             >
-              <LangLink
-                lang={lang}
+              <LocaleLink
                 key={`${uuidv4()}`}
                 href={link.href}
                 className="text-sm font-medium"
               >
                 {link.text}
-              </LangLink>
+              </LocaleLink>
             </Button>
           ))}
         </nav>
@@ -43,19 +42,17 @@ async function Header({ lang }: HeaderProps) {
             <DarkModeToggle />
           </div>
           <LanguageDropDown />
-          <LangLink lang={lang} href="/signin/user">
+          <LocaleLink href="/signin/user">
             <Button className="w-fit py-2 px-4 " variant="outline" size="icon">
               {dic.header.signIn}
             </Button>
-          </LangLink>
+          </LocaleLink>
           <Button
             className="w-fit py-2 px-4 text-white"
             variant="default"
             size="icon"
           >
-            <LangLink lang={lang} href="/signup/user">
-              {dic.header.signUp}
-            </LangLink>
+            <LocaleLink href="/signup/user">{dic.header.signUp}</LocaleLink>
           </Button>
         </div>
       </div>

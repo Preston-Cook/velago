@@ -7,8 +7,8 @@ interface MapProps {
 
 export default async function Page({ params }: MapProps) {
   return (
-    <div className="">
+    <>
       <MapDashboard />
-    </div>
+    </>
   );
 }

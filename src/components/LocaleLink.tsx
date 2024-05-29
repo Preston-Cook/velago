@@ -1,22 +1,25 @@
+'use client';
+
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { ReactNode } from 'react';
 import { i18n } from '@/i18n.config';
+import { useLocale } from '@/hooks/useLanguage';
 
 interface LangLinkProps extends NextLinkProps {
   children: ReactNode;
-  lang: string;
   className?: string;
 }
 
-export default function LangLink({
+export function LocaleLink({
   href,
-  lang,
   children,
   className,
   ...props
 }: LangLinkProps) {
-  const isDefaultLang = lang === i18n.defaultLocale;
-  const path = isDefaultLang ? href : `/${lang}${href}`;
+  const { locale } = useLocale();
+
+  const isDefaultLang = locale === i18n.defaultLocale;
+  const path = isDefaultLang ? href : `/${locale}${href}`;
   return (
     <NextLink className={className} href={path} {...props}>
       {children}

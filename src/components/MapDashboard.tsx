@@ -18,13 +18,12 @@ import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
 import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Spinner } from './Spinner';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { useLocation } from '@/context/LocationProvider';
-import { Address } from '@/types/Address';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useLocationApproximation } from '@/context/LocationProvider';
 import { Label } from './ui/label';
 import { Slider } from './ui/slider';
 import { useQueryParams } from '@/hooks/useQueryParams';
-import { Point } from '@/types/Point';
+import { LocationSearch } from './LocationSearch';
 
 export function MapDashboard() {
   const Map = useMemo(
@@ -36,57 +35,50 @@ export function MapDashboard() {
     [],
   );
 
-  const { setQueryParam } = useQueryParams();
-  const searchParams = useSearchParams();
-  const loc = useLocation();
+  // const { setQueryParam } = useQueryParams();
+  // const searchParams = useSearchParams();
+  // const loc = useLocation();
 
-  const q = searchParams.get('q');
-  const radius = searchParams.get('radius');
-  const lat = searchParams.get('lat');
-  const lng = searchParams.get('lng');
+  // const q = searchParams.get('q');
+  // const radius = searchParams.get('radius');
+  // const lat = searchParams.get('lat');
+  // const lng = searchParams.get('lng');
 
-  useEffect(function () {
-    if (!radius) {
-      setQueryParam('radius', '10');
-    }
-  }, []);
+  // // set url params if user directly navigates to /map without search
+  // useEffect(
+  //   function () {
+  //     if (!radius) {
+  //       setQueryParam('radius', '10');
+  //     }
 
-  useEffect(
-    function () {
-      if (loc !== null) {
-        const { city, region, countryCode } = loc;
+  //     if (loc !== null) {
+  //       const {
+  //         city,
+  //         region,
+  //         countryCode,
+  //         lat: defaultLat,
+  //         lng: defaultLng,
+  //       } = loc;
 
-        // set query if not exists
-        if (!q) {
-          setQueryParam('q', `${city}, ${region}, ${countryCode}`);
-        }
+  //       if (!lat) {
+  //         setQueryParam('lat', `${defaultLat}`);
+  //       }
 
-        // set lat if not exists
-        if (!lat) {
-          setQueryParam('lat', '');
-        }
+  //       if (!lng) {
+  //         setQueryParam('lng', `${defaultLng}`);
+  //       }
 
-        // set lng if not exists
-        if (!lng) {
-          setQueryParam('lng', '');
-        }
-      }
-    },
-    [loc],
-  );
+  //       if (!q) {
+  //         setQueryParam('q', `${city}, ${region}, ${countryCode}`);
+  //       }
+  //     }
+  //   },
+  //   [loc],
+  // );
 
-  // set lat in
-
-  // TODO: get lat and lng coords for address
-  // useEffect(function() {
-  //   if (q !== null && point === null) {
-
-  //   }
-  // }, [q, point])
-
-  function handleRadiusChange(e: number[]) {
-    setQueryParam('radius', `${e[0]}`);
-  }
+  // function handleRadiusChange(e: number[]) {
+  //   setQueryParam('radius', `${e[0]}`);
+  // }
 
   return (
     <div className="grid min-h-[90.5vh] w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -101,20 +93,13 @@ export function MapDashboard() {
 
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              {/* <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <Home className="h-4 w-4" />
-                Dashboard
-              </Link> */}
               <div className="my-2">
                 <Label>Radius: 10 mi.</Label>
                 <Slider
-                  value={[Number(radius)]}
+                  // value={[Number(radius)]}
                   name="radius"
                   defaultValue={[10]}
-                  onValueChange={handleRadiusChange}
+                  // onValueChange={handleRadiusChange}
                   min={1}
                   max={25}
                   step={5}
@@ -125,44 +110,6 @@ export function MapDashboard() {
                 <Label>Number of Resources: 4</Label>
                 <Slider className="mt-4" />
               </div>
-              {/* <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <Home className="h-4 w-4" />
-                Dashboard
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <ShoppingCart className="h-4 w-4" />
-                Orders
-                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                  6
-                </Badge>
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-              >
-                <Package className="h-4 w-4" />
-                Products{' '}
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <Users className="h-4 w-4" />
-                Customers
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
-                <LineChart className="h-4 w-4" />
-                Analytics
-              </Link> */}
             </nav>
           </div>
         </div>
@@ -231,16 +178,11 @@ export function MapDashboard() {
             </DialogContent>
           </Dialog>
           <div className="w-full flex-1">
-            <form>
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="4 Privet Drive Little Whinging, Surrey, England"
-                  className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-                />
-              </div>
-            </form>
+            <div className="relative">
+              {/* <LocationSearch 
+                  
+                /> */}
+            </div>
           </div>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">

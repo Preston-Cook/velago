@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/command';
 import { ChangeEvent } from 'react';
 import { Suggestion } from '@/types/Suggestion';
+import Link from 'next/link';
 
 interface SearchInputProps {
   error: string | null;
@@ -15,7 +16,7 @@ interface SearchInputProps {
   suggestions: Suggestion[];
   placeholder: string;
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
-  selectValue(e: string): void;
+  selectValue(e: string): void | undefined;
   handleFocus(): void;
 }
 

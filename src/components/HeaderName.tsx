@@ -1,6 +1,6 @@
 'use client';
 
-import LangLink from './Link';
+import { LocaleLink } from './LocaleLink';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
@@ -9,20 +9,18 @@ interface HeaderNameProps {
 }
 
 export function HeaderName({ lang }: HeaderNameProps) {
-  const { theme } = useTheme();
-
   return (
     <div className="items-center hidden md:flex">
-      <LangLink className="flex" lang={lang} href="/">
+      <LocaleLink className="flex" href="/">
         <Image
-          className="mr-2 dark:invert w-auto h-auto"
+          className="mr-2 dark:invert h-[25px] w-[25px]"
           src="/images/logo-black.png"
           height={25}
           width={25}
           alt="logo"
         />
         <h1 className="text-2xl font-bold text-primary">Velago</h1>
-      </LangLink>
+      </LocaleLink>
     </div>
   );
 }

@@ -8,34 +8,37 @@ import {
   ReactNode,
 } from 'react';
 
-interface LocationContextType {
+interface LocationApproximationContextType {
   city: string | null;
   region: string | null;
   countryCode: string | null;
+  lat: string | null;
+  lng: string | null;
 }
 
 interface LocationContextProviderProps {
   children: ReactNode;
 }
 
-const LocationContext = createContext<LocationContextType | null>({
+const LocationContext = createContext<LocationApproximationContextType | null>({
   city: null,
   region: null,
   countryCode: null,
+  lat: null,
+  lng: null,
 });
 
-export function useLocation() {
+export function useLocationApproximation() {
   const location = useContext(LocationContext);
   return location;
 }
 
 export function LocationProvider({ children }: LocationContextProviderProps) {
-  const [userLocation, setUserLocation] = useState<LocationContextType | null>(
-    null,
-  );
+  const [userLocationApproximation, setUserLocationApproximation] =
+    useState<LocationApproximationContextType | null>(null);
 
   useEffect(() => {
-    const fetchUserLocation = async () => {
+    const fetchUserLocationApproximation = async () => {
       try {
         const response = await fetch('https://ipapi.co/json/');
         if (!response.ok) {
@@ -43,22 +46,31 @@ export function LocationProvider({ children }: LocationContextProviderProps) {
         }
         const data = await response.json();
 
-        const { city, region, country_code_iso3: countryCode } = data;
-        setUserLocation({
+        const {
+          city,
+          region,
+          country_code_iso3: countryCode,
+          latitude: lat,
+          longitude: lng,
+        } = data;
+
+        setUserLocationApproximation({
           city,
           region,
           countryCode,
+          lat,
+          lng,
         });
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchUserLocation();
+    fetchUserLocationApproximation();
   }, []);
 
   return (
-    <LocationContext.Provider value={userLocation}>
+    <LocationContext.Provider value={userLocationApproximation}>
       {children}
     </LocationContext.Provider>
   );
