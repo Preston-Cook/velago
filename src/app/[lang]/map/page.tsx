@@ -6,9 +6,5 @@ interface MapProps {
 }
 
 export default async function Page({ params }: MapProps) {
-  return (
-    <>
-      <MapDashboard />
-    </>
-  );
+  return <MapDashboard />;
 }

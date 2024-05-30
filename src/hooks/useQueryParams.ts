@@ -7,24 +7,19 @@ export function useQueryParams() {
 
   const currentParams = new URLSearchParams(Array.from(searchParams.entries()));
 
+  function getQueryParam(key: string) {
+    const val = currentParams.get(key);
+    return val;
+  }
+
   function setQueryParam(key: string, value: string) {
     currentParams.set(key, value);
     currentParams.sort();
 
-    const q = currentParams.get('q');
+    const query = currentParams.toString();
+    console.log(query);
 
-    let query;
-
-    if (q === null) {
-      const search = currentParams.toString();
-      query = search ? `?${search}` : '';
-    } else {
-      currentParams.delete('q');
-      const search = currentParams.toString();
-      query = search ? `?q=${q}&${search}` : `?q=${q}`;
-    }
-
-    router.push(`${pathname}${query}`);
+    router.replace(`${pathname}?${query}`);
   }
 
   function deleteQueryParam(key: string) {
@@ -33,8 +28,8 @@ export function useQueryParams() {
     const search = currentParams.toString();
     const query = search ? `?${search}` : '';
 
-    router.push(`${pathname}${query}`);
+    router.replace(`${pathname}${query}`);
   }
 
-  return { setQueryParam, deleteQueryParam };
+  return { getQueryParam, setQueryParam, deleteQueryParam };
 }

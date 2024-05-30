@@ -1,6 +1,6 @@
 import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
-import SearchBar from './SearchBar';
+import { HomeSearchBar } from './HomeSearchBar';
 import { Search } from 'lucide-react';
 import { Input } from './ui/input';
 
@@ -23,7 +23,7 @@ export default async function Cta({ lang }: CallToActionProps) {
         <p className="mb-12 text-lg font-normal lg:text-xl sm:px-16 xl:px-48 ">
           {dic.description}
         </p>
-        <SearchBar lang={lang} placeholder={placeholder} />
+        <HomeSearchBar lang={lang} placeholder={placeholder} />
       </div>
     </section>
   );

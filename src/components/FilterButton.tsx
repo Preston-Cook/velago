@@ -38,7 +38,7 @@ export function FilterButton({ handleChange, radius }: FilterButtonProps) {
               <Slider
                 onValueChange={handleChange}
                 step={5}
-                className="col-span-2"
+                className="col-span-2 hover:cursor-pointer"
                 defaultValue={[10]}
                 max={25}
                 min={5}

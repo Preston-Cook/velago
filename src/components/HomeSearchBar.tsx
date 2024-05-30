@@ -13,7 +13,7 @@ interface SearchBarProps {
   lang: string;
 }
 
-export default function SearchBar({ placeholder, lang }: SearchBarProps) {
+export function HomeSearchBar({ placeholder, lang }: SearchBarProps) {
   const [radius, setRadius] = useState<number>(10);
   const [query, setQuery] = useState<string>('');
   const router = useRouter();

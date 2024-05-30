@@ -1,9 +1,7 @@
-import { LocationSearch } from "./LocationSearch"
+// import { LocationSearch } from "./LocationSearch"
 
-
-
-export function MapSearchBar() {
-  return (
-    <LocationSearch />
-  )
-}
+// export function MapSearchBar() {
+//   return (
+//     <LocationSearch />
+//   )
+// }
