@@ -103,6 +103,19 @@
         }
       },
       "submit": "Entregar"
+    },
+    "userSignIn": {
+      "title": "Iniciar sesión",
+      "description": "Ingrese su número de teléfono a continuación para iniciar sesión en su cuenta",
+      "labels": ["Teléfono", "Código"],
+      "login": {
+        "standard": "Iniciar sesión",
+        "google": "Iniciar sesión con Google"
+      },
+      "noAccount": {
+        "text": "¿No tienes una cuenta?",
+        "link": "Regístrate"
+      }
     }
   },
   "footer": {
@@ -117,7 +130,7 @@
     ]
   },
   "validation": {
-    "contactSchema": {
+    "contactFormSchema": {
       "firstName": {
         "min": "Debe tener al menos 2 caracteres",
         "max": "Debe tener como máximo 50 caracteres"
@@ -137,10 +150,14 @@
         "max": "Debe tener como máximo 300 caracteres"
       }
     },
-    "userSignInSchema": {
+    "userSignInFormSchema": {
       "phone": {
         "refine": "Numero de telefono invalido"
+      },
+      "otp": {
+        "refine": "Código inválido"
       }
-    }
+    },
+    "userSignUpFormSchema": {}
   }
 }

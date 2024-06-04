@@ -16,11 +16,11 @@ export default async function Cta({ lang }: CallToActionProps) {
 
   return (
     <section>
-      <div className="py-4 px-4 mx-auto max-w-screen-xl text-center lg:pt-16 lg:px-12 lg:pb-10">
-        <h1 className="mb-12 text-4xl font-bold tracking-tight leading-none  md:text-5xl lg:text-5xl text-primary">
+      <div className="mx-auto max-w-screen-xl px-4 py-4 text-center lg:px-12 lg:pb-10 lg:pt-16">
+        <h1 className="mb-12 text-4xl font-bold leading-none tracking-tight text-primary md:text-5xl lg:text-5xl">
           {dic.title}
         </h1>
-        <p className="mb-12 text-lg font-normal lg:text-xl sm:px-16 xl:px-48 ">
+        <p className="mb-12 text-lg font-normal sm:px-16 lg:text-xl xl:px-48">
           {dic.description}
         </p>
         <HomeSearchBar lang={lang} placeholder={placeholder} />

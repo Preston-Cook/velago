@@ -14,11 +14,11 @@ export default function Page({ params }: HomePageProps) {
   const { lang } = params;
 
   return (
-    <div className="py-3 px-4">
+    <div className="px-4 py-3">
       {/* <div className="fixed h-screen w-screen z-50 bg-red-50"></div> */}
-      <div className="sm:px-6 lg:px-8 py-8 flex flex-col justify-around gap-10">
+      <div className="flex flex-col justify-around gap-10 py-8 sm:px-6 lg:px-8">
         <Cta lang={lang} />
-        <Separator className="bg-primary w-[80%] min-w-[200px] mx-auto" />
+        <Separator className="mx-auto w-[80%] min-w-[200px] bg-primary" />
         <Content lang={lang} />
         <FaqSection lang={lang} />
       </div>

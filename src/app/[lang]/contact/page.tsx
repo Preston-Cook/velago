@@ -13,7 +13,7 @@ export default async function Page({ params }: ContactPageProps) {
   const dic = await getDictionary(lang);
   const { title, description } = dic.pages.contact;
   const {
-    validation: { contactSchema },
+    validation: { contactFormSchema },
   } = dic;
 
   return (
@@ -26,7 +26,7 @@ export default async function Page({ params }: ContactPageProps) {
           <p className="font-light sm:text-xl">{description}</p>
         </div>
         <div className="mx-auto">
-          <ContactForm validation={contactSchema} dic={dic.pages.contact} />
+          <ContactForm validation={contactFormSchema} dic={dic.pages.contact} />
         </div>
       </div>
     </section>

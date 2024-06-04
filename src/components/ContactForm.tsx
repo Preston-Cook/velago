@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { Textarea } from './ui/textarea';
 import SubmitButton from './SubmitButton';
+import { phoneRegex } from '@/lib/phoneRegex';
 
 interface ContactFormProps {
   validation: {
@@ -85,8 +86,6 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
     },
   ];
 
-  const phoneRegExp = /^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
-
   const contactFormSchema = z.object({
     firstName: z
       .string()
@@ -104,7 +103,7 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
       .max(50, {
         message: validation.lastName.max,
       }),
-    phone: z.string().refine((value) => phoneRegExp.test(value), {
+    phone: z.string().refine((value) => phoneRegex.test(value), {
       message: validation.phone.refine,
     }),
     email: z.string().email(validation.email.email),
@@ -160,7 +159,7 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
         className="mx-auto max-w-screen-md"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
           {fieldObjs.map((fieldObj) => (
             // eslint-disable-next-line react/jsx-key
             <FormField

@@ -97,6 +97,19 @@
         }
       },
       "submit": "Submit"
+    },
+    "userSignIn": {
+      "title": "Login",
+      "description": "Enter your phone number below to login to your account",
+      "labels": ["Phone", "Code"],
+      "login": {
+        "standard": "Login",
+        "google": "Login with Google"
+      },
+      "noAccount": {
+        "text": "Don't have an account?",
+        "link": "Sign up"
+      }
     }
   },
   "footer": {
@@ -105,7 +118,7 @@
     "links": ["Search", "Contact", "About", "Privacy Policy", "Disclaimer"]
   },
   "validation": {
-    "contactSchema": {
+    "contactFormSchema": {
       "firstName": {
         "min": "Must be at least 2 characters",
         "max": "Must be at most 50 characters"
@@ -125,10 +138,14 @@
         "max": "Must be at most 300 characters"
       }
     },
-    "userSignInSchema": {
+    "userSignInFormSchema": {
       "phone": {
         "refine": "Invalid phone number"
+      },
+      "otp": {
+        "refine": "Invalid code"
       }
-    }
+    },
+    "userSignUpFormSchema": {}
   }
 }

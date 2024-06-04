@@ -1,8 +1,8 @@
 'use client';
 
-import { MapContainer } from 'react-leaflet/MapContainer';
-import { TileLayer } from 'react-leaflet/TileLayer';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { RecenterMap } from './RecenterMap';
+import { v4 as uuid } from 'uuid';
 
 interface MapProps {
   lat: number;
@@ -20,6 +20,7 @@ export default function Map({ lat, lng }: MapProps) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <Marker key={uuid()} position={[lat, lng]} />
       <RecenterMap lat={lat} lng={lng} />
     </MapContainer>
   );

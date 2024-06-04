@@ -1,5 +1,5 @@
 import { chain } from './middlewares/chain';
-import { i18Middleware } from './middlewares/i18Middleware';
+import { i18Middleware } from './middlewares/i18middleware';
 
 export default chain([i18Middleware]);
 
