@@ -35,7 +35,7 @@ export default async function Page({ params }: UserSignInProps) {
           </div>
         </div>
       </div>
-      <div className="hidden border border-l-primary lg:block">
+      <div className="hidden border border-l-primary bg-background lg:block">
         <div className="flex items-center justify-center">
           <div className="mt-[18vh]">
             <Globe />

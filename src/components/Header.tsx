@@ -7,6 +7,8 @@ import LanguageDropDown from './LanguageDropDown';
 import { DarkModeToggle } from './DarkModeToggle';
 import { LocaleLink } from './LocaleLink';
 import { HeaderName } from './HeaderName';
+import { getCurrentUser } from '@/lib/getCurrentUser';
+import { SignOutButton } from './SignOutButton';
 
 interface HeaderProps {
   lang: Locale;
@@ -14,13 +16,14 @@ interface HeaderProps {
 
 async function Header({ lang }: HeaderProps) {
   const dic = await getDictionary(lang);
+  const currentUser = await getCurrentUser();
 
   return (
-    <header className="sm:flex sm:justify-between py-3 border-b bg-secondary border-primary">
-      <div className="relative px-4 lg:px-8 flex h-16 items-center justify-between w-full">
+    <header className="border-b border-primary bg-secondary py-3 sm:flex sm:justify-between">
+      <div className="relative flex h-16 w-full items-center justify-between px-4 lg:px-8">
         <HamburgerMenu links={dic.header.links} />
         <HeaderName lang={lang} />
-        <nav className="gap-2 ml-6 hidden max-w-400px md:flex mr-auto">
+        <nav className="max-w-400px ml-6 mr-auto hidden gap-2 md:flex">
           {dic.header.links.map((link) => (
             <Button
               key={`${uuidv4()}`}
@@ -42,18 +45,33 @@ async function Header({ lang }: HeaderProps) {
             <DarkModeToggle />
           </div>
           <LanguageDropDown />
-          <LocaleLink href="/signin/user">
-            <Button className="w-fit py-2 px-4 " variant="outline" size="icon">
-              {dic.header.signIn}
-            </Button>
-          </LocaleLink>
-          <Button
-            className="w-fit py-2 px-4 text-white"
-            variant="default"
-            size="icon"
-          >
-            <LocaleLink href="/signup/user">{dic.header.signUp}</LocaleLink>
-          </Button>
+
+          {!currentUser ? (
+            <>
+              <LocaleLink href="/signin/user">
+                <Button
+                  className="w-fit px-4 py-2"
+                  variant="outline"
+                  size="icon"
+                >
+                  {dic.header.signIn}
+                </Button>
+              </LocaleLink>
+              <LocaleLink href="/signup/user">
+                <Button
+                  className="w-fit px-4 py-2 text-white"
+                  variant="default"
+                  size="icon"
+                >
+                  {dic.header.signUp}
+                </Button>
+              </LocaleLink>
+            </>
+          ) : (
+            <>
+              <SignOutButton />
+            </>
+          )}
         </div>
       </div>
     </header>

@@ -215,7 +215,10 @@ export default function UserSignInForm({
                       <FormControl>
                         <div className="flex justify-between">
                           <CodeInput onChange={handleCodeChange} />
-                          <ResendCodeButton phone={field.value} text="Resend" />
+                          <ResendCodeButton
+                            phone={getValues('phone')}
+                            text="Resend"
+                          />
                         </div>
                       </FormControl>
                       <FormMessage />

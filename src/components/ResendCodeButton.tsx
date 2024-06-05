@@ -12,7 +12,7 @@ interface ResendCodeButtonProps {
   text: string;
 }
 
-export function ResendCodeButton({ phone, text }: ResendCodeButtonProps) {
+export function ResendCodeButton({ phone }: ResendCodeButtonProps) {
   const sbBrowserClient = createSbBrowserClient();
   const [seconds, setSeconds] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,9 +34,13 @@ export function ResendCodeButton({ phone, text }: ResendCodeButtonProps) {
 
       setIsLoading(true);
 
+      console.log(cleanedPhone);
+
       const { error } = await sbBrowserClient.auth.signInWithOtp({
         phone: cleanedPhone,
       });
+
+      console.log(JSON.stringify(error));
 
       setIsLoading(false);
 

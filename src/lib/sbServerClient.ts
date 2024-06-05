@@ -1,6 +1,7 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
+// This is for use in server components, which only have read access to cookies
 export function createSbServerClient() {
   const cookieStore = cookies();
 

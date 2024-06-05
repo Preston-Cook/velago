@@ -21,14 +21,14 @@ export default function HamburgerMenu({ links }: HamburgerMenuProps) {
   return (
     <Sheet>
       <SheetTrigger className="md:hidden">
-        <div className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 rounded-lg text-white">
+        <div className="h-10 rounded-lg bg-primary px-4 py-2 text-primary-foreground text-white hover:bg-primary/90">
           <Menu />
         </div>
       </SheetTrigger>
-      <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-secondary">
-        <h2 className="px-2 py-4 text-2xl text-primary font-bold flex">
+      <SheetContent side="left" className="w-[300px] bg-secondary sm:w-[400px]">
+        <h2 className="flex px-2 py-4 text-2xl font-bold text-primary">
           <Image
-            className="mr-2 dark:invert h-auto w-auto"
+            className="mr-2 h-auto w-auto dark:invert"
             src="/images/logo-black.png"
             height={25}
             width={25}
@@ -47,7 +47,7 @@ export default function HamburgerMenu({ links }: HamburgerMenuProps) {
             </Link>
           ))}
         </nav>
-        <Separator className="bg-primary h-[1px] my-4" />
+        <Separator className="my-4 h-[1px] bg-primary" />
         <DarkModeToggle />
       </SheetContent>
     </Sheet>

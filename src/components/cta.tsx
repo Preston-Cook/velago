@@ -1,8 +1,6 @@
 import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
 import { HomeSearchBar } from './HomeSearchBar';
-import { Search } from 'lucide-react';
-import { Input } from './ui/input';
 
 interface CallToActionProps {
   lang: Locale;

@@ -46,13 +46,12 @@ export function LocationSearch({
       q,
     });
 
-    console.log(JSON.stringify(newSuggestions));
-
     setSuggestions((_prev) => newSuggestions);
   }
 
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
     // get new value
+
     const { value: q } = e.currentTarget;
 
     // set new state
