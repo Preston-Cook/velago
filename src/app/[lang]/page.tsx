@@ -15,7 +15,6 @@ export default function Page({ params }: HomePageProps) {
 
   return (
     <div className="px-4 py-3">
-      {/* <div className="fixed h-screen w-screen z-50 bg-red-50"></div> */}
       <div className="flex flex-col justify-around gap-10 py-8 sm:px-6 lg:px-8">
         <Cta lang={lang} />
         <Separator className="mx-auto w-[80%] min-w-[200px] bg-primary" />

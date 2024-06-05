@@ -17,21 +17,21 @@ export function FilterButton({ handleChange, radius }: FilterButtonProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className="text-white h-[45px]">
-          <Filter />
+        <Button className="h-[45px] text-white">
+          <Filter className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-80" align="start">
         <div className="grid gap-4">
           <div className="space-y-2">
-            <h4 className="text-primary font-bold">Filters</h4>
+            <h4 className="font-bold text-primary">Filters</h4>
             <p className="text-sm text-muted-foreground">
               Set Filters for Search
             </p>
           </div>
           <div className="grid gap-2">
             <div className="grid grid-cols-3 items-center gap-4">
-              <Label className="text-sm text-left" htmlFor="width">
+              <Label className="text-left text-sm" htmlFor="width">
                 Radius: <br />
                 &lt; {radius}mi.
               </Label>

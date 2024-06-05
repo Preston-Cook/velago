@@ -4,29 +4,41 @@ import { signOutUser } from '@/services/users';
 import { Button } from './ui/button';
 import { useToast } from './ui/use-toast';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { Loader2 } from 'lucide-react';
 
 export function SignOutButton() {
   const router = useRouter();
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function handleClick() {
     try {
+      setIsLoading(true);
       await signOutUser();
-
-      toast({
-        title: 'Success!',
-        description: 'Successfully logged out',
-      });
     } catch (err) {
+      setIsLoading(false);
+
       toast({
         title: 'Uh oh! Something went wrong',
         description: 'There was a problem with your request',
         variant: 'destructive',
       });
+      return;
     }
 
+    toast({
+      title: 'Success!',
+      description: 'Successfully logged out',
+    });
+
+    router.push('/');
     router.refresh();
   }
 
-  return <Button onClick={handleClick}>Sign Out</Button>;
+  return (
+    <Button className="w-[80px] text-center text-white" onClick={handleClick}>
+      {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Sign Out'}
+    </Button>
+  );
 }

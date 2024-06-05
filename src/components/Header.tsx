@@ -9,6 +9,7 @@ import { LocaleLink } from './LocaleLink';
 import { HeaderName } from './HeaderName';
 import { getCurrentUser } from '@/lib/getCurrentUser';
 import { SignOutButton } from './SignOutButton';
+import ProfileButton from './ProfileButton';
 
 interface HeaderProps {
   lang: Locale;
@@ -69,6 +70,7 @@ async function Header({ lang }: HeaderProps) {
             </>
           ) : (
             <>
+              <ProfileButton />
               <SignOutButton />
             </>
           )}

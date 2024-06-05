@@ -25,6 +25,8 @@ import { ResendCodeButton } from './ResendCodeButton';
 import { cleanPhone } from '@/lib/cleanPhone';
 import { codeRegex } from '@/lib/codeRegex';
 import { Separator } from './ui/separator';
+import { useRouter } from 'next/navigation';
+import { useLocale } from '@/hooks/useLocale';
 
 interface PhoneLoginFormProps {
   validation: {
@@ -55,6 +57,8 @@ export default function UserSignInForm({
   dic,
 }: PhoneLoginFormProps) {
   const sbBrowserClient = createSbBrowserClient();
+  const router = useRouter();
+  const { locale } = useLocale();
 
   const [{ isLoadingCode, isLoadingLogin }, setIsLoading] = useState({
     isLoadingCode: false,
@@ -88,7 +92,7 @@ export default function UserSignInForm({
   }: z.infer<typeof userSignInFormSchema>) {
     setIsLoading((prev) => ({ ...prev, isLoadingLogin: true }));
 
-    const { data, error } = await sbBrowserClient.auth.verifyOtp({
+    const { error } = await sbBrowserClient.auth.verifyOtp({
       phone: cleanPhone(phone),
       token: code,
       type: 'sms',
@@ -114,10 +118,13 @@ export default function UserSignInForm({
       return;
     }
 
-    console.log(JSON.stringify(data));
-    console.log(JSON.stringify(error));
+    toast({
+      title: 'Success!',
+      description: 'Successfully logged in',
+    });
 
-    // TODO: Redirect user to some page
+    router.push(`/${locale}/map`);
+    router.refresh();
   }
 
   async function handleSendCode() {
@@ -194,7 +201,7 @@ export default function UserSignInForm({
                     onClick={handleSendCode}
                   >
                     {isLoadingCode ? (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <Loader2 className="h-4 w-4 animate-spin" />
                     ) : (
                       'Send Code'
                     )}
@@ -229,7 +236,7 @@ export default function UserSignInForm({
                       className="text-white"
                     >
                       {isLoadingLogin ? (
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        <Loader2 className="h-4 w-4 animate-spin" />
                       ) : (
                         'Login'
                       )}

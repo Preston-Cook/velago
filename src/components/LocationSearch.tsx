@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useLocationApproximation } from '@/context/LocationProvider';
 import { ChangeEvent } from 'react';
 import { getLocationSuggestions } from '@/lib/getLocationSuggestions';
-import { useLocale } from '@/hooks/useLanguage';
+import { useLocale } from '@/hooks/useLocale';
 
 interface LocationSearchProps {
   query: string;

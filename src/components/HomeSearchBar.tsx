@@ -4,7 +4,7 @@ import { FilterButton } from './FilterButton';
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { LocationSearch } from './LocationSearch';
-import { useLocale } from '@/hooks/useLanguage';
+import { useLocale } from '@/hooks/useLocale';
 import { start as nprogressStart } from 'nprogress';
 import { getCoordinates } from '@/lib/geocodeAddress';
 
@@ -43,7 +43,7 @@ export function HomeSearchBar({ placeholder, lang }: SearchBarProps) {
   }
 
   return (
-    <div className="flex max-w-md gap-2 mx-auto mt-10 justify-center items-center">
+    <div className="mx-auto mt-10 flex max-w-md items-center justify-center gap-2">
       <FilterButton handleChange={handleRadiusChange} radius={radius} />
       <div className="mx-auto flex-1">
         <div className="relative">

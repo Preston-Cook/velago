@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import Image from 'next/image';
 import { createSbBrowserClient } from '@/lib/sbBrowserClient';
 import { getURL } from '@/lib/getUrl';
+import { useState } from 'react';
 
 interface GoogleLoginButtonProps {
   text: string;
@@ -13,14 +14,19 @@ const url = getURL();
 
 export function GoogleLoginButton({ text }: GoogleLoginButtonProps) {
   const sbBrowserClient = createSbBrowserClient();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleGoogleLogin() {
+    // add loading
+
     await sbBrowserClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
         redirectTo: `${url}/api/auth/callback`,
       },
     });
+
+    // end loading
   }
 
   return (
