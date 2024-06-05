@@ -26,7 +26,8 @@ export function i18Middleware(middleware: CustomMiddleware) {
   ) => {
     const { pathname, href } = request.nextUrl;
 
-    if (href.split('/').includes('api')) {
+    // ignore internationalization on api routes
+    if (href.split('/').at(3) === 'api') {
       return middleware(request, event, response);
     }
 
