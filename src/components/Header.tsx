@@ -20,7 +20,7 @@ async function Header({ lang }: HeaderProps) {
   const currentUser = await getCurrentUser();
 
   return (
-    <header className="border-b border-primary bg-secondary py-3 sm:flex sm:justify-between">
+    <header className="relative z-50 border-b border-primary bg-secondary py-3 sm:flex sm:justify-between">
       <div className="relative flex h-16 w-full items-center justify-between px-4 lg:px-8">
         <HamburgerMenu links={dic.header.links} />
         <HeaderName lang={lang} />

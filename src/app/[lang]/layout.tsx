@@ -50,7 +50,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
           <ProgressBar />
           <LocationProvider>
             <Header lang={params.lang} />
-            <main className="flex-1 min-h-[87.125vh]">{children}</main>
+            <main className="min-h-[90.5vh] flex-1">{children}</main>
             <Toaster />
             <Footer lang={params.lang} />
           </LocationProvider>

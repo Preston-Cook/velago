@@ -7,18 +7,18 @@ import { LocaleLink } from '@/components/LocaleLink';
 
 const errorText = {
   en: {
-    title: "Something's Missing",
-    text: "Sorry, we can't find that page. You'll find lots to explore on the home page.",
+    title: 'Something Went Wrong',
+    text: 'Sorry, we encountered an error. Please try again later or visit our home page.',
     link: 'Back to Homepage',
   },
   es: {
-    title: 'Algo falta.',
-    text: 'Lo sentimos, no podemos encontrar esa página. Encontrarás mucho para explorar en la página de inicio.',
+    title: '¡Ups, Algo Salió Mal!',
+    text: 'Lo sentimos, encontramos un error. Por favor, inténtalo de nuevo más tarde o visita nuestra página de inicio.',
     link: 'Volver a la página de inicio.',
   },
 };
 
-export default function Error() {
+export default function ErrorPage() {
   const { lang } = useParams<{ lang: Locale }>();
   const dic = errorText[lang as keyof typeof errorText];
 
@@ -26,8 +26,8 @@ export default function Error() {
     <div className="flex h-[90.5vh] flex-col items-center justify-center px-2">
       <div className="mx-auto rounded-md border bg-secondary px-10">
         <div className="z-0 mx-auto py-4 text-center">
-          <h1 className="mb-4 text-7xl font-bold tracking-tight text-primary lg:text-9xl">
-            404
+          <h1 className="mb-8 text-7xl font-bold tracking-tight text-primary lg:text-9xl">
+            {'Oops!'}
           </h1>
           <p className="mb-4 text-3xl font-bold tracking-tight text-primary md:text-4xl">
             {dic.title}
