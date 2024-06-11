@@ -9,9 +9,9 @@ import Footer from '@/components/Footer';
 import { Locale, i18n } from '@/i18n.config';
 import { Toaster } from '@/components/ui/toaster';
 import { LocationProvider } from '@/context/LocationProvider';
-import 'leaflet/dist/leaflet.css';
-import NextTopLoader from 'nextjs-toploader';
 import { ProgressBar } from '@/components/ProgressBar';
+import { Analytics } from '@vercel/analytics/react';
+import 'leaflet/dist/leaflet.css';
 
 export const metadata: Metadata = {
   title: 'Velago',
@@ -55,6 +55,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
             <Footer lang={params.lang} />
           </LocationProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
