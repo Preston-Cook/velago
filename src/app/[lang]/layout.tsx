@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 import localFont from 'next/font/local';
-import '@/styles/globals.css';
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from '@/context/ThemeProvider';
 import Header from '@/components/Header';
@@ -11,6 +10,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { LocationProvider } from '@/context/LocationProvider';
 import { ProgressBar } from '@/components/ProgressBar';
 import { Analytics } from '@vercel/analytics/react';
+import '@/styles/globals.css';
 import 'leaflet/dist/leaflet.css';
 
 export const metadata: Metadata = {
