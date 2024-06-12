@@ -63,10 +63,10 @@ export function MapDashboard({ placeholder }: MapDashBoardProps) {
   }
 
   return (
-    <div className="grid min-h-[90.5vh] w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+    <div className="grid min-h-[90.8vh] w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <MapSidebar radius={radius} onRadiusChange={handleRadiusChange} />
       <div className="flex flex-col">
-        <header className="flex h-14 items-center gap-4 border-b border-primary bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+        <header className="flex h-16 items-center gap-4 border-b border-primary bg-muted/40 px-4 lg:h-[60px] lg:px-6">
           <FilterMenu radius={radius} onRadiusChange={handleRadiusChange} />
           <div className="w-full flex-1">
             <div className="relative">
