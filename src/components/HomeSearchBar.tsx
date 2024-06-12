@@ -2,9 +2,8 @@
 
 import { FilterButton } from './FilterButton';
 import { useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { LocationSearch } from './LocationSearch';
-import { useLocale } from '@/hooks/useLocale';
 import { start as nprogressStart } from 'nprogress';
 import { getCoordinates } from '@/lib/geocodeAddress';
 
@@ -13,7 +12,7 @@ interface SearchBarProps {
   lang: string;
 }
 
-export function HomeSearchBar({ placeholder, lang }: SearchBarProps) {
+export function HomeSearchBar({ placeholder }: SearchBarProps) {
   const [radius, setRadius] = useState<number>(10);
   const [query, setQuery] = useState<string>('');
   const router = useRouter();

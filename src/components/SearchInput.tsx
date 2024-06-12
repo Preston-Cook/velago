@@ -29,7 +29,7 @@ export function SearchInput({
   handleFocus,
 }: SearchInputProps) {
   return (
-    <div className="absolute -top-[22px] w-full">
+    <div className="absolute -top-[22px] z-[2000] w-full">
       <Command className="rounded-lg border bg-secondary focus-within:border-primary">
         <CommandInput
           name="q"
@@ -38,7 +38,7 @@ export function SearchInput({
           value={query}
           onChangeCapture={handleChange}
         />
-        <CommandList>
+        <CommandList className="z-50">
           {error ? (
             <CommandItem className="text-destructive" disabled>
               <span className="mr-2">

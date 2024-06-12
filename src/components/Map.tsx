@@ -23,7 +23,7 @@ export default function Map({ lat, lng }: MapProps) {
     <MapContainer
       center={[30.269501, -97.715942]}
       zoom={10}
-      className="z-20 h-full w-full"
+      className="h-full w-full"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

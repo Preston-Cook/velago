@@ -71,11 +71,16 @@ export function LocationSearch({
     handleClearSuggestions();
   }
 
+  async function handleSelectValue(e: string) {
+    await onSelectValue(e);
+    setSuggestions((_prev) => []);
+  }
+
   return (
     <OutsideAlerter func={handleClearSuggestions}>
       <SearchInput
         handleFocus={handleFocus}
-        selectValue={onSelectValue}
+        selectValue={handleSelectValue}
         error={error}
         handleChange={handleChange}
         query={query}
