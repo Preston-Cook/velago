@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Goal, UserRoundPlus, Globe } from 'lucide-react';
+import { v4 as uuid } from 'uuid';
 
 interface AboutSectionProps {
   header: string;
@@ -7,7 +8,7 @@ interface AboutSectionProps {
   iconIdx: number;
 }
 
-const icons = [<Goal key={0} />, <UserRoundPlus key={1} />, <Globe key={2} />];
+const icons = [<Goal key={uuid()} />, <UserRoundPlus key={uuid()} />];
 
 export function AboutSection({ header, text, iconIdx }: AboutSectionProps) {
   const icon = icons[iconIdx as keyof typeof icons];
