@@ -2,7 +2,6 @@
 
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -12,11 +11,44 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { v4 as uuid } from 'uuid';
 import { capitalizeString } from '@/lib/utils';
+import DarkModeIcon from '../../public/images/logo-light.png';
+import LightModeIcon from '../../public/images/logo-black.png';
+import { useEffect } from 'react';
 
 const themes = ['light', 'dark', 'system'];
 
 export function DarkModeToggle() {
-  const { setTheme, theme } = useTheme();
+  const { setTheme, theme, resolvedTheme } = useTheme();
+
+  useEffect(
+    function () {
+      // query dom for both favicons
+      const favicons = document.querySelectorAll("link[rel~='icon']");
+
+      // get parent head element
+      const headEl = favicons[0].parentNode as Node;
+
+      // remove both favicons from dom or just one
+      favicons.forEach((el) => {
+        headEl.removeChild(el);
+      });
+
+      // create new element to append to dom
+      const newFaviconEl = document.createElement('link');
+
+      // add base attributes
+      newFaviconEl.rel = 'icon';
+      newFaviconEl.type = 'image/png';
+
+      // dynamically set src based on new theme
+      newFaviconEl.href =
+        resolvedTheme === 'dark' ? DarkModeIcon.src : LightModeIcon.src;
+
+      // add new element to dom
+      headEl.appendChild(newFaviconEl);
+    },
+    [resolvedTheme],
+  );
 
   return (
     <DropdownMenu>
