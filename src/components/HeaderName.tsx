@@ -10,10 +10,10 @@ interface HeaderNameProps {
 
 export function HeaderName({ lang }: HeaderNameProps) {
   return (
-    <div className="items-center hidden md:flex">
+    <div className="hidden items-center md:flex">
       <LocaleLink className="flex" href="/">
         <Image
-          className="mr-2 dark:invert h-[25px] w-[25px]"
+          className="mr-2 h-[25px] w-[25px] dark:invert"
           src="/images/logo-black.png"
           height={25}
           width={25}

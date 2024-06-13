@@ -8,7 +8,6 @@ import { DarkModeToggle } from './DarkModeToggle';
 import { LocaleLink } from './LocaleLink';
 import { HeaderName } from './HeaderName';
 import { getCurrentUser } from '@/lib/getCurrentUser';
-import { SignOutButton } from './SignOutButton';
 import ProfileButton from './ProfileButton';
 
 interface HeaderProps {
@@ -71,7 +70,6 @@ async function Header({ lang }: HeaderProps) {
           ) : (
             <>
               <ProfileButton />
-              <SignOutButton />
             </>
           )}
         </div>

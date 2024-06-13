@@ -125,6 +125,24 @@
           "4 Privet Drive Little Whinging, Surrey, England"
         ]
       }
+    },
+    "about": {
+      "title": "What is Velago?",
+      "subheading": "Learn more about our mission to equip underprivileged communities with the knowledge to control their healthcare",
+      "content": [
+        {
+          "header": "Our Mission",
+          "text": "Welcome to Velago, a platform dedicated to transforming access to healthcare and charitable services. Our mission is to connect underprivileged individuals with Medicare-accepting healthcare providers and compassionate charitable organizations. At Velago, we believe everyone deserves access to quality healthcare and support, regardless of their socio-economic status."
+        },
+        {
+          "header": "Empowering Users",
+          "text": "Our platform features easy-to-use search tools and comprehensive listings to help users find the support they need. Whether seeking medical care, mental health services, or assistance from charitable organizations, Velago provides detailed information and resources to guide you. We aim to empower individuals by simplifying the process of accessing essential care and support."
+        },
+        {
+          "header": "Expanding Reach",
+          "text": "For healthcare providers and charitable organizations, Velago offers an opportunity to reach a broader audience and make a significant impact. By joining our platform, providers can connect with those in need, while organizations can extend their reach and amplify their efforts. Together, we can create a world where essential healthcare and support services are accessible to all. Explore, connect, and contribute to a more compassionate world with Velago today."
+        }
+      ]
     }
   },
   "footer": {
