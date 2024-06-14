@@ -42,3 +42,6 @@ _/
 .env
 .env.development
 .env.production
+
+# migration config
+migration_lock.toml

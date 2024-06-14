@@ -27,11 +27,6 @@ export function SignOutButton() {
       return;
     }
 
-    toast({
-      title: 'Success!',
-      description: 'Successfully logged out',
-    });
-
     router.push('/');
     router.refresh();
   }

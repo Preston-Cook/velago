@@ -118,11 +118,6 @@ export default function UserSignInForm({
       return;
     }
 
-    toast({
-      title: 'Success!',
-      description: 'Successfully logged in',
-    });
-
     router.push(`/${locale}/map`);
     router.refresh();
   }
@@ -136,10 +131,10 @@ export default function UserSignInForm({
     await sbBrowserClient.auth.signOut();
     const { error } = await sbBrowserClient.auth.signInWithOtp({ phone });
 
-    setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
-
     // There is something wrong with sending code
     if (error) {
+      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
+
       toast({
         title: 'Uh oh! Something went wrong',
         description: 'There was a problem with your request',

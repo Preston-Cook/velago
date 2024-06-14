@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Sheet, SheetTrigger, SheetContent } from './ui/sheet';
 import { DarkModeToggle } from './DarkModeToggle';
 import Image from 'next/image';
+import { createSbBrowserClient } from '@/lib/sbBrowserClient';
 
 export interface LinkProps {
   href: string;
@@ -25,7 +26,10 @@ export default function HamburgerMenu({ links }: HamburgerMenuProps) {
           <Menu />
         </div>
       </SheetTrigger>
-      <SheetContent side="left" className="w-[300px] bg-secondary sm:w-[400px]">
+      <SheetContent
+        side="left"
+        className="z-[6000] w-[300px] bg-secondary sm:w-[400px]"
+      >
         <h2 className="flex px-2 py-4 text-2xl font-bold text-primary">
           <Image
             className="mr-2 h-auto w-auto dark:invert"

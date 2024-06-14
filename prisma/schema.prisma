@@ -1,363 +1,436 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["multiSchema"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider  = "postgresql"
   url       = env("TRANSACTION_CONNECTION")
   directUrl = env("SESSION_CONNECTION")
-  schemas   = ["auth", "public"]
 }
 
-//*************AUTH SCHEMA*************//
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model audit_log_entries {
-  instance_id String?   @db.Uuid
-  id          String    @id @db.Uuid
-  payload     Json?     @db.Json
-  created_at  DateTime? @db.Timestamptz(6)
-  ip_address  String    @default("") @db.VarChar(64)
-
-  @@index([instance_id], map: "audit_logs_instance_id_idx")
-  @@schema("auth")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model flow_state {
-  id                     String                @id @db.Uuid
-  user_id                String?               @db.Uuid
-  auth_code              String
-  code_challenge_method  code_challenge_method
-  code_challenge         String
-  provider_type          String
-  provider_access_token  String?
-  provider_refresh_token String?
-  created_at             DateTime?             @db.Timestamptz(6)
-  updated_at             DateTime?             @db.Timestamptz(6)
-  authentication_method  String
-  auth_code_issued_at    DateTime?             @db.Timestamptz(6)
-  saml_relay_states      saml_relay_states[]
-
-  @@index([created_at(sort: Desc)])
-  @@index([auth_code], map: "idx_auth_code")
-  @@index([user_id, authentication_method], map: "idx_user_id_auth_method")
-  @@schema("auth")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model identities {
-  provider_id     String
-  user_id         String    @db.Uuid
-  identity_data   Json
-  provider        String
-  last_sign_in_at DateTime? @db.Timestamptz(6)
-  created_at      DateTime? @db.Timestamptz(6)
-  updated_at      DateTime? @db.Timestamptz(6)
-  email           String?   @default(dbgenerated("lower((identity_data ->> 'email'::text))"))
-  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  users           users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@unique([provider_id, provider], map: "identities_provider_id_provider_unique")
-  @@index([email])
-  @@index([user_id])
-  @@schema("auth")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model instances {
-  id              String    @id @db.Uuid
-  uuid            String?   @db.Uuid
-  raw_base_config String?
-  created_at      DateTime? @db.Timestamptz(6)
-  updated_at      DateTime? @db.Timestamptz(6)
-
-  @@schema("auth")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model mfa_amr_claims {
-  session_id            String   @db.Uuid
-  created_at            DateTime @db.Timestamptz(6)
-  updated_at            DateTime @db.Timestamptz(6)
-  authentication_method String
-  id                    String   @id(map: "amr_id_pk") @db.Uuid
-  sessions              sessions @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@unique([session_id, authentication_method], map: "mfa_amr_claims_session_id_authentication_method_pkey")
-  @@schema("auth")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model mfa_challenges {
-  id          String      @id @db.Uuid
-  factor_id   String      @db.Uuid
-  created_at  DateTime    @db.Timestamptz(6)
-  verified_at DateTime?   @db.Timestamptz(6)
-  ip_address  String      @db.Inet
-  mfa_factors mfa_factors @relation(fields: [factor_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "mfa_challenges_auth_factor_id_fkey")
-
-  @@index([created_at(sort: Desc)], map: "mfa_challenge_created_at_idx")
-  @@schema("auth")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model mfa_factors {
-  id             String           @id @db.Uuid
-  user_id        String           @db.Uuid
-  friendly_name  String?
-  factor_type    factor_type
-  status         factor_status
-  created_at     DateTime         @db.Timestamptz(6)
-  updated_at     DateTime         @db.Timestamptz(6)
-  secret         String?
-  mfa_challenges mfa_challenges[]
-  users          users            @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@index([user_id, created_at], map: "factor_id_created_at_idx")
-  @@index([user_id])
-  @@schema("auth")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model one_time_tokens {
-  id         String              @id @db.Uuid
-  user_id    String              @db.Uuid
-  token_type one_time_token_type
-  token_hash String
-  relates_to String
-  created_at DateTime            @default(now()) @db.Timestamp(6)
-  updated_at DateTime            @default(now()) @db.Timestamp(6)
-  users      users               @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@unique([user_id, token_type])
-  @@index([relates_to], map: "one_time_tokens_relates_to_hash_idx", type: Hash)
-  @@index([token_hash], map: "one_time_tokens_token_hash_hash_idx", type: Hash)
-  @@schema("auth")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model refresh_tokens {
-  instance_id String?   @db.Uuid
-  id          BigInt    @id @default(autoincrement())
-  token       String?   @unique(map: "refresh_tokens_token_unique") @db.VarChar(255)
-  user_id     String?   @db.VarChar(255)
-  revoked     Boolean?
-  created_at  DateTime? @db.Timestamptz(6)
-  updated_at  DateTime? @db.Timestamptz(6)
-  parent      String?   @db.VarChar(255)
-  session_id  String?   @db.Uuid
-  sessions    sessions? @relation(fields: [session_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@index([instance_id])
-  @@index([instance_id, user_id])
-  @@index([parent])
-  @@index([session_id, revoked])
-  @@index([updated_at(sort: Desc)])
-  @@schema("auth")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model saml_providers {
-  id                String        @id @db.Uuid
-  sso_provider_id   String        @db.Uuid
-  entity_id         String        @unique
-  metadata_xml      String
-  metadata_url      String?
-  attribute_mapping Json?
-  created_at        DateTime?     @db.Timestamptz(6)
-  updated_at        DateTime?     @db.Timestamptz(6)
-  name_id_format    String?
-  sso_providers     sso_providers @relation(fields: [sso_provider_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@index([sso_provider_id])
-  @@schema("auth")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model saml_relay_states {
-  id              String        @id @db.Uuid
-  sso_provider_id String        @db.Uuid
-  request_id      String
-  for_email       String?
-  redirect_to     String?
-  created_at      DateTime?     @db.Timestamptz(6)
-  updated_at      DateTime?     @db.Timestamptz(6)
-  flow_state_id   String?       @db.Uuid
-  flow_state      flow_state?   @relation(fields: [flow_state_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  sso_providers   sso_providers @relation(fields: [sso_provider_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@index([created_at(sort: Desc)])
-  @@index([for_email])
-  @@index([sso_provider_id])
-  @@schema("auth")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model schema_migrations {
-  version String @id @db.VarChar(255)
-
-  @@schema("auth")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-model sessions {
-  id             String           @id @db.Uuid
-  user_id        String           @db.Uuid
-  created_at     DateTime?        @db.Timestamptz(6)
-  updated_at     DateTime?        @db.Timestamptz(6)
-  factor_id      String?          @db.Uuid
-  aal            aal_level?
-  not_after      DateTime?        @db.Timestamptz(6)
-  refreshed_at   DateTime?        @db.Timestamp(6)
-  user_agent     String?
-  ip             String?          @db.Inet
-  tag            String?
-  mfa_amr_claims mfa_amr_claims[]
-  refresh_tokens refresh_tokens[]
-  users          users            @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@index([not_after(sort: Desc)])
-  @@index([user_id])
-  @@index([user_id, created_at], map: "user_id_created_at_idx")
-  @@schema("auth")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
-model sso_domains {
-  id              String        @id @db.Uuid
-  sso_provider_id String        @db.Uuid
-  domain          String
-  created_at      DateTime?     @db.Timestamptz(6)
-  updated_at      DateTime?     @db.Timestamptz(6)
-  sso_providers   sso_providers @relation(fields: [sso_provider_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@index([sso_provider_id])
-  @@schema("auth")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
-model sso_providers {
-  id                String              @id @db.Uuid
-  resource_id       String?
-  created_at        DateTime?           @db.Timestamptz(6)
-  updated_at        DateTime?           @db.Timestamptz(6)
-  saml_providers    saml_providers[]
-  saml_relay_states saml_relay_states[]
-  sso_domains       sso_domains[]
-
-  @@schema("auth")
-}
-
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
-model users {
-  instance_id                 String?           @db.Uuid
-  id                          String            @id @db.Uuid
-  aud                         String?           @db.VarChar(255)
-  role                        String?           @db.VarChar(255)
-  email                       String?           @db.VarChar(255)
-  encrypted_password          String?           @db.VarChar(255)
-  email_confirmed_at          DateTime?         @db.Timestamptz(6)
-  invited_at                  DateTime?         @db.Timestamptz(6)
-  confirmation_token          String?           @db.VarChar(255)
-  confirmation_sent_at        DateTime?         @db.Timestamptz(6)
-  recovery_token              String?           @db.VarChar(255)
-  recovery_sent_at            DateTime?         @db.Timestamptz(6)
-  email_change_token_new      String?           @db.VarChar(255)
-  email_change                String?           @db.VarChar(255)
-  email_change_sent_at        DateTime?         @db.Timestamptz(6)
-  last_sign_in_at             DateTime?         @db.Timestamptz(6)
-  raw_app_meta_data           Json?
-  raw_user_meta_data          Json?
-  is_super_admin              Boolean?
-  created_at                  DateTime?         @db.Timestamptz(6)
-  updated_at                  DateTime?         @db.Timestamptz(6)
-  phone                       String?           @unique
-  phone_confirmed_at          DateTime?         @db.Timestamptz(6)
-  phone_change                String?           @default("")
-  phone_change_token          String?           @default("") @db.VarChar(255)
-  phone_change_sent_at        DateTime?         @db.Timestamptz(6)
-  confirmed_at                DateTime?         @default(dbgenerated("LEAST(email_confirmed_at, phone_confirmed_at)")) @db.Timestamptz(6)
-  email_change_token_current  String?           @default("") @db.VarChar(255)
-  email_change_confirm_status Int?              @default(0) @db.SmallInt
-  banned_until                DateTime?         @db.Timestamptz(6)
-  reauthentication_token      String?           @default("") @db.VarChar(255)
-  reauthentication_sent_at    DateTime?         @db.Timestamptz(6)
-  is_sso_user                 Boolean           @default(false)
-  deleted_at                  DateTime?         @db.Timestamptz(6)
-  is_anonymous                Boolean           @default(false)
-  identities                  identities[]
-  mfa_factors                 mfa_factors[]
-  one_time_tokens             one_time_tokens[]
-  sessions                    sessions[]
-  public_user                 User?
-
-  @@index([instance_id])
-  @@index([is_anonymous])
-  @@schema("auth")
-}
-
-enum aal_level {
-  aal1
-  aal2
-  aal3
-
-  @@schema("auth")
-}
-
-enum code_challenge_method {
-  s256
-  plain
-
-  @@schema("auth")
-}
-
-enum factor_status {
-  unverified
-  verified
-
-  @@schema("auth")
-}
-
-enum factor_type {
-  totp
-  webauthn
-
-  @@schema("auth")
-}
-
-enum one_time_token_type {
-  confirmation_token
-  reauthentication_token
-  recovery_token
-  email_change_token_new
-  email_change_token_current
-  phone_change_token
-
-  @@schema("auth")
-}
-
-//*************PUBLIC SCHEMA*************//
-model User {
-  id        String @unique @db.Uuid
-  auth_info users  @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+model Users {
+  id String @id @db.Uuid
 
   @@map("users")
-  @@schema("public")
 }
 
-model Settings {
-  id String @unique @db.Uuid
+model Organization {
+  id                      String                   @id @default(uuid()) @db.Uuid
+  name                    String
+  alternateName           String?                  @map("alternate_name")
+  description             String
+  email                   String?
+  website                 String?
+  taxStatus               String?                  @map("tax_status")
+  taxId                   String?                  @map("tax_id")
+  yearIncorporated        Int?                     @map("year_incorporated")
+  legalStatus             String?                  @map("legal_status")
+  logo                    String?
+  uri                     String?
+  parentOrganization      Organization?            @relation("ParentOrganization", fields: [parentOrganizationId], references: [id])
+  parentOrganizationId    String?                  @map("parent_organization_id") @db.Uuid
+  childOrganizations      Organization[]           @relation("ParentOrganization")
+  services                Service[]
+  funding                 Funding[]
+  contacts                Contact[]
+  phones                  Phone[]
+  locations               Location[]
+  programs                Program[]
+  organizationIdentifiers OrganizationIdentifier[]
+  attributes              Attribute[]
+  metadata                Metadata?
+}
 
-  @@map("settings")
-  @@schema("public")
+model Service {
+  id                     String              @id @db.Uuid
+  name                   String
+  alternateName          String?             @map("alternate_name")
+  description            String?
+  url                    String?
+  email                  String?
+  status                 StatusType
+  interpretationServices String?             @map("interpretation_services")
+  applicationProcess     String?             @map("application_process")
+  waitTime               String?             @map("wait_time")
+  fees                   String?
+  feesDescription        String?             @map("fees_description")
+  accreditations         String?
+  eligibilityDescription String?             @map("eligibility_description")
+  minimunAge             Int?                @map("minimum_age")
+  maximumAge             Int?                @map("maximum_age")
+  assuredDate            String?             @map("assured_date")
+  assurerEmail           String?             @map("assurer_email")
+  licenses               String?
+  alert                  String?
+  lastModified           DateTime?           @map("last_modified")
+  phones                 Phone[]
+  schedules              Schedule[]
+  serviceAreas           ServiceArea[]
+  serviceAtLocations     ServiceAtLocation[]
+  languages              Language[]
+  contacts               Contact[]
+  organization           Organization?       @relation(fields: [organizationId], references: [id])
+  organizationId         String?             @unique @map("organization_id") @db.Uuid
+  funding                Funding[]
+  costOptions            CostOption[]
+  programId              String?             @unique @map("program_id") @db.Uuid
+  program                Program?            @relation(fields: [programId], references: [id])
+  requiredDocuments      RequiredDocument[]
+  attributes             Attribute[]
+  metadata               Metadata?
+}
+
+enum StatusType {
+  ACTIVE
+  INACTIVE
+  DEFUNCT
+  TEMPORARILY_CLOSED
+}
+
+model Program {
+  id             String        @id @default(uuid()) @db.Uuid
+  organizationId String?       @unique @map("organization_id") @db.Uuid
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  name           String
+  alternateName  String?       @map("alternate_name")
+  description    String
+  service        Service?
+  attribtues     Attribute[]
+  metadata       Metadata?
+}
+
+model Address {
+  id            String      @id @default(uuid()) @db.Uuid
+  locationId    String?     @unique @db.Uuid
+  location      Location?   @relation(fields: [locationId], references: [id])
+  attention     String?     @map("attention")
+  address1      String?     @map("address_1")
+  address2      String?     @map("address_2")
+  city          String?     @map("city")
+  region        String?     @map("region")
+  stateProvince String?     @map("state_province")
+  postalCode    String?     @map("postal_code")
+  country       String?     @map("country")
+  addressType   String?     @map("address_type")
+  attributes    Attribute[]
+  metadata      Metadata?
+}
+
+model Contact {
+  id                  String             @id @default(uuid()) @db.Uuid
+  organizationId      String?            @map("organization_id") @db.Uuid
+  organization        Organization?      @relation(fields: [organizationId], references: [id])
+  serviceId           String?            @unique @map("service_id") @db.Uuid
+  service             Service?           @relation(fields: [serviceId], references: [id])
+  serviceAtLocationId String?            @unique @map("service_at_location_id") @db.Uuid
+  serviceAtLocation   ServiceAtLocation? @relation(fields: [serviceAtLocationId], references: [id])
+  phone               Phone[]
+  locationId          String?            @unique @map("location_id") @db.Uuid
+  location            Location?          @relation(fields: [locationId], references: [id])
+  name                String?
+  title               String?
+  department          String?
+  email               String?
+  attributes          Attribute[]
+  metadata            Metadata?
+}
+
+model RequiredDocument {
+  id         String      @id @default(uuid()) @db.Uuid
+  service    Service?    @relation(fields: [serviceId], references: [id])
+  serviceId  String?     @unique @map("service_id") @db.Uuid
+  document   String?
+  uri        String?
+  attributes Attribute[]
+  metadata   Metadata?
+}
+
+model Location {
+  id                String              @id @default(uuid()) @db.Uuid
+  phones            Phone[]
+  languages         Language[]
+  locationType      LocationType        @map("location_type")
+  url               String?
+  organizationId    String?             @unique @map("organization_id") @db.Uuid
+  organization      Organization?       @relation(fields: [organizationId], references: [id])
+  accessability     Accessability?
+  address           Address?
+  serviceAtLocation ServiceAtLocation[]
+  contacts          Contact[]
+}
+
+enum LocationType {
+  PHYSICAL
+  POSTAL
+  VIRTUAL
+}
+
+model ServiceAtLocation {
+  id          String      @id @default(uuid()) @db.Uuid
+  service     Service?    @relation(fields: [serviceId], references: [id])
+  serviceId   String?     @unique @map("service_id") @db.Uuid
+  contacts    Contact[]
+  description String?
+  phones      Phone[]
+  schedules   Schedule[]
+  location    Location?   @relation(fields: [locationId], references: [id])
+  locationId  String?     @map("location_id") @db.Uuid
+  attributes  Attribute[]
+  metadata    Metadata?
+}
+
+model Phone {
+  id                  String             @id @default(uuid()) @db.Uuid
+  location            Location?          @relation(fields: [locationId], references: [id])
+  locationId          String?            @unique @map("location_id") @db.Uuid
+  service             Service?           @relation(fields: [serviceId], references: [id])
+  serviceId           String?            @unique @map("service_id") @db.Uuid
+  Organization        Organization?      @relation(fields: [organizationId], references: [id])
+  organizationId      String?            @map("organization_id") @db.Uuid
+  contactId           String?            @unique @map("contact_id") @db.Uuid
+  contact             Contact?           @relation(fields: [contactId], references: [id])
+  Language            Language[]
+  serviceAtLocationId String?            @unique @map("service_at_location_id") @db.Uuid
+  serviceAtLocation   ServiceAtLocation? @relation(fields: [serviceAtLocationId], references: [id])
+  description         String?
+  number              String
+  extention           Int
+  phoneType           String?            @map("phone_type")
+  attributes          Attribute[]
+  metadata            Metadata?
+}
+
+model ServiceArea {
+  id          String      @id @default(uuid()) @db.Uuid
+  service     Service?    @relation(fields: [serviceId], references: [id])
+  serviceId   String      @map("service_id") @db.Uuid
+  name        String?
+  description String?
+  extent      String?
+  extentType  ExtentType  @map("extent_type")
+  uri         String?
+  attributes  Attribute[]
+  metadata    Metadata?
+}
+
+enum ExtentType {
+  GEOJSON
+  TOPOJSON
+  KML
+}
+
+model CostOption {
+  id                String      @id @default(uuid()) @db.Uuid
+  service           Service?    @relation(fields: [serviceId], references: [id])
+  serviceId         String?     @map("service_id") @db.Uuid
+  validFrom         String?     @map("valid_from")
+  validTo           String?     @map("valid_to")
+  option            String
+  currency          String?
+  amount            Decimal?
+  amountDescription String?     @map("amount_description")
+  attributes        Attribute[]
+  metadata          Metadata?
+}
+
+model Accessability {
+  id          String      @id @default(uuid()) @db.Uuid
+  locationId  String?     @unique @map("location_id") @db.Uuid
+  location    Location?   @relation(fields: [locationId], references: [id])
+  description String?
+  details     String?
+  url         String?
+  attibutes   Attribute[]
+  metadata    Metadata?
+}
+
+model Schedule {
+  id                  String             @id @default(uuid()) @db.Uuid
+  service             Service?           @relation(fields: [serviceId], references: [id])
+  serviceId           String?            @unique @map("service_id") @db.Uuid
+  ServiceAtLocation   ServiceAtLocation? @relation(fields: [serviceAtLocationId], references: [id])
+  serviceAtLocationId String?            @map("service_at_location_id") @db.Uuid
+  validFrom           String?            @map("valid_from")
+  validTo             String?            @map("valid_to")
+  dstart              String?
+  timezome            Int
+  until               String?
+  count               Int?
+  wkst                String?
+  freq                String?
+  interval            Int?
+  byday               String?
+  byweekno            String?
+  bymonthday          String?
+  byyearday           String?
+  description         String?
+  opensAt             String?            @map("opens_at")
+  closesAt            String?            @map("closes_at")
+  scheduleLink        String?            @map("schedule_link")
+  attendingType       String?            @map("attending_type")
+  notes               String?
+  attributes          Attribute[]
+  metadata            Metadata?
+}
+
+model Language {
+  id         String      @id @default(uuid()) @db.Uuid
+  serviceId  String?     @map("service_id") @db.Uuid
+  service    Service?    @relation(fields: [serviceId], references: [id])
+  locationId String?     @map("location_id") @db.Uuid
+  location   Location?   @relation(fields: [locationId], references: [id])
+  phoneId    String?     @map("phone_id") @db.Uuid
+  phone      Phone?      @relation(fields: [phoneId], references: [id])
+  name       String?
+  code       String?
+  note       String?
+  attributes Attribute[]
+  metadata   Metadata?
+}
+
+model Funding {
+  id             String        @id @default(uuid()) @db.Uuid
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?       @unique @map("organization_id") @db.Uuid
+  serviceId      String?       @unique @map("service_id") @db.Uuid
+  service        Service?      @relation(fields: [serviceId], references: [id])
+  source         String?
+  attributes     Attribute[]
+  metadata       Metadata?
+}
+
+model OrganizationIdentifier {
+  id               String       @id @default(uuid()) @db.Uuid
+  organization     Organization @relation(fields: [organizationId], references: [id])
+  organizationId   String       @unique @map("organization_id") @db.Uuid
+  identifierScheme String?      @map("identifier_scheme")
+  identifierType   String       @map("identifier_type")
+  identifier       String
+  attributes       Attribute[]
+  metadata         Metadata?
+}
+
+model Taxonomy {
+  id           String        @id @default(uuid()) @db.Uuid
+  name         String
+  description  String
+  uri          String?
+  version      String?
+  taxonomyTerm TaxonomyTerm?
+  metadata     Metadata[]
+}
+
+model TaxonomyTerm {
+  id             String     @id @default(uuid()) @db.Uuid
+  code           String?
+  name           String
+  description    String
+  parentId       String?    @map("parent_id") @db.Uuid
+  taxonomy       String
+  taxonomyDetail Taxonomy?  @relation(fields: [taxonomyId], references: [id])
+  taxonomyId     String?    @unique @map("taxonomy_id") @db.Uuid
+  termUri        String?    @map("term_uri")
+  attribute      Attribute?
+  metadata       Metadata[]
+}
+
+model Attribute {
+  id                       String                  @id @default(uuid()) @db.Uuid
+  linkId                   String?                 @map("link_id") @db.Uuid
+  linkType                 String?                 @map("link_type")
+  value                    String?
+  taxonomyTerm             TaxonomyTerm?           @relation(fields: [taxonomyTermId], references: [id])
+  taxonomyTermId           String?                 @unique @map("taxonomy_term_id") @db.Uuid
+  metaTableDescription     MetaTableDescription?   @relation(fields: [metaTableDescriptionId], references: [id])
+  metaTableDescriptionId   String?                 @map("meta_table_desciption_id") @db.Uuid
+  costOption               CostOption?             @relation(fields: [costOptionId], references: [id])
+  costOptionId             String?                 @unique @map("cost_option_id") @db.Uuid
+  organizationIdentifier   OrganizationIdentifier? @relation(fields: [organizationIdentifierId], references: [id])
+  organizationIdentifierId String?                 @unique @map("organization_identifier_id") @db.Uuid
+  programId                String?                 @map("program_id") @db.Uuid
+  program                  Program?                @relation(fields: [programId], references: [id])
+  organization             Organization?           @relation(fields: [organizationId], references: [id])
+  organizationId           String?                 @unique @map("organization_id") @db.Uuid
+  service                  Service?                @relation(fields: [serviceId], references: [id])
+  serviceId                String?                 @unique @map("service_id") @db.Uuid
+  metadata                 Metadata[]
+  Accessability            Accessability?          @relation(fields: [accessabilityId], references: [id])
+  accessabilityId          String?                 @map("accessability_id") @db.Uuid
+  Funding                  Funding?                @relation(fields: [fundingId], references: [id])
+  fundingId                String?                 @map("funding_id") @db.Uuid
+  Language                 Language?               @relation(fields: [languageId], references: [id])
+  languageId               String?                 @map("language_id") @db.Uuid
+  ServiceArea              ServiceArea?            @relation(fields: [serviceAreaId], references: [id])
+  serviceAreaId            String?                 @map("service_area_id") @db.Uuid
+  requiredDocument         RequiredDocument?       @relation(fields: [requiredDocumentId], references: [id])
+  requiredDocumentId       String?                 @map("required_document_id") @db.Uuid
+  address                  Address?                @relation(fields: [addressId], references: [id])
+  addressId                String?                 @map("address_id") @db.Uuid
+  ServiceAtLocation        ServiceAtLocation?      @relation(fields: [serviceAtLocationId], references: [id])
+  serviceAtLocationId      String?                 @map("service_at_location_id") @db.Uuid
+  phoneId                  String?                 @unique @map("phone_id") @db.Uuid
+  phone                    Phone?                  @relation(fields: [phoneId], references: [id])
+  schedule                 Schedule?               @relation(fields: [scheduleId], references: [id])
+  scheduleId               String?                 @map("schedule_id") @db.Uuid
+  contactId                String?                 @unique @map("contact_id") @db.Uuid
+  contact                  Contact?                @relation(fields: [contactId], references: [id])
+}
+
+model MetaTableDescription {
+  id           String      @id @default(uuid()) @db.Uuid
+  name         String?
+  language     String?
+  characterSet String?     @map("character_set")
+  attribtues   Attribute[]
+  metadata     Metadata?
+}
+
+model Metadata {
+  id                       String                  @id @default(uuid()) @db.Uuid
+  resourceId               String?                 @map("resource_id")
+  resourceType             String?                 @map("resource_type")
+  lastActionDate           String                  @map("last_action_date")
+  lastActionType           String                  @map("last_action_type")
+  fieldName                String                  @map("field_name")
+  previousValue            String                  @map("previous_value")
+  replacementValue         String                  @map("replacement_value")
+  updatedBy                String                  @map("updated_by")
+  taxonomy                 Taxonomy?               @relation(fields: [taxonomyId], references: [id])
+  taxonomyId               String?                 @unique @map("taxonomy_id") @db.Uuid
+  taxonomyTerm             TaxonomyTerm?           @relation(fields: [taxonomyTermId], references: [id])
+  taxonomyTermId           String?                 @unique @map("taxonomy_term_id") @db.Uuid
+  attribute                Attribute?              @relation(fields: [attributeId], references: [id])
+  attributeId              String?                 @unique @map("attribute_id") @db.Uuid
+  metaTableDescription     MetaTableDescription?   @relation(fields: [metaTableDescriptionId], references: [id])
+  metaTableDescriptionId   String?                 @unique @map("meta_table_description_id") @db.Uuid
+  costOption               CostOption?             @relation(fields: [costOptionId], references: [id])
+  costOptionId             String?                 @unique @map("cost_option_id") @db.Uuid
+  organizationIdentifer    OrganizationIdentifier? @relation(fields: [organizationIdentifierId], references: [id])
+  organizationIdentifierId String?                 @unique @map("organization_identifier_id") @db.Uuid
+  program                  Program?                @relation(fields: [programId], references: [id])
+  programId                String?                 @unique @map("program_id") @db.Uuid
+  organization             Organization?           @relation(fields: [organizationId], references: [id])
+  organizationId           String?                 @unique @map("organization_id") @db.Uuid
+  service                  Service?                @relation(fields: [serviceId], references: [id])
+  serviceId                String?                 @unique @map("service_id") @db.Uuid
+  accessabilityId          String?                 @unique @map("accessability_id") @db.Uuid
+  accessability            Accessability?          @relation(fields: [accessabilityId], references: [id])
+  fundingId                String?                 @unique @map("funding_id") @db.Uuid
+  funding                  Funding?                @relation(fields: [fundingId], references: [id])
+  languageId               String?                 @unique @map("language_id") @db.Uuid
+  language                 Language?               @relation(fields: [languageId], references: [id])
+  serviceAreaId            String?                 @unique @map("service_area_id") @db.Uuid
+  serviceArea              ServiceArea?            @relation(fields: [serviceAreaId], references: [id])
+  requiredDocument         RequiredDocument?       @relation(fields: [requiredDocumentId], references: [id])
+  requiredDocumentId       String?                 @unique @map("required_document_id") @db.Uuid
+  address                  Address?                @relation(fields: [addressId], references: [id])
+  addressId                String?                 @unique @map("address_id") @db.Uuid
+  serviceAtLocationId      String?                 @unique @map("service_at_location_id") @db.Uuid
+  serviceAtLocation        ServiceAtLocation?      @relation(fields: [serviceAtLocationId], references: [id])
+  phoneId                  String?                 @unique @map("phone_id") @db.Uuid
+  phone                    Phone?                  @relation(fields: [phoneId], references: [id])
+  scheduleId               String?                 @unique @map("schedule_id") @db.Uuid
+  schedule                 Schedule?               @relation(fields: [scheduleId], references: [id])
+  contactId                String?                 @unique @map("contact_id") @db.Uuid
+  contact                  Contact?                @relation(fields: [contactId], references: [id])
 }

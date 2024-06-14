@@ -11,6 +11,8 @@ interface AboutPageProps {
   };
 }
 
+// Housing, substance abuse, healthcare (providers), childcare, aging/social isolation, disability, food, unemployment
+
 export default async function Page({ params }: AboutPageProps) {
   const { lang } = params;
 
@@ -24,7 +26,7 @@ export default async function Page({ params }: AboutPageProps) {
         <Separator className="mx-auto w-[80%] min-w-[200px] bg-primary" />
       </div>
       <div>
-        <div className="mx-auto flex max-w-[80%] flex-col py-8">
+        <div className="mx-auto flex max-w-[92%] flex-col py-8">
           {content.map((section, i) => {
             const { header, text } = section;
 
