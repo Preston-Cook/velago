@@ -23,29 +23,13 @@ export function DarkModeToggle() {
   useEffect(
     function () {
       // query dom for both favicons
-      const favicons = document.querySelectorAll("link[rel~='icon']");
+      const faviconLinks = document.querySelectorAll("link[rel~='icon']");
 
-      // get parent head element
-      const headEl = favicons[0].parentNode as Node;
-
-      // remove both favicons from dom or just one
-      favicons.forEach((el) => {
-        headEl.removeChild(el);
+      // set src based on resolved theme
+      faviconLinks.forEach((el) => {
+        (el as HTMLLinkElement).href =
+          resolvedTheme === 'dark' ? DarkModeIcon.src : LightModeIcon.src;
       });
-
-      // create new element to append to dom
-      const newFaviconEl = document.createElement('link');
-
-      // add base attributes
-      newFaviconEl.rel = 'icon';
-      newFaviconEl.type = 'image/png';
-
-      // dynamically set src based on new theme
-      newFaviconEl.href =
-        resolvedTheme === 'dark' ? DarkModeIcon.src : LightModeIcon.src;
-
-      // add new element to dom
-      headEl.appendChild(newFaviconEl);
     },
     [resolvedTheme],
   );
