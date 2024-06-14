@@ -26,10 +26,11 @@ export function DarkModeToggle() {
       const faviconLinks = document.querySelectorAll("link[rel~='icon']");
 
       // set src based on resolved theme
-      faviconLinks.forEach((el) => {
-        (el as HTMLLinkElement).href =
-          resolvedTheme === 'dark' ? DarkModeIcon.src : LightModeIcon.src;
-      });
+      faviconLinks.forEach(
+        (el) =>
+          ((el as HTMLLinkElement).href =
+            resolvedTheme === 'dark' ? DarkModeIcon.src : LightModeIcon.src),
+      );
     },
     [resolvedTheme],
   );
