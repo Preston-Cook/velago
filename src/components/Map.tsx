@@ -2,7 +2,6 @@
 
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import { RecenterMap } from './RecenterMap';
-import { v4 as uuid } from 'uuid';
 import L from 'leaflet';
 
 interface MapProps {
@@ -29,7 +28,7 @@ export default function Map({ lat, lng }: MapProps) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker icon={icon} key={uuid()} position={[lat, lng]} />
+      {/* <Marker icon={icon} key={uuid()} position={[lat, lng]} /> */}
       <RecenterMap lat={lat} lng={lng} />
     </MapContainer>
   );

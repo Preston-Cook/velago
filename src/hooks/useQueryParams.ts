@@ -17,7 +17,6 @@ export function useQueryParams() {
     currentParams.sort();
 
     const query = currentParams.toString();
-    console.log(query);
 
     router.replace(`${pathname}?${query}`);
   }
