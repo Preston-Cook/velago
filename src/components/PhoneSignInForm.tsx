@@ -185,7 +185,6 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
 
     setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
 
-    // There is something wrong with sending code
     if (err2) {
       toast({
         title: 'Uh oh! Something went wrong',

@@ -162,6 +162,7 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
       .maybeSingle();
 
     if (err1) {
+      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
       toast({
         title: 'Uh oh! Something went wrong',
         description: 'There was a problem with your request',
@@ -216,7 +217,7 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
       .maybeSingle();
 
     if (err1) {
-      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
+      setIsLoading((prev) => ({ ...prev, isLoadingSignUp: false }));
       toast({
         title: 'Uh oh! Something went wrong',
         description: 'There was a problem with your request',
@@ -226,7 +227,7 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
     }
 
     if (data) {
-      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
+      setIsLoading((prev) => ({ ...prev, isLoadingSignUp: false }));
       toast({
         title: 'Uh oh! Account already exists',
         description: 'There is already an account associated with this email',
@@ -238,31 +239,14 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
     // add user to public users table and log them in
     const cleanedPhone = cleanPhone(phone);
 
-    const { error: err2 } = await sbBrowserClient.from('User').insert({
-      first_name: firstName,
-      last_name: lastName,
-      phone: cleanedPhone,
-      email,
-    });
-
-    if (err2) {
-      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
-      toast({
-        title: 'Uh oh! Something went wrong',
-        description: 'There was a problem with your request',
-        variant: 'destructive',
-      });
-      return;
-    }
-
-    const { error: err3 } = await sbBrowserClient.auth.verifyOtp({
+    const { data: data1, error: err3 } = await sbBrowserClient.auth.verifyOtp({
       phone: cleanedPhone,
       token: code,
       type: 'sms',
     });
 
     if (err3?.status === 403) {
-      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
+      setIsLoading((prev) => ({ ...prev, isLoadingSignUp: false }));
       toast({
         title: 'Invalid Code',
         description: 'Your code is invalid',
@@ -272,7 +256,32 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
     }
 
     if (err3) {
-      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
+      setIsLoading((prev) => ({ ...prev, isLoadingSignUp: false }));
+      toast({
+        title: 'Uh oh! Something went wrong',
+        description: 'There was a problem with your request',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const id = data1.user?.id as string;
+
+    // post data to api
+    const res = await fetch('/api/users', {
+      method: 'POST',
+      body: JSON.stringify({
+        id,
+        email,
+        phone: cleanedPhone,
+        first_name: firstName,
+        last_name: lastName,
+      }),
+    });
+
+    if (!res.ok) {
+      await sbBrowserClient.auth.signOut();
+      setIsLoading((prev) => ({ ...prev, isLoadingSignUp: false }));
       toast({
         title: 'Uh oh! Something went wrong',
         description: 'There was a problem with your request',

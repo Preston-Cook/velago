@@ -71,22 +71,26 @@ export async function GET(request: Request, response: Response) {
         last = null;
       }
 
+      const id = data.user.id;
+
       // the user was signing up
-      await prisma.user.create({
-        data: {
-          firstName: first as string | null,
-          lastName: last as string | null,
-          email,
-        },
-      });
+      try {
+        await prisma.user.update({
+          where: { id },
+          data: { email, firstName: first, lastName: last },
+        });
+      } catch (err) {
+        await supabase.auth.signOut();
+        return NextResponse.redirect(`${origin}/signin/${role}?error=400`);
+      }
     } else if (action === 'signIn') {
-      if (!user) {
+      if (!user || user.provider !== 'google') {
+        await supabase.auth.signOut();
         return NextResponse.redirect(`${origin}/signin/${role}?error=404`);
       }
     }
 
     return NextResponse.redirect(`${origin}${next}`);
   }
-
   return NextResponse.redirect(`${origin}/auth/auth-code-error`);
 }
