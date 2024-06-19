@@ -45,7 +45,7 @@ export function DarkModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="flex flex-col gap-1 border border-input"
+        className="z-[8000] flex flex-col gap-1 border border-input"
         align="start"
       >
         {themes.map((themeType) => (

@@ -1,19 +1,19 @@
-import { PhoneSignInForm } from '@/components/PhoneSignInForm';
 import { Locale } from '@/i18n.config';
-import { getDictionary } from '@/lib/dictionary';
-import { Globe } from '@/components/Globe';
 import { LocaleLink } from '@/components/LocaleLink';
+import { Globe } from '@/components/Globe';
+import { PhoneSignUpForm } from '@/components/PhoneSignUpForm';
+import { getDictionary } from '@/lib/dictionary';
 
-interface UserSignInProps {
+interface UserSignUpProps {
   params: {
     lang: Locale;
   };
 }
 
-export default async function Page({ params }: UserSignInProps) {
+export default async function Page({ params }: UserSignUpProps) {
   const { lang } = params;
   const dic = await getDictionary(lang);
-  const { title, description, noAccount } = dic.pages.userSignIn;
+  const { title, description, noAccount } = dic.pages.userSignUp;
 
   return (
     <div className="w-full lg:grid lg:grid-cols-2">
@@ -23,19 +23,19 @@ export default async function Page({ params }: UserSignInProps) {
             <h1 className="text-3xl font-bold">{title}</h1>
             <p className="text-balance text-muted-foreground">{description}</p>
           </div>
-          <PhoneSignInForm
-            dic={dic.pages.userSignIn}
-            validation={dic.validation.userSignInFormSchema}
+          <PhoneSignUpForm
+            validation={dic.validation.userSignUpFormSchema}
+            dic={dic.pages.userSignUp}
           />
           <div className="mt-4 text-center text-sm">
             {noAccount.text}{' '}
-            <LocaleLink href="/signup/user" className="underline">
+            <LocaleLink href="/signin/user" className="underline">
               {noAccount.link}
             </LocaleLink>
           </div>
         </div>
       </div>
-      <div className="hidden border border-l-primary bg-background lg:block">
+      <div className="hidden min-h-[90.75vh] border-l border-l-primary bg-background lg:block">
         <div className="flex items-center justify-center">
           <div className="mt-[18vh]">
             <Globe />

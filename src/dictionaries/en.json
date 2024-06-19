@@ -99,16 +99,29 @@
       "submit": "Submit"
     },
     "userSignIn": {
-      "title": "Login",
-      "description": "Enter your phone number below to login to your account",
+      "title": "Sign In",
+      "description": "Enter your phone number below to sign in to your account",
       "labels": ["Phone", "Code"],
       "login": {
-        "standard": "Login",
-        "google": "Login with Google"
+        "standard": "Sign in",
+        "google": "Sign in with Google"
       },
       "noAccount": {
         "text": "Don't have an account?",
         "link": "Sign up"
+      }
+    },
+    "userSignUp": {
+      "title": "Sign Up",
+      "description": "Enter your first name, last name, and phone phone number below to sign up for your account",
+      "labels": ["First Name", "Last Name", "Phone", "Email"],
+      "signup": {
+        "standard": "Sign Up",
+        "google": "Sign Up with Google"
+      },
+      "noAccount": {
+        "text": "Already have an account?",
+        "link": "Sign in"
       }
     },
     "map": {
@@ -179,6 +192,21 @@
         "refine": "Invalid code"
       }
     },
-    "userSignUpFormSchema": {}
+    "userSignUpFormSchema": {
+      "firstName": {
+        "min": "Must be at least 2 characters",
+        "max": "Must be at most 50 characters"
+      },
+      "lastName": {
+        "min": "Must be at least 2 characters",
+        "max": "Must be at most 50 characters"
+      },
+      "phone": {
+        "refine": "Invalid phone number"
+      },
+      "email": {
+        "email": "Invalid email"
+      }
+    }
   }
 }

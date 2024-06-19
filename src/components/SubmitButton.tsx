@@ -1,11 +1,13 @@
 import { Loader2 } from 'lucide-react';
 import { Button } from './ui/button';
+import { cn } from '@/lib/utils';
 
 interface SubmitButtonProps {
   isLoading: boolean;
   children: React.ReactNode;
   type?: 'submit' | 'reset' | 'button';
   onClick?(): void;
+  classname?: string;
 }
 
 export default function SubmitButton({
@@ -13,10 +15,11 @@ export default function SubmitButton({
   children,
   type,
   onClick,
+  classname,
 }: SubmitButtonProps) {
   return (
     <Button
-      className="mt-8 w-[60%] max-w-[500px] text-white"
+      className={cn('mt-8 w-[60%] max-w-[500px] text-white', classname)}
       type={type ?? 'submit'}
       disabled={isLoading}
       onClick={onClick}

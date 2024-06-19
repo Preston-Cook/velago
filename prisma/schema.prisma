@@ -1,15 +1,25 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions", "multiSchema"]
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("TRANSACTION_CONNECTION")
-  directUrl = env("SESSION_CONNECTION")
+  provider   = "postgresql"
+  url        = env("TRANSACTION_CONNECTION")
+  directUrl  = env("SESSION_CONNECTION")
+  extensions = [pgsodium(schema: "pgsodium"), supabase_vault, uuid_ossp(map: "uuid-ossp", schema: "extensions"), vector, pgcrypto(schema: "extensions"), pgjwt(schema: "extensions")]
+  schemas    = ["extensions", "grapql", "public"]
 }
 
 model User {
-  id String @id @db.Uuid
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstName String? @map("first_name")
+  lastName  String? @map("last_name")
+  email     String?
+  phone     String?
+  role      String  @default("user")
+
+  @@schema("public")
 }
 
 model Organization {
@@ -37,6 +47,8 @@ model Organization {
   organizationIdentifiers OrganizationIdentifier[]
   attributes              Attribute[]
   metadata                Metadata?
+
+  @@schema("public")
 }
 
 model Service {
@@ -76,6 +88,8 @@ model Service {
   requiredDocuments      RequiredDocument[]
   attributes             Attribute[]
   metadata               Metadata?
+
+  @@schema("public")
 }
 
 enum StatusType {
@@ -83,6 +97,8 @@ enum StatusType {
   INACTIVE
   DEFUNCT
   TEMPORARILY_CLOSED
+
+  @@schema("public")
 }
 
 model Program {
@@ -95,6 +111,8 @@ model Program {
   service        Service?
   attribtues     Attribute[]
   metadata       Metadata?
+
+  @@schema("public")
 }
 
 model Address {
@@ -112,6 +130,8 @@ model Address {
   addressType   String?     @map("address_type")
   attributes    Attribute[]
   metadata      Metadata?
+
+  @@schema("public")
 }
 
 model Contact {
@@ -131,6 +151,8 @@ model Contact {
   email               String?
   attributes          Attribute[]
   metadata            Metadata?
+
+  @@schema("public")
 }
 
 model RequiredDocument {
@@ -141,6 +163,8 @@ model RequiredDocument {
   uri        String?
   attributes Attribute[]
   metadata   Metadata?
+
+  @@schema("public")
 }
 
 model Location {
@@ -155,12 +179,16 @@ model Location {
   address           Address?
   serviceAtLocation ServiceAtLocation[]
   contacts          Contact[]
+
+  @@schema("public")
 }
 
 enum LocationType {
   PHYSICAL
   POSTAL
   VIRTUAL
+
+  @@schema("public")
 }
 
 model ServiceAtLocation {
@@ -175,6 +203,8 @@ model ServiceAtLocation {
   locationId  String?     @map("location_id") @db.Uuid
   attributes  Attribute[]
   metadata    Metadata?
+
+  @@schema("public")
 }
 
 model Phone {
@@ -196,6 +226,8 @@ model Phone {
   phoneType           String?            @map("phone_type")
   attributes          Attribute[]
   metadata            Metadata?
+
+  @@schema("public")
 }
 
 model ServiceArea {
@@ -209,12 +241,16 @@ model ServiceArea {
   uri         String?
   attributes  Attribute[]
   metadata    Metadata?
+
+  @@schema("public")
 }
 
 enum ExtentType {
   GEOJSON
   TOPOJSON
   KML
+
+  @@schema("public")
 }
 
 model CostOption {
@@ -229,6 +265,8 @@ model CostOption {
   amountDescription String?     @map("amount_description")
   attributes        Attribute[]
   metadata          Metadata?
+
+  @@schema("public")
 }
 
 model Accessability {
@@ -240,6 +278,8 @@ model Accessability {
   url         String?
   attibutes   Attribute[]
   metadata    Metadata?
+
+  @@schema("public")
 }
 
 model Schedule {
@@ -269,6 +309,8 @@ model Schedule {
   notes               String?
   attributes          Attribute[]
   metadata            Metadata?
+
+  @@schema("public")
 }
 
 model Language {
@@ -284,6 +326,8 @@ model Language {
   note       String?
   attributes Attribute[]
   metadata   Metadata?
+
+  @@schema("public")
 }
 
 model Funding {
@@ -295,6 +339,8 @@ model Funding {
   source         String?
   attributes     Attribute[]
   metadata       Metadata?
+
+  @@schema("public")
 }
 
 model OrganizationIdentifier {
@@ -306,6 +352,8 @@ model OrganizationIdentifier {
   identifier       String
   attributes       Attribute[]
   metadata         Metadata?
+
+  @@schema("public")
 }
 
 model Taxonomy {
@@ -316,6 +364,8 @@ model Taxonomy {
   version      String?
   taxonomyTerm TaxonomyTerm?
   metadata     Metadata[]
+
+  @@schema("public")
 }
 
 model TaxonomyTerm {
@@ -330,6 +380,8 @@ model TaxonomyTerm {
   termUri        String?    @map("term_uri")
   attribute      Attribute?
   metadata       Metadata[]
+
+  @@schema("public")
 }
 
 model Attribute {
@@ -372,6 +424,8 @@ model Attribute {
   scheduleId               String?                 @map("schedule_id") @db.Uuid
   contactId                String?                 @unique @map("contact_id") @db.Uuid
   contact                  Contact?                @relation(fields: [contactId], references: [id])
+
+  @@schema("public")
 }
 
 model MetaTableDescription {
@@ -381,6 +435,8 @@ model MetaTableDescription {
   characterSet String?     @map("character_set")
   attribtues   Attribute[]
   metadata     Metadata?
+
+  @@schema("public")
 }
 
 model Metadata {
@@ -431,4 +487,6 @@ model Metadata {
   schedule                 Schedule?               @relation(fields: [scheduleId], references: [id])
   contactId                String?                 @unique @map("contact_id") @db.Uuid
   contact                  Contact?                @relation(fields: [contactId], references: [id])
+
+  @@schema("public")
 }

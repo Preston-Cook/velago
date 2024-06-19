@@ -1,12 +1,19 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { type CookieOptions, createServerClient } from '@supabase/ssr';
+import prisma from '@/lib/db';
 
-export async function GET(request: Request) {
+export async function GET(request: Request, response: Response) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get('code');
   // if "next" is in param, use it as the redirect URL
   const next = searchParams.get('next') ?? '/';
+  const role = searchParams.get('role') ?? 'user';
+  const action = searchParams.get('action');
+
+  if (!action || !['signUp', 'signIn'].includes(action)) {
+    return NextResponse.redirect(`${origin}/auth/auth-code-error`);
+  }
 
   if (code) {
     const cookieStore = cookies();
@@ -27,13 +34,59 @@ export async function GET(request: Request) {
         },
       },
     );
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
-    if (!error) {
-      return NextResponse.redirect(`${origin}${next}`);
+    if (error) {
+      return NextResponse.redirect(`${origin}/signin/user?error=400`);
     }
+
+    // get email from google data
+    const email = data?.user?.email;
+
+    const user = await prisma.user.findFirst({
+      where: {
+        email,
+      },
+    });
+
+    if (action === 'signUp') {
+      if (user) {
+        await supabase.auth.signOut();
+        return NextResponse.redirect(`${origin}/signup/${role}?error=409`);
+      }
+
+      let first, last;
+
+      const fullName = data.user.user_metadata.full_name;
+
+      const pieces = fullName?.split(' ');
+
+      if (pieces?.length === 2) {
+        [first, last] = pieces;
+      } else if (pieces?.length > 2) {
+        first = pieces[0];
+        last = pieces.slice(1).join(' ');
+      } else {
+        first = null;
+        last = null;
+      }
+
+      // the user was signing up
+      await prisma.user.create({
+        data: {
+          firstName: first as string | null,
+          lastName: last as string | null,
+          email,
+        },
+      });
+    } else if (action === 'signIn') {
+      if (!user) {
+        return NextResponse.redirect(`${origin}/signin/${role}?error=404`);
+      }
+    }
+
+    return NextResponse.redirect(`${origin}${next}`);
   }
 
-  // TODO: redirection on oauth error
   return NextResponse.redirect(`${origin}/auth/auth-code-error`);
 }

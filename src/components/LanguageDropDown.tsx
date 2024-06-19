@@ -29,7 +29,7 @@ export default function LanguageDropDown() {
           {lang === 'en' ? 'English' : 'Español'}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="center">
+      <DropdownMenuContent className="z-[8000] w-56" align="center">
         <DropdownMenuLabel>
           {lang === 'en' ? 'Language' : 'Idioma'}
         </DropdownMenuLabel>

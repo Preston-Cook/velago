@@ -117,6 +117,19 @@
         "link": "Regístrate"
       }
     },
+    "userSignUp": {
+      "title": "Registrarse",
+      "description": "Ingrese su nombre, apellido y número de teléfono a continuación para registrarse en su cuenta",
+      "labels": ["Nombre", "Apellido", "Teléfono", "Correo Electrónico"],
+      "signup": {
+        "standard": "Registrarse",
+        "google": "Registrarse con Google"
+      },
+      "noAccount": {
+        "text": "¿Ya tienes una cuenta?",
+        "link": "Iniciar sesión"
+      }
+    },
     "map": {
       "search": {
         "placeholders": [
@@ -191,6 +204,21 @@
         "refine": "Código inválido"
       }
     },
-    "userSignUpFormSchema": {}
+    "userSignUpFormSchema": {
+      "firstName": {
+        "min": "Debe tener al menos 2 caracteres",
+        "max": "Debe tener como máximo 50 caracteres"
+      },
+      "lastName": {
+        "min": "Debe tener al menos 2 caracteres",
+        "max": "Debe tener como máximo 50 caracteres"
+      },
+      "phone": {
+        "refine": "Numero de telefono invalido"
+      },
+      "email": {
+        "email": "Email inválido"
+      }
+    }
   }
 }

@@ -27,6 +27,8 @@ import { codeRegex } from '@/lib/codeRegex';
 import { Separator } from './ui/separator';
 import { useRouter } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
+import { useEffect } from 'react';
+import { useQueryParams } from '@/hooks/useQueryParams';
 
 interface PhoneLoginFormProps {
   validation: {
@@ -52,13 +54,40 @@ interface PhoneLoginFormProps {
   };
 }
 
-export default function UserSignInForm({
-  validation,
-  dic,
-}: PhoneLoginFormProps) {
+export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
   const sbBrowserClient = createSbBrowserClient();
   const router = useRouter();
   const { locale } = useLocale();
+  const { getQueryParam, deleteQueryParam } = useQueryParams();
+
+  const error = getQueryParam('error');
+  const { toast } = useToast();
+
+  useEffect(
+    function () {
+      let timeout = null;
+
+      if (!error) return;
+
+      const title =
+        error === '404'
+          ? 'Uh oh! Account does not exist'
+          : 'Uh oh! Something went wrong';
+      const description =
+        error === '404'
+          ? 'There is no account with this email'
+          : 'There was a problem with your request';
+
+      timeout = setTimeout(() => {
+        toast({ title, description, variant: 'destructive' });
+      }, 0);
+
+      deleteQueryParam('error');
+
+      return () => timeout && clearTimeout(timeout);
+    },
+    [deleteQueryParam, error, toast],
+  );
 
   const [{ isLoadingCode, isLoadingLogin }, setIsLoading] = useState({
     isLoadingCode: false,
@@ -66,8 +95,6 @@ export default function UserSignInForm({
   });
 
   const [showLogin, setShowLogin] = useState<boolean>(false);
-
-  const { toast } = useToast();
 
   const userSignInFormSchema = z.object({
     phone: z.string().refine((value) => phoneRegex.test(value), {
@@ -98,9 +125,8 @@ export default function UserSignInForm({
       type: 'sms',
     });
 
-    setIsLoading((prev) => ({ ...prev, isLoadingLogin: false }));
-
     if (error?.status === 403) {
+      setIsLoading((prev) => ({ ...prev, isLoadingLogin: false }));
       toast({
         title: 'Invalid Code',
         description: 'Your code is invalid',
@@ -110,6 +136,7 @@ export default function UserSignInForm({
     }
 
     if (error) {
+      setIsLoading((prev) => ({ ...prev, isLoadingLogin: false }));
       toast({
         title: 'Uh oh! Something went wrong',
         description: 'There was a problem with your request',
@@ -123,18 +150,43 @@ export default function UserSignInForm({
   }
 
   async function handleSendCode() {
-    // send code but show loading while sending code. Then display on page
     const phone = cleanPhone(getValues('phone'));
 
     setIsLoading((prev) => ({ ...prev, isLoadingCode: true }));
 
-    await sbBrowserClient.auth.signOut();
-    const { error } = await sbBrowserClient.auth.signInWithOtp({ phone });
+    // check if user exists. If not, show error
+    const { data, error: err1 } = await sbBrowserClient
+      .from('User')
+      .select('*')
+      .eq('phone', phone)
+      .maybeSingle();
+
+    if (!data) {
+      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
+      toast({
+        title: 'Uh oh! Account does not exist',
+        description: 'There is no account with this phone number',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (err1) {
+      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
+      toast({
+        title: 'Uh oh! Something went wrong',
+        description: 'There was a problem with your request',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const { error: err2 } = await sbBrowserClient.auth.signInWithOtp({ phone });
+
+    setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
 
     // There is something wrong with sending code
-    if (error) {
-      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
-
+    if (err2) {
       toast({
         title: 'Uh oh! Something went wrong',
         description: 'There was a problem with your request',
@@ -174,6 +226,9 @@ export default function UserSignInForm({
                     const { value }: { value: string } = target;
 
                     setValue('phone', formatPhone(value));
+
+                    // if the number of digits in the current value is >10 return
+                    if (value.replace(/[^0-9]/g, '').length > 10) return;
 
                     setShowLogin((prev) => (prev ? !prev : prev));
                   }}
@@ -242,7 +297,7 @@ export default function UserSignInForm({
             </>
           )}
           <Separator className="mx-auto w-[80%] min-w-[200px] bg-primary" />
-          <GoogleLoginButton text={dic.login.google} />
+          <GoogleLoginButton action="signIn" text={dic.login.google} />
         </div>
       </form>
     </Form>

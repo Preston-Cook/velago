@@ -7,17 +7,21 @@ import { getURL } from '@/lib/getUrl';
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useToast } from './ui/use-toast';
+import { usePathname } from 'next/navigation';
 
 interface GoogleLoginButtonProps {
   text: string;
+  action: 'signIn' | 'signUp';
 }
 
 const url = getURL();
 
-export function GoogleLoginButton({ text }: GoogleLoginButtonProps) {
+export function GoogleLoginButton({ text, action }: GoogleLoginButtonProps) {
   const sbBrowserClient = createSbBrowserClient();
   const [isLoading, setIsLoading] = useState(false);
+  const pathname = usePathname();
   const { toast } = useToast();
+  const role = pathname.split('/').at(-1);
 
   async function handleGoogleLogin() {
     setIsLoading(true);
@@ -25,7 +29,7 @@ export function GoogleLoginButton({ text }: GoogleLoginButtonProps) {
     const { error } = await sbBrowserClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${url}/api/auth/callback?next=/map`,
+        redirectTo: `${url}/api/auth/callback?next=/map&action=${action}&role=${role}`,
       },
     });
 
