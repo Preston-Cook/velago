@@ -6,7 +6,7 @@ import { createSbBrowserClient } from '@/lib/sbBrowserClient';
 import { getURL } from '@/lib/getUrl';
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import { useToast } from './ui/use-toast';
+import { useToast } from '@/hooks/useToast';
 import { usePathname } from 'next/navigation';
 
 interface GoogleLoginButtonProps {
@@ -20,7 +20,7 @@ export function GoogleLoginButton({ text, action }: GoogleLoginButtonProps) {
   const sbBrowserClient = createSbBrowserClient();
   const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
-  const { toast } = useToast();
+  const { showToastError } = useToast();
   const role = pathname.split('/').at(-1);
 
   async function handleGoogleLogin() {
@@ -36,22 +36,16 @@ export function GoogleLoginButton({ text, action }: GoogleLoginButtonProps) {
     if (error?.status === 403) {
       setIsLoading(false);
 
-      toast({
+      showToastError({
         title: 'Invalid Code',
         description: 'Your code is invalid',
-        variant: 'destructive',
       });
       return;
     }
 
     if (error) {
       setIsLoading(false);
-
-      toast({
-        title: 'Uh oh! Something went wrong',
-        description: 'There was a problem with your request',
-        variant: 'destructive',
-      });
+      showToastError();
       return;
     }
   }

@@ -19,7 +19,6 @@ import {
 } from '@/components/ui/form';
 import formatPhone from '@/lib/formatPhone';
 import { createSbBrowserClient } from '@/lib/sbBrowserClient';
-import { useToast } from './ui/use-toast';
 import { CodeInput } from './CodeInput';
 import { ResendCodeButton } from './ResendCodeButton';
 import { cleanPhone } from '@/lib/cleanPhone';
@@ -29,6 +28,7 @@ import { useRouter } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
 import { useEffect } from 'react';
 import { useQueryParams } from '@/hooks/useQueryParams';
+import { useToast } from '@/hooks/useToast';
 
 interface PhoneLoginFormProps {
   validation: {
@@ -59,9 +59,8 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
   const router = useRouter();
   const { locale } = useLocale();
   const { getQueryParam, deleteQueryParam } = useQueryParams();
-
   const error = getQueryParam('error');
-  const { toast } = useToast();
+  const { showToastError, showToastSuccess } = useToast();
 
   useEffect(
     function () {
@@ -79,14 +78,14 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
           : 'There was a problem with your request';
 
       timeout = setTimeout(() => {
-        toast({ title, description, variant: 'destructive' });
+        showToastSuccess({ title, description });
       }, 0);
 
       deleteQueryParam('error');
 
       return () => timeout && clearTimeout(timeout);
     },
-    [deleteQueryParam, error, toast],
+    [deleteQueryParam, error, showToastSuccess],
   );
 
   const [{ isLoadingCode, isLoadingLogin }, setIsLoading] = useState({
@@ -127,21 +126,16 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
 
     if (error?.status === 403) {
       setIsLoading((prev) => ({ ...prev, isLoadingLogin: false }));
-      toast({
+      showToastError({
         title: 'Invalid Code',
         description: 'Your code is invalid',
-        variant: 'destructive',
       });
       return;
     }
 
     if (error) {
       setIsLoading((prev) => ({ ...prev, isLoadingLogin: false }));
-      toast({
-        title: 'Uh oh! Something went wrong',
-        description: 'There was a problem with your request',
-        variant: 'destructive',
-      });
+      showToastError();
       return;
     }
 
@@ -163,21 +157,16 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
 
     if (!data) {
       setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
-      toast({
+      showToastError({
         title: 'Uh oh! Account does not exist',
         description: 'There is no account with this phone number',
-        variant: 'destructive',
       });
       return;
     }
 
     if (err1) {
       setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
-      toast({
-        title: 'Uh oh! Something went wrong',
-        description: 'There was a problem with your request',
-        variant: 'destructive',
-      });
+      showToastError();
       return;
     }
 
@@ -186,18 +175,13 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
     setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
 
     if (err2) {
-      toast({
-        title: 'Uh oh! Something went wrong',
-        description: 'There was a problem with your request',
-        variant: 'destructive',
-      });
+      showToastError();
       return;
     }
 
-    toast({
+    showToastSuccess({
       title: 'Success!',
       description: 'Your code has been sent!',
-      variant: 'default',
     });
 
     setShowLogin(true);
