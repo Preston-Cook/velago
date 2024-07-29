@@ -3,13 +3,19 @@
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import { Spinner } from './Spinner';
+import { GeolocationPrompt } from './GeolocationPrompt';
 
 interface MapContainerProps {
   lat: number;
   lng: number;
+  isUsingGeolocationLoc: boolean | null;
 }
 
-export function MapContainer({ lat, lng }: MapContainerProps) {
+export function MapContainer({
+  lat,
+  lng,
+  isUsingGeolocationLoc,
+}: MapContainerProps) {
   const Map = useMemo(
     () =>
       dynamic(() => import('@/components/Map'), {
@@ -25,7 +31,11 @@ export function MapContainer({ lat, lng }: MapContainerProps) {
         className="flex flex-1 items-center justify-center overflow-hidden rounded-lg border border-dashed shadow-sm"
         x-chunk="dashboard-02-chunk-1"
       >
-        {!lat || !lng ? <Spinner /> : <Map lat={lat} lng={lng} />}
+        {isUsingGeolocationLoc === null || !lat || !lng ? (
+          <Spinner />
+        ) : (
+          <Map lat={lat} lng={lng} />
+        )}
       </div>
     </main>
   );

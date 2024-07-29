@@ -8,6 +8,7 @@ import { useLocationApproximation } from '@/context/LocationProvider';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { MapSearchBar } from './MapSearchBar';
 import { reverseGeocode } from '@/lib/reverseGeocode';
+import { GeolocationPrompt } from './GeolocationPrompt';
 
 interface MapDashBoardProps {
   placeholder: string;
@@ -21,7 +22,9 @@ export function MapDashboard({ placeholder }: MapDashBoardProps) {
     lat: number;
     lng: number;
   } | null>(null);
-  const isUsingGeolocationLoc = useState<boolean>(false);
+  const [isUsingGeolocationLoc, setIsUsingGeolocationLoc] = useState<
+    boolean | null
+  >(null);
 
   // get params from url
   const { getQueryParam, setQueryParam } = useQueryParams();
@@ -54,7 +57,7 @@ export function MapDashboard({ placeholder }: MapDashBoardProps) {
   }, []);
 
   useEffect(() => {
-    if (userLocation) {
+    if (userLocation && isUsingGeolocationLoc) {
       const {
         lat: geocodeLat,
         lng: geocodeLng,
@@ -94,21 +97,40 @@ export function MapDashboard({ placeholder }: MapDashBoardProps) {
         setQueryParam('lng', `${lngApprox}`);
       }
     }
-  }, [loc, address, lat, lng, setQueryParam, userLocation]);
+  }, [
+    loc,
+    address,
+    lat,
+    lng,
+    setQueryParam,
+    userLocation,
+    isUsingGeolocationLoc,
+  ]);
 
   return (
     <div className="grid min-h-[90.75vh] w-full md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr]">
+      <GeolocationPrompt
+        isOpenPrompt={userLocation !== null && isUsingGeolocationLoc === null}
+        onUseCurrentLocationSelection={setIsUsingGeolocationLoc}
+      />
       <MapSidebar />
       <div className="flex flex-col">
         <header className="flex h-16 items-center gap-4 border-b border-primary bg-muted/40 px-4 lg:h-[60px] lg:px-6">
           {/* <FilterMenu radius={radius} onRadiusChange={handleRadiusChange} /> */}
           <div className="w-full flex-1">
             <div className="relative">
-              <MapSearchBar placeholder={placeholder} />
+              <MapSearchBar
+                placeholder={placeholder}
+                onUseCurrentLocationSelection={setIsUsingGeolocationLoc}
+              />
             </div>
           </div>
         </header>
-        <MapContainer lat={lat} lng={lng} />
+        <MapContainer
+          lat={lat}
+          lng={lng}
+          isUsingGeolocationLoc={isUsingGeolocationLoc}
+        />
       </div>
     </div>
   );

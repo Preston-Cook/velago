@@ -29,7 +29,7 @@ export function SearchInput({
   handleFocus,
 }: SearchInputProps) {
   return (
-    <div className="absolute -top-[22px] z-[2000] w-full">
+    <div className="absolute -top-[22px] z-[50] w-full">
       <Command className="rounded-lg border bg-secondary focus-within:border-primary">
         <CommandInput
           name="q"

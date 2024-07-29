@@ -7,9 +7,13 @@ import { useQueryParams } from '@/hooks/useQueryParams';
 
 interface MapSearchBar {
   placeholder: string;
+  onUseCurrentLocationSelection(e: boolean): void;
 }
 
-export function MapSearchBar({ placeholder }: MapSearchBar) {
+export function MapSearchBar({
+  placeholder,
+  onUseCurrentLocationSelection,
+}: MapSearchBar) {
   const { setQueryParam } = useQueryParams();
 
   const [query, setQuery] = useState<string>('');
@@ -20,10 +24,10 @@ export function MapSearchBar({ placeholder }: MapSearchBar) {
 
   async function handleSelectValue(e: string) {
     const { lat, lng, formattedAddress } = await getCoordinates(e);
-
     setQueryParam('address', formattedAddress);
     setQueryParam('lat', `${lat}`);
     setQueryParam('lng', `${lng}`);
+    onUseCurrentLocationSelection(false);
   }
 
   return (
