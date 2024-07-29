@@ -21,6 +21,7 @@ export function MapDashboard({ placeholder }: MapDashBoardProps) {
     lat: number;
     lng: number;
   } | null>(null);
+  const isUsingGeolocationLoc = useState<boolean>(false);
 
   // get params from url
   const { getQueryParam, setQueryParam } = useQueryParams();
