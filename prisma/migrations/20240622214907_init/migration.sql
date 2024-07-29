@@ -22,9 +22,6 @@ CREATE EXTENSION IF NOT EXISTS pgsodium WITH SCHEMA pgsodium;
 
 CREATE SCHEMA IF NOT EXISTS vault;
 
-CREATE EXTENSION IF NOT EXISTS "pgcrypto" WITH SCHEMA extensions;
-
-CREATE EXTENSION IF NOT EXISTS "pgjwt" WITH SCHEMA extensions;
 --
 -- Name: vault; Type: SCHEMA; Schema: -; Owner: -
 --

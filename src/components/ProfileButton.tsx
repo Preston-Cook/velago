@@ -1,6 +1,5 @@
 'use client';
 
-import { LocaleLink } from './LocaleLink';
 import { Button } from './ui/button';
 import { UserRound } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
@@ -10,18 +9,6 @@ import { Separator } from '@radix-ui/react-separator';
 import { SignOutButton } from './SignOutButton';
 
 export default function ProfileButton() {
-  const userInfo = useState();
-  const supabase = createSbBrowserClient();
-
-  useEffect(
-    function () {
-      async function getCurrentUser() {
-        const user = await supabase.auth.getUser();
-      }
-    },
-    [supabase.auth],
-  );
-
   return (
     <Popover>
       <PopoverTrigger asChild>

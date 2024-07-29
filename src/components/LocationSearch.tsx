@@ -39,7 +39,7 @@ export function LocationSearch({
     q = query
       ? query
       : `
-    ${locApprox?.city}, ${locApprox?.region}, ${locApprox?.countryCode}`;
+${locApprox?.city}, ${locApprox?.region}, ${locApprox?.countryCode}`;
 
     const newSuggestions = await getLocationSuggestions({
       lang,

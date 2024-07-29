@@ -133,19 +133,6 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
     setValue('code', e);
   }
 
-  const fieldObjs = [
-    {
-      name: 'firstName',
-      label: 'First Name',
-      placeholder: 'Aaron',
-    },
-    {
-      name: 'lastName',
-      label: 'Last Name',
-      placeholder: 'Swartz',
-    },
-  ];
-
   const { control, getValues, setValue, handleSubmit: handleSubmitHook } = form;
 
   async function handleSendCode() {
@@ -155,10 +142,12 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
     setIsLoading((prev) => ({ ...prev, isLoadingCode: true }));
 
     const { data, error: err1 } = await sbBrowserClient
-      .from('User')
+      .from('user')
       .select('id')
       .eq('phone', phone)
       .maybeSingle();
+
+    console.log(err1);
 
     if (err1) {
       setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
@@ -200,7 +189,7 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
 
     // check if user with email already exists
     const { data, error: err1 } = await sbBrowserClient
-      .from('User')
+      .from('user')
       .select('id')
       .eq('email', email)
       .maybeSingle();
@@ -286,10 +275,10 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
               render={({ field }) => (
                 <>
                   <FormItem>
-                    <FormLabel>{fieldObjs[0].label}</FormLabel>
+                    <FormLabel>{'First Name'}</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder={fieldObjs[0].placeholder}
+                        placeholder={'Aaron'}
                         {...field}
                         className="block w-full bg-secondary"
                       ></Input>
@@ -305,10 +294,10 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
               render={({ field }) => (
                 <>
                   <FormItem>
-                    <FormLabel>{fieldObjs[1].label}</FormLabel>
+                    <FormLabel>{'Last Name'}</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder={fieldObjs[1].placeholder}
+                        placeholder={'Swartz'}
                         {...field}
                         className="block w-full bg-secondary"
                       ></Input>

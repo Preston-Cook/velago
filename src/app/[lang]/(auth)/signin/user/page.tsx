@@ -3,6 +3,8 @@ import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
 import { Globe } from '@/components/Globe';
 import { LocaleLink } from '@/components/LocaleLink';
+import { createSbServerClient } from '@/lib/sbServerClient';
+import { getCurrentUser } from '@/lib/getCurrentUser';
 
 interface UserSignInProps {
   params: {
@@ -12,7 +14,10 @@ interface UserSignInProps {
 
 export default async function Page({ params }: UserSignInProps) {
   const { lang } = params;
+  const currentUser = await getCurrentUser();
+
   const dic = await getDictionary(lang);
+
   const { title, description, noAccount } = dic.pages.userSignIn;
 
   return (
@@ -35,7 +40,7 @@ export default async function Page({ params }: UserSignInProps) {
           </div>
         </div>
       </div>
-      <div className="hidden border border-l-primary bg-background lg:block">
+      <div className="hidden border border-b-background border-l-primary bg-background lg:block">
         <div className="flex items-center justify-center">
           <div className="mt-[18vh]">
             <Globe />

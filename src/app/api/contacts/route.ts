@@ -1,45 +1,26 @@
+import { cleanPhone } from '@/lib/cleanPhone';
+import prisma from '@/lib/db';
 import { NextResponse } from 'next/server';
-import contactFormSchema from '@/schemas/contactSchema';
-import { ZodError } from 'zod';
-import { db } from '@/db';
-import { contacts } from '@/db/schema';
-import { PostgresError } from 'postgres';
-import { sendContact } from '@/lib/resend';
 
 export async function POST(request: Request) {
-  const body = await request.json();
+  const { firstName, lastName, phone, email, message } = await request.json();
+  const cleanedPhone = cleanPhone(phone);
 
-  // validate json data
   try {
-    contactFormSchema.parse(body);
-  } catch (err) {
-    return NextResponse.json(
-      { error: (err as ZodError).flatten().fieldErrors },
-      {
-        status: 400,
+    await prisma.contactMessage.create({
+      data: {
+        firstName,
+        lastName,
+        phone: cleanedPhone,
+        email,
+        message,
       },
-    );
-  }
-
-  // save contact to db using drizzle
-  try {
-    await db.insert(contacts).values(body);
+    });
   } catch (err) {
-    return NextResponse.json(
-      { error: (err as PostgresError).message },
-      { status: 400 },
-    );
+    return NextResponse.json({ message: 'bad request' }, { status: 400 });
   }
 
-  // send email to velago owners
-  try {
-    await sendContact(body);
-  } catch (err) {
-    return NextResponse.json(
-      { error: (err as Error).message },
-      { status: 400 },
-    );
-  }
+  // TODO: send a message to velago email with contact message with resend
 
-  return NextResponse.json({ msg: 'created' }, { status: 201 });
+  return NextResponse.json({ message: 'created' }, { status: 201 });
 }

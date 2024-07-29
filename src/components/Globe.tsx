@@ -1,14 +1,19 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import createGlobe from 'cobe';
 import { useEffect } from 'react';
 import { LegacyRef } from 'react';
+import { Loader2 } from 'lucide-react';
+import { Spinner } from './Spinner';
 
 export function Globe() {
   const canvasRef = useRef<HTMLCanvasElement>();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
+
     let phi = 0;
 
     const globe = createGlobe(canvasRef.current as HTMLCanvasElement, {
@@ -31,16 +36,26 @@ export function Globe() {
       },
     });
 
+    setIsLoading(false);
+
     return () => {
       globe.destroy();
     };
   }, []);
 
   return (
-    <canvas
-      className="w-auto"
-      ref={canvasRef as LegacyRef<HTMLCanvasElement>}
-      style={{ width: 500, height: 500, maxWidth: '100%', aspectRatio: 1 }}
-    />
+    <>
+      {isLoading ? (
+        <div className="flex h-[500px] w-[500px] flex-col justify-center">
+          <Spinner className="mx-auto" />
+        </div>
+      ) : (
+        <canvas
+          className="w-auto bg-transparent"
+          ref={canvasRef as LegacyRef<HTMLCanvasElement>}
+          style={{ width: 500, height: 500, maxWidth: '100%', aspectRatio: 1 }}
+        />
+      )}
+    </>
   );
 }

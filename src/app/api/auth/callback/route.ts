@@ -41,20 +41,7 @@ export async function GET(request: Request, response: Response) {
     }
 
     // get email from google data
-    const email = data?.user?.email;
-
-    const user = await prisma.user.findFirst({
-      where: {
-        email,
-      },
-    });
-
     if (action === 'signUp') {
-      if (user) {
-        await supabase.auth.signOut();
-        return NextResponse.redirect(`${origin}/signup/${role}?error=409`);
-      }
-
       let first, last;
 
       const fullName = data.user.user_metadata.full_name;
@@ -77,16 +64,11 @@ export async function GET(request: Request, response: Response) {
       try {
         await prisma.user.update({
           where: { id },
-          data: { email, firstName: first, lastName: last },
+          data: { firstName: first, lastName: last },
         });
       } catch (err) {
         await supabase.auth.signOut();
         return NextResponse.redirect(`${origin}/signin/${role}?error=400`);
-      }
-    } else if (action === 'signIn') {
-      if (!user || user.provider !== 'google') {
-        await supabase.auth.signOut();
-        return NextResponse.redirect(`${origin}/signin/${role}?error=404`);
       }
     }
 

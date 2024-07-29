@@ -2,8 +2,8 @@
   "header": {
     "links": [
       {
-        "href": "/search",
-        "text": "Search"
+        "href": "/map",
+        "text": "Map"
       },
       {
         "href": "/contact",

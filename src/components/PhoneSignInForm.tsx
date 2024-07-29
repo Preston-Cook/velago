@@ -78,14 +78,14 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
           : 'There was a problem with your request';
 
       timeout = setTimeout(() => {
-        showToastSuccess({ title, description });
+        showToastError({ title, description });
       }, 0);
 
       deleteQueryParam('error');
 
       return () => timeout && clearTimeout(timeout);
     },
-    [deleteQueryParam, error, showToastSuccess],
+    [deleteQueryParam, error, showToastError],
   );
 
   const [{ isLoadingCode, isLoadingLogin }, setIsLoading] = useState({
@@ -150,10 +150,16 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
 
     // check if user exists. If not, show error
     const { data, error: err1 } = await sbBrowserClient
-      .from('User')
-      .select('*')
+      .from('user')
+      .select('id')
       .eq('phone', phone)
       .maybeSingle();
+
+    if (err1) {
+      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
+      showToastError();
+      return;
+    }
 
     if (!data) {
       setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
@@ -161,12 +167,6 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
         title: 'Uh oh! Account does not exist',
         description: 'There is no account with this phone number',
       });
-      return;
-    }
-
-    if (err1) {
-      setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
-      showToastError();
       return;
     }
 

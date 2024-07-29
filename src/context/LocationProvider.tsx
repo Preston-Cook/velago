@@ -14,6 +14,7 @@ interface LocationApproximationContextType {
   countryCode: string | null;
   lat: string | null;
   lng: string | null;
+  setLocation: (location: Partial<LocationApproximationContextType>) => void;
 }
 
 interface LocationContextProviderProps {
@@ -26,6 +27,7 @@ const LocationContext = createContext<LocationApproximationContextType | null>({
   countryCode: null,
   lat: null,
   lng: null,
+  setLocation: () => {},
 });
 
 export function useLocationApproximation() {
@@ -34,8 +36,22 @@ export function useLocationApproximation() {
 }
 
 export function LocationProvider({ children }: LocationContextProviderProps) {
-  const [userLocationApproximation, setUserLocationApproximation] =
-    useState<LocationApproximationContextType | null>(null);
+  const [userLocationApproximation, setUserLocationApproximation] = useState<
+    Omit<LocationApproximationContextType, 'setLocation'>
+  >({
+    city: null,
+    region: null,
+    countryCode: null,
+    lat: null,
+    lng: null,
+  });
+
+  const setLocation = (location: Partial<LocationApproximationContextType>) => {
+    setUserLocationApproximation((prevLocation) => ({
+      ...prevLocation,
+      ...location,
+    }));
+  };
 
   useEffect(() => {
     const fetchUserLocationApproximation = async () => {
@@ -70,7 +86,9 @@ export function LocationProvider({ children }: LocationContextProviderProps) {
   }, []);
 
   return (
-    <LocationContext.Provider value={userLocationApproximation}>
+    <LocationContext.Provider
+      value={{ ...userLocationApproximation, setLocation }}
+    >
       {children}
     </LocationContext.Provider>
   );

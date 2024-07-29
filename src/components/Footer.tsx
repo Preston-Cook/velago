@@ -13,11 +13,11 @@ export default async function Footer({ lang }: FooterProps) {
   const dic = await getDictionary(lang);
 
   return (
-    <footer className="border-t border-primary sm:flex sm:justify-between py-8 px-4 bg-secondary">
+    <footer className="border-t border-primary bg-secondary px-4 py-8 sm:flex sm:justify-between">
       <div className="mx-auto max-w-screen-xl text-center">
         <LocaleLink href="/">
           <Button
-            className="sm:pl-0 text-2xl font-semibold flex mx-auto"
+            className="mx-auto flex text-2xl font-semibold sm:pl-0"
             variant="link"
           >
             <Image
@@ -30,8 +30,8 @@ export default async function Footer({ lang }: FooterProps) {
             Velago
           </Button>
         </LocaleLink>
-        <p className="my-6 ">{dic.footer.description}</p>
-        <ul className="flex flex-wrap justify-center items-center mb-6 ">
+        <p className="my-6">{dic.footer.description}</p>
+        <ul className="mb-6 flex flex-wrap items-center justify-center">
           {dic.footer.links.map((link) => (
             <li key={uuidv4()}>
               <LocaleLink href={`/${link.toLowerCase()}`}>
@@ -42,7 +42,7 @@ export default async function Footer({ lang }: FooterProps) {
             </li>
           ))}
         </ul>
-        <span className="text-sm sm:text-center ">
+        <span className="text-sm sm:text-center">
           © 2024 Velago™ {dic.footer.legal}
         </span>
       </div>

@@ -132,7 +132,7 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
 
   async function onSubmit(values: z.infer<typeof contactFormSchema>) {
     setIsLoading(true);
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contacts`, {
+    const res = await fetch(`/api/contacts`, {
       method: 'POST',
       body: JSON.stringify(values),
     });
@@ -224,7 +224,9 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
         />
         <div className="w-full" />
         <div className="text-center">
-          <SubmitButton isLoading={isLoading}>{dic.submit}</SubmitButton>
+          <SubmitButton classname="w-full md:w-[50%]" isLoading={isLoading}>
+            {dic.submit}
+          </SubmitButton>
         </div>
       </form>
     </Form>
