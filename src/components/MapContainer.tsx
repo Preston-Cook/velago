@@ -3,7 +3,6 @@
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import { Spinner } from './Spinner';
-import { GeolocationPrompt } from './GeolocationPrompt';
 
 interface MapContainerProps {
   lat: number;
@@ -26,7 +25,7 @@ export function MapContainer({
   );
 
   return (
-    <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+    <main className="flex h-[90.5vh] flex-1 flex-col gap-4 overflow-y-hidden p-4 lg:gap-6">
       <div
         className="flex flex-1 items-center justify-center overflow-hidden rounded-lg border border-dashed shadow-sm"
         x-chunk="dashboard-02-chunk-1"

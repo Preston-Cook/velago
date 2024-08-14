@@ -39,11 +39,13 @@ export const metadata: Metadata = {
 const fontSans = FontSans({
   subsets: ['latin'],
   variable: '--font-sans',
+  display: 'swap',
 });
 
 const fontHeading = localFont({
   src: '../../assets/fonts/CalSans-SemiBold.woff2',
   variable: '--font-heading',
+  display: 'swap',
 });
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));

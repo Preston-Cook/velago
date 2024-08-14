@@ -64,11 +64,11 @@ export function FilterAccordion() {
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1">
         <AccordionTrigger>Medical Providers</AccordionTrigger>
-        <AccordionContent className="max-h-[300px] overflow-y-scroll"></AccordionContent>
+        <AccordionContent className="max-h-[250px] overflow-y-scroll"></AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger>Non-Medical Providers</AccordionTrigger>
-        <AccordionContent className="flex max-h-[300px] flex-col gap-2 overflow-y-scroll">
+        <AccordionContent className="flex max-h-[250px] flex-col gap-2 overflow-y-scroll py-2">
           <div className="flex gap-2">
             <div className="flex items-center">
               <Checkbox

@@ -40,21 +40,17 @@ export function i18Middleware(middleware: CustomMiddleware) {
     if (pathnameIsMissingLocale) {
       const locale = getLocale(request);
 
-      if (locale === i18n.defaultLocale) {
-        return NextResponse.rewrite(
-          new URL(
-            `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
-            request.url,
-          ),
-        );
-      }
+      const redirectUrl = new URL(
+        `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
+        request.url,
+      ).toString();
 
-      return NextResponse.redirect(
-        new URL(
-          `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
-          request.url,
-        ),
-      );
+      const headerName =
+        locale === i18n.defaultLocale
+          ? 'x-redirect-helper-default'
+          : 'x-redirect-helper';
+
+      request.headers.set(headerName, redirectUrl);
     }
 
     return middleware(request, event, response);

@@ -19,17 +19,17 @@ export default function PartnerCard({
   action,
 }: PartnerCardProps) {
   return (
-    <Card className="md:w-[35%] self-stretch flex flex-col justify-between bg-secondary">
-      <CardHeader className="flex flex-col  flex-1">
-        <CardTitle className="text-center mb-2 text-primary min-h-14">
+    <Card className="flex flex-col justify-between self-stretch bg-secondary md:w-[35%]">
+      <CardHeader className="flex flex-1 flex-col">
+        <CardTitle className="mb-2 min-h-14 text-center text-primary">
           {title}
         </CardTitle>
-        <CardDescription className="text-center text-base dark:text-white text-black">
+        <CardDescription className="text-center text-base text-black dark:text-white">
           {description}
         </CardDescription>
       </CardHeader>
       <CardFooter>
-        <Button className="w-[80%] mx-auto text-white">{action}</Button>
+        <Button className="mx-auto w-[80%] text-white">{action}</Button>
       </CardFooter>
     </Card>
   );

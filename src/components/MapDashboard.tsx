@@ -32,6 +32,21 @@ export function MapDashboard({ placeholder }: MapDashBoardProps) {
   const address = getQueryParam('address');
   const lat = Number(getQueryParam('lat'));
   const lng = Number(getQueryParam('lng'));
+  const radius = Number(getQueryParam('radius'));
+  const numResources = Number(getQueryParam('num_resources'));
+
+  useEffect(
+    function () {
+      if (!radius) {
+        setQueryParam('radius', '10');
+      }
+
+      if (!numResources) {
+        setQueryParam('num_resources', '5');
+      }
+    },
+    [radius, numResources, getQueryParam, setQueryParam],
+  );
 
   useEffect(() => {
     if ('geolocation' in navigator) {
@@ -108,15 +123,15 @@ export function MapDashboard({ placeholder }: MapDashBoardProps) {
   ]);
 
   return (
-    <div className="grid min-h-[90.75vh] w-full md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr]">
+    <div className="grid h-[90.75vh] w-full md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr]">
       <GeolocationPrompt
         isOpenPrompt={userLocation !== null && isUsingGeolocationLoc === null}
         onUseCurrentLocationSelection={setIsUsingGeolocationLoc}
       />
       <MapSidebar />
       <div className="flex flex-col">
-        <header className="flex h-16 items-center gap-4 border-b border-primary bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-          {/* <FilterMenu radius={radius} onRadiusChange={handleRadiusChange} /> */}
+        <header className="flex max-h-14 min-h-14 items-center gap-4 border-b border-primary bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+          <FilterMenu />
           <div className="w-full flex-1">
             <div className="relative">
               <MapSearchBar
