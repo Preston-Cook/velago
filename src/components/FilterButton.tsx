@@ -21,7 +21,7 @@ export function FilterButton({ handleChange, radius }: FilterButtonProps) {
           <Filter className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80" align="start">
+      <PopoverContent className="mt-1 w-80" align="start">
         <div className="grid gap-4">
           <div className="space-y-2">
             <h4 className="font-bold text-primary">Filters</h4>
