@@ -2,6 +2,13 @@
   "extends": ["prettier", "next/core-web-vitals"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": ["warn", { "singleQuote": true }]
+    "prettier/prettier": [
+      "warn",
+      { "singleQuote": true },
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }

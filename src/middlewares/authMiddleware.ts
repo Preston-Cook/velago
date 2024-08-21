@@ -54,6 +54,7 @@ export function updateSession(middleware: CustomMiddleware) {
       },
     });
 
+    // This will refresh to user's session
     await supabase.auth.getUser();
 
     return middleware(request, event, response);
