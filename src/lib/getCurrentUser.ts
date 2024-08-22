@@ -4,16 +4,14 @@ export async function getCurrentUser() {
   const supabase = createSbServerClient();
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (!session) {
+  if (!user) {
     return null;
   }
 
-  const {
-    user: { id },
-  } = session;
+  const { id } = user;
 
   return supabase.from('user').select('*').eq('id', id);
 }
