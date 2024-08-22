@@ -36,10 +36,10 @@ export function i18Middleware(middleware: CustomMiddleware) {
         !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
     );
 
+    const locale = getLocale(request);
+
     // Redirect if there is no locale
     if (pathnameIsMissingLocale) {
-      const locale = getLocale(request);
-
       const redirectUrl = new URL(
         `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,
         request.url,
@@ -47,10 +47,11 @@ export function i18Middleware(middleware: CustomMiddleware) {
 
       const headerName =
         locale === i18n.defaultLocale
-          ? 'x-redirect-helper-default'
+          ? 'x-redirect-default-helper'
           : 'x-redirect-helper';
 
       request.headers.set(headerName, redirectUrl);
+      request.headers.set('x-locale-helper', locale ?? i18n.defaultLocale);
     }
 
     return middleware(request, event, response);

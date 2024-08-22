@@ -11,7 +11,6 @@ interface getLocationSuggestionsParams {
   q: string;
 }
 
-// TODO: add refferal restrictions
 export async function getLocationSuggestions({
   lang,
   q,
