@@ -42,5 +42,499 @@ model ContactMessage {
   phone     String
   message   String
 
+  @@map("contact_message")
+  @@schema("public")
+}
+
+model Organization {
+  id                      String                   @id @default(uuid()) @db.Uuid
+  name                    String
+  alternateName           String?                  @map("alternate_name")
+  description             String
+  email                   String?
+  website                 String?
+  taxStatus               String?                  @map("tax_status")
+  taxId                   String?                  @map("tax_id")
+  yearIncorporated        Int?                     @map("year_incorporated")
+  legalStatus             String?                  @map("legal_status")
+  logo                    String?
+  uri                     String?
+  parentOrganization      Organization?            @relation("ParentOrganization", fields: [parentOrganizationId], references: [id])
+  parentOrganizationId    String?                  @map("parent_organization_id") @db.Uuid
+  childOrganizations      Organization[]           @relation("ParentOrganization")
+  services                Service[]
+  funding                 Funding[]
+  contacts                Contact[]
+  phones                  Phone[]
+  locations               Location[]
+  programs                Program[]
+  organizationIdentifiers OrganizationIdentifier[]
+  attributes              Attribute[]
+  metadata                Metadata?
+
+  @@map("organization")
+  @@schema("public")
+}
+
+model Service {
+  id                     String              @id @db.Uuid
+  name                   String
+  alternateName          String?             @map("alternate_name")
+  description            String?
+  url                    String?
+  email                  String?
+  status                 StatusType
+  interpretationServices String?             @map("interpretation_services")
+  applicationProcess     String?             @map("application_process")
+  waitTime               String?             @map("wait_time")
+  fees                   String?
+  feesDescription        String?             @map("fees_description")
+  accreditations         String?
+  eligibilityDescription String?             @map("eligibility_description")
+  minimunAge             Int?                @map("minimum_age")
+  maximumAge             Int?                @map("maximum_age")
+  assuredDate            String?             @map("assured_date")
+  assurerEmail           String?             @map("assurer_email")
+  licenses               String?
+  alert                  String?
+  lastModified           DateTime?           @map("last_modified")
+  phones                 Phone[]
+  schedules              Schedule[]
+  serviceAreas           ServiceArea[]
+  serviceAtLocations     ServiceAtLocation[]
+  languages              Language[]
+  contacts               Contact[]
+  organization           Organization?       @relation(fields: [organizationId], references: [id])
+  organizationId         String?             @unique @map("organization_id") @db.Uuid
+  funding                Funding[]
+  costOptions            CostOption[]
+  programId              String?             @unique @map("program_id") @db.Uuid
+  program                Program?            @relation(fields: [programId], references: [id])
+  requiredDocuments      RequiredDocument[]
+  attributes             Attribute[]
+  metadata               Metadata?
+
+  @@map("service")
+  @@schema("public")
+}
+
+enum StatusType {
+  ACTIVE
+  INACTIVE
+  DEFUNCT
+  TEMPORARILY_CLOSED
+
+  @@map("status_type")
+  @@schema("public")
+}
+
+model Program {
+  id             String        @id @default(uuid()) @db.Uuid
+  organizationId String?       @unique @map("organization_id") @db.Uuid
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  name           String
+  alternateName  String?       @map("alternate_name")
+  description    String
+  service        Service?
+  attribtues     Attribute[]
+  metadata       Metadata?
+
+  @@map("program")
+  @@schema("public")
+}
+
+model Address {
+  id            String      @id @default(uuid()) @db.Uuid
+  locationId    String?     @unique @db.Uuid
+  location      Location?   @relation(fields: [locationId], references: [id])
+  attention     String?     @map("attention")
+  address1      String?     @map("address_1")
+  address2      String?     @map("address_2")
+  city          String?     @map("city")
+  region        String?     @map("region")
+  stateProvince String?     @map("state_province")
+  postalCode    String?     @map("postal_code")
+  country       String?     @map("country")
+  addressType   String?     @map("address_type")
+  attributes    Attribute[]
+  metadata      Metadata?
+
+  @@map("address")
+  @@schema("public")
+}
+
+model Contact {
+  id                  String             @id @default(uuid()) @db.Uuid
+  organizationId      String?            @map("organization_id") @db.Uuid
+  organization        Organization?      @relation(fields: [organizationId], references: [id])
+  serviceId           String?            @unique @map("service_id") @db.Uuid
+  service             Service?           @relation(fields: [serviceId], references: [id])
+  serviceAtLocationId String?            @unique @map("service_at_location_id") @db.Uuid
+  serviceAtLocation   ServiceAtLocation? @relation(fields: [serviceAtLocationId], references: [id])
+  phone               Phone[]
+  locationId          String?            @unique @map("location_id") @db.Uuid
+  location            Location?          @relation(fields: [locationId], references: [id])
+  name                String?
+  title               String?
+  department          String?
+  email               String?
+  attributes          Attribute[]
+  metadata            Metadata?
+
+  @@map("contact")
+  @@schema("public")
+}
+
+model RequiredDocument {
+  id         String      @id @default(uuid()) @db.Uuid
+  service    Service?    @relation(fields: [serviceId], references: [id])
+  serviceId  String?     @unique @map("service_id") @db.Uuid
+  document   String?
+  uri        String?
+  attributes Attribute[]
+  metadata   Metadata?
+
+  @@map("required_document")
+  @@schema("public")
+}
+
+model Location {
+  id                String              @id @default(uuid()) @db.Uuid
+  phones            Phone[]
+  languages         Language[]
+  locationType      LocationType        @map("location_type")
+  url               String?
+  organizationId    String?             @unique @map("organization_id") @db.Uuid
+  organization      Organization?       @relation(fields: [organizationId], references: [id])
+  accessability     Accessability?
+  address           Address?
+  serviceAtLocation ServiceAtLocation[]
+  contacts          Contact[]
+
+  @@map("location")
+  @@schema("public")
+}
+
+enum LocationType {
+  PHYSICAL
+  POSTAL
+  VIRTUAL
+
+  @@map("location_type")
+  @@schema("public")
+}
+
+model ServiceAtLocation {
+  id          String      @id @default(uuid()) @db.Uuid
+  service     Service?    @relation(fields: [serviceId], references: [id])
+  serviceId   String?     @unique @map("service_id") @db.Uuid
+  contacts    Contact[]
+  description String?
+  phones      Phone[]
+  schedules   Schedule[]
+  location    Location?   @relation(fields: [locationId], references: [id])
+  locationId  String?     @map("location_id") @db.Uuid
+  attributes  Attribute[]
+  metadata    Metadata?
+
+  @@map("service_at_location")
+  @@schema("public")
+}
+
+model Phone {
+  id                  String             @id @default(uuid()) @db.Uuid
+  location            Location?          @relation(fields: [locationId], references: [id])
+  locationId          String?            @unique @map("location_id") @db.Uuid
+  service             Service?           @relation(fields: [serviceId], references: [id])
+  serviceId           String?            @unique @map("service_id") @db.Uuid
+  Organization        Organization?      @relation(fields: [organizationId], references: [id])
+  organizationId      String?            @map("organization_id") @db.Uuid
+  contactId           String?            @unique @map("contact_id") @db.Uuid
+  contact             Contact?           @relation(fields: [contactId], references: [id])
+  Language            Language[]
+  serviceAtLocationId String?            @unique @map("service_at_location_id") @db.Uuid
+  serviceAtLocation   ServiceAtLocation? @relation(fields: [serviceAtLocationId], references: [id])
+  description         String?
+  number              String
+  extention           Int
+  phoneType           String?            @map("phone_type")
+  attributes          Attribute[]
+  metadata            Metadata?
+
+  @@map("phone")
+  @@schema("public")
+}
+
+model ServiceArea {
+  id          String      @id @default(uuid()) @db.Uuid
+  service     Service?    @relation(fields: [serviceId], references: [id])
+  serviceId   String      @map("service_id") @db.Uuid
+  name        String?
+  description String?
+  extent      String?
+  extentType  ExtentType  @map("extent_type")
+  uri         String?
+  attributes  Attribute[]
+  metadata    Metadata?
+
+  @@map("serice_area")
+  @@schema("public")
+}
+
+enum ExtentType {
+  GEOJSON
+  TOPOJSON
+  KML
+
+  @@map("extent_type")
+  @@schema("public")
+}
+
+model CostOption {
+  id                String      @id @default(uuid()) @db.Uuid
+  service           Service?    @relation(fields: [serviceId], references: [id])
+  serviceId         String?     @map("service_id") @db.Uuid
+  validFrom         String?     @map("valid_from")
+  validTo           String?     @map("valid_to")
+  option            String
+  currency          String?
+  amount            Decimal?
+  amountDescription String?     @map("amount_description")
+  attributes        Attribute[]
+  metadata          Metadata?
+
+  @@map("cost_option")
+  @@schema("public")
+}
+
+model Accessability {
+  id          String      @id @default(uuid()) @db.Uuid
+  locationId  String?     @unique @map("location_id") @db.Uuid
+  location    Location?   @relation(fields: [locationId], references: [id])
+  description String?
+  details     String?
+  url         String?
+  attibutes   Attribute[]
+  metadata    Metadata?
+
+  @@map("accessability")
+  @@schema("public")
+}
+
+model Schedule {
+  id                  String             @id @default(uuid()) @db.Uuid
+  service             Service?           @relation(fields: [serviceId], references: [id])
+  serviceId           String?            @unique @map("service_id") @db.Uuid
+  ServiceAtLocation   ServiceAtLocation? @relation(fields: [serviceAtLocationId], references: [id])
+  serviceAtLocationId String?            @map("service_at_location_id") @db.Uuid
+  validFrom           String?            @map("valid_from")
+  validTo             String?            @map("valid_to")
+  dstart              String?
+  timezome            Int
+  until               String?
+  count               Int?
+  wkst                String?
+  freq                String?
+  interval            Int?
+  byday               String?
+  byweekno            String?
+  bymonthday          String?
+  byyearday           String?
+  description         String?
+  opensAt             String?            @map("opens_at")
+  closesAt            String?            @map("closes_at")
+  scheduleLink        String?            @map("schedule_link")
+  attendingType       String?            @map("attending_type")
+  notes               String?
+  attributes          Attribute[]
+  metadata            Metadata?
+
+  @@map("schedule")
+  @@schema("public")
+}
+
+model Language {
+  id         String      @id @default(uuid()) @db.Uuid
+  serviceId  String?     @map("service_id") @db.Uuid
+  service    Service?    @relation(fields: [serviceId], references: [id])
+  locationId String?     @map("location_id") @db.Uuid
+  location   Location?   @relation(fields: [locationId], references: [id])
+  phoneId    String?     @map("phone_id") @db.Uuid
+  phone      Phone?      @relation(fields: [phoneId], references: [id])
+  name       String?
+  code       String?
+  note       String?
+  attributes Attribute[]
+  metadata   Metadata?
+
+  @@map("language")
+  @@schema("public")
+}
+
+model Funding {
+  id             String        @id @default(uuid()) @db.Uuid
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?       @unique @map("organization_id") @db.Uuid
+  serviceId      String?       @unique @map("service_id") @db.Uuid
+  service        Service?      @relation(fields: [serviceId], references: [id])
+  source         String?
+  attributes     Attribute[]
+  metadata       Metadata?
+
+  @@map("funding")
+  @@schema("public")
+}
+
+model OrganizationIdentifier {
+  id               String       @id @default(uuid()) @db.Uuid
+  organization     Organization @relation(fields: [organizationId], references: [id])
+  organizationId   String       @unique @map("organization_id") @db.Uuid
+  identifierScheme String?      @map("identifier_scheme")
+  identifierType   String       @map("identifier_type")
+  identifier       String
+  attributes       Attribute[]
+  metadata         Metadata?
+
+  @@map("organization_identifier")
+  @@schema("public")
+}
+
+model Taxonomy {
+  id           String        @id @default(uuid()) @db.Uuid
+  name         String
+  description  String
+  uri          String?
+  version      String?
+  taxonomyTerm TaxonomyTerm?
+  metadata     Metadata[]
+
+  @@map("taxonomy")
+  @@schema("public")
+}
+
+model TaxonomyTerm {
+  id             String     @id @default(uuid()) @db.Uuid
+  code           String?
+  name           String
+  description    String
+  parentId       String?    @map("parent_id") @db.Uuid
+  taxonomy       String
+  taxonomyDetail Taxonomy?  @relation(fields: [taxonomyId], references: [id])
+  taxonomyId     String?    @unique @map("taxonomy_id") @db.Uuid
+  termUri        String?    @map("term_uri")
+  attribute      Attribute?
+  metadata       Metadata[]
+
+  @@map("taxonomy_term")
+  @@schema("public")
+}
+
+model Attribute {
+  id                       String                  @id @default(uuid()) @db.Uuid
+  linkId                   String?                 @map("link_id") @db.Uuid
+  linkType                 String?                 @map("link_type")
+  value                    String?
+  taxonomyTerm             TaxonomyTerm?           @relation(fields: [taxonomyTermId], references: [id])
+  taxonomyTermId           String?                 @unique @map("taxonomy_term_id") @db.Uuid
+  metaTableDescription     MetaTableDescription?   @relation(fields: [metaTableDescriptionId], references: [id])
+  metaTableDescriptionId   String?                 @map("meta_table_desciption_id") @db.Uuid
+  costOption               CostOption?             @relation(fields: [costOptionId], references: [id])
+  costOptionId             String?                 @unique @map("cost_option_id") @db.Uuid
+  organizationIdentifier   OrganizationIdentifier? @relation(fields: [organizationIdentifierId], references: [id])
+  organizationIdentifierId String?                 @unique @map("organization_identifier_id") @db.Uuid
+  programId                String?                 @map("program_id") @db.Uuid
+  program                  Program?                @relation(fields: [programId], references: [id])
+  organization             Organization?           @relation(fields: [organizationId], references: [id])
+  organizationId           String?                 @unique @map("organization_id") @db.Uuid
+  service                  Service?                @relation(fields: [serviceId], references: [id])
+  serviceId                String?                 @unique @map("service_id") @db.Uuid
+  metadata                 Metadata[]
+  Accessability            Accessability?          @relation(fields: [accessabilityId], references: [id])
+  accessabilityId          String?                 @map("accessability_id") @db.Uuid
+  Funding                  Funding?                @relation(fields: [fundingId], references: [id])
+  fundingId                String?                 @map("funding_id") @db.Uuid
+  Language                 Language?               @relation(fields: [languageId], references: [id])
+  languageId               String?                 @map("language_id") @db.Uuid
+  ServiceArea              ServiceArea?            @relation(fields: [serviceAreaId], references: [id])
+  serviceAreaId            String?                 @map("service_area_id") @db.Uuid
+  requiredDocument         RequiredDocument?       @relation(fields: [requiredDocumentId], references: [id])
+  requiredDocumentId       String?                 @map("required_document_id") @db.Uuid
+  address                  Address?                @relation(fields: [addressId], references: [id])
+  addressId                String?                 @map("address_id") @db.Uuid
+  ServiceAtLocation        ServiceAtLocation?      @relation(fields: [serviceAtLocationId], references: [id])
+  serviceAtLocationId      String?                 @map("service_at_location_id") @db.Uuid
+  phoneId                  String?                 @unique @map("phone_id") @db.Uuid
+  phone                    Phone?                  @relation(fields: [phoneId], references: [id])
+  schedule                 Schedule?               @relation(fields: [scheduleId], references: [id])
+  scheduleId               String?                 @map("schedule_id") @db.Uuid
+  contactId                String?                 @unique @map("contact_id") @db.Uuid
+  contact                  Contact?                @relation(fields: [contactId], references: [id])
+
+  @@map("attribute")
+  @@schema("public")
+}
+
+model MetaTableDescription {
+  id           String      @id @default(uuid()) @db.Uuid
+  name         String?
+  language     String?
+  characterSet String?     @map("character_set")
+  attribtues   Attribute[]
+  metadata     Metadata?
+
+  @@map("meta_table_description")
+  @@schema("public")
+}
+
+model Metadata {
+  id                       String                  @id @default(uuid()) @db.Uuid
+  resourceId               String?                 @map("resource_id")
+  resourceType             String?                 @map("resource_type")
+  lastActionDate           String                  @map("last_action_date")
+  lastActionType           String                  @map("last_action_type")
+  fieldName                String                  @map("field_name")
+  previousValue            String                  @map("previous_value")
+  replacementValue         String                  @map("replacement_value")
+  updatedBy                String                  @map("updated_by")
+  taxonomy                 Taxonomy?               @relation(fields: [taxonomyId], references: [id])
+  taxonomyId               String?                 @unique @map("taxonomy_id") @db.Uuid
+  taxonomyTerm             TaxonomyTerm?           @relation(fields: [taxonomyTermId], references: [id])
+  taxonomyTermId           String?                 @unique @map("taxonomy_term_id") @db.Uuid
+  attribute                Attribute?              @relation(fields: [attributeId], references: [id])
+  attributeId              String?                 @unique @map("attribute_id") @db.Uuid
+  metaTableDescription     MetaTableDescription?   @relation(fields: [metaTableDescriptionId], references: [id])
+  metaTableDescriptionId   String?                 @unique @map("meta_table_description_id") @db.Uuid
+  costOption               CostOption?             @relation(fields: [costOptionId], references: [id])
+  costOptionId             String?                 @unique @map("cost_option_id") @db.Uuid
+  organizationIdentifer    OrganizationIdentifier? @relation(fields: [organizationIdentifierId], references: [id])
+  organizationIdentifierId String?                 @unique @map("organization_identifier_id") @db.Uuid
+  program                  Program?                @relation(fields: [programId], references: [id])
+  programId                String?                 @unique @map("program_id") @db.Uuid
+  organization             Organization?           @relation(fields: [organizationId], references: [id])
+  organizationId           String?                 @unique @map("organization_id") @db.Uuid
+  service                  Service?                @relation(fields: [serviceId], references: [id])
+  serviceId                String?                 @unique @map("service_id") @db.Uuid
+  accessabilityId          String?                 @unique @map("accessability_id") @db.Uuid
+  accessability            Accessability?          @relation(fields: [accessabilityId], references: [id])
+  fundingId                String?                 @unique @map("funding_id") @db.Uuid
+  funding                  Funding?                @relation(fields: [fundingId], references: [id])
+  languageId               String?                 @unique @map("language_id") @db.Uuid
+  language                 Language?               @relation(fields: [languageId], references: [id])
+  serviceAreaId            String?                 @unique @map("service_area_id") @db.Uuid
+  serviceArea              ServiceArea?            @relation(fields: [serviceAreaId], references: [id])
+  requiredDocument         RequiredDocument?       @relation(fields: [requiredDocumentId], references: [id])
+  requiredDocumentId       String?                 @unique @map("required_document_id") @db.Uuid
+  address                  Address?                @relation(fields: [addressId], references: [id])
+  addressId                String?                 @unique @map("address_id") @db.Uuid
+  serviceAtLocationId      String?                 @unique @map("service_at_location_id") @db.Uuid
+  serviceAtLocation        ServiceAtLocation?      @relation(fields: [serviceAtLocationId], references: [id])
+  phoneId                  String?                 @unique @map("phone_id") @db.Uuid
+  phone                    Phone?                  @relation(fields: [phoneId], references: [id])
+  scheduleId               String?                 @unique @map("schedule_id") @db.Uuid
+  schedule                 Schedule?               @relation(fields: [scheduleId], references: [id])
+  contactId                String?                 @unique @map("contact_id") @db.Uuid
+  contact                  Contact?                @relation(fields: [contactId], references: [id])
+
+  @@map("metadata")
   @@schema("public")
 }

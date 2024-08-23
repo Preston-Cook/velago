@@ -23,10 +23,11 @@ export async function POST(request: Request) {
   // }
 
   // TODO: send a message to velago email with contact message with resend
+
   const resend = new Resend(process.env.RESEND_API_KEY as string);
 
-  await resend.emails.send({
-    from: 'Acme <onboarding@resend.dev>',
+  const res = await resend.emails.send({
+    from: 'info@velago.org',
     to: ['preston.l.cook@gmail.com'],
     subject: 'hello world',
     html: '<p>it works!</p>',
