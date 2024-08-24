@@ -31,7 +31,51 @@ import { useToast } from '@/hooks/useToast';
 
 interface PhoneSignUpFormProps {
   dic: {
+    title: string;
+    description: string;
     labels: string[];
+    account: {
+      existsEmail: {
+        title: string;
+        description: string;
+      };
+      existsPhone: {
+        title: string;
+        description: string;
+      };
+      generic: {
+        title: string;
+        description: string;
+      };
+    };
+    code: {
+      success: {
+        title: string;
+        description: string;
+      };
+      error: {
+        title: string;
+        description: string;
+      };
+      invalid: {
+        title: string;
+        description: string;
+      };
+    };
+    phone: {
+      verify: string;
+    };
+    signup: {
+      standard: string;
+      google: string;
+    };
+    noAccount: {
+      text: string;
+      link: string;
+    };
+    button: {
+      text: string;
+    };
   };
   validation: {
     firstName: {
@@ -67,12 +111,12 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
 
       const title =
         error === '409'
-          ? 'Uh oh! Account already exists'
-          : 'Uh oh! Something went wrong';
+          ? dic.account.existsEmail.title
+          : dic.account.generic.title;
       const description =
         error === '409'
-          ? 'There is already an account associated with this email'
-          : 'There was a problem with your request';
+          ? dic.account.existsEmail.description
+          : dic.account.generic.description;
 
       timeout = setTimeout(() => {
         showToastError({ title, description });
@@ -158,9 +202,8 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
     if (data) {
       setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
       showToastError({
-        title: 'Uh oh! Account exists',
-        description:
-          'There is already an account associated with this phone number',
+        title: dic.account.existsPhone.title,
+        description: dic.account.existsPhone.description,
       });
       return;
     }
@@ -175,8 +218,8 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
     }
 
     showToastSuccess({
-      title: 'Success!',
-      description: 'Your code has been sent!',
+      title: dic.code.success.title,
+      description: dic.code.success.description,
     });
 
     setShowSignUp(true);
@@ -203,8 +246,8 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
     if (data) {
       setIsLoading((prev) => ({ ...prev, isLoadingSignUp: false }));
       showToastError({
-        title: 'Uh oh! Account already exists',
-        description: 'There is already an account associated with this email',
+        title: dic.account.existsEmail.title,
+        description: dic.account.existsEmail.description,
       });
       return;
     }
@@ -221,8 +264,8 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
     if (err3?.status === 403) {
       setIsLoading((prev) => ({ ...prev, isLoadingSignUp: false }));
       showToastError({
-        title: 'Invalid Code',
-        description: 'Your code is invalid',
+        title: dic.code.invalid.title,
+        description: dic.code.invalid.description,
       });
       return;
     }
@@ -275,7 +318,7 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
               render={({ field }) => (
                 <>
                   <FormItem>
-                    <FormLabel>{'First Name'}</FormLabel>
+                    <FormLabel>{dic.labels[0]}</FormLabel>
                     <FormControl>
                       <Input
                         placeholder={'Aaron'}
@@ -294,7 +337,7 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
               render={({ field }) => (
                 <>
                   <FormItem>
-                    <FormLabel>{'Last Name'}</FormLabel>
+                    <FormLabel>{dic.labels[1]}</FormLabel>
                     <FormControl>
                       <Input
                         placeholder={'Swartz'}
@@ -314,7 +357,7 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
             render={({ field }) => (
               <>
                 <FormItem className="grid gap-2">
-                  <FormLabel>{`${dic.labels[3]} (Optional)`}</FormLabel>
+                  <FormLabel>{`${dic.labels[3]}`}</FormLabel>
                   <FormControl>
                     {/* @ts-ignore */}
                     <Input
@@ -348,7 +391,7 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
                     setShowSignUp((prev) => (prev ? !prev : prev));
                   }}
                 >
-                  <FormLabel>{'Phone'}</FormLabel>
+                  <FormLabel>{dic.labels[2]}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder={'(123)-456-7890'}
@@ -368,7 +411,7 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
                     {isLoadingCode ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
                     ) : (
-                      'Verify Phone'
+                      dic.phone.verify
                     )}
                   </Button>
                 )}
@@ -407,7 +450,7 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
                       {isLoadingSignUp ? (
                         <Loader2 className="h-4 w-4 animate-spin" />
                       ) : (
-                        'Sign Up'
+                        dic.button.text
                       )}
                     </Button>
                   </>

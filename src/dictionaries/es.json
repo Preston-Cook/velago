@@ -157,17 +157,57 @@
         "text": "Iniciar sesión"
       }
     },
+
     "userSignUp": {
-      "title": "Registrarse",
-      "description": "Ingrese su nombre, apellido y número de teléfono a continuación para registrarse en su cuenta",
-      "labels": ["Nombre", "Apellido", "Teléfono", "Correo Electrónico"],
+      "title": "Regístrate",
+      "description": "Ingresa tu nombre, apellido y número de teléfono a continuación para crear tu cuenta",
+      "labels": [
+        "Nombre",
+        "Apellido",
+        "Teléfono (Opcional)",
+        "Correo electrónico"
+      ],
+      "account": {
+        "existsEmail": {
+          "title": "¡Uh oh! La cuenta ya existe",
+          "description": "Ya existe una cuenta asociada con este correo electrónico"
+        },
+        "existsPhone": {
+          "title": "¡Uh oh! La cuenta ya existe",
+          "description": "Ya existe una cuenta asociada con este número de teléfono"
+        },
+        "generic": {
+          "title": "¡Uh oh! Algo salió mal",
+          "description": "Hubo un problema con tu solicitud"
+        }
+      },
+      "code": {
+        "success": {
+          "title": "¡Éxito!",
+          "description": "Tu código ha sido enviado"
+        },
+        "error": {
+          "title": "¡Uh oh! Algo salió mal",
+          "description": "Hubo un problema con tu solicitud"
+        },
+        "invalid": {
+          "title": "Código inválido",
+          "description": "Tu código es inválido"
+        }
+      },
+      "phone": {
+        "verify": "Verificar"
+      },
       "signup": {
-        "standard": "Registrarse",
-        "google": "Registrarse con Google"
+        "standard": "Regístrate",
+        "google": "Regístrate con Google"
       },
       "noAccount": {
         "text": "¿Ya tienes una cuenta?",
-        "link": "Iniciar sesión"
+        "link": "Inicia sesión"
+      },
+      "button": {
+        "text": "Regístrate"
       }
     },
     "map": {

@@ -154,7 +154,38 @@
     "userSignUp": {
       "title": "Sign Up",
       "description": "Enter your first name, last name, and phone phone number below to sign up for your account",
-      "labels": ["First Name", "Last Name", "Phone", "Email"],
+      "labels": ["First Name", "Last Name", "Phone (Optional)", "Email"],
+      "account": {
+        "existsEmail": {
+          "title": "Uh oh! Account already exists",
+          "description": "There is already an account associated with this email"
+        },
+        "existsPhone": {
+          "title": "Uh oh! Account already exists",
+          "description": "There is already an account associated with this phone number"
+        },
+        "generic": {
+          "title": "Uh oh! Something went wrong",
+          "description": "There was a problem with your request"
+        }
+      },
+      "code": {
+        "success": {
+          "title": "Success!",
+          "description": "Your code has been sent"
+        },
+        "error": {
+          "title": "Uh oh! Something went wrong",
+          "description": "There was a problem with your request"
+        },
+        "invalid": {
+          "title": "Invalid code",
+          "description": "Your code is invalid"
+        }
+      },
+      "phone": {
+        "verify": "Verify"
+      },
       "signup": {
         "standard": "Sign Up",
         "google": "Sign Up with Google"
@@ -162,6 +193,9 @@
       "noAccount": {
         "text": "Already have an account?",
         "link": "Sign in"
+      },
+      "button": {
+        "text": "Sign Up"
       }
     },
     "map": {
