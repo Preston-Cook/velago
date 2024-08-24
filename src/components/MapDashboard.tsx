@@ -50,24 +50,27 @@ export function MapDashboard({ placeholder }: MapDashBoardProps) {
 
   useEffect(() => {
     if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        const { latitude, longitude } = position.coords;
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
 
-        try {
-          const {
-            formattedAddress,
-            lat: reverseGeoLat,
-            lng: reverseGeoLng,
-          } = await reverseGeocode({ lat: latitude, lng: longitude });
-          setUserLocation({
-            address: formattedAddress,
-            lat: reverseGeoLat,
-            lng: reverseGeoLng,
-          });
-        } catch (error) {
-          console.error('Error reverse geocoding:', error);
-        }
-      });
+          try {
+            const {
+              formattedAddress,
+              lat: reverseGeoLat,
+              lng: reverseGeoLng,
+            } = await reverseGeocode({ lat: latitude, lng: longitude });
+            setUserLocation({
+              address: formattedAddress,
+              lat: reverseGeoLat,
+              lng: reverseGeoLng,
+            });
+          } catch (error) {
+            console.error('Error reverse geocoding:', error);
+          }
+        },
+        () => setIsUsingGeolocationLoc(false),
+      );
     }
   }, []);
 
