@@ -18,7 +18,7 @@ export default async function Page({ params }: UserSignInProps) {
 
   const dic = await getDictionary(lang);
 
-  const { title, description, noAccount } = dic.pages.userSignIn;
+  const { title, description, noAccount, orgAccount } = dic.pages.userSignIn;
 
   return (
     <div className="w-full lg:grid lg:grid-cols-2">
@@ -36,6 +36,12 @@ export default async function Page({ params }: UserSignInProps) {
             {noAccount.text}{' '}
             <LocaleLink href="/signup/user" className="underline">
               {noAccount.link}
+            </LocaleLink>
+          </div>
+          <div className="text-center text-sm">
+            {orgAccount.text}{' '}
+            <LocaleLink href="/signup/organization" className="underline">
+              {orgAccount.link}
             </LocaleLink>
           </div>
         </div>

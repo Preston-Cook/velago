@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { type CookieOptions, createServerClient } from '@supabase/ssr';
 import prisma from '@/lib/db';
 
-export async function GET(request: Request, response: Response) {
+export async function GET(request: Request, _response: Response) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get('code');
   // if "next" is in param, use it as the redirect URL

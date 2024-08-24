@@ -47,9 +47,49 @@ interface PhoneLoginFormProps {
       standard: string;
       google: string;
     };
+    phone: {
+      label: string;
+    };
+    orgAccount: {
+      text: string;
+      link: string;
+    };
     noAccount: {
       text: string;
       link: string;
+    };
+    account: {
+      error: {
+        notFound: {
+          title: string;
+          description: string;
+        };
+        generic: {
+          title: string;
+          description: string;
+        };
+      };
+    };
+    code: {
+      button: {
+        resend: string;
+        sendCode: string;
+      };
+      success: {
+        title: string;
+        description: string;
+      };
+      error: {
+        title: string;
+        description: string;
+      };
+      invalid: {
+        title: string;
+        description: string;
+      };
+    };
+    button: {
+      text: string;
     };
   };
 }
@@ -70,12 +110,12 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
 
       const title =
         error === '404'
-          ? 'Uh oh! Account does not exist'
-          : 'Uh oh! Something went wrong';
+          ? dic.account.error.notFound.title
+          : dic.account.error.generic.title;
       const description =
         error === '404'
-          ? 'There is no account with this email'
-          : 'There was a problem with your request';
+          ? dic.account.error.notFound.description
+          : dic.account.error.generic.description;
 
       timeout = setTimeout(() => {
         showToastError({ title, description });
@@ -127,8 +167,8 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
     if (error?.status === 403) {
       setIsLoading((prev) => ({ ...prev, isLoadingLogin: false }));
       showToastError({
-        title: 'Invalid Code',
-        description: 'Your code is invalid',
+        title: dic.code.error.title,
+        description: dic.code.error.description,
       });
       return;
     }
@@ -164,8 +204,8 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
     if (!data) {
       setIsLoading((prev) => ({ ...prev, isLoadingCode: false }));
       showToastError({
-        title: 'Uh oh! Account does not exist',
-        description: 'There is no account with this phone number',
+        title: dic.account.error.notFound.title,
+        description: dic.account.error.notFound.description,
       });
       return;
     }
@@ -180,8 +220,8 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
     }
 
     showToastSuccess({
-      title: 'Success!',
-      description: 'Your code has been sent!',
+      title: dic.code.success.title,
+      description: dic.code.success.description,
     });
 
     setShowLogin(true);
@@ -216,7 +256,7 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
                     setShowLogin((prev) => (prev ? !prev : prev));
                   }}
                 >
-                  <FormLabel>{'Phone'}</FormLabel>
+                  <FormLabel>{dic.phone.label}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder={'(123)-456-7890'}
@@ -236,7 +276,7 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
                     {isLoadingCode ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
                     ) : (
-                      'Send Code'
+                      dic.code.button.sendCode
                     )}
                   </Button>
                 )}
@@ -257,7 +297,7 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
                           <CodeInput onChange={handleCodeChange} />
                           <ResendCodeButton
                             phone={getValues('phone')}
-                            text="Resend"
+                            text={dic.code.button.resend}
                           />
                         </div>
                       </FormControl>
@@ -271,7 +311,7 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
                       {isLoadingLogin ? (
                         <Loader2 className="h-4 w-4 animate-spin" />
                       ) : (
-                        'Login'
+                        dic.button.text
                       )}
                     </Button>
                   </>

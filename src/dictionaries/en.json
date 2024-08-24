@@ -106,9 +106,49 @@
         "standard": "Sign in",
         "google": "Sign in with Google"
       },
+      "phone": {
+        "label": "Phone"
+      },
+      "orgAccount": {
+        "text": "Have an organization account?",
+        "link": "Sign in"
+      },
       "noAccount": {
         "text": "Don't have an account?",
         "link": "Sign up"
+      },
+      "account": {
+        "error": {
+          "notFound": {
+            "title": "Uh oh! Account does not exist",
+            "description": "There is no account with this phone number"
+          },
+          "generic": {
+            "title": "Uh oh! Something went wrong",
+            "description": "There was a problem with your request"
+          }
+        }
+      },
+      "code": {
+        "button": {
+          "resend": "Resend",
+          "sendCode": "Send Code"
+        },
+        "success": {
+          "title": "Success!",
+          "description": "Your code has been sent"
+        },
+        "error": {
+          "title": "Uh oh! Something went wrong",
+          "description": "There was a problem with your request"
+        },
+        "invalid": {
+          "title": "Invalid code",
+          "description": "Your code is invalid"
+        }
+      },
+      "button": {
+        "text": "Sign in"
       }
     },
     "userSignUp": {

@@ -112,9 +112,49 @@
         "standard": "Iniciar sesión",
         "google": "Iniciar sesión con Google"
       },
+      "phone": {
+        "label": "Teléfono"
+      },
+      "orgAccount": {
+        "text": "¿Tienes una cuenta de organización?",
+        "link": "Iniciar sesión"
+      },
       "noAccount": {
         "text": "¿No tienes una cuenta?",
         "link": "Regístrate"
+      },
+      "account": {
+        "error": {
+          "notFound": {
+            "title": "¡Uh oh! La cuenta no existe",
+            "description": "No hay ninguna cuenta con este número de teléfono"
+          },
+          "generic": {
+            "title": "¡Uh oh! Algo salió mal",
+            "description": "Hubo un problema con tu solicitud"
+          }
+        }
+      },
+      "code": {
+        "button": {
+          "resend": "Reenviar",
+          "sendCode": "Enviar código"
+        },
+        "success": {
+          "title": "¡Éxito!",
+          "description": "Tu código ha sido enviado"
+        },
+        "error": {
+          "title": "¡Uh oh! Algo salió mal",
+          "description": "Hubo un problema con tu solicitud"
+        },
+        "invalid": {
+          "title": "Código inválido",
+          "description": "Tu código es inválido"
+        }
+      },
+      "button": {
+        "text": "Iniciar sesión"
       }
     },
     "userSignUp": {
