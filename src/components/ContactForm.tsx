@@ -132,7 +132,7 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
 
   async function onSubmit(values: z.infer<typeof contactFormSchema>) {
     setIsLoading(true);
-    const res = await fetch(`/api/contacts`, {
+    const res = await fetch('/api/contacts', {
       method: 'POST',
       body: JSON.stringify(values),
     });

@@ -47,7 +47,6 @@ export function MapSidebar() {
                 onValueChange={handleRadiusChange}
                 min={1}
                 max={25}
-                step={5}
                 className="mt-4"
               />
             </div>
@@ -72,7 +71,7 @@ export function MapSidebar() {
               <span>Resource Filters</span>
             </h3>
             <Separator />
-            <FilterAccordion />
+            <FilterAccordion isMapSidebar={true} />
           </nav>
           <Separator className="my-4 bg-primary" />
           <nav className="mx-4 grid items-start px-2 text-sm font-medium lg:px-4">

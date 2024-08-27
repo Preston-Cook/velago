@@ -69,7 +69,7 @@ interface PhoneSignUpFormProps {
       standard: string;
       google: string;
     };
-    noAccount: {
+    accountExists: {
       text: string;
       link: string;
     };

@@ -13,7 +13,8 @@ interface UserSignUpProps {
 export default async function Page({ params }: UserSignUpProps) {
   const { lang } = params;
   const dic = await getDictionary(lang);
-  const { title, description, noAccount } = dic.pages.userSignUp;
+  const { title, description, accountExists, orgAccount } =
+    dic.pages.userSignUp;
 
   return (
     <div className="w-full lg:grid lg:grid-cols-2">
@@ -28,9 +29,15 @@ export default async function Page({ params }: UserSignUpProps) {
             dic={dic.pages.userSignUp}
           />
           <div className="mt-4 text-center text-sm">
-            {noAccount.text}{' '}
+            {accountExists.text}{' '}
             <LocaleLink href="/signin/user" className="underline">
-              {noAccount.link}
+              {accountExists.link}
+            </LocaleLink>
+          </div>
+          <div className="text-center text-sm">
+            {orgAccount.text}{' '}
+            <LocaleLink href="/signup/organization" className="underline">
+              {orgAccount.link}
             </LocaleLink>
           </div>
         </div>

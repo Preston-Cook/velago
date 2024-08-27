@@ -35,14 +35,26 @@ model Role {
 }
 
 model ContactMessage {
-  id        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   firstName String
   lastName  String
   email     String
   phone     String
   message   String
+  timestamp DateTime @default(now())
 
   @@map("contact_message")
+  @@schema("public")
+}
+
+model SignUpMessage {
+  id             String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  orgName        String  @map("org_name")
+  email          String
+  description    String
+  additionalInfo String? @map("additional_info")
+
+  @@map("sign_up_message")
   @@schema("public")
 }
 

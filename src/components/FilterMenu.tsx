@@ -1,4 +1,9 @@
-import { Filter, MapIcon, SlidersHorizontal } from 'lucide-react';
+import {
+  Filter,
+  HeartHandshake,
+  MapIcon,
+  SlidersHorizontal,
+} from 'lucide-react';
 import {
   Dialog,
   DialogTitle,
@@ -10,16 +15,25 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
-import { Input } from './ui/input';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { SendMessageButton } from './SendMessageButton';
 import { Separator } from './ui/separator';
+import { Slider } from './ui/slider';
+import { FilterAccordion } from './FilterAccordion';
 
 export function FilterMenu() {
   const { getQueryParam, setQueryParam } = useQueryParams();
 
   const radius = Number(getQueryParam('radius'));
   const numResources = Number(getQueryParam('num_resources'));
+
+  function handleRadiusChange(e: number[]) {
+    setQueryParam('radius', `${e[0]}`);
+  }
+
+  function handleNumResourcesChange(e: number[]) {
+    setQueryParam('num_resources', `${e[0]}`);
+  }
 
   return (
     <Dialog>
@@ -33,7 +47,7 @@ export function FilterMenu() {
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="flex flex-col">
+      <DialogContent className="flex max-h-[60vh] flex-col overflow-y-scroll">
         <DialogHeader>
           <DialogTitle>
             <div className="flex items-center gap-2 font-semibold">
@@ -57,26 +71,49 @@ export function FilterMenu() {
             <Separator className="mx-auto my-4 w-[80%]" />
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Name
+                <Label htmlFor="name" className="text-left">
+                  {`Radius: ${radius} mi.`}
                 </Label>
-                <Input
-                  id="name"
-                  defaultValue="Pedro Duarte"
-                  className="col-span-3"
-                />
+                <div className="col-span-3 px-4">
+                  <Slider
+                    value={[radius]}
+                    name="radius"
+                    defaultValue={[10]}
+                    onValueChange={handleRadiusChange}
+                    min={1}
+                    max={25}
+                    step={1}
+                  />
+                </div>
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
-                  Username
+                <Label htmlFor="username" className="text-left">
+                  {`Number of Resources: ${numResources}`}
                 </Label>
-                <Input
-                  id="username"
-                  defaultValue="@peduarte"
-                  className="col-span-3"
-                />
+                <div className="col-span-3 px-4">
+                  <Slider
+                    defaultValue={[5]}
+                    min={1}
+                    onValueChange={handleNumResourcesChange}
+                    value={[numResources]}
+                    max={10}
+                  />
+                </div>
               </div>
             </div>
+          </div>
+        </div>
+        <Separator className="mx-auto bg-primary" />
+        <div className="flex flex-col gap-2">
+          <div>
+            <DialogTitle>
+              <div className="flex items-center gap-2">
+                <HeartHandshake className="h-6 w-6" />
+                <span className="text-lg">Resource Filters</span>
+              </div>
+            </DialogTitle>
+            <Separator className="mx-auto my-4 w-[80%]" />
+            <FilterAccordion isMapSidebar={false} />
           </div>
         </div>
 

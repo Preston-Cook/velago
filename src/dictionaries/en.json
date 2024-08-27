@@ -190,12 +190,60 @@
         "standard": "Sign Up",
         "google": "Sign Up with Google"
       },
-      "noAccount": {
+      "accountExists": {
         "text": "Already have an account?",
         "link": "Sign in"
       },
+      "orgAccount": {
+        "text": "Want an organization account?",
+        "link": "Sign up"
+      },
       "button": {
         "text": "Sign Up"
+      }
+    },
+    "orgSignUp": {
+      "title": "Request an Account",
+      "description": "Enter your email and a brief description of your organization to request an account. You will receive an email from the Velago team.",
+      "labels": [
+        "Organization Name",
+        "Organization Email",
+        "Organization Description",
+        "Additional Information (Optional)"
+      ],
+      "signIn": {
+        "text": "Already have an organization account?",
+        "link": "Sign in"
+      },
+      "userAccount": {
+        "text": "Want to sign up for a user account?",
+        "link": "Sign up"
+      },
+      "descriptionPlaceholder": "Enter organization description here",
+      "additionalInfo": "Enter additional information here",
+      "toast": {
+        "success": {
+          "title": "Success!",
+          "description": "Your request has been sent to Velago!"
+        },
+        "error": {
+          "title": "Uh oh! Something went wrong",
+          "description": "There was a problem with your request"
+        }
+      },
+      "submit": "Submit",
+      "validation": {
+        "orgName": {
+          "min": "Must be at least 3 characters",
+          "max": "Must be at most 70 characters"
+        },
+        "email": {
+          "email": "Invalid email"
+        },
+        "description": {
+          "min": "Must be at least 50 characters",
+          "max": "Must be at most 750 characters"
+        }
       }
     },
     "map": {

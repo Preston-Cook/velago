@@ -167,6 +167,10 @@
         "Teléfono (Opcional)",
         "Correo electrónico"
       ],
+      "orgAccount": {
+        "text": "¿Desea registrarse para una cuenta de organización?",
+        "link": "Registrarse"
+      },
       "account": {
         "existsEmail": {
           "title": "¡Uh oh! La cuenta ya existe",
@@ -202,12 +206,56 @@
         "standard": "Regístrate",
         "google": "Regístrate con Google"
       },
-      "noAccount": {
+      "accountExists": {
         "text": "¿Ya tienes una cuenta?",
         "link": "Inicia sesión"
       },
       "button": {
         "text": "Regístrate"
+      }
+    },
+    "orgSignUp": {
+      "title": "Solicitar una Cuenta",
+      "description": "Ingrese su correo electrónico y una breve descripción de su organización para solicitar una cuenta. Recibirá un correo electrónico del equipo de Velago.",
+      "labels": [
+        "Nombre de la Organización",
+        "Correo Electrónico de la Organización",
+        "Descripción de la Organización",
+        "Información Adicional (Opcional)"
+      ],
+      "signIn": {
+        "text": "¿Ya tiene una cuenta de organización?",
+        "link": "Iniciar sesión"
+      },
+      "userAccount": {
+        "text": "¿Desea registrarse para una cuenta de usuario?",
+        "link": "Registrarse"
+      },
+      "descriptionPlaceholder": "Ingrese la descripción de la organización aquí",
+      "additionalInfo": "Ingrese información adicional aquí",
+      "toast": {
+        "success": {
+          "title": "¡Éxito!",
+          "description": "¡Su solicitud ha sido enviada a Velago!"
+        },
+        "error": {
+          "title": "¡Vaya! Algo salió mal",
+          "description": "Hubo un problema con su solicitud"
+        }
+      },
+      "submit": "Enviar",
+      "validation": {
+        "orgName": {
+          "min": "Debe tener al menos 3 caracteres",
+          "max": "Debe tener como máximo 70 caracteres"
+        },
+        "email": {
+          "email": "Correo electrónico no válido"
+        },
+        "description": {
+          "min": "Debe tener al menos 50 caracteres",
+          "max": "Debe tener como máximo 750 caracteres"
+        }
       }
     },
     "map": {
