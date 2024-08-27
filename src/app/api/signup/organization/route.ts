@@ -1,10 +1,23 @@
+import prisma from '@/lib/db';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
-  // TODO: sent request to resend api to send email
   const { orgName, email, description, additionalInfo } = await req.json();
 
-  console.log(orgName, email, description, additionalInfo);
+  try {
+    await prisma.signUpMessage.create({
+      data: {
+        orgName,
+        email,
+        description,
+        additionalInfo,
+      },
+    });
+  } catch (err) {
+    return NextResponse.json({ message: 'bad request' }, { status: 400 });
+  }
+
+  // TODO: sent request to resend api to send email
 
   return NextResponse.json({ message: 'created' }, { status: 201 });
 }
