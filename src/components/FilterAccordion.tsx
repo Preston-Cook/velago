@@ -4,10 +4,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Checkbox } from './ui/checkbox';
-import { v4 as uuid } from 'uuid';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
+import { Checkbox } from './ui/checkbox';
 
 const resourceCategories = [
   'Aging/Disability',

@@ -1,13 +1,13 @@
 'use client';
 
-import { Button } from './ui/button';
-import Image from 'next/image';
-import { createSbBrowserClient } from '@/lib/sbBrowserClient';
-import { getURL } from '@/lib/getUrl';
-import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/useToast';
+import { getURL } from '@/lib/getUrl';
+import { createSbBrowserClient } from '@/lib/sbBrowserClient';
+import { Loader2 } from 'lucide-react';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import { Button } from './ui/button';
 
 interface GoogleLoginButtonProps {
   text: string;

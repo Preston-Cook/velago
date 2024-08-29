@@ -1,25 +1,25 @@
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { useQueryParams } from '@/hooks/useQueryParams';
+import {
   Filter,
   HeartHandshake,
   MapIcon,
   SlidersHorizontal,
 } from 'lucide-react';
-import {
-  Dialog,
-  DialogTitle,
-  DialogDescription,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-} from '@/components/ui/dialog';
+import { FilterAccordion } from './FilterAccordion';
+import { SendMessageButton } from './SendMessageButton';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
-import { useQueryParams } from '@/hooks/useQueryParams';
-import { SendMessageButton } from './SendMessageButton';
 import { Separator } from './ui/separator';
 import { Slider } from './ui/slider';
-import { FilterAccordion } from './FilterAccordion';
 
 export function FilterMenu() {
   const { getQueryParam, setQueryParam } = useQueryParams();

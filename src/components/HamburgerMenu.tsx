@@ -1,13 +1,12 @@
 'use client';
 
-import Link from 'next/link';
 import { Separator } from '@radix-ui/react-separator';
 import { Menu } from 'lucide-react';
-import { v4 as uuidv4 } from 'uuid';
-import { Sheet, SheetTrigger, SheetContent } from './ui/sheet';
-import { DarkModeToggle } from './DarkModeToggle';
 import Image from 'next/image';
-import { createSbBrowserClient } from '@/lib/sbBrowserClient';
+import Link from 'next/link';
+import { v4 as uuidv4 } from 'uuid';
+import { DarkModeToggle } from './DarkModeToggle';
+import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
 
 export interface LinkProps {
   href: string;

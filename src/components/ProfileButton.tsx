@@ -1,12 +1,10 @@
 'use client';
 
-import { Button } from './ui/button';
-import { UserRound } from 'lucide-react';
-import { Popover, PopoverTrigger, PopoverContent } from './ui/popover';
-import { createSbBrowserClient } from '@/lib/sbBrowserClient';
-import { useEffect, useState } from 'react';
 import { Separator } from '@radix-ui/react-separator';
+import { UserRound } from 'lucide-react';
 import { SignOutButton } from './SignOutButton';
+import { Button } from './ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
 export default function ProfileButton() {
   return (

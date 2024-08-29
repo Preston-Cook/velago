@@ -1,10 +1,7 @@
 'use client';
 
-import { useRef, useState } from 'react';
 import createGlobe from 'cobe';
-import { useEffect } from 'react';
-import { LegacyRef } from 'react';
-import { Loader2 } from 'lucide-react';
+import { LegacyRef, useEffect, useRef, useState } from 'react';
 import { Spinner } from './Spinner';
 
 export function Globe() {

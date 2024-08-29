@@ -1,14 +1,14 @@
 import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
-import { v4 as uuidv4 } from 'uuid';
-import HamburgerMenu from './HamburgerMenu';
-import { Button } from './ui/button';
-import LanguageDropDown from './LanguageDropDown';
-import { DarkModeToggle } from './DarkModeToggle';
-import { LocaleLink } from './LocaleLink';
-import { HeaderName } from './HeaderName';
 import { getCurrentUser } from '@/lib/getCurrentUser';
+import { v4 as uuidv4 } from 'uuid';
+import { DarkModeToggle } from './DarkModeToggle';
+import HamburgerMenu from './HamburgerMenu';
+import { HeaderName } from './HeaderName';
+import LanguageDropDown from './LanguageDropDown';
+import { LocaleLink } from './LocaleLink';
 import ProfileButton from './ProfileButton';
+import { Button } from './ui/button';
 
 interface HeaderProps {
   lang: Locale;

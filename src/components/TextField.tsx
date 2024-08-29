@@ -1,11 +1,12 @@
 import {
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { FormEvent } from 'react';
 import { Control } from 'react-hook-form';
 
 interface TextFieldProps {
@@ -15,6 +16,7 @@ interface TextFieldProps {
   label: string;
   type?: string;
   className?: string;
+  onChange?(e: FormEvent<HTMLDivElement>): void;
 }
 
 export function TextField({
@@ -23,13 +25,14 @@ export function TextField({
   placeholder,
   label,
   type = 'text',
+  onChange,
 }: TextFieldProps) {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem onChange={onChange}>
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <Input

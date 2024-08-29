@@ -1,14 +1,14 @@
 'use client';
 
-import { MapContainer } from '@/components/MapContainer';
 import { FilterMenu } from '@/components/FilterMenu';
+import { MapContainer } from '@/components/MapContainer';
 import { MapSidebar } from '@/components/MapSideBar';
-import { useEffect, useState } from 'react';
 import { useLocationApproximation } from '@/context/LocationProvider';
 import { useQueryParams } from '@/hooks/useQueryParams';
-import { MapSearchBar } from './MapSearchBar';
 import { reverseGeocode } from '@/lib/reverseGeocode';
+import { useEffect, useState } from 'react';
 import { GeolocationPrompt } from './GeolocationPrompt';
+import { MapSearchBar } from './MapSearchBar';
 
 interface MapDashBoardProps {
   placeholder: string;

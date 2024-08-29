@@ -1,10 +1,8 @@
+import { Globe } from '@/components/Globe';
+import { LocaleLink } from '@/components/LocaleLink';
 import { PhoneSignInForm } from '@/components/PhoneSignInForm';
 import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
-import { Globe } from '@/components/Globe';
-import { LocaleLink } from '@/components/LocaleLink';
-import { createSbServerClient } from '@/lib/sbServerClient';
-import { getCurrentUser } from '@/lib/getCurrentUser';
 
 interface UserSignInProps {
   params: {

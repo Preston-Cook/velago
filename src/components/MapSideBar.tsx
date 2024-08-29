@@ -1,12 +1,16 @@
-import { Filter, HeartHandshake, MapIcon, MapPin } from 'lucide-react';
-import { Label } from './ui/label';
-import { Slider } from './ui/slider';
-import { FilterAccordion } from './FilterAccordion';
-import { Separator } from './ui/separator';
-import { SlidersHorizontal, MessageSquareText } from 'lucide-react';
-import { useEffect } from 'react';
 import { useQueryParams } from '@/hooks/useQueryParams';
+import {
+  HeartHandshake,
+  MapIcon,
+  MapPin,
+  MessageSquareText,
+  SlidersHorizontal,
+} from 'lucide-react';
+import { FilterAccordion } from './FilterAccordion';
 import { SendMessageButton } from './SendMessageButton';
+import { Label } from './ui/label';
+import { Separator } from './ui/separator';
+import { Slider } from './ui/slider';
 
 export function MapSidebar() {
   const { getQueryParam, setQueryParam } = useQueryParams();

@@ -1,8 +1,8 @@
 'use client';
 
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
-import { RecenterMap } from './RecenterMap';
 import L from 'leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
+import { RecenterMap } from './RecenterMap';
 
 interface MapProps {
   lat: number;

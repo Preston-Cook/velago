@@ -1,7 +1,5 @@
 'use client';
 
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -9,11 +7,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { v4 as uuid } from 'uuid';
 import { capitalizeString } from '@/lib/utils';
-import DarkModeIcon from '../../public/images/logo-light.png';
-import LightModeIcon from '../../public/images/logo-black.png';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
+import LightModeIcon from '../../public/images/logo-black.png';
+import DarkModeIcon from '../../public/images/logo-light.png';
 
 const themes = ['light', 'dark', 'system'];
 

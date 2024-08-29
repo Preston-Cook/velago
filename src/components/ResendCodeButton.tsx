@@ -1,11 +1,11 @@
 'use client';
 
+import { cleanPhone } from '@/lib/cleanPhone';
+import { createSbBrowserClient } from '@/lib/sbBrowserClient';
+import { Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
-import { createSbBrowserClient } from '@/lib/sbBrowserClient';
 import { useToast } from './ui/use-toast';
-import { cleanPhone } from '@/lib/cleanPhone';
-import { Loader2 } from 'lucide-react';
 
 interface ResendCodeButtonProps {
   phone: string;

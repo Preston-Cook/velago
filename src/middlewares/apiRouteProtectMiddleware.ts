@@ -1,7 +1,7 @@
-import { NextRequest, NextFetchEvent, NextResponse } from 'next/server';
-import { CustomMiddleware } from '@/types/CustomMiddleware';
-import { createSbServerClient } from '@/lib/sbServerClient';
 import { protectedApiRoutes } from '@/config/protectedApiRoutes';
+import { createSbServerClient } from '@/lib/sbServerClient';
+import { CustomMiddleware } from '@/types/CustomMiddleware';
+import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 
 export function apiRouteProtectMiddleware(middleware: CustomMiddleware) {
   return async (

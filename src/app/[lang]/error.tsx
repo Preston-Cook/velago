@@ -1,9 +1,9 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { useParams } from 'next/navigation';
-import { Locale } from '@/i18n.config';
 import { LocaleLink } from '@/components/LocaleLink';
+import { Button } from '@/components/ui/button';
+import { Locale } from '@/i18n.config';
+import { useParams } from 'next/navigation';
 
 const errorText = {
   en: {

@@ -1,10 +1,10 @@
-import { Button } from './ui/button';
-import { Filter } from 'lucide-react';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { Filter } from 'lucide-react';
+import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Slider } from './ui/slider';
 

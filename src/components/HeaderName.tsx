@@ -1,8 +1,7 @@
 'use client';
 
-import { LocaleLink } from './LocaleLink';
 import Image from 'next/image';
-import { useTheme } from 'next-themes';
+import { LocaleLink } from './LocaleLink';
 
 interface HeaderNameProps {
   lang: string;

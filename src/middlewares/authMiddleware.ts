@@ -1,7 +1,6 @@
-import { createServerClient, type CookieOptions } from '@supabase/ssr';
-import { NextResponse, type NextRequest } from 'next/server';
 import { CustomMiddleware } from '@/types/CustomMiddleware';
-import { NextFetchEvent } from 'next/server';
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
+import { NextFetchEvent, NextResponse, type NextRequest } from 'next/server';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;

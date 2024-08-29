@@ -1,9 +1,8 @@
-import { Locale } from '@/i18n.config';
-import { LocaleLink } from '@/components/LocaleLink';
 import { Globe } from '@/components/Globe';
-import { PhoneSignUpForm } from '@/components/PhoneSignUpForm';
-import { getDictionary } from '@/lib/dictionary';
+import { LocaleLink } from '@/components/LocaleLink';
 import { OrganizationSignUpForm } from '@/components/OrganizationSignUpForm';
+import { Locale } from '@/i18n.config';
+import { getDictionary } from '@/lib/dictionary';
 
 interface OrganizationSignUpProps {
   params: {

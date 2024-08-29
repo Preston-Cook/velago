@@ -6,8 +6,8 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
-import { ChangeEvent } from 'react';
 import { Suggestion } from '@/types/Suggestion';
+import { ChangeEvent } from 'react';
 
 interface SearchInputProps {
   error: string | null;

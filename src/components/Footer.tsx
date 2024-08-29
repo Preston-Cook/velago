@@ -1,9 +1,9 @@
 import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
-import { v4 as uuidv4 } from 'uuid';
-import { Button } from './ui/button';
-import { LocaleLink } from './LocaleLink';
 import Image from 'next/image';
+import { v4 as uuidv4 } from 'uuid';
+import { LocaleLink } from './LocaleLink';
+import { Button } from './ui/button';
 
 interface FooterProps {
   lang: Locale;

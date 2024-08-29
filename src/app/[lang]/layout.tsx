@@ -1,17 +1,17 @@
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import { ProgressBar } from '@/components/ProgressBar';
+import { Toaster } from '@/components/ui/toaster';
+import { LocationProvider } from '@/context/LocationProvider';
+import { ThemeProvider } from '@/context/ThemeProvider';
+import { Locale, i18n } from '@/i18n.config';
+import { cn } from '@/lib/utils';
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 import localFont from 'next/font/local';
-import { cn } from '@/lib/utils';
-import { ThemeProvider } from '@/context/ThemeProvider';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { Locale, i18n } from '@/i18n.config';
-import { Toaster } from '@/components/ui/toaster';
-import { LocationProvider } from '@/context/LocationProvider';
-import { ProgressBar } from '@/components/ProgressBar';
-import { Analytics } from '@vercel/analytics/react';
-import DarkIcon from '../../../public/images/logo-light.png';
 import LightIcon from '../../../public/images/logo-black.png';
+import DarkIcon from '../../../public/images/logo-light.png';
 
 import '@/styles/globals.css';
 import 'leaflet/dist/leaflet.css';

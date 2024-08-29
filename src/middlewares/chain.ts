@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import type { NextFetchEvent, NextRequest } from 'next/server';
 import { CustomMiddleware } from '@/types/CustomMiddleware';
+import type { NextFetchEvent, NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 type MiddlewareFactory = (middleware: CustomMiddleware) => CustomMiddleware;
 

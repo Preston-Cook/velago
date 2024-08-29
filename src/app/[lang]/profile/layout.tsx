@@ -1,16 +1,5 @@
-import Link from 'next/link';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Locale } from '@/i18n.config';
 import { LocaleLink } from '@/components/LocaleLink';
+import { Locale } from '@/i18n.config';
 import { UserRound } from 'lucide-react';
 
 interface ProfileLayoutProps {

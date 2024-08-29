@@ -1,7 +1,7 @@
+import Content from '@/components/Content';
 import Cta from '@/components/Cta';
 import FaqSection from '@/components/Faq';
 import { Separator } from '@/components/ui/separator';
-import Content from '@/components/Content';
 import { Locale } from '@/i18n.config';
 
 interface HomePageProps {

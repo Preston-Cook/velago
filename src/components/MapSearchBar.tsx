@@ -1,9 +1,9 @@
 'use client';
 
+import { useQueryParams } from '@/hooks/useQueryParams';
+import { getCoordinates } from '@/lib/geocodeAddress';
 import { useState } from 'react';
 import { LocationSearch } from './LocationSearch';
-import { getCoordinates } from '@/lib/geocodeAddress';
-import { useQueryParams } from '@/hooks/useQueryParams';
 
 interface MapSearchBar {
   placeholder: string;

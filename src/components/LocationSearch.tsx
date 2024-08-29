@@ -1,13 +1,12 @@
 'use client';
 
-import { SearchInput } from './SearchInput';
-import OutsideAlerter from './OutsideAlerter';
-import { Suggestion } from '@/types/Suggestion';
-import { useState } from 'react';
 import { useLocationApproximation } from '@/context/LocationProvider';
-import { ChangeEvent } from 'react';
-import { getLocationSuggestions } from '@/lib/getLocationSuggestions';
 import { useLocale } from '@/hooks/useLocale';
+import { getLocationSuggestions } from '@/lib/getLocationSuggestions';
+import { Suggestion } from '@/types/Suggestion';
+import { ChangeEvent, useState } from 'react';
+import OutsideAlerter from './OutsideAlerter';
+import { SearchInput } from './SearchInput';
 
 interface LocationSearchProps {
   query: string;

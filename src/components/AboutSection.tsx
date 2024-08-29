@@ -1,5 +1,5 @@
-import React, { ReactElement } from 'react';
 import { Globe, Goal, UserRoundPlus } from 'lucide-react';
+import React, { ReactElement } from 'react';
 import { v4 as uuid } from 'uuid';
 
 interface AboutSectionProps {

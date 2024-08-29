@@ -1,11 +1,11 @@
 'use client';
 
 import { signOutUser } from '@/services/users';
-import { Button } from './ui/button';
-import { useToast } from './ui/use-toast';
+import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { Button } from './ui/button';
+import { useToast } from './ui/use-toast';
 
 export function SignOutButton() {
   const router = useRouter();

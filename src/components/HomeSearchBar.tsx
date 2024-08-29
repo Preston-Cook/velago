@@ -1,11 +1,11 @@
 'use client';
 
-import { FilterButton } from './FilterButton';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { LocationSearch } from './LocationSearch';
-import { start as nprogressStart } from 'nprogress';
 import { getCoordinates } from '@/lib/geocodeAddress';
+import { useRouter } from 'next/navigation';
+import { start as nprogressStart } from 'nprogress';
+import { useState } from 'react';
+import { FilterButton } from './FilterButton';
+import { LocationSearch } from './LocationSearch';
 
 interface SearchBarProps {
   placeholder: string;

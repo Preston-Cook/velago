@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, LegacyRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface OutsideAlerterProps {
   children: React.ReactNode;

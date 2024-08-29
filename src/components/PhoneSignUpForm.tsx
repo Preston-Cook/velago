@@ -8,27 +8,27 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { phoneRegex } from '@/lib/phoneRegex';
 import { Input } from '@/components/ui/input';
-import formatPhone from '@/lib/formatPhone';
-import { Loader2 } from 'lucide-react';
-import { Separator } from './ui/separator';
-import { Button } from './ui/button';
-import { GoogleLoginButton } from './GoogleLoginButton';
-import { createSbBrowserClient } from '@/lib/sbBrowserClient';
-import { useRouter } from 'next/navigation';
 import { useLocale } from '@/hooks/useLocale';
-import { useEffect, useState } from 'react';
-import { cleanPhone } from '@/lib/cleanPhone';
-import { ResendCodeButton } from './ResendCodeButton';
-import { CodeInput } from './CodeInput';
-import { codeRegex } from '@/lib/codeRegex';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { useToast } from '@/hooks/useToast';
+import { cleanPhone } from '@/lib/cleanPhone';
+import { codeRegex } from '@/lib/codeRegex';
+import formatPhone from '@/lib/formatPhone';
+import { phoneRegex } from '@/lib/phoneRegex';
+import { createSbBrowserClient } from '@/lib/sbBrowserClient';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { CodeInput } from './CodeInput';
+import { GoogleLoginButton } from './GoogleLoginButton';
+import { ResendCodeButton } from './ResendCodeButton';
 import { TextField } from './TextField';
+import { Button } from './ui/button';
+import { Separator } from './ui/separator';
 
 interface PhoneSignUpFormProps {
   dic: {

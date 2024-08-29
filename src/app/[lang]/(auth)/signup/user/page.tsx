@@ -1,7 +1,7 @@
-import { Locale } from '@/i18n.config';
-import { LocaleLink } from '@/components/LocaleLink';
 import { Globe } from '@/components/Globe';
+import { LocaleLink } from '@/components/LocaleLink';
 import { PhoneSignUpForm } from '@/components/PhoneSignUpForm';
+import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
 
 interface UserSignUpProps {

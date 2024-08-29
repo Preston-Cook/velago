@@ -1,9 +1,9 @@
 'use client';
 
+import { useLocale } from '@/hooks/useLocale';
+import { i18n } from '@/i18n.config';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { ReactNode } from 'react';
-import { i18n } from '@/i18n.config';
-import { useLocale } from '@/hooks/useLocale';
 
 interface LangLinkProps extends NextLinkProps {
   children: ReactNode;

@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/dictionary';
+import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 import PartnerCard from './PartnerCard';
 import { Button } from './ui/button';

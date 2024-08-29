@@ -1,7 +1,5 @@
 'use client';
 
-import redirectedPathName from '@/lib/redirectedPathName';
-import { useParams, usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -13,6 +11,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Locale } from '@/i18n.config';
+import redirectedPathName from '@/lib/redirectedPathName';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
 export default function LanguageDropDown() {
   const pathName = usePathname();

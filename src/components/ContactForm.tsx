@@ -1,23 +1,14 @@
 'use client';
 
+import { Form } from '@/components/ui/form';
+import { useToast } from '@/components/ui/use-toast';
+import formatPhone from '@/lib/formatPhone';
+import { phoneRegex } from '@/lib/phoneRegex';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FormEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import formatPhone from '@/lib/formatPhone';
-import { useToast } from '@/components/ui/use-toast';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { useState } from 'react';
-import { Textarea } from './ui/textarea';
 import SubmitButton from './SubmitButton';
-import { phoneRegex } from '@/lib/phoneRegex';
 import { TextareaField } from './TextareaField';
 import { TextField } from './TextField';
 
@@ -155,6 +146,13 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
     setIsLoading(false);
   }
 
+  function handlePhoneChange(e: FormEvent<HTMLDivElement>) {
+    const { target } = e;
+    // @ts-expect-error value prop exists
+    const { value }: { value: string } = target;
+    setValue('phone', formatPhone(value));
+  }
+
   return (
     <Form {...form}>
       <form
@@ -181,31 +179,13 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
           placeholder={'example@velago.com'}
           label={dic.labels[3]}
         />
-        <FormField
+        <TextField
           control={control}
-          name={'phone'}
-          render={({ field }) => (
-            <FormItem
-              onChange={(e) => {
-                const { target } = e;
-                // @ts-expect-error value prop exists
-                const { value }: { value: string } = target;
-                setValue('phone', formatPhone(value));
-              }}
-            >
-              <FormLabel>{fieldObjs[3].label}</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder={fieldObjs[3].placeholder}
-                  {...field}
-                  className="block w-full bg-secondary"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          name="phone"
+          placeholder={fieldObjs[3].placeholder}
+          label={fieldObjs[3].label}
+          onChange={handlePhoneChange}
         />
-
         <div className="mt-8">
           <TextareaField
             control={control}
@@ -215,7 +195,6 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
             label={dic.labels[4]}
           />
         </div>
-
         <div className="w-full" />
         <div className="text-center">
           <SubmitButton classname="w-full md:w-[50%]" isLoading={isLoading}>

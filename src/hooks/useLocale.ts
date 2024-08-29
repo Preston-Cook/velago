@@ -1,7 +1,7 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { i18n } from '@/i18n.config';
+import { usePathname } from 'next/navigation';
 
 export function useLocale() {
   const path = usePathname();
