@@ -1,192 +1,159 @@
+'use client';
+
 import { useForm } from 'react-hook-form';
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from './ui/form';
-import { Input } from './ui/input';
+import { Form } from './ui/form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import SubmitButton from './SubmitButton';
+import { useState } from 'react';
+import { createSbBrowserClient } from '@/lib/sbBrowserClient';
+import { useToast } from '@/hooks/useToast';
+import { useLocale } from '@/hooks/useLocale';
+import { useRouter } from 'next/navigation';
+import { TextField } from './TextField';
 
 interface OrganizationSignInFormProps {
-  dic: {};
-  validation: {};
+  dic: {
+    title: string;
+    description: string;
+    labels: string[];
+    noAccount: {
+      text: string;
+      link: string;
+    };
+    userAccount: {
+      text: string;
+      link: string;
+    };
+    button: {
+      text: string;
+    };
+    validation: {
+      email: {
+        required: string;
+        invalid: string;
+      };
+      password: {
+        required: string;
+        invalid: string;
+      };
+    };
+  };
+  validation: {
+    email: {
+      required: string;
+      invalid: string;
+    };
+    password: {
+      required: string;
+      invalid: string;
+    };
+  };
 }
 
-export function OrganizationSignInForm() {
-  const phoneSignUpFormSchema = z.object({
-    orgName: z.string().min(3, { message }),
+export function OrganizationSignInForm({
+  dic,
+  validation,
+}: OrganizationSignInFormProps) {
+  const sbBrowserClient = createSbBrowserClient();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { showToastError } = useToast();
+  const { locale } = useLocale();
+  const router = useRouter();
+
+  const organizationSignInFormSchema = z.object({
+    email: z
+      .string()
+      .min(1, { message: validation.email.required })
+      .email({ message: validation.email.invalid }),
+    password: z.string().min(1, { message: 'Password Required' }),
   });
 
-  const form = useForm<z.infer<typeof phoneSignUpFormSchema>>({
-    resolver: zodResolver(phoneSignUpFormSchema),
+  const form = useForm<z.infer<typeof organizationSignInFormSchema>>({
+    resolver: zodResolver(organizationSignInFormSchema),
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      phone: '',
       email: '',
-      code: '',
+      password: '',
     },
   });
 
-  const { control, getValues, setValue, handleSubmit: handleSubmitHook } = form;
+  const { control, handleSubmit: handleSubmitHook } = form;
+
+  async function handleSubmit({
+    email,
+    password,
+  }: z.infer<typeof organizationSignInFormSchema>) {
+    setIsLoading(true);
+
+    // check if user with email exists
+    const res = await fetch(`/api/users?email=${email}`);
+
+    if (res.status === 404) {
+      showToastError({
+        title: 'Uh oh! Account does not exist',
+        description: 'There is no account with this email',
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    const { user } = await res.json();
+
+    console.log(JSON.stringify(user));
+    console.log(user.role.name === 'organization');
+
+    if (user.role.name !== 'organization' && user.role.name !== 'admin') {
+      console.log('I am here');
+      showToastError({
+        title: 'Uh oh! Organization account does not exist',
+        description:
+          'There is no organization account associated with this email',
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    const { error } = await sbBrowserClient.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      showToastError({
+        title: 'Uh oh! Something went wrong',
+        description: 'There was a problem with your request',
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    router.push(`/${locale}/dashboard`);
+    router.refresh();
+  }
 
   return (
     <Form {...form}>
       <form onSubmit={handleSubmitHook(handleSubmit)}>
         <div className="grid gap-4">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <FormField
-              control={control}
-              name={'orgName'}
-              render={({ field }) => (
-                <>
-                  <FormItem>
-                    <FormLabel>{dic.labels[0]}</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={'Aaron'}
-                        {...field}
-                        className="block w-full bg-secondary"
-                      ></Input>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                </>
-              )}
-            />
-            <FormField
-              control={control}
-              name={'lastName'}
-              render={({ field }) => (
-                <>
-                  <FormItem>
-                    <FormLabel>{dic.labels[1]}</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={'Swartz'}
-                        {...field}
-                        className="block w-full bg-secondary"
-                      ></Input>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                </>
-              )}
-            />
-          </div>
-          <FormField
+          <TextField
             control={control}
-            name={'email'}
-            render={({ field }) => (
-              <>
-                <FormItem className="grid gap-2">
-                  <FormLabel>{`${dic.labels[3]}`}</FormLabel>
-                  <FormControl>
-                    {/* @ts-ignore */}
-                    <Input
-                      placeholder={'example@velago.com'}
-                      {...field}
-                      className="block w-full bg-secondary"
-                    ></Input>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              </>
-            )}
+            placeholder="velago@example.com"
+            label={dic.labels[0]}
+            type="email"
+            name="email"
           />
-          <FormField
+          <TextField
             control={control}
-            name="phone"
-            render={({ field }) => (
-              <>
-                <FormItem
-                  className="grid gap-2"
-                  onChange={(e) => {
-                    const { target } = e;
-
-                    // @ts-expect-error value prop exists
-                    const { value }: { value: string } = target;
-
-                    setValue('phone', formatPhone(value));
-
-                    if (value.replace(/[^0-9]/g, '').length > 10) return;
-
-                    setShowSignUp((prev) => (prev ? !prev : prev));
-                  }}
-                >
-                  <FormLabel>{dic.labels[2]}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={'(123)-456-7890'}
-                      {...field}
-                      className="block w-full bg-secondary"
-                    ></Input>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-                {!showSignUp && (
-                  <Button
-                    disabled={isLoadingCode || !phoneRegex.test(field.value)}
-                    className="mt-2 w-full text-white"
-                    type="button"
-                    onClick={handleSendCode}
-                  >
-                    {isLoadingCode ? (
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                    ) : (
-                      dic.phone.verify
-                    )}
-                  </Button>
-                )}
-              </>
-            )}
+            placeholder="Password"
+            label={dic.labels[1]}
+            type="password"
+            name="password"
           />
-          {showSignUp && (
-            <>
-              <FormField
-                control={control}
-                name="code"
-                render={({ field }) => (
-                  <>
-                    <FormItem>
-                      <FormLabel>{'Code'}</FormLabel>
-                      <FormControl>
-                        <div className="flex justify-between">
-                          <CodeInput onChange={handleCodeChange} />
-                          <ResendCodeButton
-                            phone={getValues('phone')}
-                            text="Resend"
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                    <Button
-                      type="submit"
-                      disabled={
-                        isLoadingSignUp ||
-                        !codeRegex.test(field.value) ||
-                        !nameIsNotNull()
-                      }
-                      className="text-white"
-                    >
-                      {isLoadingSignUp ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        dic.button.text
-                      )}
-                    </Button>
-                  </>
-                )}
-              />
-            </>
-          )}
-          <Separator className="mx-auto w-[80%] min-w-[200px] bg-primary" />
-          <GoogleLoginButton action="signUp" text={'Sign Up with Google'} />
+        </div>
+        <div>
+          <SubmitButton classname="w-full" isLoading={isLoading} type="submit">
+            Sign In
+          </SubmitButton>
         </div>
       </form>
     </Form>

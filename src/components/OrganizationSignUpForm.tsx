@@ -16,6 +16,8 @@ import { Textarea } from './ui/textarea';
 import SubmitButton from './SubmitButton';
 import { useToast } from '@/hooks/useToast';
 import { useState } from 'react';
+import { TextField } from './TextField';
+import { TextareaField } from './TextareaField';
 
 interface OrganizationSignUpForm {
   dic: {
@@ -133,81 +135,32 @@ export function OrganizationSignUpForm({
       <form onSubmit={handleSubmitHook(handleSubmit)}>
         <div className="grid gap-4">
           <div className="grid grid-cols-1 gap-4">
-            <FormField
+            <TextField
+              placeholder="Velago"
               control={control}
-              name={'orgName'}
-              render={({ field }) => (
-                <>
-                  <FormItem>
-                    <FormLabel>{dic.labels[0]}</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={'Velago'}
-                        {...field}
-                        className="block w-full bg-secondary"
-                      ></Input>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                </>
-              )}
+              name="orgName"
+              label={dic.labels[0]}
             />
-            <FormField
+            <TextField
               control={control}
-              name={'email'}
-              render={({ field }) => (
-                <>
-                  <FormItem>
-                    <FormLabel>{dic.labels[1]}</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={'example@velago.com'}
-                        {...field}
-                        className="block w-full bg-secondary"
-                      ></Input>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                </>
-              )}
+              placeholder="velago@example.com"
+              label={dic.labels[1]}
+              type="email"
+              name="email"
             />
-            <FormField
+            <TextareaField
               control={control}
+              placeholder={dic.descriptionPlaceholder}
+              label={dic.labels[2]}
               name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{dic.labels[2]}</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder={dic.descriptionPlaceholder}
-                      {...field}
-                      rows={3}
-                      className="block w-full bg-secondary"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
             />
-            <FormField
+            <TextareaField
               control={control}
+              placeholder={dic.additionalInfo}
+              label={dic.labels[3]}
               name="additionalInfo"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{dic.labels[3]}</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder={dic.additionalInfo}
-                      {...field}
-                      rows={3}
-                      className="col-span-4 block w-full bg-secondary"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              className="col-span-4"
             />
-
             <div className="text-center">
               <SubmitButton classname="w-full mt-4" isLoading={isLoading}>
                 {dic.submit}

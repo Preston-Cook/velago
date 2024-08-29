@@ -28,6 +28,7 @@ import { CodeInput } from './CodeInput';
 import { codeRegex } from '@/lib/codeRegex';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { useToast } from '@/hooks/useToast';
+import { TextField } from './TextField';
 
 interface PhoneSignUpFormProps {
   dic: {
@@ -312,64 +313,24 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
       <form onSubmit={handleSubmitHook(handleSubmit)}>
         <div className="grid gap-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <FormField
+            <TextField
               control={control}
-              name={'firstName'}
-              render={({ field }) => (
-                <>
-                  <FormItem>
-                    <FormLabel>{dic.labels[0]}</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={'Aaron'}
-                        {...field}
-                        className="block w-full bg-secondary"
-                      ></Input>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                </>
-              )}
+              name="firstName"
+              placeholder="Aaron"
+              label={dic.labels[0]}
             />
-            <FormField
+            <TextField
               control={control}
-              name={'lastName'}
-              render={({ field }) => (
-                <>
-                  <FormItem>
-                    <FormLabel>{dic.labels[1]}</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={'Swartz'}
-                        {...field}
-                        className="block w-full bg-secondary"
-                      ></Input>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                </>
-              )}
+              name="lastName"
+              placeholder="Swartz"
+              label={dic.labels[1]}
             />
           </div>
-          <FormField
+          <TextField
             control={control}
-            name={'email'}
-            render={({ field }) => (
-              <>
-                <FormItem className="grid gap-2">
-                  <FormLabel>{`${dic.labels[3]}`}</FormLabel>
-                  <FormControl>
-                    {/* @ts-ignore */}
-                    <Input
-                      placeholder={'example@velago.com'}
-                      {...field}
-                      className="block w-full bg-secondary"
-                    ></Input>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              </>
-            )}
+            name="email"
+            placeholder={'example@velago.com'}
+            label={dic.labels[3]}
           />
           <FormField
             control={control}

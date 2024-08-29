@@ -214,6 +214,32 @@
         "text": "Regístrate"
       }
     },
+    "orgSignIn": {
+      "title": "Inicio de Sesión de Organización",
+      "description": "Ingrese su correo electrónico y contraseña a continuación para iniciar sesión en su cuenta de organización",
+      "labels": ["Correo Electrónico", "Contraseña"],
+      "noAccount": {
+        "text": "¿No tiene una cuenta de organización?",
+        "link": "Regístrate"
+      },
+      "userAccount": {
+        "text": "¿Tiene una cuenta de usuario?",
+        "link": "Iniciar sesión"
+      },
+      "button": {
+        "text": "Iniciar Sesión"
+      },
+      "validation": {
+        "email": {
+          "required": "Correo electrónico requerido",
+          "invalid": "Correo electrónico inválido"
+        },
+        "password": {
+          "required": "Contraseña requerida",
+          "invalid": "Contraseña inválida"
+        }
+      }
+    },
     "orgSignUp": {
       "title": "Solicitar una Cuenta",
       "description": "Ingrese su correo electrónico y una breve descripción de su organización para solicitar una cuenta. Recibirá un correo electrónico del equipo de Velago.",

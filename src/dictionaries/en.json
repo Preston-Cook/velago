@@ -202,6 +202,32 @@
         "text": "Sign Up"
       }
     },
+    "orgSignIn": {
+      "title": "Organization Sign In",
+      "description": "Enter your email and password below to sign in to your organization account",
+      "labels": ["Email", "Password"],
+      "noAccount": {
+        "text": "Don't have an organization account?",
+        "link": "Sign up"
+      },
+      "userAccount": {
+        "text": "Have a user account?",
+        "link": "Sign in"
+      },
+      "button": {
+        "text": "Sign In"
+      },
+      "validation": {
+        "email": {
+          "required": "Email required",
+          "invalid": "Invalid email"
+        },
+        "password": {
+          "required": "Password required",
+          "invalid": "Invalid password"
+        }
+      }
+    },
     "orgSignUp": {
       "title": "Request an Account",
       "description": "Enter your email and a brief description of your organization to request an account. You will receive an email from the Velago team.",

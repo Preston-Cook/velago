@@ -18,6 +18,8 @@ import { useState } from 'react';
 import { Textarea } from './ui/textarea';
 import SubmitButton from './SubmitButton';
 import { phoneRegex } from '@/lib/phoneRegex';
+import { TextareaField } from './TextareaField';
+import { TextField } from './TextField';
 
 interface ContactFormProps {
   validation: {
@@ -160,61 +162,42 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-          {fieldObjs.map((fieldObj) => (
-            // eslint-disable-next-line react/jsx-key
-            <FormField
-              control={control}
-              name={
-                fieldObj.name as 'firstName' | 'lastName' | 'email' | 'phone'
-              }
-              render={({ field }) =>
-                fieldObj.name === 'phone' ? (
-                  <FormItem
-                    onChange={(e) => {
-                      const { target } = e;
-                      // @ts-expect-error value prop exists
-                      const { value }: { value: string } = target;
-                      setValue('phone', formatPhone(value));
-                    }}
-                  >
-                    <FormLabel>{fieldObj.label}</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={fieldObj.placeholder}
-                        {...field}
-                        className="block w-full bg-secondary"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                ) : (
-                  <FormItem>
-                    <FormLabel>{fieldObj.label}</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder={fieldObj.placeholder}
-                        {...field}
-                        className="block w-full bg-secondary"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )
-              }
-            />
-          ))}
+          <TextField
+            control={control}
+            name="firstName"
+            placeholder="Aaron"
+            label={dic.labels[0]}
+          />
+          <TextField
+            control={control}
+            name="lastName"
+            placeholder="Swartz"
+            label={dic.labels[1]}
+          />
         </div>
+        <TextField
+          control={control}
+          name="email"
+          placeholder={'example@velago.com'}
+          label={dic.labels[3]}
+        />
         <FormField
           control={control}
-          name="message"
+          name={'phone'}
           render={({ field }) => (
-            <FormItem className="mt-8">
-              <FormLabel>{dic.labels[4]}</FormLabel>
+            <FormItem
+              onChange={(e) => {
+                const { target } = e;
+                // @ts-expect-error value prop exists
+                const { value }: { value: string } = target;
+                setValue('phone', formatPhone(value));
+              }}
+            >
+              <FormLabel>{fieldObjs[3].label}</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder={dic.messagePlaceholder}
+                <Input
+                  placeholder={fieldObjs[3].placeholder}
                   {...field}
-                  rows={6}
                   className="block w-full bg-secondary"
                 />
               </FormControl>
@@ -222,6 +205,17 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
             </FormItem>
           )}
         />
+
+        <div className="mt-8">
+          <TextareaField
+            control={control}
+            name="message"
+            rows={6}
+            placeholder={dic.messagePlaceholder}
+            label={dic.labels[4]}
+          />
+        </div>
+
         <div className="w-full" />
         <div className="text-center">
           <SubmitButton classname="w-full md:w-[50%]" isLoading={isLoading}>
