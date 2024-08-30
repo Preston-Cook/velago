@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { LocaleLink } from './LocaleLink';
 
 interface PartnerCardProps {
   title: string;
@@ -28,8 +29,10 @@ export default function PartnerCard({
           {description}
         </CardDescription>
       </CardHeader>
-      <CardFooter>
-        <Button className="mx-auto w-[80%] text-white">{action}</Button>
+      <CardFooter className="w-full">
+        <LocaleLink href="/signup/organization" className="mx-auto w-[80%] ">
+          <Button className="mx-auto text-white w-full">{action}</Button>
+        </LocaleLink>
       </CardFooter>
     </Card>
   );

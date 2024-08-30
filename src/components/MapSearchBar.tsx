@@ -10,6 +10,11 @@ interface MapSearchBar {
   onUseCurrentLocationSelection(e: boolean): void;
 }
 
+interface HandleSelectValueParams {
+  placeId: string;
+  text: string;
+}
+
 export function MapSearchBar({
   placeholder,
   onUseCurrentLocationSelection,
@@ -22,8 +27,9 @@ export function MapSearchBar({
     setQuery((_prev) => q);
   }
 
-  async function handleSelectValue(e: string) {
-    const { lat, lng, formattedAddress } = await getCoordinates(e);
+  async function handleSelectValue({ placeId, text }: HandleSelectValueParams) {
+    const { lat, lng, formattedAddress } = await getCoordinates(placeId);
+    setQuery(text);
     setQueryParam('address', formattedAddress);
     setQueryParam('lat', `${lat}`);
     setQueryParam('lng', `${lng}`);

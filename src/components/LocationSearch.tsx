@@ -8,11 +8,16 @@ import { ChangeEvent, useState } from 'react';
 import OutsideAlerter from './OutsideAlerter';
 import { SearchInput } from './SearchInput';
 
+interface HandleSelectValueParams {
+  placeId: string;
+  text: string;
+}
+
 interface LocationSearchProps {
   query: string;
   errorText: string;
   placeholder: string;
-  onSelectValue(e: string): void;
+  onSelectValue(e: HandleSelectValueParams): void;
   onQueryChange(e: string): void;
 }
 
@@ -70,8 +75,8 @@ ${locApprox?.city}, ${locApprox?.region}, ${locApprox?.countryCode}`;
     handleClearSuggestions();
   }
 
-  async function handleSelectValue(e: string) {
-    await onSelectValue(e);
+  async function handleSelectValue({ placeId, text }: HandleSelectValueParams) {
+    await onSelectValue({ placeId, text });
     setSuggestions((_prev) => []);
   }
 

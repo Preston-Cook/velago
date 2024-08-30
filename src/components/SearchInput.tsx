@@ -9,13 +9,18 @@ import {
 import { Suggestion } from '@/types/Suggestion';
 import { ChangeEvent } from 'react';
 
+interface HandleSelectValueParams {
+  placeId: string;
+  text: string;
+}
+
 interface SearchInputProps {
   error: string | null;
   query: string;
   suggestions: Suggestion[];
   placeholder: string;
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
-  selectValue(e: string): void;
+  selectValue(e: HandleSelectValueParams): void;
   handleFocus(): void;
 }
 
@@ -55,7 +60,9 @@ export function SearchInput({
               return (
                 <CommandItem
                   className="text-left"
-                  onSelect={(_) => selectValue(placeId)}
+                  onSelect={(_) =>
+                    selectValue({ placeId, text: el.placePrediction.text.text })
+                  }
                   key={placeId}
                 >
                   {el.placePrediction.text.text}
