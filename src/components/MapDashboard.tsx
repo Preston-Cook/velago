@@ -16,44 +16,34 @@ interface MapDashBoardProps {
 
 export function MapDashboard({ placeholder }: MapDashBoardProps) {
   const loc = useLocationApproximation();
+  const { getQueryParam, setQueryParam } = useQueryParams();
 
   const [userLocation, setUserLocation] = useState<{
     address: string;
     lat: number;
     lng: number;
   } | null>(null);
+
   const [isUsingGeolocationLoc, setIsUsingGeolocationLoc] = useState<
     boolean | null
   >(null);
 
-  // get params from url
-  const { getQueryParam, setQueryParam } = useQueryParams();
-
   const address = getQueryParam('address');
   const lat = Number(getQueryParam('lat'));
   const lng = Number(getQueryParam('lng'));
-  const radius = Number(getQueryParam('radius'));
-  const numResources = Number(getQueryParam('num_resources'));
+  const radius = Number(getQueryParam('radius')) || 10;
+  const numResources = Number(getQueryParam('num_resources')) || 5;
 
-  useEffect(
-    function () {
-      if (!radius) {
-        setQueryParam('radius', '10');
-      }
-
-      if (!numResources) {
-        setQueryParam('num_resources', '5');
-      }
-    },
-    [radius, numResources, getQueryParam, setQueryParam],
-  );
+  useEffect(() => {
+    setQueryParam('radius', radius.toString());
+    setQueryParam('num_resources', numResources.toString());
+  }, [radius, numResources, setQueryParam]);
 
   useEffect(() => {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const { latitude, longitude } = position.coords;
-
           try {
             const {
               formattedAddress,
@@ -75,46 +65,35 @@ export function MapDashboard({ placeholder }: MapDashBoardProps) {
   }, []);
 
   useEffect(() => {
-    if (userLocation && isUsingGeolocationLoc) {
-      const {
-        lat: geocodeLat,
-        lng: geocodeLng,
-        address: geocodeAddress,
-      } = userLocation;
-      setQueryParam('address', geocodeAddress);
-      setQueryParam('lat', `${geocodeLat}`);
-      setQueryParam('lng', `${geocodeLng}`);
-    } else if (
-      loc &&
-      loc.city &&
-      loc.region &&
-      loc.countryCode &&
-      loc.lat &&
-      loc.lng
-    ) {
-      const {
-        lat: latApprox,
-        lng: lngApprox,
-        city: cityApprox,
-        region: regionApprox,
-        countryCode: countryCodeApprox,
-      } = loc;
-
-      if (!address) {
-        setQueryParam(
-          'address',
-          `${cityApprox}, ${regionApprox}, ${countryCodeApprox}`,
-        );
+    const updateQueryParams = (loc: any, userLocation: any) => {
+      if (userLocation && isUsingGeolocationLoc) {
+        const {
+          address: geocodeAddress,
+          lat: geocodeLat,
+          lng: geocodeLng,
+        } = userLocation;
+        setQueryParam('address', geocodeAddress);
+        setQueryParam('lat', `${geocodeLat}`);
+        setQueryParam('lng', `${geocodeLng}`);
+      } else if (
+        loc?.city &&
+        loc?.region &&
+        loc?.countryCode &&
+        loc?.lat &&
+        loc?.lng
+      ) {
+        if (!address) {
+          setQueryParam(
+            'address',
+            `${loc.city}, ${loc.region}, ${loc.countryCode}`,
+          );
+        }
+        if (!lat) setQueryParam('lat', `${loc.lat}`);
+        if (!lng) setQueryParam('lng', `${loc.lng}`);
       }
+    };
 
-      if (!lat) {
-        setQueryParam('lat', `${latApprox}`);
-      }
-
-      if (!lng) {
-        setQueryParam('lng', `${lngApprox}`);
-      }
-    }
+    updateQueryParams(loc, userLocation);
   }, [
     loc,
     address,

@@ -1,12 +1,5 @@
-import { Locale } from '@/i18n.config';
+import { Dashboard } from '@/components/Dashboard';
 
-interface DashboardPageProps {
-  params: {
-    lang: Locale;
-  };
-}
-
-export default function Dashboard({ params }: DashboardPageProps) {
-  const { lang } = params;
-  return <div></div>;
+export default async function DashboardPage() {
+  return <Dashboard />;
 }

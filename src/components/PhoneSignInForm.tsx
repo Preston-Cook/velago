@@ -19,7 +19,7 @@ import { createSbBrowserClient } from '@/lib/sbBrowserClient';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { CodeInput } from './CodeInput';
@@ -101,45 +101,39 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
   const error = getQueryParam('error');
   const { showToastError, showToastSuccess } = useToast();
 
-  useEffect(
-    function () {
-      let timeout = null;
+  useEffect(() => {
+    if (!error) return;
 
-      if (!error) return;
+    const title =
+      error === '404'
+        ? dic.account.error.notFound.title
+        : dic.account.error.generic.title;
+    const description =
+      error === '404'
+        ? dic.account.error.notFound.description
+        : dic.account.error.generic.description;
 
-      const title =
-        error === '404'
-          ? dic.account.error.notFound.title
-          : dic.account.error.generic.title;
-      const description =
-        error === '404'
-          ? dic.account.error.notFound.description
-          : dic.account.error.generic.description;
+    showToastError({ title, description });
+    deleteQueryParam('error');
+  }, [deleteQueryParam, error, showToastError, dic]);
 
-      timeout = setTimeout(() => {
-        showToastError({ title, description });
-      }, 0);
-
-      deleteQueryParam('error');
-
-      return () => timeout && clearTimeout(timeout);
-    },
-    [deleteQueryParam, error, showToastError],
-  );
-
-  const [{ isLoadingCode, isLoadingLogin }, setIsLoading] = useState({
+  const [isLoading, setIsLoading] = useState({
     isLoadingCode: false,
     isLoadingLogin: false,
   });
 
   const [showLogin, setShowLogin] = useState<boolean>(false);
 
-  const userSignInFormSchema = z.object({
-    phone: z.string().refine((value) => phoneRegex.test(value), {
-      message: validation.phone.refine,
-    }),
-    code: z.string(),
-  });
+  const userSignInFormSchema = useMemo(
+    () =>
+      z.object({
+        phone: z.string().refine((value) => phoneRegex.test(value), {
+          message: validation.phone.refine,
+        }),
+        code: z.string(),
+      }),
+    [validation],
+  );
 
   const form = useForm<z.infer<typeof userSignInFormSchema>>({
     resolver: zodResolver(userSignInFormSchema),
@@ -151,43 +145,42 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
 
   const { handleSubmit: handleSubmitHook, getValues, setValue, control } = form;
 
-  async function handleSubmit({
-    phone,
-    code,
-  }: z.infer<typeof userSignInFormSchema>) {
-    setIsLoading((prev) => ({ ...prev, isLoadingLogin: true }));
+  const handleSubmit = useCallback(
+    async ({ phone, code }: z.infer<typeof userSignInFormSchema>) => {
+      setIsLoading((prev) => ({ ...prev, isLoadingLogin: true }));
 
-    const { error } = await sbBrowserClient.auth.verifyOtp({
-      phone: cleanPhone(phone),
-      token: code,
-      type: 'sms',
-    });
-
-    if (error?.status === 403) {
-      setIsLoading((prev) => ({ ...prev, isLoadingLogin: false }));
-      showToastError({
-        title: dic.code.error.title,
-        description: dic.code.error.description,
+      const { error } = await sbBrowserClient.auth.verifyOtp({
+        phone: cleanPhone(phone),
+        token: code,
+        type: 'sms',
       });
-      return;
-    }
 
-    if (error) {
-      setIsLoading((prev) => ({ ...prev, isLoadingLogin: false }));
-      showToastError();
-      return;
-    }
+      if (error?.status === 403) {
+        setIsLoading((prev) => ({ ...prev, isLoadingLogin: false }));
+        showToastError({
+          title: dic.code.error.title,
+          description: dic.code.error.description,
+        });
+        return;
+      }
 
-    router.push(`/${locale}/map`);
-    router.refresh();
-  }
+      if (error) {
+        setIsLoading((prev) => ({ ...prev, isLoadingLogin: false }));
+        showToastError();
+        return;
+      }
 
-  async function handleSendCode() {
+      router.push(`/${locale}/map`);
+      router.refresh();
+    },
+    [dic, router, sbBrowserClient, showToastError, locale],
+  );
+
+  const handleSendCode = useCallback(async () => {
     const phone = cleanPhone(getValues('phone'));
 
     setIsLoading((prev) => ({ ...prev, isLoadingCode: true }));
 
-    // check if user exists. If not, show error
     const { data, error: err1 } = await sbBrowserClient
       .from('user')
       .select('id')
@@ -224,11 +217,14 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
     });
 
     setShowLogin(true);
-  }
+  }, [dic, getValues, sbBrowserClient, showToastError, showToastSuccess]);
 
-  function handleCodeChange(e: string) {
-    setValue('code', e);
-  }
+  const handleCodeChange = useCallback(
+    (e: string) => {
+      setValue('code', e);
+    },
+    [setValue],
+  );
 
   return (
     <Form {...form}>
@@ -249,7 +245,6 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
 
                     setValue('phone', formatPhone(value));
 
-                    // if the number of digits in the current value is >10 return
                     if (value.replace(/[^0-9]/g, '').length > 10) return;
 
                     setShowLogin((prev) => (prev ? !prev : prev));
@@ -261,18 +256,20 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
                       placeholder={'(123)-456-7890'}
                       {...field}
                       className="block w-full bg-secondary"
-                    ></Input>
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
                 {!showLogin && (
                   <Button
-                    disabled={isLoadingCode || !phoneRegex.test(field.value)}
+                    disabled={
+                      isLoading.isLoadingCode || !phoneRegex.test(field.value)
+                    }
                     className="mt-2 w-full text-white"
                     type="button"
                     onClick={handleSendCode}
                   >
-                    {isLoadingCode ? (
+                    {isLoading.isLoadingCode ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
                     ) : (
                       dic.code.button.sendCode
@@ -304,10 +301,12 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
                     </FormItem>
                     <Button
                       type="submit"
-                      disabled={isLoadingLogin || !codeRegex.test(field.value)}
+                      disabled={
+                        isLoading.isLoadingLogin || !codeRegex.test(field.value)
+                      }
                       className="text-white"
                     >
-                      {isLoadingLogin ? (
+                      {isLoading.isLoadingLogin ? (
                         <Loader2 className="h-4 w-4 animate-spin" />
                       ) : (
                         dic.button.text

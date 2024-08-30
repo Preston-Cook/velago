@@ -12,6 +12,11 @@ interface SearchBarProps {
   lang: string;
 }
 
+interface HandleSelectValueParams {
+  placeId: string;
+  text: string;
+}
+
 export function HomeSearchBar({ placeholder }: SearchBarProps) {
   const [radius, setRadius] = useState<number>(10);
   const [query, setQuery] = useState<string>('');
@@ -21,9 +26,9 @@ export function HomeSearchBar({ placeholder }: SearchBarProps) {
     setRadius(e[0]);
   }
 
-  async function handleSelectValue(e: string) {
+  async function handleSelectValue({ placeId }: HandleSelectValueParams) {
     nprogressStart();
-    const { lat, lng, formattedAddress } = await getCoordinates(e);
+    const { lat, lng, formattedAddress } = await getCoordinates(placeId);
 
     const urlParams = new URLSearchParams({
       lat: `${lat}`.slice(0, 7),

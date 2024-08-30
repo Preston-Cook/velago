@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/useToast';
 import { createSbBrowserClient } from '@/lib/sbBrowserClient';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import SubmitButton from './SubmitButton';
@@ -51,24 +51,30 @@ interface OrganizationSignInFormProps {
   };
 }
 
-export function OrganizationSignInForm({
+const OrganizationSignInForm: React.FC<OrganizationSignInFormProps> = ({
   dic,
   validation,
-}: OrganizationSignInFormProps) {
-  const sbBrowserClient = createSbBrowserClient();
+}) => {
+  const sbBrowserClient = useMemo(() => createSbBrowserClient(), []);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { showToastError } = useToast();
   const { locale } = useLocale();
   const router = useRouter();
 
-  const organizationSignInFormSchema = z.object({
-    email: z
-      .string()
-      .min(1, { message: validation.email.required })
-      .email({ message: validation.email.invalid }),
-    password: z.string().min(1, { message: 'Password Required' }),
-  });
+  // Memoize schema creation
+  const organizationSignInFormSchema = useMemo(
+    () =>
+      z.object({
+        email: z
+          .string()
+          .min(1, { message: validation.email.required })
+          .email({ message: validation.email.invalid }),
+        password: z.string().min(1, { message: validation.password.required }),
+      }),
+    [validation],
+  );
 
+  // Use useForm with memoized schema
   const form = useForm<z.infer<typeof organizationSignInFormSchema>>({
     resolver: zodResolver(organizationSignInFormSchema),
     defaultValues: {
@@ -77,63 +83,65 @@ export function OrganizationSignInForm({
     },
   });
 
-  const { control, handleSubmit: handleSubmitHook } = form;
+  const { control, handleSubmit } = form;
 
-  async function handleSubmit({
-    email,
-    password,
-  }: z.infer<typeof organizationSignInFormSchema>) {
-    setIsLoading(true);
+  const handleFormSubmit = useCallback(
+    async (data: z.infer<typeof organizationSignInFormSchema>) => {
+      const { email, password } = data;
+      setIsLoading(true);
 
-    // check if user with email exists
-    const res = await fetch(`/api/users?email=${email}`);
+      try {
+        const res = await fetch(`/api/users?email=${email}`);
 
-    if (res.status === 404) {
-      showToastError({
-        title: 'Uh oh! Account does not exist',
-        description: 'There is no account with this email',
-      });
-      setIsLoading(false);
-      return;
-    }
+        if (res.status === 404) {
+          showToastError({
+            title: 'Uh oh! Account does not exist',
+            description: 'There is no account with this email',
+          });
+          return;
+        }
 
-    const { user } = await res.json();
+        const { user } = await res.json();
 
-    console.log(JSON.stringify(user));
-    console.log(user.role.name === 'organization');
+        if (user.role.name !== 'organization' && user.role.name !== 'admin') {
+          showToastError({
+            title: 'Uh oh! Organization account does not exist',
+            description:
+              'There is no organization account associated with this email',
+          });
+          return;
+        }
 
-    if (user.role.name !== 'organization' && user.role.name !== 'admin') {
-      console.log('I am here');
-      showToastError({
-        title: 'Uh oh! Organization account does not exist',
-        description:
-          'There is no organization account associated with this email',
-      });
-      setIsLoading(false);
-      return;
-    }
+        const { error } = await sbBrowserClient.auth.signInWithPassword({
+          email,
+          password,
+        });
 
-    const { error } = await sbBrowserClient.auth.signInWithPassword({
-      email,
-      password,
-    });
+        if (error) {
+          showToastError({
+            title: 'Uh oh! Something went wrong',
+            description: 'There was a problem with your request',
+          });
+          return;
+        }
 
-    if (error) {
-      showToastError({
-        title: 'Uh oh! Something went wrong',
-        description: 'There was a problem with your request',
-      });
-      setIsLoading(false);
-      return;
-    }
-
-    router.push(`/${locale}/dashboard`);
-    router.refresh();
-  }
+        router.push(`/${locale}/dashboard`);
+        router.refresh();
+      } catch (error) {
+        showToastError({
+          title: 'Uh oh! Something went wrong',
+          description: 'There was a problem with your request',
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [sbBrowserClient, showToastError, router, locale],
+  );
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmitHook(handleSubmit)}>
+      <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="grid gap-4">
           <TextField
             control={control}
@@ -152,10 +160,12 @@ export function OrganizationSignInForm({
         </div>
         <div>
           <SubmitButton classname="w-full" isLoading={isLoading} type="submit">
-            Sign In
+            {dic.button.text}
           </SubmitButton>
         </div>
       </form>
     </Form>
   );
-}
+};
+
+export default OrganizationSignInForm;

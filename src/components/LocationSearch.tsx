@@ -17,7 +17,7 @@ interface LocationSearchProps {
   query: string;
   errorText: string;
   placeholder: string;
-  onSelectValue(e: HandleSelectValueParams): void;
+  onSelectValue(e: HandleSelectValueParams): Promise<void>;
   onQueryChange(e: string): void;
 }
 

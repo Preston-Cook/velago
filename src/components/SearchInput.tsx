@@ -20,7 +20,7 @@ interface SearchInputProps {
   suggestions: Suggestion[];
   placeholder: string;
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
-  selectValue(e: HandleSelectValueParams): void;
+  selectValue(e: HandleSelectValueParams): Promise<void>;
   handleFocus(): void;
 }
 
