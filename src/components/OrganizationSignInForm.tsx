@@ -3,6 +3,7 @@
 import { useLocale } from '@/hooks/useLocale';
 import { useToast } from '@/hooks/useToast';
 import { createSbBrowserClient } from '@/lib/sbBrowserClient';
+import type { OrgSignInDic } from '@/types/DicTypes';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo, useState } from 'react';
@@ -13,53 +14,16 @@ import { TextField } from './TextField';
 import { Form } from './ui/form';
 
 interface OrganizationSignInFormProps {
-  dic: {
-    title: string;
-    description: string;
-    labels: string[];
-    noAccount: {
-      text: string;
-      link: string;
-    };
-    userAccount: {
-      text: string;
-      link: string;
-    };
-    button: {
-      text: string;
-    };
-    validation: {
-      email: {
-        required: string;
-        invalid: string;
-      };
-      password: {
-        required: string;
-        invalid: string;
-      };
-    };
-  };
-  validation: {
-    email: {
-      required: string;
-      invalid: string;
-    };
-    password: {
-      required: string;
-      invalid: string;
-    };
-  };
+  dic: OrgSignInDic;
 }
 
-const OrganizationSignInForm: React.FC<OrganizationSignInFormProps> = ({
-  dic,
-  validation,
-}) => {
+export function OrganizationSignInForm({ dic }: OrganizationSignInFormProps) {
   const sbBrowserClient = useMemo(() => createSbBrowserClient(), []);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { showToastError } = useToast();
   const { locale } = useLocale();
   const router = useRouter();
+  const { validation } = dic;
 
   // Memoize schema creation
   const organizationSignInFormSchema = useMemo(
@@ -166,6 +130,4 @@ const OrganizationSignInForm: React.FC<OrganizationSignInFormProps> = ({
       </form>
     </Form>
   );
-};
-
-export default OrganizationSignInForm;
+}

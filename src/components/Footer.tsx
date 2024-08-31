@@ -32,15 +32,18 @@ export default async function Footer({ lang }: FooterProps) {
         </LocaleLink>
         <p className="my-6">{dic.footer.description}</p>
         <ul className="mb-6 flex flex-wrap items-center justify-center">
-          {dic.footer.links.map((link) => (
-            <li key={uuidv4()}>
-              <LocaleLink href={`/${link.toLowerCase()}`}>
-                <Button className="sm:pl-0" variant="link">
-                  {link}
-                </Button>
-              </LocaleLink>
-            </li>
-          ))}
+          {dic.footer.links.map((link, i) => {
+            const { href, text } = link;
+            return (
+              <li key={uuidv4()}>
+                <LocaleLink href={href}>
+                  <Button className="sm:pl-0" variant="link">
+                    {text}
+                  </Button>
+                </LocaleLink>
+              </li>
+            );
+          })}
         </ul>
         <span className="text-sm sm:text-center">
           © 2024 Velago™ {dic.footer.legal}

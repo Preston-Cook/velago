@@ -96,7 +96,27 @@
           "description": "There was a problem with your request"
         }
       },
-      "submit": "Submit"
+      "submit": "Submit",
+      "validation": {
+        "firstName": {
+          "min": "Must be at least 2 characters",
+          "max": "Must be at most 50 characters"
+        },
+        "lastName": {
+          "min": "Must be at least 2 characters",
+          "max": "Must be at most 50 characters"
+        },
+        "phone": {
+          "refine": "Invalid phone number"
+        },
+        "email": {
+          "email": "Invalid email"
+        },
+        "message": {
+          "min": "Must be at least 10 characters",
+          "max": "Must be at most 300 characters"
+        }
+      }
     },
     "userSignIn": {
       "title": "Sign In",
@@ -149,12 +169,20 @@
       },
       "button": {
         "text": "Sign in"
+      },
+      "validation": {
+        "phone": {
+          "refine": "Invalid phone number"
+        },
+        "otp": {
+          "refine": "Invalid code"
+        }
       }
     },
     "userSignUp": {
       "title": "Sign Up",
-      "description": "Enter your first name, last name, and phone phone number below to sign up for your account",
-      "labels": ["First Name", "Last Name", "Phone (Optional)", "Email"],
+      "description": "Enter your first name, last name, and phone number below to sign up for your account",
+      "labels": ["First Name", "Last Name", "Phone", "Email (Optional)"],
       "account": {
         "existsEmail": {
           "title": "Uh oh! Account already exists",
@@ -200,6 +228,22 @@
       },
       "button": {
         "text": "Sign Up"
+      },
+      "validation": {
+        "firstName": {
+          "min": "Must be at least 2 characters",
+          "max": "Must be at most 50 characters"
+        },
+        "lastName": {
+          "min": "Must be at least 2 characters",
+          "max": "Must be at most 50 characters"
+        },
+        "phone": {
+          "refine": "Invalid phone number"
+        },
+        "email": {
+          "email": "Invalid email"
+        }
       }
     },
     "orgSignIn": {
@@ -309,52 +353,27 @@
   "footer": {
     "legal": "All Rights Reserved",
     "description": "Empowering underprivileged individuals by connecting them with Medicare-accepting healthcare providers and charitable organizations.",
-    "links": ["Search", "Contact", "About", "Privacy Policy", "Disclaimer"]
-  },
-  "validation": {
-    "contactFormSchema": {
-      "firstName": {
-        "min": "Must be at least 2 characters",
-        "max": "Must be at most 50 characters"
+    "links": [
+      {
+        "href": "/map",
+        "text": "Map"
       },
-      "lastName": {
-        "min": "Must be at least 2 characters",
-        "max": "Must be at most 50 characters"
+      {
+        "href": "/contact",
+        "text": "Contact"
       },
-      "phone": {
-        "refine": "Invalid phone number"
+      {
+        "href": "/about",
+        "text": "About"
       },
-      "email": {
-        "email": "Invalid email"
+      {
+        "href": "/privacy",
+        "text": "Privacy Policy"
       },
-      "message": {
-        "min": "Must be at least 10 characters",
-        "max": "Must be at most 300 characters"
+      {
+        "href": "/disclaimer",
+        "text": "Disclaimer"
       }
-    },
-    "userSignInFormSchema": {
-      "phone": {
-        "refine": "Invalid phone number"
-      },
-      "otp": {
-        "refine": "Invalid code"
-      }
-    },
-    "userSignUpFormSchema": {
-      "firstName": {
-        "min": "Must be at least 2 characters",
-        "max": "Must be at most 50 characters"
-      },
-      "lastName": {
-        "min": "Must be at least 2 characters",
-        "max": "Must be at most 50 characters"
-      },
-      "phone": {
-        "refine": "Invalid phone number"
-      },
-      "email": {
-        "email": "Invalid email"
-      }
-    }
+    ]
   }
 }

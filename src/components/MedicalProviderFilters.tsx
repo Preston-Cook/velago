@@ -1,5 +1,6 @@
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { capitalizeFirstLetter } from '@/lib/capitalizeFirstLetter';
+import { Hand, HandHelping, PersonStanding, ShieldCheck } from 'lucide-react';
 import { useCallback, useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 import {
@@ -51,6 +52,13 @@ const categories = {
   gender: ['Female', 'Male', 'Other'],
 };
 
+const icons = {
+  ethnicity: Hand,
+  insurance: ShieldCheck,
+  provider: HandHelping,
+  gender: PersonStanding,
+};
+
 export function MedicalProviderFilters({
   isMapSidebar,
 }: MedicalProviderFiltersProps) {
@@ -95,35 +103,47 @@ export function MedicalProviderFilters({
 
   return (
     <Accordion type="single" collapsible className="w-full">
-      {Object.entries(categories).map(([key, categoryList]) => (
-        <AccordionItem key={key} value={`item-${key}`} className="border-none">
-          <AccordionTrigger>{capitalizeFirstLetter(key)}</AccordionTrigger>
-          <AccordionContent
-            className={`flex ${isMapSidebar} flex-col gap-2 py-2`}
+      {Object.entries(categories).map(([key, categoryList]) => {
+        const Icon = icons[key as keyof typeof icons];
+        return (
+          <AccordionItem
+            key={key}
+            value={`item-${key}`}
+            className="border-none"
           >
-            <div className="flex gap-2">
-              <div className="flex items-center">
-                <Checkbox
-                  onClick={() => handleClickSelectAll(key)}
-                  checked={categoryList.length === filterStates[key].size}
-                />
+            <AccordionTrigger>
+              <div className="flex items-center gap-2 font-semibold">
+                <Icon className="h-4 w-4" />
+                <span>{capitalizeFirstLetter(key)}</span>
               </div>
-              <div>Select All</div>
-            </div>
-            {categoryList.map((type) => (
-              <div className="flex gap-2" key={uuid()}>
+            </AccordionTrigger>
+            <AccordionContent
+              className={`flex ${isMapSidebar} flex-col gap-2 py-2`}
+            >
+              <div className="flex gap-2">
                 <div className="flex items-center">
                   <Checkbox
-                    checked={filterStates[key].has(type)}
-                    onClick={() => handleClick(key, type)}
+                    onClick={() => handleClickSelectAll(key)}
+                    checked={categoryList.length === filterStates[key].size}
                   />
                 </div>
-                <div>{type}</div>
+                <div>Select All</div>
               </div>
-            ))}
-          </AccordionContent>
-        </AccordionItem>
-      ))}
+              {categoryList.map((type) => (
+                <div className="flex gap-2" key={uuid()}>
+                  <div className="flex items-center">
+                    <Checkbox
+                      checked={filterStates[key].has(type)}
+                      onClick={() => handleClick(key, type)}
+                    />
+                  </div>
+                  <div>{type}</div>
+                </div>
+              ))}
+            </AccordionContent>
+          </AccordionItem>
+        );
+      })}
     </Accordion>
   );
 }

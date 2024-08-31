@@ -20,6 +20,7 @@ export function LocaleLink({
 
   const isDefaultLang = locale === i18n.defaultLocale;
   const path = isDefaultLang ? href : `/${locale}${href}`;
+
   return (
     <NextLink className={className} href={path} {...props}>
       {children}

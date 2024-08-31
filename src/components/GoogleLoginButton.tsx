@@ -55,7 +55,7 @@ export function GoogleLoginButton({ text, action }: GoogleLoginButtonProps) {
       onClick={handleGoogleLogin}
       variant="outline"
       type="button"
-      className="flex w-full bg-secondary"
+      className="flex w-full bg-secondary mt-4"
     >
       {isLoading ? (
         <Loader2 className="h-4 w-4 animate-spin" />

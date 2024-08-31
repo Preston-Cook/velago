@@ -24,11 +24,8 @@ export default async function Page({ params }: UserSignUpProps) {
             <h1 className="text-3xl font-bold">{title}</h1>
             <p className="text-balance text-muted-foreground">{description}</p>
           </div>
-          <PhoneSignUpForm
-            validation={dic.validation.userSignUpFormSchema}
-            dic={dic.pages.userSignUp}
-          />
-          <div className="mt-4 text-center text-sm">
+          <PhoneSignUpForm dic={dic.pages.userSignUp} />
+          <div className="text-center text-sm">
             {accountExists.text}{' '}
             <LocaleLink href="/signin/user" className="underline">
               {accountExists.link}

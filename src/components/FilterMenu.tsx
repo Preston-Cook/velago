@@ -2,7 +2,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -12,6 +11,7 @@ import {
   Filter,
   HeartHandshake,
   MapIcon,
+  MapPin,
   SlidersHorizontal,
 } from 'lucide-react';
 import { FilterAccordion } from './FilterAccordion';
@@ -59,7 +59,7 @@ export function FilterMenu() {
             Edit the following fields to filter resources and connect
           </DialogDescription>
         </DialogHeader>
-        <Separator className="mx-auto bg-primary" />
+        <Separator className="mx-auto bg-primary my-4" />
         <div className="flex flex-col gap-2">
           <div>
             <DialogTitle>
@@ -103,7 +103,7 @@ export function FilterMenu() {
             </div>
           </div>
         </div>
-        <Separator className="mx-auto bg-primary" />
+        <Separator className="mx-auto bg-primary my-4" />
         <div className="flex flex-col gap-2">
           <div>
             <DialogTitle>
@@ -116,32 +116,25 @@ export function FilterMenu() {
             <FilterAccordion isMapSidebar={false} />
           </div>
         </div>
-
-        {/* <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input
-              id="name"
-              defaultValue="Pedro Duarte"
-              className="col-span-3"
-            />
+        <Separator className="mx-auto bg-primary my-4" />
+        <div className="flex flex-col gap-2">
+          <div>
+            <DialogTitle>
+              <div className="flex items-center gap-2">
+                <MapPin className="h-6 w-6" />
+                <span className="text-lg">Resources</span>
+              </div>
+            </DialogTitle>
+            <Separator className="mx-auto my-4 w-[80%]" />
+            <p>No Resources Selected</p>
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input
-              id="username"
-              defaultValue="@peduarte"
-              className="col-span-3"
-            />
+        </div>
+        <Separator className="mx-auto bg-primary my-4" />
+        <div className="flex flex-col gap-2">
+          <div>
+            <SendMessageButton />
           </div>
-        </div> */}
-        <DialogFooter>
-          <SendMessageButton />
-        </DialogFooter>
+        </div>
       </DialogContent>
     </Dialog>
   );

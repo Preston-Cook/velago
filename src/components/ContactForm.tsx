@@ -4,6 +4,7 @@ import { Form } from '@/components/ui/form';
 import { useToast } from '@/components/ui/use-toast';
 import formatPhone from '@/lib/formatPhone';
 import { phoneRegex } from '@/lib/phoneRegex';
+import type { ContactDic } from '@/types/DicTypes';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -13,71 +14,13 @@ import { TextareaField } from './TextareaField';
 import { TextField } from './TextField';
 
 interface ContactFormProps {
-  validation: {
-    firstName: {
-      min: string;
-      max: string;
-    };
-    lastName: {
-      min: string;
-      max: string;
-    };
-    phone: {
-      refine: string;
-    };
-    email: {
-      email: string;
-    };
-    message: {
-      min: string;
-      max: string;
-    };
-  };
-  dic: {
-    title: string;
-    description: string;
-    labels: string[];
-    messagePlaceholder: string;
-    toast: {
-      success: {
-        title: string;
-        description: string;
-      };
-      error: {
-        title: string;
-        description: string;
-      };
-    };
-    submit: string;
-  };
+  dic: ContactDic;
 }
 
-export default function ContactForm({ validation, dic }: ContactFormProps) {
+export default function ContactForm({ dic }: ContactFormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { toast } = useToast();
-
-  const fieldObjs = [
-    {
-      name: 'firstName',
-      label: dic.labels[0],
-      placeholder: 'Aaron',
-    },
-    {
-      name: 'lastName',
-      label: dic.labels[1],
-      placeholder: 'Swartz',
-    },
-    {
-      name: 'email',
-      label: dic.labels[2],
-      placeholder: 'example@velago.com',
-    },
-    {
-      name: 'phone',
-      label: dic.labels[3],
-      placeholder: '(123) 456-7890',
-    },
-  ];
+  const { validation } = dic;
 
   const contactFormSchema = z.object({
     firstName: z
@@ -159,7 +102,7 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
         className="mx-auto max-w-screen-md"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
           <TextField
             control={control}
             name="firstName"
@@ -177,16 +120,17 @@ export default function ContactForm({ validation, dic }: ContactFormProps) {
           control={control}
           name="email"
           placeholder={'example@velago.com'}
-          label={dic.labels[3]}
+          label={dic.labels[2]}
         />
         <TextField
+          className="mt-4"
           control={control}
           name="phone"
-          placeholder={fieldObjs[3].placeholder}
-          label={fieldObjs[3].label}
+          placeholder={'(123)-456-7890'}
+          label={'Phone'}
           onChange={handlePhoneChange}
         />
-        <div className="mt-8">
+        <div className="mt-4">
           <TextareaField
             control={control}
             name="message"

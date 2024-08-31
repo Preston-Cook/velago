@@ -39,6 +39,7 @@ export function i18Middleware(middleware: CustomMiddleware) {
     const locale = getLocale(request);
 
     // Redirect if there is no locale
+
     if (pathnameIsMissingLocale) {
       const redirectUrl = new URL(
         `/${locale}${pathname.startsWith('/') ? '' : '/'}${pathname}`,

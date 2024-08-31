@@ -24,10 +24,7 @@ export default async function Page({ params }: UserSignInProps) {
             <h1 className="text-3xl font-bold">{title}</h1>
             <p className="text-balance text-muted-foreground">{description}</p>
           </div>
-          <OrganizationSignInForm
-            dic={dic.pages.orgSignIn}
-            validation={dic.pages.orgSignIn.validation}
-          />
+          <OrganizationSignInForm dic={dic.pages.orgSignIn} />
           <div className="mt-4 text-center text-sm">
             {noAccount.text}{' '}
             <LocaleLink href="/signup/organization" className="underline">

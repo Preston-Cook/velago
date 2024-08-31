@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { useQueryParams } from '@/hooks/useQueryParams';
+import { ClipboardPlus, HandHeart } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MedicalProviderFilters } from './MedicalProviderFilters';
 import { Checkbox } from './ui/checkbox';
@@ -109,7 +110,14 @@ export function FilterAccordion({ isMapSidebar }: FilterAccordionProps) {
     if (genderTypes === null) {
       setQueryParam('gender_types', genderCategories.join(','));
     }
-  }, [resourceTypes, setQueryParam]);
+  }, [
+    resourceTypes,
+    setQueryParam,
+    ethnicityTypes,
+    providerTypes,
+    genderTypes,
+    insuranceTypes,
+  ]);
 
   const handleClickResourceType = useCallback(
     (category: string) => {
@@ -147,7 +155,10 @@ export function FilterAccordion({ isMapSidebar }: FilterAccordionProps) {
           onClick={() => handleTriggerClick('medical')}
           className={`${isMedicalActive ? 'text-primary' : ''}`}
         >
-          Medical Providers
+          <div className="flex items-center gap-2 font-semibold">
+            <ClipboardPlus className="h-4 w-4" />
+            <span>Medical Providers</span>
+          </div>
         </AccordionTrigger>
         <AccordionContent
           className={`flex ${isMapSidebar ? 'max-h-[250px] overflow-y-scroll' : ''} flex-col gap-2 py-2`}
@@ -160,7 +171,10 @@ export function FilterAccordion({ isMapSidebar }: FilterAccordionProps) {
           onClick={() => handleTriggerClick('nonMedical')}
           className={`${isNonMedicalActive ? 'text-primary' : ''}`}
         >
-          Non-Medical Providers
+          <div className="flex items-center gap-2 font-semibold">
+            <HandHeart className="h-4 w-4" />
+            <span>Non-Medical Providers</span>
+          </div>
         </AccordionTrigger>
         <AccordionContent
           className={`flex ${isMapSidebar ? 'max-h-[250px] overflow-y-scroll' : ''} flex-col gap-2 py-2`}

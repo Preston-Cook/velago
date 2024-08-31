@@ -6,6 +6,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 import { FormEvent } from 'react';
 import { Control } from 'react-hook-form';
 
@@ -20,6 +21,7 @@ interface TextFieldProps {
 }
 
 export function TextField({
+  className,
   control,
   name,
   placeholder,
@@ -32,7 +34,7 @@ export function TextField({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem onChange={onChange}>
+        <FormItem className={cn(className, 'mt-4')} onChange={onChange}>
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <Input

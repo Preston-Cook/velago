@@ -2,15 +2,15 @@
   "header": {
     "links": [
       {
-        "href": "/es/map",
+        "href": "/map",
         "text": "Mapa"
       },
       {
-        "href": "/es/contact",
+        "href": "/contact",
         "text": "Contacto"
       },
       {
-        "href": "/es/about",
+        "href": "/about",
         "text": "Acerca"
       }
     ],
@@ -102,7 +102,27 @@
           "description": "Hubo un problema con su solicitud"
         }
       },
-      "submit": "Entregar"
+      "submit": "Entregar",
+      "validation": {
+        "firstName": {
+          "min": "Debe tener al menos 2 caracteres",
+          "max": "Debe tener como máximo 50 caracteres"
+        },
+        "lastName": {
+          "min": "Debe tener al menos 2 caracteres",
+          "max": "Debe tener como máximo 50 caracteres"
+        },
+        "phone": {
+          "refine": "Numero de telefono invalido"
+        },
+        "email": {
+          "email": "Email inválido"
+        },
+        "message": {
+          "min": "Debe tener al menos 10 caracteres.",
+          "max": "Debe tener como máximo 300 caracteres"
+        }
+      }
     },
     "userSignIn": {
       "title": "Iniciar sesión",
@@ -155,6 +175,14 @@
       },
       "button": {
         "text": "Iniciar sesión"
+      },
+      "validation": {
+        "phone": {
+          "refine": "Numero de telefono invalido"
+        },
+        "otp": {
+          "refine": "Código inválido"
+        }
       }
     },
 
@@ -164,8 +192,8 @@
       "labels": [
         "Nombre",
         "Apellido",
-        "Teléfono (Opcional)",
-        "Correo electrónico"
+        "Teléfono",
+        "Correo electrónico (Opcional)"
       ],
       "orgAccount": {
         "text": "¿Desea registrarse para una cuenta de organización?",
@@ -212,6 +240,22 @@
       },
       "button": {
         "text": "Regístrate"
+      },
+      "validation": {
+        "firstName": {
+          "min": "Debe tener al menos 2 caracteres",
+          "max": "Debe tener como máximo 50 caracteres"
+        },
+        "lastName": {
+          "min": "Debe tener al menos 2 caracteres",
+          "max": "Debe tener como máximo 50 caracteres"
+        },
+        "phone": {
+          "refine": "Numero de telefono invalido"
+        },
+        "email": {
+          "email": "Email inválido"
+        }
       }
     },
     "orgSignIn": {
@@ -322,57 +366,26 @@
     "legal": "Todos los Derechos Reservados",
     "description": "Empoderando a personas desfavorecidas conectándolas con proveedores de atención médica que aceptan Medicare y organizaciones benéficas.",
     "links": [
-      "Buscar",
-      "Contacto",
-      "Acerca del Sitio",
-      "Política de Privacidad",
-      "Descargo de Responsabilidad"
+      {
+        "href": "/map",
+        "text": "Mapa"
+      },
+      {
+        "href": "/contact",
+        "text": "Contacto"
+      },
+      {
+        "href": "/about",
+        "text": "Acerca de"
+      },
+      {
+        "href": "/privacy",
+        "text": "Política de privacidad"
+      },
+      {
+        "href": "/disclaimer",
+        "text": "Descargo de responsabilidad"
+      }
     ]
-  },
-  "validation": {
-    "contactFormSchema": {
-      "firstName": {
-        "min": "Debe tener al menos 2 caracteres",
-        "max": "Debe tener como máximo 50 caracteres"
-      },
-      "lastName": {
-        "min": "Debe tener al menos 2 caracteres",
-        "max": "Debe tener como máximo 50 caracteres"
-      },
-      "phone": {
-        "refine": "Numero de telefono invalido"
-      },
-      "email": {
-        "email": "Email inválido"
-      },
-      "message": {
-        "min": "Debe tener al menos 10 caracteres.",
-        "max": "Debe tener como máximo 300 caracteres"
-      }
-    },
-    "userSignInFormSchema": {
-      "phone": {
-        "refine": "Numero de telefono invalido"
-      },
-      "otp": {
-        "refine": "Código inválido"
-      }
-    },
-    "userSignUpFormSchema": {
-      "firstName": {
-        "min": "Debe tener al menos 2 caracteres",
-        "max": "Debe tener como máximo 50 caracteres"
-      },
-      "lastName": {
-        "min": "Debe tener al menos 2 caracteres",
-        "max": "Debe tener como máximo 50 caracteres"
-      },
-      "phone": {
-        "refine": "Numero de telefono invalido"
-      },
-      "email": {
-        "email": "Email inválido"
-      }
-    }
   }
 }

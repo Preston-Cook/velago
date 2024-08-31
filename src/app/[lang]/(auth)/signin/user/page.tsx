@@ -14,7 +14,8 @@ export default async function Page({ params }: UserSignInProps) {
   const { lang } = params;
   const dic = await getDictionary(lang);
 
-  const { title, description, noAccount, orgAccount } = dic.pages.userSignIn;
+  const { title, description, noAccount, orgAccount, validation } =
+    dic.pages.userSignIn;
 
   return (
     <div className="w-full lg:grid lg:grid-cols-2">
@@ -24,11 +25,8 @@ export default async function Page({ params }: UserSignInProps) {
             <h1 className="text-3xl font-bold">{title}</h1>
             <p className="text-balance text-muted-foreground">{description}</p>
           </div>
-          <PhoneSignInForm
-            dic={dic.pages.userSignIn}
-            validation={dic.validation.userSignInFormSchema}
-          />
-          <div className="mt-4 text-center text-sm">
+          <PhoneSignInForm dic={dic.pages.userSignIn} />
+          <div className="text-center text-sm">
             {noAccount.text}{' '}
             <LocaleLink href="/signup/user" className="underline">
               {noAccount.link}

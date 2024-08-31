@@ -17,6 +17,7 @@ import { codeRegex } from '@/lib/codeRegex';
 import formatPhone from '@/lib/formatPhone';
 import { phoneRegex } from '@/lib/phoneRegex';
 import { createSbBrowserClient } from '@/lib/sbBrowserClient';
+import { UserSignUpDic } from '@/types/DicTypes';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -31,78 +32,17 @@ import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 
 interface PhoneSignUpFormProps {
-  dic: {
-    title: string;
-    description: string;
-    labels: string[];
-    account: {
-      existsEmail: {
-        title: string;
-        description: string;
-      };
-      existsPhone: {
-        title: string;
-        description: string;
-      };
-      generic: {
-        title: string;
-        description: string;
-      };
-    };
-    code: {
-      success: {
-        title: string;
-        description: string;
-      };
-      error: {
-        title: string;
-        description: string;
-      };
-      invalid: {
-        title: string;
-        description: string;
-      };
-    };
-    phone: {
-      verify: string;
-    };
-    signup: {
-      standard: string;
-      google: string;
-    };
-    accountExists: {
-      text: string;
-      link: string;
-    };
-    button: {
-      text: string;
-    };
-  };
-  validation: {
-    firstName: {
-      min: string;
-      max: string;
-    };
-    lastName: {
-      min: string;
-      max: string;
-    };
-    phone: {
-      refine: string;
-    };
-    email: {
-      email: string;
-    };
-  };
+  dic: UserSignUpDic;
 }
 
-export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
+export function PhoneSignUpForm({ dic }: PhoneSignUpFormProps) {
   const sbBrowserClient = createSbBrowserClient();
   const router = useRouter();
   const { locale } = useLocale();
   const { getQueryParam, deleteQueryParam } = useQueryParams();
   const { showToastError, showToastSuccess } = useToast();
   const error = getQueryParam('error');
+  const { validation } = dic;
 
   useEffect(() => {
     if (!error) return;
@@ -295,7 +235,7 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
       router.push(`/${locale}/map`);
       router.refresh();
     },
-    [router, locale, sbBrowserClient, dic, showToastError, showToastSuccess],
+    [router, locale, sbBrowserClient, dic, showToastError],
   );
 
   const nameIsNotNull = useCallback(() => {
@@ -306,118 +246,116 @@ export function PhoneSignUpForm({ dic, validation }: PhoneSignUpFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={handleSubmitHook(handleSubmit)}>
-        <div className="grid gap-4">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <TextField
-              control={control}
-              name="firstName"
-              placeholder="Aaron"
-              label={dic.labels[0]}
-            />
-            <TextField
-              control={control}
-              name="lastName"
-              placeholder="Swartz"
-              label={dic.labels[1]}
-            />
-          </div>
+        <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
           <TextField
             control={control}
-            name="email"
-            placeholder={'example@velago.com'}
-            label={dic.labels[3]}
+            name="firstName"
+            placeholder="Aaron"
+            label={dic.labels[0]}
           />
-          <FormField
+          <TextField
             control={control}
-            name="phone"
-            render={({ field }) => (
-              <>
-                <FormItem
-                  className="grid gap-2"
-                  onChange={(e) => {
-                    const { target } = e;
-
-                    // @ts-expect-error value prop exists
-                    const { value }: { value: string } = target;
-                    setValue('phone', formatPhone(value));
-
-                    if (value.replace(/[^0-9]/g, '').length > 10) return;
-
-                    setShowSignUp((prev) => !prev);
-                  }}
-                >
-                  <FormLabel>{dic.labels[2]}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={'(123)-456-7890'}
-                      {...field}
-                      className="block w-full bg-secondary"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-                {!showSignUp && (
-                  <Button
-                    disabled={
-                      isLoading.isLoadingCode || !phoneRegex.test(field.value)
-                    }
-                    className="mt-2 w-full text-white"
-                    type="button"
-                    onClick={handleSendCode}
-                  >
-                    {isLoading.isLoadingCode ? (
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                    ) : (
-                      dic.phone.verify
-                    )}
-                  </Button>
-                )}
-              </>
-            )}
+            name="lastName"
+            placeholder="Swartz"
+            label={dic.labels[1]}
           />
-          {showSignUp && (
+        </div>
+        <TextField
+          control={control}
+          name="email"
+          placeholder={'example@velago.com'}
+          label={dic.labels[3]}
+        />
+        <FormField
+          control={control}
+          name="phone"
+          render={({ field }) => (
             <>
-              <FormField
-                control={control}
-                name="code"
-                render={({ field }) => (
-                  <>
-                    <FormItem>
-                      <FormLabel>{'Code'}</FormLabel>
-                      <FormControl>
-                        <div className="flex justify-between">
-                          <CodeInput onChange={handleCodeChange} />
-                          <ResendCodeButton
-                            phone={getValues('phone')}
-                            text="Resend"
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                    <Button
-                      type="submit"
-                      disabled={
-                        isLoading.isLoadingSignUp ||
-                        !codeRegex.test(field.value) ||
-                        !nameIsNotNull()
-                      }
-                      className="text-white"
-                    >
-                      {isLoading.isLoadingSignUp ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        dic.button.text
-                      )}
-                    </Button>
-                  </>
-                )}
-              />
+              <FormItem
+                className="mt-4"
+                onChange={(e) => {
+                  const { target } = e;
+
+                  // @ts-expect-error value prop exists
+                  const { value }: { value: string } = target;
+                  setValue('phone', formatPhone(value));
+
+                  if (value.replace(/[^0-9]/g, '').length > 10) return;
+
+                  setShowSignUp((prev) => !prev);
+                }}
+              >
+                <FormLabel>{dic.labels[2]}</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder={'(123)-456-7890'}
+                    {...field}
+                    className="block w-full bg-secondary"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+              {!showSignUp && (
+                <Button
+                  disabled={
+                    isLoading.isLoadingCode || !phoneRegex.test(field.value)
+                  }
+                  className="mt-6 w-full text-white"
+                  type="button"
+                  onClick={handleSendCode}
+                >
+                  {isLoading.isLoadingCode ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    dic.phone.verify
+                  )}
+                </Button>
+              )}
             </>
           )}
-          <Separator className="mx-auto w-[80%] min-w-[200px] bg-primary" />
-          <GoogleLoginButton action="signUp" text={'Sign Up with Google'} />
-        </div>
+        />
+        {showSignUp && (
+          <>
+            <FormField
+              control={control}
+              name="code"
+              render={({ field }) => (
+                <>
+                  <FormItem>
+                    <FormLabel>{'Code'}</FormLabel>
+                    <FormControl>
+                      <div className="flex justify-between">
+                        <CodeInput onChange={handleCodeChange} />
+                        <ResendCodeButton
+                          phone={getValues('phone')}
+                          text="Resend"
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                  <Button
+                    type="submit"
+                    disabled={
+                      isLoading.isLoadingSignUp ||
+                      !codeRegex.test(field.value) ||
+                      !nameIsNotNull()
+                    }
+                    className="text-white"
+                  >
+                    {isLoading.isLoadingSignUp ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      dic.button.text
+                    )}
+                  </Button>
+                </>
+              )}
+            />
+          </>
+        )}
+        <Separator className="mx-auto w-[80%] min-w-[200px] bg-primary my-6" />
+        <GoogleLoginButton action="signUp" text={'Sign Up with Google'} />
       </form>
     </Form>
   );

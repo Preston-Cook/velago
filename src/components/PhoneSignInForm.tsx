@@ -16,6 +16,7 @@ import { codeRegex } from '@/lib/codeRegex';
 import formatPhone from '@/lib/formatPhone';
 import { phoneRegex } from '@/lib/phoneRegex';
 import { createSbBrowserClient } from '@/lib/sbBrowserClient';
+import type { UserSignInDic } from '@/types/DicTypes';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -30,76 +31,17 @@ import { Input } from './ui/input';
 import { Separator } from './ui/separator';
 
 interface PhoneLoginFormProps {
-  validation: {
-    phone: {
-      refine: string;
-    };
-    otp: {
-      refine: string;
-    };
-  };
-  dic: {
-    title: string;
-    description: string;
-    labels: string[];
-    login: {
-      standard: string;
-      google: string;
-    };
-    phone: {
-      label: string;
-    };
-    orgAccount: {
-      text: string;
-      link: string;
-    };
-    noAccount: {
-      text: string;
-      link: string;
-    };
-    account: {
-      error: {
-        notFound: {
-          title: string;
-          description: string;
-        };
-        generic: {
-          title: string;
-          description: string;
-        };
-      };
-    };
-    code: {
-      button: {
-        resend: string;
-        sendCode: string;
-      };
-      success: {
-        title: string;
-        description: string;
-      };
-      error: {
-        title: string;
-        description: string;
-      };
-      invalid: {
-        title: string;
-        description: string;
-      };
-    };
-    button: {
-      text: string;
-    };
-  };
+  dic: UserSignInDic;
 }
 
-export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
+export function PhoneSignInForm({ dic }: PhoneLoginFormProps) {
   const sbBrowserClient = createSbBrowserClient();
   const router = useRouter();
   const { locale } = useLocale();
   const { getQueryParam, deleteQueryParam } = useQueryParams();
   const error = getQueryParam('error');
   const { showToastError, showToastSuccess } = useToast();
+  const { validation } = dic;
 
   useEffect(() => {
     if (!error) return;
@@ -229,97 +171,94 @@ export function PhoneSignInForm({ validation, dic }: PhoneLoginFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={handleSubmitHook(handleSubmit)}>
-        <div className="grid gap-4">
-          <FormField
-            control={control}
-            name="phone"
-            render={({ field }) => (
-              <>
-                <FormItem
-                  className="grid gap-2"
-                  onChange={(e) => {
-                    const { target } = e;
-
-                    // @ts-expect-error value prop exists
-                    const { value }: { value: string } = target;
-
-                    setValue('phone', formatPhone(value));
-
-                    if (value.replace(/[^0-9]/g, '').length > 10) return;
-
-                    setShowLogin((prev) => (prev ? !prev : prev));
-                  }}
-                >
-                  <FormLabel>{dic.phone.label}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={'(123)-456-7890'}
-                      {...field}
-                      className="block w-full bg-secondary"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-                {!showLogin && (
-                  <Button
-                    disabled={
-                      isLoading.isLoadingCode || !phoneRegex.test(field.value)
-                    }
-                    className="mt-2 w-full text-white"
-                    type="button"
-                    onClick={handleSendCode}
-                  >
-                    {isLoading.isLoadingCode ? (
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                    ) : (
-                      dic.code.button.sendCode
-                    )}
-                  </Button>
-                )}
-              </>
-            )}
-          />
-          {showLogin && (
+        <FormField
+          control={control}
+          name="phone"
+          render={({ field }) => (
             <>
-              <FormField
-                control={control}
-                name="code"
-                render={({ field }) => (
-                  <>
-                    <FormItem>
-                      <FormLabel>{'Code'}</FormLabel>
-                      <FormControl>
-                        <div className="flex justify-between">
-                          <CodeInput onChange={handleCodeChange} />
-                          <ResendCodeButton
-                            phone={getValues('phone')}
-                            text={dic.code.button.resend}
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                    <Button
-                      type="submit"
-                      disabled={
-                        isLoading.isLoadingLogin || !codeRegex.test(field.value)
-                      }
-                      className="text-white"
-                    >
-                      {isLoading.isLoadingLogin ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        dic.button.text
-                      )}
-                    </Button>
-                  </>
-                )}
-              />
+              <FormItem
+                onChange={(e) => {
+                  const { target } = e;
+
+                  // @ts-expect-error value prop exists
+                  const { value }: { value: string } = target;
+
+                  setValue('phone', formatPhone(value));
+
+                  if (value.replace(/[^0-9]/g, '').length > 10) return;
+
+                  setShowLogin((prev) => (prev ? !prev : prev));
+                }}
+              >
+                <FormLabel>{dic.phone.label}</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder={'(123)-456-7890'}
+                    {...field}
+                    className="block w-full bg-secondary"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+              {!showLogin && (
+                <Button
+                  disabled={
+                    isLoading.isLoadingCode || !phoneRegex.test(field.value)
+                  }
+                  className="mt-6 w-full text-white"
+                  type="button"
+                  onClick={handleSendCode}
+                >
+                  {isLoading.isLoadingCode ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    dic.code.button.sendCode
+                  )}
+                </Button>
+              )}
             </>
           )}
-          <Separator className="mx-auto w-[80%] min-w-[200px] bg-primary" />
-          <GoogleLoginButton action="signIn" text={dic.login.google} />
-        </div>
+        />
+        {showLogin && (
+          <>
+            <FormField
+              control={control}
+              name="code"
+              render={({ field }) => (
+                <>
+                  <FormItem>
+                    <FormLabel>{'Code'}</FormLabel>
+                    <FormControl>
+                      <div className="flex justify-between">
+                        <CodeInput onChange={handleCodeChange} />
+                        <ResendCodeButton
+                          phone={getValues('phone')}
+                          text={dic.code.button.resend}
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                  <Button
+                    type="submit"
+                    disabled={
+                      isLoading.isLoadingLogin || !codeRegex.test(field.value)
+                    }
+                    className="text-white"
+                  >
+                    {isLoading.isLoadingLogin ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      dic.button.text
+                    )}
+                  </Button>
+                </>
+              )}
+            />
+          </>
+        )}
+        <Separator className="mx-auto w-[80%] min-w-[200px] bg-primary my-6" />
+        <GoogleLoginButton action="signIn" text={dic.login.google} />
       </form>
     </Form>
   );
