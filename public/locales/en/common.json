@@ -1,0 +1,380 @@
+{
+    "header": {
+      "links": [
+        {
+          "href": "/map",
+          "text": "Map"
+        },
+        {
+          "href": "/contact",
+          "text": "Contact"
+        },
+        {
+          "href": "/about",
+          "text": "About"
+        }
+      ],
+      "signIn": "Sign In",
+      "signUp": "Sign Up"
+    },
+    "pages": {
+      "home": {
+        "callToAction": {
+          "title": "Find Resources Near You",
+          "description": "Use Velago to search for healthcare providers and charitable organizations near you",
+          "placeholders": [
+            "Westminster, London SW1A 1AA, United Kingdom",
+            "1600 Pennsylvania Avenue NW, Washington, D.C., USA",
+            "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France",
+            "Dharmapuri, Forest Colony, Tajganj, Agra, Uttar Pradesh 282001, India",
+            "Bennelong Point, Sydney NSW 2000, Australia",
+            "221B Baker Street London NW1 6XE, United Kingdom",
+            "12 Grimmauld Place London, United Kingdom",
+            "742 Evergreen Terrace Springfield, USA",
+            "4 Privet Drive Little Whinging, Surrey, England"
+          ]
+        },
+        "content": {
+          "title": "Partner with Us",
+          "cards": [
+            {
+              "title": "Healthcare Providers",
+              "description": "Partner with us to reach more patients in need. Showcase your services and contribute to improving healthcare accessibility. Explore partnership opportunities today!",
+              "button": "List Your Provider"
+            },
+            {
+              "title": "Organizations",
+              "description": "Join us in making a difference. List your services, share impact stories, and engage with a caring community. Start your partnership journey today!",
+              "button": "List Your Organization"
+            }
+          ],
+          "productDescription": {
+            "title": "Revolutionizing Access for All",
+            "paragraph1": "Welcome to Velago, where we are revolutionizing access to healthcare and charitable services. Our platform connects underprivileged individuals with Medicare-accepting healthcare providers and compassionate charitable organizations. Through easy search tools and comprehensive listings, users can find the support they need, while providers and organizations can reach a wider audience and make a lasting impact.",
+            "paragraph2": "Join us in creating a world where everyone has access to essential healthcare and support services. Explore, connect, and make a difference with Velago today.",
+            "link": "Learn more"
+          }
+        },
+        "faq": {
+          "title": "Frequently Asked Questions (FAQ)",
+          "questions": [
+            {
+              "question": "How can I find healthcare providers or charities near me?",
+              "answer": "You can use our search bar to enter your location and discover nearby healthcare providers accepting Medicare and charitable organizations."
+            },
+            {
+              "question": "What types of services do healthcare providers and charities offer?",
+              "answer": "Healthcare providers offer a range of medical services, including primary care, specialist consultations, and preventive screenings. Charitable organizations may provide financial assistance, food distribution, shelter, and other support services."
+            },
+            {
+              "question": "How do I know if a healthcare provider accepts Medicare?",
+              "answer": "Our platform filters healthcare providers based on their acceptance of Medicare. You can easily identify Medicare-accepting providers in your search results."
+            },
+            {
+              "question": "Can I search for specific types of resources?",
+              "answer": "Yes, you can refine your search by specifying the type of healthcare provider (e.g., clinics, hospitals, pharmacies) or the focus area of charitable organizations (e.g., healthcare, education, housing)."
+            },
+            {
+              "question": "Are there any eligibility criteria for accessing charitable services?",
+              "answer": "Eligibility criteria for charitable services vary by organization. Some may have income-based criteria, while others prioritize specific demographics or conditions. You can contact the organizations directly for more information."
+            }
+          ]
+        }
+      },
+      "contact": {
+        "title": "Contact Us",
+        "description": "Get in touch with us to learn more about our services, partnerships, or any inquiries you may have.",
+        "labels": ["First Name", "Last Name", "Email", "Phone", "Message"],
+        "messagePlaceholder": "Enter message here",
+        "toast": {
+          "success": {
+            "title": "Success!",
+            "description": "Your message has been sent to Velago!"
+          },
+          "error": {
+            "title": "Uh oh! Something went wrong",
+            "description": "There was a problem with your request"
+          }
+        },
+        "submit": "Submit",
+        "validation": {
+          "firstName": {
+            "min": "Must be at least 2 characters",
+            "max": "Must be at most 50 characters"
+          },
+          "lastName": {
+            "min": "Must be at least 2 characters",
+            "max": "Must be at most 50 characters"
+          },
+          "phone": {
+            "refine": "Invalid phone number"
+          },
+          "email": {
+            "email": "Invalid email"
+          },
+          "message": {
+            "min": "Must be at least 10 characters",
+            "max": "Must be at most 300 characters"
+          }
+        }
+      },
+      "userSignIn": {
+        "title": "Sign In",
+        "description": "Enter your phone number below to sign in to your account",
+        "labels": ["Phone", "Code"],
+        "login": {
+          "standard": "Sign in",
+          "google": "Sign in with Google"
+        },
+        "phone": {
+          "label": "Phone"
+        },
+        "orgAccount": {
+          "text": "Have an organization account?",
+          "link": "Sign in"
+        },
+        "noAccount": {
+          "text": "Don't have an account?",
+          "link": "Sign up"
+        },
+        "account": {
+          "error": {
+            "notFound": {
+              "title": "Uh oh! Account does not exist",
+              "description": "There is no account with this phone number"
+            },
+            "generic": {
+              "title": "Uh oh! Something went wrong",
+              "description": "There was a problem with your request"
+            }
+          }
+        },
+        "code": {
+          "button": {
+            "resend": "Resend",
+            "sendCode": "Send Code"
+          },
+          "success": {
+            "title": "Success!",
+            "description": "Your code has been sent"
+          },
+          "error": {
+            "title": "Uh oh! Something went wrong",
+            "description": "There was a problem with your request"
+          },
+          "invalid": {
+            "title": "Invalid code",
+            "description": "Your code is invalid"
+          }
+        },
+        "button": {
+          "text": "Sign in"
+        },
+        "validation": {
+          "phone": {
+            "refine": "Invalid phone number"
+          },
+          "otp": {
+            "refine": "Invalid code"
+          }
+        }
+      },
+      "userSignUp": {
+        "title": "Sign Up",
+        "description": "Enter your first name, last name, and phone number below to sign up for your account",
+        "labels": ["First Name", "Last Name", "Phone", "Email (Optional)"],
+        "account": {
+          "existsEmail": {
+            "title": "Uh oh! Account already exists",
+            "description": "There is already an account associated with this email"
+          },
+          "existsPhone": {
+            "title": "Uh oh! Account already exists",
+            "description": "There is already an account associated with this phone number"
+          },
+          "generic": {
+            "title": "Uh oh! Something went wrong",
+            "description": "There was a problem with your request"
+          }
+        },
+        "code": {
+          "success": {
+            "title": "Success!",
+            "description": "Your code has been sent"
+          },
+          "error": {
+            "title": "Uh oh! Something went wrong",
+            "description": "There was a problem with your request"
+          },
+          "invalid": {
+            "title": "Invalid code",
+            "description": "Your code is invalid"
+          }
+        },
+        "phone": {
+          "verify": "Verify"
+        },
+        "signup": {
+          "standard": "Sign Up",
+          "google": "Sign Up with Google"
+        },
+        "accountExists": {
+          "text": "Already have an account?",
+          "link": "Sign in"
+        },
+        "orgAccount": {
+          "text": "Want an organization account?",
+          "link": "Sign up"
+        },
+        "button": {
+          "text": "Sign Up"
+        },
+        "validation": {
+          "firstName": {
+            "min": "Must be at least 2 characters",
+            "max": "Must be at most 50 characters"
+          },
+          "lastName": {
+            "min": "Must be at least 2 characters",
+            "max": "Must be at most 50 characters"
+          },
+          "phone": {
+            "refine": "Invalid phone number"
+          },
+          "email": {
+            "email": "Invalid email"
+          }
+        }
+      },
+      "orgSignIn": {
+        "title": "Organization Sign In",
+        "description": "Enter your email and password below to sign in to your organization account",
+        "labels": ["Email", "Password"],
+        "noAccount": {
+          "text": "Don't have an organization account?",
+          "link": "Sign up"
+        },
+        "userAccount": {
+          "text": "Have a user account?",
+          "link": "Sign in"
+        },
+        "button": {
+          "text": "Sign In"
+        },
+        "validation": {
+          "email": {
+            "required": "Email required",
+            "invalid": "Invalid email"
+          },
+          "password": {
+            "required": "Password required",
+            "invalid": "Invalid password"
+          }
+        }
+      },
+      "orgSignUp": {
+        "title": "Request an Account",
+        "description": "Enter your email and a brief description of your organization to request an account. You will receive an email from the Velago team.",
+        "labels": [
+          "Organization Name",
+          "Organization Email",
+          "Organization Description",
+          "Additional Information (Optional)"
+        ],
+        "signIn": {
+          "text": "Already have an organization account?",
+          "link": "Sign in"
+        },
+        "userAccount": {
+          "text": "Want to sign up for a user account?",
+          "link": "Sign up"
+        },
+        "descriptionPlaceholder": "Enter organization description here",
+        "additionalInfo": "Enter additional information here",
+        "toast": {
+          "success": {
+            "title": "Success!",
+            "description": "Your request has been sent to Velago!"
+          },
+          "error": {
+            "title": "Uh oh! Something went wrong",
+            "description": "There was a problem with your request"
+          }
+        },
+        "submit": "Submit",
+        "validation": {
+          "orgName": {
+            "min": "Must be at least 3 characters",
+            "max": "Must be at most 70 characters"
+          },
+          "email": {
+            "email": "Invalid email"
+          },
+          "description": {
+            "min": "Must be at least 50 characters",
+            "max": "Must be at most 750 characters"
+          }
+        }
+      },
+      "map": {
+        "search": {
+          "placeholders": [
+            "Westminster, London SW1A 1AA, United Kingdom",
+            "1600 Pennsylvania Avenue NW, Washington, D.C., USA",
+            "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France",
+            "Dharmapuri, Forest Colony, Tajganj, Agra, Uttar Pradesh 282001, India",
+            "Bennelong Point, Sydney NSW 2000, Australia",
+            "221B Baker Street London NW1 6XE, United Kingdom",
+            "12 Grimmauld Place London, United Kingdom",
+            "742 Evergreen Terrace Springfield, USA",
+            "4 Privet Drive Little Whinging, Surrey, England"
+          ]
+        }
+      },
+      "about": {
+        "title": "What is Velago?",
+        "subheading": "Learn more about our mission to equip underprivileged communities with the knowledge to control their healthcare",
+        "content": [
+          {
+            "header": "Our Mission",
+            "text": "Welcome to Velago, a platform dedicated to transforming access to healthcare and charitable services. Our mission is to connect underprivileged individuals with Medicare-accepting healthcare providers and compassionate charitable organizations. At Velago, we believe everyone deserves access to quality healthcare and support, regardless of their socio-economic status."
+          },
+          {
+            "header": "Empowering Users",
+            "text": "Our platform features easy-to-use search tools and comprehensive listings to help users find the support they need. Whether seeking medical care, mental health services, or assistance from charitable organizations, Velago provides detailed information and resources to guide you. We aim to empower individuals by simplifying the process of accessing essential care and support."
+          },
+          {
+            "header": "Expanding Reach",
+            "text": "For healthcare providers and charitable organizations, Velago offers an opportunity to reach a broader audience and make a significant impact. By joining our platform, providers can connect with those in need, while organizations can extend their reach and amplify their efforts. Together, we can create a world where essential healthcare and support services are accessible to all. Explore, connect, and contribute to a more compassionate world with Velago today."
+          }
+        ]
+      }
+    },
+    "footer": {
+      "legal": "All Rights Reserved",
+      "description": "Empowering underprivileged individuals by connecting them with Medicare-accepting healthcare providers and charitable organizations.",
+      "links": [
+        {
+          "href": "/map",
+          "text": "Map"
+        },
+        {
+          "href": "/contact",
+          "text": "Contact"
+        },
+        {
+          "href": "/about",
+          "text": "About"
+        },
+        {
+          "href": "/privacy",
+          "text": "Privacy Policy"
+        },
+        {
+          "href": "/disclaimer",
+          "text": "Disclaimer"
+        }
+      ]
+    }
+  }
+  

@@ -1,0 +1,410 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema", "postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("TRANSACTION_CONNECTION")
+  directUrl  = env("SESSION_CONNECTION")
+  extensions = [pgcrypto(schema: "extensions"), pgjwt(schema: "extensions"), supabase_vault, uuid_ossp(map: "uuid-ossp", schema: "extensions"), vector]
+  schemas    = ["extensions", "grapql", "public"]
+}
+
+model User {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstName String? @map("first_name")
+  lastName  String? @map("last_name")
+  email     String? @unique
+  phone     String?
+  role      Role    @relation(fields: [roleId], references: [id])
+  roleId    String  @map("role_id") @db.Uuid
+  provider  String
+
+  @@map("user")
+  @@schema("public")
+}
+
+model Role {
+  id    String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name  String
+  users User[]
+
+  @@map("role")
+  @@schema("public")
+}
+
+model ContactMessage {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstName String
+  lastName  String
+  email     String
+  phone     String
+  message   String
+  timestamp DateTime @default(now())
+
+  @@map("contact_message")
+  @@schema("public")
+}
+
+model SignUpMessage {
+  id             String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  orgName        String  @map("org_name")
+  email          String
+  description    String
+  additionalInfo String? @map("additional_info")
+
+  @@map("sign_up_message")
+  @@schema("public")
+}
+
+model Organization {
+  id                      String                   @id @default(uuid()) @db.Uuid
+  name                    String
+  alternateName           String?                  @map("alternate_name")
+  description             String?
+  email                   String?
+  website                 String?
+  taxStatus               String?                  @map("tax_status")
+  taxId                   String?                  @map("tax_id")
+  yearIncorporated        Int?                     @map("year_incorporated")
+  legalStatus             String?                  @map("legal_status")
+  logo                    String?
+  uri                     String?
+  organizationStatus      Boolean                  @default(true) @map("organization_status")
+  parentOrganization      Organization?            @relation("ParentOrganization", fields: [parentOrganizationId], references: [id])
+  parentOrganizationId    String?                  @map("parent_organization_id") @db.Uuid
+  childOrganizations      Organization[]           @relation("ParentOrganization")
+  services                Service[]
+  funding                 Funding[]
+  contacts                Contact[]
+  phones                  Phone[]
+  locations               Location[]
+  programs                Program[]
+  organizationIdentifiers OrganizationIdentifier[]
+
+  @@map("organization")
+  @@schema("public")
+}
+
+model Service {
+  id                     String              @id @db.Uuid
+  name                   String
+  alternateName          String?             @map("alternate_name")
+  description            String?
+  url                    String?
+  email                  String?
+  status                 StatusType
+  interpretationServices String?             @map("interpretation_services")
+  applicationProcess     String?             @map("application_process")
+  waitTime               String?             @map("wait_time")
+  fees                   String?
+  feesDescription        String?             @map("fees_description")
+  accreditations         String?
+  eligibilityDescription String?             @map("eligibility_description")
+  minimunAge             Int?                @map("minimum_age")
+  maximumAge             Int?                @map("maximum_age")
+  assuredDate            String?             @map("assured_date")
+  assurerEmail           String?             @map("assurer_email")
+  licenses               String?
+  alert                  String?
+  lastModified           DateTime?           @map("last_modified")
+  phones                 Phone[]
+  schedules              Schedule[]
+  serviceAreas           ServiceArea[]
+  serviceAtLocations     ServiceAtLocation[]
+  languages              Language[]
+  contacts               Contact[]
+  organization           Organization?       @relation(fields: [organizationId], references: [id])
+  organizationId         String?             @unique @map("organization_id") @db.Uuid
+  funding                Funding[]
+  costOptions            CostOption[]
+  programId              String?             @unique @map("program_id") @db.Uuid
+  program                Program?            @relation(fields: [programId], references: [id])
+  requiredDocuments      RequiredDocument[]
+
+  @@map("service")
+  @@schema("public")
+}
+
+enum StatusType {
+  ACTIVE
+  INACTIVE
+  DEFUNCT
+  TEMPORARILY_CLOSED
+
+  @@map("status_type")
+  @@schema("public")
+}
+
+model Program {
+  id             String        @id @default(uuid()) @db.Uuid
+  organizationId String?       @unique @map("organization_id") @db.Uuid
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  name           String
+  alternateName  String?       @map("alternate_name")
+  description    String
+  service        Service?
+
+  @@map("program")
+  @@schema("public")
+}
+
+model Address {
+  id            String    @id @default(uuid()) @db.Uuid
+  locationId    String?   @unique @db.Uuid
+  location      Location? @relation(fields: [locationId], references: [id])
+  attention     String?   @map("attention")
+  address1      String?   @map("address_1")
+  address2      String?   @map("address_2")
+  city          String?   @map("city")
+  region        String?   @map("region")
+  stateProvince String?   @map("state_province")
+  postalCode    String?   @map("postal_code")
+  country       String?   @map("country")
+  addressType   String?   @map("address_type")
+
+  @@map("address")
+  @@schema("public")
+}
+
+model Contact {
+  id                  String             @id @default(uuid()) @db.Uuid
+  organizationId      String?            @map("organization_id") @db.Uuid
+  organization        Organization?      @relation(fields: [organizationId], references: [id])
+  serviceId           String?            @unique @map("service_id") @db.Uuid
+  service             Service?           @relation(fields: [serviceId], references: [id])
+  serviceAtLocationId String?            @unique @map("service_at_location_id") @db.Uuid
+  serviceAtLocation   ServiceAtLocation? @relation(fields: [serviceAtLocationId], references: [id])
+  phone               Phone[]
+  locationId          String?            @unique @map("location_id") @db.Uuid
+  location            Location?          @relation(fields: [locationId], references: [id])
+  name                String?
+  title               String?
+  department          String?
+  email               String?
+
+  @@map("contact")
+  @@schema("public")
+}
+
+model RequiredDocument {
+  id        String   @id @default(uuid()) @db.Uuid
+  service   Service? @relation(fields: [serviceId], references: [id])
+  serviceId String?  @unique @map("service_id") @db.Uuid
+  document  String?
+  uri       String?
+
+  @@map("required_document")
+  @@schema("public")
+}
+
+model Location {
+  id                String              @id @default(uuid()) @db.Uuid
+  phones            Phone[]
+  languages         Language[]
+  locationType      LocationType        @map("location_type")
+  url               String?
+  organizationId    String?             @unique @map("organization_id") @db.Uuid
+  organization      Organization?       @relation(fields: [organizationId], references: [id])
+  accessability     Accessability?
+  address           Address?
+  serviceAtLocation ServiceAtLocation[]
+  contacts          Contact[]
+
+  @@map("location")
+  @@schema("public")
+}
+
+enum LocationType {
+  PHYSICAL
+  POSTAL
+  VIRTUAL
+
+  @@map("location_type")
+  @@schema("public")
+}
+
+model ServiceAtLocation {
+  id          String     @id @default(uuid()) @db.Uuid
+  service     Service?   @relation(fields: [serviceId], references: [id])
+  serviceId   String?    @unique @map("service_id") @db.Uuid
+  contacts    Contact[]
+  description String?
+  phones      Phone[]
+  schedules   Schedule[]
+  location    Location?  @relation(fields: [locationId], references: [id])
+  locationId  String?    @map("location_id") @db.Uuid
+
+  @@map("service_at_location")
+  @@schema("public")
+}
+
+model Phone {
+  id                  String             @id @default(uuid()) @db.Uuid
+  location            Location?          @relation(fields: [locationId], references: [id])
+  locationId          String?            @unique @map("location_id") @db.Uuid
+  service             Service?           @relation(fields: [serviceId], references: [id])
+  serviceId           String?            @unique @map("service_id") @db.Uuid
+  Organization        Organization?      @relation(fields: [organizationId], references: [id])
+  organizationId      String?            @map("organization_id") @db.Uuid
+  contactId           String?            @unique @map("contact_id") @db.Uuid
+  contact             Contact?           @relation(fields: [contactId], references: [id])
+  Language            Language[]
+  serviceAtLocationId String?            @unique @map("service_at_location_id") @db.Uuid
+  serviceAtLocation   ServiceAtLocation? @relation(fields: [serviceAtLocationId], references: [id])
+  description         String?
+  number              String
+  extention           Int
+  phoneType           String?            @map("phone_type")
+
+  @@map("phone")
+  @@schema("public")
+}
+
+model ServiceArea {
+  id          String     @id @default(uuid()) @db.Uuid
+  service     Service?   @relation(fields: [serviceId], references: [id])
+  serviceId   String     @map("service_id") @db.Uuid
+  name        String?
+  description String?
+  extent      String?
+  extentType  ExtentType @map("extent_type")
+  uri         String?
+
+  @@map("serice_area")
+  @@schema("public")
+}
+
+enum ExtentType {
+  GEOJSON
+  TOPOJSON
+  KML
+
+  @@map("extent_type")
+  @@schema("public")
+}
+
+model CostOption {
+  id                String   @id @default(uuid()) @db.Uuid
+  service           Service? @relation(fields: [serviceId], references: [id])
+  serviceId         String?  @map("service_id") @db.Uuid
+  validFrom         String?  @map("valid_from")
+  validTo           String?  @map("valid_to")
+  option            String
+  currency          String?
+  amount            Decimal?
+  amountDescription String?  @map("amount_description")
+
+  @@map("cost_option")
+  @@schema("public")
+}
+
+model Accessability {
+  id          String    @id @default(uuid()) @db.Uuid
+  locationId  String?   @unique @map("location_id") @db.Uuid
+  location    Location? @relation(fields: [locationId], references: [id])
+  description String?
+  details     String?
+  url         String?
+
+  @@map("accessability")
+  @@schema("public")
+}
+
+model Schedule {
+  id                  String             @id @default(uuid()) @db.Uuid
+  service             Service?           @relation(fields: [serviceId], references: [id])
+  serviceId           String?            @unique @map("service_id") @db.Uuid
+  ServiceAtLocation   ServiceAtLocation? @relation(fields: [serviceAtLocationId], references: [id])
+  serviceAtLocationId String?            @map("service_at_location_id") @db.Uuid
+  validFrom           String?            @map("valid_from")
+  validTo             String?            @map("valid_to")
+  dstart              String?
+  timezome            Int
+  until               String?
+  count               Int?
+  wkst                String?
+  freq                String?
+  interval            Int?
+  byday               String?
+  byweekno            String?
+  bymonthday          String?
+  byyearday           String?
+  description         String?
+  opensAt             String?            @map("opens_at")
+  closesAt            String?            @map("closes_at")
+  scheduleLink        String?            @map("schedule_link")
+  attendingType       String?            @map("attending_type")
+  notes               String?
+
+  @@map("schedule")
+  @@schema("public")
+}
+
+model Language {
+  id         String    @id @default(uuid()) @db.Uuid
+  serviceId  String?   @map("service_id") @db.Uuid
+  service    Service?  @relation(fields: [serviceId], references: [id])
+  locationId String?   @map("location_id") @db.Uuid
+  location   Location? @relation(fields: [locationId], references: [id])
+  phoneId    String?   @map("phone_id") @db.Uuid
+  phone      Phone?    @relation(fields: [phoneId], references: [id])
+  name       String?
+  code       String?
+  note       String?
+
+  @@map("language")
+  @@schema("public")
+}
+
+model Funding {
+  id             String        @id @default(uuid()) @db.Uuid
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?       @unique @map("organization_id") @db.Uuid
+  serviceId      String?       @unique @map("service_id") @db.Uuid
+  service        Service?      @relation(fields: [serviceId], references: [id])
+  source         String?
+
+  @@map("funding")
+  @@schema("public")
+}
+
+model OrganizationIdentifier {
+  id               String       @id @default(uuid()) @db.Uuid
+  organization     Organization @relation(fields: [organizationId], references: [id])
+  organizationId   String       @unique @map("organization_id") @db.Uuid
+  identifierScheme String?      @map("identifier_scheme")
+  identifierType   String       @map("identifier_type")
+  identifier       String
+
+  @@map("organization_identifier")
+  @@schema("public")
+}
+
+model Taxonomy {
+  id           String        @id @default(uuid()) @db.Uuid
+  name         String
+  description  String
+  uri          String?
+  version      String?
+  taxonomyTerm TaxonomyTerm?
+
+  @@map("taxonomy")
+  @@schema("public")
+}
+
+model TaxonomyTerm {
+  id             String    @id @default(uuid()) @db.Uuid
+  code           String?
+  name           String
+  description    String
+  parentId       String?   @map("parent_id") @db.Uuid
+  taxonomy       String
+  taxonomyDetail Taxonomy? @relation(fields: [taxonomyId], references: [id])
+  taxonomyId     String?   @unique @map("taxonomy_id") @db.Uuid
+  termUri        String?   @map("term_uri")
+
+  @@map("taxonomy_term")
+  @@schema("public")
+}
