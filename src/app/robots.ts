@@ -1,3 +1,4 @@
+import { protectedPageRoutes } from '@/config/protectedPageRoutes';
 import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
@@ -5,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/private/',
+      disallow: protectedPageRoutes,
     },
     sitemap: 'https://acme.com/sitemap.xml',
   };
