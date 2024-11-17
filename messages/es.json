@@ -1,0 +1,391 @@
+{
+  "header": {
+    "links": [
+      {
+        "href": "/map",
+        "text": "Mapa"
+      },
+      {
+        "href": "/contact",
+        "text": "Contacto"
+      },
+      {
+        "href": "/about",
+        "text": "Acerca"
+      }
+    ],
+    "signUp": "Registrar",
+    "signIn": "Iniciar Sesión"
+  },
+  "pages": {
+    "home": {
+      "callToAction": {
+        "title": "Encuentra Recursos Cerca de Ti",
+        "description": "Utiliza Velago para buscar proveedores de atención médica y organizaciones benéficas cerca de ti",
+        "placeholders": [
+          "Westminster, London SW1A 1AA, United Kingdom",
+          "1600 Pennsylvania Avenue NW, Washington, D.C., USA",
+          "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France",
+          "Dharmapuri, Forest Colony, Tajganj, Agra, Uttar Pradesh 282001, India",
+          "Bennelong Point, Sydney NSW 2000, Australia",
+          "221B Baker Street London NW1 6XE, United Kingdom",
+          "12 Grimmauld Place London, United Kingdom",
+          "742 Evergreen Terrace Springfield, USA",
+          "4 Privet Drive Little Whinging, Surrey, England"
+        ]
+      },
+      "content": {
+        "title": "Asocíate con Nosotros",
+        "cards": [
+          {
+            "title": "Proveedores de Atención Médica",
+            "description": "Asóciate con nosotros para llegar a más pacientes necesitados. Muestra tus servicios y contribuye a mejorar la accesibilidad a la atención médica. ¡Explora las oportunidades de asociación hoy!",
+            "button": "Listar tu Proveedor"
+          },
+          {
+            "title": "Organizaciones",
+            "description": "Únete a nosotros para marcar la diferencia. Lista tus servicios, comparte historias de impacto y participa con una comunidad solidaria. ¡Comienza tu viaje de asociación hoy!",
+            "button": "Listar tu Organización"
+          }
+        ],
+        "productDescription": {
+          "title": "Revolucionando el Acceso para Todos",
+          "paragraph1": "Bienvenido a Velago, donde estamos revolucionando el acceso a la atención médica y los servicios benéficos. Nuestra plataforma conecta a personas desfavorecidas con proveedores de atención médica que aceptan Medicare y organizaciones benéficas compasivas. A través de herramientas de búsqueda fáciles y listados completos, los usuarios pueden encontrar el apoyo que necesitan, mientras que los proveedores y organizaciones pueden llegar a una audiencia más amplia y tener un impacto duradero.",
+          "paragraph2": "Únete a nosotros para crear un mundo donde todos tengan acceso a servicios esenciales de atención médica y apoyo. Explora, conecta y marca la diferencia con Velago hoy.",
+          "link": "Saber más"
+        }
+      },
+      "faq": {
+        "title": "Preguntas Frecuentes (FAQ)",
+        "questions": [
+          {
+            "question": "¿Cómo puedo encontrar proveedores de atención médica u organizaciones benéficas cerca de mí?",
+            "answer": "Puedes usar nuestra barra de búsqueda para ingresar tu ubicación y descubrir proveedores de atención médica cercanos que acepten Medicare y organizaciones benéficas."
+          },
+          {
+            "question": "¿Qué tipos de servicios ofrecen los proveedores de atención médica y las organizaciones benéficas?",
+            "answer": "Los proveedores de atención médica ofrecen una variedad de servicios médicos, que incluyen atención primaria, consultas especializadas y exámenes preventivos. Las organizaciones benéficas pueden proporcionar asistencia financiera, distribución de alimentos, refugio y otros servicios de apoyo."
+          },
+          {
+            "question": "¿Cómo sé si un proveedor de atención médica acepta Medicare?",
+            "answer": "Nuestra plataforma filtra los proveedores de atención médica según su aceptación de Medicare. Puedes identificar fácilmente los proveedores que aceptan Medicare en tus resultados de búsqueda."
+          },
+          {
+            "question": "¿Puedo buscar tipos específicos de recursos?",
+            "answer": "Sí, puedes refinar tu búsqueda especificando el tipo de proveedor de atención médica (por ejemplo, clínicas, hospitales, farmacias) o el área de enfoque de las organizaciones benéficas (por ejemplo, atención médica, educación, vivienda)."
+          },
+          {
+            "question": "¿Hay criterios de elegibilidad para acceder a servicios benéficos?",
+            "answer": "Los criterios de elegibilidad para servicios benéficos varían según la organización. Algunas pueden tener criterios basados en ingresos, mientras que otras priorizan ciertas demografías o condiciones específicas. Puedes contactar directamente a las organizaciones para obtener más información."
+          }
+        ]
+      }
+    },
+    "contact": {
+      "title": "Contacto con Nosotros",
+      "description": "Póngase en contacto con nosotros para obtener más información sobre nuestros servicios, asociaciones o cualquier consulta que pueda tener.",
+      "messagePlaceholder": "Introduzca el mensaje aquí",
+      "labels": [
+        "Nombre de pila",
+        "Apellido",
+        "Correo electrónico",
+        "Teléfono",
+        "Mensaje"
+      ],
+      "toast": {
+        "success": {
+          "title": "¡Éxito!",
+          "description": "¡Tu mensaje ha sido enviado a Velago!"
+        },
+        "error": {
+          "title": "¡Uh oh! Algo salió mal",
+          "description": "Hubo un problema con su solicitud"
+        }
+      },
+      "submit": "Entregar",
+      "validation": {
+        "firstName": {
+          "min": "Debe tener al menos 2 caracteres",
+          "max": "Debe tener como máximo 50 caracteres"
+        },
+        "lastName": {
+          "min": "Debe tener al menos 2 caracteres",
+          "max": "Debe tener como máximo 50 caracteres"
+        },
+        "phone": {
+          "refine": "Numero de telefono invalido"
+        },
+        "email": {
+          "email": "Email inválido"
+        },
+        "message": {
+          "min": "Debe tener al menos 10 caracteres.",
+          "max": "Debe tener como máximo 300 caracteres"
+        }
+      }
+    },
+    "userSignIn": {
+      "title": "Iniciar sesión",
+      "description": "Ingrese su número de teléfono a continuación para iniciar sesión en su cuenta",
+      "labels": ["Teléfono", "Código"],
+      "login": {
+        "standard": "Iniciar sesión",
+        "google": "Iniciar sesión con Google"
+      },
+      "phone": {
+        "label": "Teléfono"
+      },
+      "orgAccount": {
+        "text": "¿Tienes una cuenta de organización?",
+        "link": "Iniciar sesión"
+      },
+      "noAccount": {
+        "text": "¿No tienes una cuenta?",
+        "link": "Regístrate"
+      },
+      "account": {
+        "error": {
+          "notFound": {
+            "title": "¡Uh oh! La cuenta no existe",
+            "description": "No hay ninguna cuenta con este número de teléfono"
+          },
+          "generic": {
+            "title": "¡Uh oh! Algo salió mal",
+            "description": "Hubo un problema con tu solicitud"
+          }
+        }
+      },
+      "code": {
+        "button": {
+          "resend": "Reenviar",
+          "sendCode": "Enviar código"
+        },
+        "success": {
+          "title": "¡Éxito!",
+          "description": "Tu código ha sido enviado"
+        },
+        "error": {
+          "title": "¡Uh oh! Algo salió mal",
+          "description": "Hubo un problema con tu solicitud"
+        },
+        "invalid": {
+          "title": "Código inválido",
+          "description": "Tu código es inválido"
+        }
+      },
+      "button": {
+        "text": "Iniciar sesión"
+      },
+      "validation": {
+        "phone": {
+          "refine": "Numero de telefono invalido"
+        },
+        "otp": {
+          "refine": "Código inválido"
+        }
+      }
+    },
+
+    "userSignUp": {
+      "title": "Regístrate",
+      "description": "Ingresa tu nombre, apellido y número de teléfono a continuación para crear tu cuenta",
+      "labels": [
+        "Nombre",
+        "Apellido",
+        "Teléfono",
+        "Correo electrónico (Opcional)"
+      ],
+      "orgAccount": {
+        "text": "¿Desea registrarse para una cuenta de organización?",
+        "link": "Registrarse"
+      },
+      "account": {
+        "existsEmail": {
+          "title": "¡Uh oh! La cuenta ya existe",
+          "description": "Ya existe una cuenta asociada con este correo electrónico"
+        },
+        "existsPhone": {
+          "title": "¡Uh oh! La cuenta ya existe",
+          "description": "Ya existe una cuenta asociada con este número de teléfono"
+        },
+        "generic": {
+          "title": "¡Uh oh! Algo salió mal",
+          "description": "Hubo un problema con tu solicitud"
+        }
+      },
+      "code": {
+        "success": {
+          "title": "¡Éxito!",
+          "description": "Tu código ha sido enviado"
+        },
+        "error": {
+          "title": "¡Uh oh! Algo salió mal",
+          "description": "Hubo un problema con tu solicitud"
+        },
+        "invalid": {
+          "title": "Código inválido",
+          "description": "Tu código es inválido"
+        }
+      },
+      "phone": {
+        "verify": "Verificar"
+      },
+      "signup": {
+        "standard": "Regístrate",
+        "google": "Regístrate con Google"
+      },
+      "accountExists": {
+        "text": "¿Ya tienes una cuenta?",
+        "link": "Inicia sesión"
+      },
+      "button": {
+        "text": "Regístrate"
+      },
+      "validation": {
+        "firstName": {
+          "min": "Debe tener al menos 2 caracteres",
+          "max": "Debe tener como máximo 50 caracteres"
+        },
+        "lastName": {
+          "min": "Debe tener al menos 2 caracteres",
+          "max": "Debe tener como máximo 50 caracteres"
+        },
+        "phone": {
+          "refine": "Numero de telefono invalido"
+        },
+        "email": {
+          "email": "Email inválido"
+        }
+      }
+    },
+    "orgSignIn": {
+      "title": "Inicio de Sesión de Organización",
+      "description": "Ingrese su correo electrónico y contraseña a continuación para iniciar sesión en su cuenta de organización",
+      "labels": ["Correo Electrónico", "Contraseña"],
+      "noAccount": {
+        "text": "¿No tiene una cuenta de organización?",
+        "link": "Regístrate"
+      },
+      "userAccount": {
+        "text": "¿Tiene una cuenta de usuario?",
+        "link": "Iniciar sesión"
+      },
+      "button": {
+        "text": "Iniciar Sesión"
+      },
+      "validation": {
+        "email": {
+          "required": "Correo electrónico requerido",
+          "invalid": "Correo electrónico inválido"
+        },
+        "password": {
+          "required": "Contraseña requerida",
+          "invalid": "Contraseña inválida"
+        }
+      }
+    },
+    "orgSignUp": {
+      "title": "Solicitar una Cuenta",
+      "description": "Ingrese su correo electrónico y una breve descripción de su organización para solicitar una cuenta. Recibirá un correo electrónico del equipo de Velago.",
+      "labels": [
+        "Nombre de la Organización",
+        "Correo Electrónico de la Organización",
+        "Descripción de la Organización",
+        "Información Adicional (Opcional)"
+      ],
+      "signIn": {
+        "text": "¿Ya tiene una cuenta de organización?",
+        "link": "Iniciar sesión"
+      },
+      "userAccount": {
+        "text": "¿Desea registrarse para una cuenta de usuario?",
+        "link": "Registrarse"
+      },
+      "descriptionPlaceholder": "Ingrese la descripción de la organización aquí",
+      "additionalInfo": "Ingrese información adicional aquí",
+      "toast": {
+        "success": {
+          "title": "¡Éxito!",
+          "description": "¡Su solicitud ha sido enviada a Velago!"
+        },
+        "error": {
+          "title": "¡Vaya! Algo salió mal",
+          "description": "Hubo un problema con su solicitud"
+        }
+      },
+      "submit": "Enviar",
+      "validation": {
+        "orgName": {
+          "min": "Debe tener al menos 3 caracteres",
+          "max": "Debe tener como máximo 70 caracteres"
+        },
+        "email": {
+          "email": "Correo electrónico no válido"
+        },
+        "description": {
+          "min": "Debe tener al menos 50 caracteres",
+          "max": "Debe tener como máximo 750 caracteres"
+        }
+      }
+    },
+    "map": {
+      "search": {
+        "placeholders": [
+          "Westminster, London SW1A 1AA, United Kingdom",
+          "1600 Pennsylvania Avenue NW, Washington, D.C., USA",
+          "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France",
+          "Dharmapuri, Forest Colony, Tajganj, Agra, Uttar Pradesh 282001, India",
+          "Bennelong Point, Sydney NSW 2000, Australia",
+          "221B Baker Street London NW1 6XE, United Kingdom",
+          "12 Grimmauld Place London, United Kingdom",
+          "742 Evergreen Terrace Springfield, USA",
+          "4 Privet Drive Little Whinging, Surrey, England"
+        ]
+      }
+    },
+    "about": {
+      "title": "¿Qué es Velago?",
+      "subheading": "Conozca más sobre nuestra misión de equipar a las comunidades desfavorecidas con el conocimiento para controlar su atención médica.",
+      "content": [
+        {
+          "header": "Nuestra Misión",
+          "text": "Bienvenido a Velago, una plataforma dedicada a transformar el acceso a los servicios de salud y caridad. Nuestra misión es conectar a personas desfavorecidas con proveedores de atención médica que aceptan Medicare y organizaciones caritativas compasivas. En Velago, creemos que todos merecen acceso a atención médica y apoyo de calidad, independientemente de su estatus socioeconómico."
+        },
+        {
+          "header": "Empoderando a los Usuarios",
+          "text": "Nuestra plataforma cuenta con herramientas de búsqueda fáciles de usar y listados completos para ayudar a los usuarios a encontrar el apoyo que necesitan. Ya sea que busquen atención médica, servicios de salud mental o asistencia de organizaciones caritativas, Velago proporciona información detallada y recursos para guiarlos. Nuestro objetivo es empoderar a las personas simplificando el proceso de acceso a la atención y el apoyo esenciales."
+        },
+        {
+          "header": "Ampliando el Alcance",
+          "text": "Para los proveedores de atención médica y organizaciones caritativas, Velago ofrece la oportunidad de llegar a una audiencia más amplia y tener un impacto significativo. Al unirse a nuestra plataforma, los proveedores pueden conectarse con aquellos que necesitan sus servicios, mientras que las organizaciones pueden ampliar su alcance y amplificar sus esfuerzos. Juntos, podemos crear un mundo donde los servicios esenciales de salud y apoyo sean accesibles para todos. Explora, conecta y contribuye a un mundo más compasivo con Velago hoy."
+        }
+      ]
+    }
+  },
+  "footer": {
+    "legal": "Todos los Derechos Reservados",
+    "description": "Empoderando a personas desfavorecidas conectándolas con proveedores de atención médica que aceptan Medicare y organizaciones benéficas.",
+    "links": [
+      {
+        "href": "/map",
+        "text": "Mapa"
+      },
+      {
+        "href": "/contact",
+        "text": "Contacto"
+      },
+      {
+        "href": "/about",
+        "text": "Acerca de"
+      },
+      {
+        "href": "/privacy",
+        "text": "Política de privacidad"
+      },
+      {
+        "href": "/disclaimer",
+        "text": "Descargo de responsabilidad"
+      }
+    ]
+  }
+}
