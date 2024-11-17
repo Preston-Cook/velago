@@ -1,3 +1,4 @@
+import { pathnameLocaleMappings } from '@/config/pathnameLocaleMappings';
 import { createNavigation } from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
 
@@ -7,29 +8,7 @@ export const routing = defineRouting({
 
   // Used when no locale matches
   defaultLocale: 'en',
-  pathnames: {
-    '/': '/',
-    '/map': {
-      en: '/map',
-      es: '/mapa',
-    },
-    '/contact': {
-      en: '/contact',
-      es: '/contacto',
-    },
-    '/about': {
-      en: '/about',
-      es: '/acerca-de',
-    },
-    '/privacy': {
-      en: '/privacy',
-      es: '/privacidad',
-    },
-    '/disclaimer': {
-      en: '/disclaimer',
-      es: '/descargo-de-responsabilidad',
-    },
-  },
+  pathnames: pathnameLocaleMappings,
 });
 
 // Lightweight wrappers around Next.js' navigation APIs
