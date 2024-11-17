@@ -1,6 +1,23 @@
 {
   "Footer": {
     "legal": "All Rights Reserved",
-    "description": "Empowering underprivileged individuals by connecting them with Medicare-accepting healthcare providers and charitable organizations."
+    "description": "Empowering underprivileged individuals by connecting them with Medicare-accepting healthcare providers and charitable organizations.",
+    "links": {
+      "map": {
+        "text": "Map"
+      },
+      "contact": {
+        "text": "Contact"
+      },
+      "about": {
+        "text": "About"
+      },
+      "privacy": {
+        "text": "Privacy Policy"
+      },
+      "disclaimer": {
+        "text": "Disclaimer"
+      }
+    }
   }
 }

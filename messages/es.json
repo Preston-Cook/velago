@@ -1,6 +1,23 @@
 {
   "Footer": {
     "legal": "Todos los derechos reservados",
-    "description": "Empoderando a personas desfavorecidas al conectarlas con proveedores de atención médica que aceptan Medicare y organizaciones benéficas."
+    "description": "Empoderando a personas desfavorecidas al conectarlas con proveedores de atención médica que aceptan Medicare y organizaciones benéficas.",
+    "links": {
+      "map": {
+        "text": "Mapa"
+      },
+      "conact": {
+        "text": "Contacto"
+      },
+      "about": {
+        "text": "Acerca de"
+      },
+      "privacy": {
+        "text": "Política de privacidad"
+      },
+      "disclaimer": {
+        "text": "Aviso legal"
+      }
+    }
   }
 }

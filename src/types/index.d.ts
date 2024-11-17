@@ -1,3 +1,4 @@
+import { pathnameLocaleMappings } from '@/config/pathnameLocaleMappings';
 import { NextMiddlewareResult } from 'next/dist/server/web/types';
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 
@@ -15,3 +16,5 @@ export interface ThemeColorStateParams {
   themeColor: ThemeColors;
   setThemeColor: React.Dispatch<React.SetStateAction<ThemeColors>>;
 }
+
+export type PathnameConfig = typeof pathnameLocaleMappings;
