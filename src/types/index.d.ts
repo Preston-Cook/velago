@@ -8,3 +8,10 @@ export type CustomMiddleware = (
   event: NextFetchEvent,
   response: NextResponse,
 ) => NextMiddlewareResult | Promise<NextMiddlewareResult>;
+
+export type ThemeColors = 'Zinc' | 'Rose' | 'Blue' | 'Green' | 'Orange';
+
+export interface ThemeColorStateParams {
+  themeColor: ThemeColors;
+  setThemeColor: React.Dispatch<React.SetStateAction<ThemeColors>>;
+}

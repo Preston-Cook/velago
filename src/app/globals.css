@@ -25,6 +25,7 @@ h6 {
 }
 
 @layer base {
+  /****** Default Blue Theme ******/
   :root {
     --background: 210 20% 85%; /* Softer, less bright background */
     --foreground: 222.2 47.4% 11.2%; /* Darker text color for contrast */

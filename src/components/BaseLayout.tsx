@@ -1,13 +1,12 @@
-import { ThemeProvider } from '@/app/context/ThemeProvider';
+import ThemeDataProvider from '@/app/context/ThemeProvider';
 import { cn } from '@/lib/utils';
 import { Locale } from '@/types';
 import { Analytics } from '@vercel/analytics/next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
-import { Footer } from './Footer';
-import Header from './Header';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,21 +27,21 @@ export default async function BaseLayout({
     <html className="h-full" lang={locale} suppressHydrationWarning>
       <body
         className={cn(
-          'min-h-screen bg-slate-600 font-sans antialiased flex flex-col',
+          'min-h-screen font-sans antialiased flex flex-col',
           inter.className,
         )}
       >
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            attribute="class"
+          <NextThemesProvider
+            attribute={'class'}
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </ThemeProvider>
+            <ThemeDataProvider>
+              <main className="flex-1">{children}</main>
+            </ThemeDataProvider>
+          </NextThemesProvider>
         </NextIntlClientProvider>
         <Analytics />
       </body>
