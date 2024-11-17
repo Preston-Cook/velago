@@ -6,7 +6,6 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
-import { Toggle } from './DarkModeToggle';
 import { Footer } from './Footer';
 import Header from './Header';
 
@@ -41,10 +40,7 @@ export default async function BaseLayout({
             disableTransitionOnChange
           >
             <Header />
-            <main className="flex-1">
-              <Toggle />
-              {children}
-            </main>
+            <main className="flex-1">{children}</main>
             <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>
