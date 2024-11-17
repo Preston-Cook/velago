@@ -15,18 +15,18 @@ export async function Footer() {
         <Image
           className="dark:hidden"
           src="/images/logo-black.png"
-          height={40}
-          width={40}
+          height={30}
+          width={30}
           alt="Velago logo"
         />
         <Image
           className="hidden dark:block"
           src="/images/logo-white.png"
-          height={40}
-          width={40}
+          height={30}
+          width={30}
           alt="Velago logo"
         />
-        <h3 className="text-primary text-3xl w-fit">Velago</h3>
+        <h3 className="text-primary text-2xl w-fit">Velago</h3>
       </div>
       <div className="md:max-w-[60%]">{t('description')}</div>
       <div className="w-full flex gap-x-5 items-center justify-center">
