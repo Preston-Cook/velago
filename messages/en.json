@@ -4,8 +4,23 @@
       "en": "English",
       "es": "Spanish"
     },
-    "signUp": "Sign Up",
-    "signIn": "Sign in"
+    "links": {
+      "map": {
+        "text": "Map"
+      },
+      "contact": {
+        "text": "Contact"
+      },
+      "about": {
+        "text": "About"
+      },
+      "signUp": {
+        "text": "Sign Up"
+      },
+      "signIn": {
+        "text": "Sign In"
+      }
+    }
   },
   "Footer": {
     "legal": "All Rights Reserved",
@@ -25,6 +40,46 @@
       },
       "disclaimer": {
         "text": "Disclaimer"
+      }
+    }
+  },
+  "Sheet": {
+    "sections": {
+      "menu": {
+        "title": "Menu",
+        "links": {
+          "map": {
+            "text": "Map"
+          },
+          "about": {
+            "text": "About"
+          },
+          "contact": {
+            "text": "Contact"
+          }
+        }
+      },
+      "legal": {
+        "title": "Legal",
+        "links": {
+          "privacy": {
+            "text": "Privacy Policy"
+          },
+          "disclaimer": {
+            "text": "Disclaimer"
+          }
+        }
+      },
+      "account": {
+        "title": "Account",
+        "links": {
+          "signIn": {
+            "text": "Sign In"
+          },
+          "signUp": {
+            "text": "Sign Up"
+          }
+        }
       }
     }
   }

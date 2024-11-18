@@ -9,7 +9,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { Inter, Roboto } from 'next/font/google';
 import { ReactNode } from 'react';
 import { Footer } from './Footer';
-import Header from './Header';
+import { Header } from './Header';
 
 interface BaseLayoutProps {
   children: ReactNode;

@@ -1,4 +1,4 @@
-import { footerLinks } from '@/config/footerLinks';
+import { footerLinks } from '@/config/links';
 import { Link } from '@/i18n/routing';
 import type { PathnameConfig } from '@/types';
 import { getTranslations } from 'next-intl/server';
@@ -29,7 +29,7 @@ export async function Footer() {
         <h3 className="text-primary text-2xl w-fit">Velago</h3>
       </Link>
       <div className="md:max-w-[60%]">{t('description')}</div>
-      <div className="w-full flex gap-x-5 items-center justify-center">
+      <div className="w-full flex gap-x-5 items-center justify-center flex-wrap">
         {footerLinks.map(({ name, href }) => (
           <Link key={uuid()} href={href as keyof PathnameConfig}>
             <Button className="font-semibold p-0" variant={'link'}>

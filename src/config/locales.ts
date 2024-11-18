@@ -1,3 +1,5 @@
+import { Locale } from '@/types';
+
 export const pathnameLocaleMappings = {
   '/': '/',
   '/map': {
@@ -37,3 +39,7 @@ export const pathnameLocaleMappings = {
     es: '/registrarse/organizacion',
   },
 };
+
+export const defaultLocale: Locale = 'en';
+
+export const supportedLocales: Locale[] = ['en', 'es'];

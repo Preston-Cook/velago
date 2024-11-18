@@ -7,7 +7,7 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
-import { supportedLocales } from '@/config/supportedLocales';
+import { supportedLocales } from '@/config/locales';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { DropdownMenuRadioItem } from '@radix-ui/react-dropdown-menu';

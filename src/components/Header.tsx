@@ -1,12 +1,12 @@
-import { HamburgerMenu } from '@/components/HamburgerMenu';
-import { LocaleToggle } from '@/components/LocaleToggle';
 import { SignInButton } from '@/components/SignInButton';
 import { SignUpButton } from '@/components/SignUpButton';
-import { ThemeModeToggle } from '@/components/ThemeModeToggle';
 import { Link } from '@/i18n/routing';
 import Image from 'next/image';
+import { HamburgerMenu } from './HamburgerMenu';
+import { LocaleToggle } from './LocaleToggle';
+import { ThemeModeToggle } from './ThemeModeToggle';
 
-export default async function Header() {
+export async function Header() {
   return (
     <header className="bg-secondary border-b border-primary p-4 flex">
       <div className="flex flex-1">

@@ -1,6 +1,8 @@
-import { defaultLocale } from '@/config/defaultLocale';
-import { pathnameLocaleMappings } from '@/config/pathnameLocaleMappings';
-import { supportedLocales } from '@/config/supportedLocales';
+import {
+  defaultLocale,
+  pathnameLocaleMappings,
+  supportedLocales,
+} from '@/config/locales';
 import { createNavigation } from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
 
