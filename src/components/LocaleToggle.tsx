@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/DropdownMenu';
 import { supportedLocales } from '@/config/supportedLocales';
 import { usePathname, useRouter } from '@/i18n/routing';
+import { cn } from '@/lib/utils';
 import { DropdownMenuRadioItem } from '@radix-ui/react-dropdown-menu';
 import { Languages } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
@@ -44,7 +45,7 @@ export function LocaleToggle({ className }: LocaleToggleProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className={className} variant={'outline'}>
+        <Button className={cn('p-3', className)} variant={'outline'}>
           <Languages />
         </Button>
       </DropdownMenuTrigger>

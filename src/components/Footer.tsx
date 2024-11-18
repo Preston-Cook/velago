@@ -11,7 +11,7 @@ export async function Footer() {
 
   return (
     <footer className="bg-secondary border-t border-primary p-4 items-center flex flex-col gap-4 text-center">
-      <div className="flex justify-center gap-x-2 items-center">
+      <Link href={'/'} className="flex justify-center gap-x-2 items-center">
         <Image
           className="dark:hidden"
           src="/images/logo-black.png"
@@ -27,7 +27,7 @@ export async function Footer() {
           alt="Velago logo"
         />
         <h3 className="text-primary text-2xl w-fit">Velago</h3>
-      </div>
+      </Link>
       <div className="md:max-w-[60%]">{t('description')}</div>
       <div className="w-full flex gap-x-5 items-center justify-center">
         {footerLinks.map(({ name, href }) => (
