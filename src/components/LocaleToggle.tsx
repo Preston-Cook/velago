@@ -17,7 +17,11 @@ import { useParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { v4 as uuid } from 'uuid';
 
-export function LocaleToggle() {
+interface LocaleToggleProps {
+  className?: string;
+}
+
+export function LocaleToggle({ className }: LocaleToggleProps) {
   const t = useTranslations('Header.localeToggle');
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
@@ -40,12 +44,11 @@ export function LocaleToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={'outline'}>
-          <h3 className=" w-[70px]">{t('label')}</h3>
+        <Button className={className} variant={'outline'}>
           <Languages />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="bg-background p-0">
+      <DropdownMenuContent align="start" className="bg-background p-0">
         <div className="border-none">
           <DropdownMenuRadioGroup
             onValueChange={handleLocaleChange}
@@ -53,7 +56,7 @@ export function LocaleToggle() {
           >
             {supportedLocales.map((locale) => (
               <DropdownMenuRadioItem
-                className={`border-none outline-none ${currentLocale === locale ? 'bg-primary text-white' : 'hover:bg-secondary'} p-2 hover:cursor-pointer flex justify-between items-center`}
+                className={`border-none outline-none ${currentLocale === locale ? 'bg-primary' : 'hover:bg-secondary'} p-2 hover:cursor-pointer flex justify-between items-center`}
                 value={locale}
                 key={uuid()}
                 disabled={isPending}

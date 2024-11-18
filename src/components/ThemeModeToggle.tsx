@@ -4,11 +4,16 @@ import { Button } from '@/components/ui/Button';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
-export function ThemeModeToggle() {
+interface ThemeModeToggleProps {
+  className?: string;
+}
+
+export function ThemeModeToggle({ className }: ThemeModeToggleProps) {
   const { setTheme, theme } = useTheme();
 
   return (
     <Button
+      className={className}
       variant="outline"
       size="icon"
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}

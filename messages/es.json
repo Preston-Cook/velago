@@ -2,8 +2,7 @@
   "Header": {
     "localeToggle": {
       "en": "Inglés",
-      "es": "Español",
-      "label": "Idioma"
+      "es": "Español"
     },
     "signUp": "Registrarse",
     "signIn": "Iniciar sesión"
