@@ -4,7 +4,9 @@
       "en": "Inglés",
       "es": "Español",
       "label": "Idioma"
-    }
+    },
+    "signUp": "Registrarse",
+    "signIn": "Iniciar sesión"
   },
   "Footer": {
     "legal": "Todos los derechos reservados",

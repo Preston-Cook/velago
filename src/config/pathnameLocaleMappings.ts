@@ -20,4 +20,20 @@ export const pathnameLocaleMappings = {
     en: '/disclaimer',
     es: '/descargo-de-responsabilidad',
   },
+  '/signin/user': {
+    en: '/signin/user',
+    es: '/iniciar-sesion/usuario',
+  },
+  '/signin/organization': {
+    en: '/signin/organization',
+    es: '/iniciar-sesion/organizacion',
+  },
+  '/signup/user': {
+    en: '/signup/user',
+    es: '/registrarse/usuario',
+  },
+  '/signup/organization': {
+    en: '/signup/organization',
+    es: '/registrarse/organizacion',
+  },
 };

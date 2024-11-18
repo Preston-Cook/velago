@@ -1,4 +1,6 @@
 import { LocaleToggle } from '@/components/LocaleToggle';
+import { SignInButton } from '@/components/SignInButton';
+import { SignUpButton } from '@/components/SignUpButton';
 import { ThemeModeToggle } from '@/components/ThemeModeToggle';
 import Image from 'next/image';
 
@@ -25,6 +27,8 @@ export default async function Header() {
       <div className="flex gap-x-4 items-center">
         <ThemeModeToggle />
         <LocaleToggle />
+        <SignInButton />
+        <SignUpButton />
       </div>
     </header>
   );

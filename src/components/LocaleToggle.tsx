@@ -61,8 +61,8 @@ export function LocaleToggle() {
                 {t(locale)}
                 <Image
                   src={`/images/${locale}.png`}
-                  height={10}
-                  width={40}
+                  height={25}
+                  width={25}
                   alt={`${t(`${locale}`)} flag`}
                 />
               </DropdownMenuRadioItem>
