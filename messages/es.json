@@ -1,4 +1,11 @@
 {
+  "Header": {
+    "localeToggle": {
+      "en": "Inglés",
+      "es": "Español",
+      "label": "Idioma"
+    }
+  },
   "Footer": {
     "legal": "Todos los derechos reservados",
     "description": "Empoderando a personas desfavorecidas al conectarlas con proveedores de atención médica que aceptan Medicare y organizaciones benéficas.",
@@ -6,7 +13,7 @@
       "map": {
         "text": "Mapa"
       },
-      "conact": {
+      "contact": {
         "text": "Contacto"
       },
       "about": {

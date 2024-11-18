@@ -1,4 +1,11 @@
 {
+  "Header": {
+    "localeToggle": {
+      "en": "English",
+      "es": "Spanish",
+      "label": "Language"
+    }
+  },
   "Footer": {
     "legal": "All Rights Reserved",
     "description": "Empowering underprivileged individuals by connecting them with Medicare-accepting healthcare providers and charitable organizations.",

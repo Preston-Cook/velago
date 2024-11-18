@@ -1,13 +1,15 @@
+import { defaultLocale } from '@/config/defaultLocale';
 import { pathnameLocaleMappings } from '@/config/pathnameLocaleMappings';
+import { supportedLocales } from '@/config/supportedLocales';
 import { createNavigation } from 'next-intl/navigation';
 import { defineRouting } from 'next-intl/routing';
 
 export const routing = defineRouting({
   // A list of all locales that are supported
-  locales: ['en', 'es'],
+  locales: supportedLocales,
 
   // Used when no locale matches
-  defaultLocale: 'en',
+  defaultLocale: defaultLocale,
   pathnames: pathnameLocaleMappings,
 });
 
