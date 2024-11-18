@@ -4,12 +4,27 @@
       "en": "Inglés",
       "es": "Español"
     },
-    "signUp": "Registrarse",
-    "signIn": "Iniciar sesión"
+    "links": {
+      "map": {
+        "text": "Mapa"
+      },
+      "contact": {
+        "text": "Contacto"
+      },
+      "about": {
+        "text": "Acerca de"
+      },
+      "signUp": {
+        "text": "Registrarse"
+      },
+      "signIn": {
+        "text": "Iniciar sesión"
+      }
+    }
   },
   "Footer": {
     "legal": "Todos los derechos reservados",
-    "description": "Empoderando a personas desfavorecidas al conectarlas con proveedores de atención médica que aceptan Medicare y organizaciones benéficas.",
+    "description": "Empoderando a individuos desfavorecidos conectándolos con proveedores de atención médica que aceptan Medicare y organizaciones benéficas.",
     "links": {
       "map": {
         "text": "Mapa"
@@ -24,7 +39,47 @@
         "text": "Política de privacidad"
       },
       "disclaimer": {
-        "text": "Aviso legal"
+        "text": "Descargo de responsabilidad"
+      }
+    }
+  },
+  "Sheet": {
+    "sections": {
+      "menu": {
+        "title": "Menú",
+        "links": {
+          "map": {
+            "text": "Mapa"
+          },
+          "about": {
+            "text": "Acerca de"
+          },
+          "contact": {
+            "text": "Contacto"
+          }
+        }
+      },
+      "legal": {
+        "title": "Legal",
+        "links": {
+          "privacy": {
+            "text": "Política de privacidad"
+          },
+          "disclaimer": {
+            "text": "Descargo de responsabilidad"
+          }
+        }
+      },
+      "account": {
+        "title": "Cuenta",
+        "links": {
+          "signIn": {
+            "text": "Iniciar sesión"
+          },
+          "signUp": {
+            "text": "Registrarse"
+          }
+        }
       }
     }
   }
