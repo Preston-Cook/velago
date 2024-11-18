@@ -1,4 +1,5 @@
 import { LocaleToggle } from '@/components/LocaleToggle';
+import { ThemeModeToggle } from '@/components/ThemeModeToggle';
 import Image from 'next/image';
 
 export default async function Header() {
@@ -21,7 +22,8 @@ export default async function Header() {
         />
         <h3 className="text-2xl text-primary">Velago</h3>
       </div>
-      <div>
+      <div className="flex gap-x-4 items-center">
+        <ThemeModeToggle />
         <LocaleToggle />
       </div>
     </header>
