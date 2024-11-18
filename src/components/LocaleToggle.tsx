@@ -56,7 +56,7 @@ export function LocaleToggle({ className }: LocaleToggleProps) {
           >
             {supportedLocales.map((locale) => (
               <DropdownMenuRadioItem
-                className={`border-none outline-none ${currentLocale === locale ? 'bg-primary' : 'hover:bg-secondary'} p-2 hover:cursor-pointer flex justify-between items-center`}
+                className={`border-none outline-none ${currentLocale === locale ? 'bg-primary text-white' : 'hover:bg-secondary'} p-2 hover:cursor-pointer flex justify-between items-center`}
                 value={locale}
                 key={uuid()}
                 disabled={isPending}
