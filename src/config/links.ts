@@ -2,9 +2,11 @@ import { IconLink } from '@/types';
 import {
   BriefcaseBusiness,
   Cookie,
+  Key,
   Map,
   Phone,
   ShieldAlert,
+  User,
 } from 'lucide-react';
 
 export const headerLinks: IconLink[] = [
@@ -50,6 +52,16 @@ export const sheetLinks: IconLink[] = [
     name: 'disclaimer',
     href: '/disclaimer',
     icon: ShieldAlert,
+  },
+  {
+    name: 'signIn',
+    href: '/signup/user',
+    icon: Key,
+  },
+  {
+    name: 'signUp',
+    href: '/signup/user',
+    icon: User,
   },
 ];
 

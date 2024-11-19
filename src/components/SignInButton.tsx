@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/Button';
 import { Link } from '@/i18n/routing';
+import { Key } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 interface SignInButtonProps {
@@ -11,7 +12,9 @@ export function SignInButton({ className }: SignInButtonProps) {
 
   return (
     <Link className={className} href="/signup/user">
-      <Button variant={'outline'}>{t('signIn.text')}</Button>
+      <Button className="w-full" variant={'outline'}>
+        <Key /> {t('signIn.text')}
+      </Button>
     </Link>
   );
 }
