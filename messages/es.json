@@ -12,18 +12,18 @@
         "text": "Contacto"
       },
       "about": {
-        "text": "Acerca De"
+        "text": "Sobre"
       },
       "signUp": {
-        "text": "Registrarse"
+        "text": "Regístrate"
       },
       "signIn": {
-        "text": "Iniciar Sesión"
+        "text": "Iniciar"
       }
     }
   },
   "Footer": {
-    "legal": "Todos los derechos reservados",
+    "legal": "Derechos reservados",
     "description": "Empoderando a individuos desfavorecidos conectándolos con proveedores de atención médica que aceptan Medicare y organizaciones benéficas.",
     "links": {
       "map": {
@@ -33,13 +33,13 @@
         "text": "Contacto"
       },
       "about": {
-        "text": "Acerca De"
+        "text": "Sobre"
       },
       "privacy": {
-        "text": "Política De Privacidad"
+        "text": "Privacidad"
       },
       "disclaimer": {
-        "text": "Descargo De Responsabilidad"
+        "text": "Descargo"
       }
     }
   },
@@ -52,7 +52,7 @@
             "text": "Mapa"
           },
           "about": {
-            "text": "Acerca De"
+            "text": "Sobre"
           },
           "contact": {
             "text": "Contacto"
@@ -63,10 +63,10 @@
         "title": "Legal",
         "links": {
           "privacy": {
-            "text": "Política De Privacidad"
+            "text": "Privacidad"
           },
           "disclaimer": {
-            "text": "Descargo De Responsabilidad"
+            "text": "Descargo"
           }
         }
       },
@@ -74,10 +74,10 @@
         "title": "Cuenta",
         "links": {
           "signIn": {
-            "text": "Iniciar Sesión"
+            "text": "Iniciar"
           },
           "signUp": {
-            "text": "Registrarse"
+            "text": "Regístrate"
           }
         }
       }

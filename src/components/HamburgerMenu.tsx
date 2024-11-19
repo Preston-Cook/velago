@@ -25,8 +25,8 @@ export function HamburgerMenu({ className }: HamburgerMenuProps) {
 
   return (
     <Sheet>
-      <SheetTrigger>
-        <Menu className={className} />
+      <SheetTrigger className={className}>
+        <Menu />
       </SheetTrigger>
       <SheetContent
         className="flex flex-col p-4 bg-secondary w-[60%]"
@@ -56,59 +56,19 @@ export function HamburgerMenu({ className }: HamburgerMenuProps) {
             </Link>
           </div>
         </SheetHeader>
-        <div className="flex-1 flex-col flex gap-4 border-primary border-t py-4">
-          {sheetSectionNames.map(({ name, links }) => (
-            <SheetSection key={uuid()} name={name} links={links} />
-          ))}
-
-          {/* <div className="flex flex-col gap-4">
-            <SheetDescription className="text-lg">Menu</SheetDescription>
-
-            {sheetMenuLinks.map(({ name, href, icon }) => (
-              <IconLink
-                i18nRootKey={'Sheet.links'}
-                icon={icon}
-                className="w-full"
-                key={uuid()}
-                name={name}
-                href={href}
-              />
+        <div className="flex-1 overflow-y-scroll">
+          <div className="flex-1 flex-col flex gap-4 border-primary border-t py-4">
+            {sheetSectionNames.map(({ name, links }) => (
+              <SheetSection key={uuid()} name={name} links={links} />
             ))}
           </div>
-          <div className="flex flex-col gap-4">
-            <SheetDescription className="text-lg">Legal</SheetDescription>
 
-            {sheetLegalLinks.map(({ name, href, icon }) => (
-              <IconLink
-                i18nRootKey={'Sheet.links'}
-                icon={icon}
-                className="w-full"
-                key={uuid()}
-                name={name}
-                href={href}
-              />
-            ))}
-          </div> */}
-          {/* <div className="flex flex-1 flex-col border-primary border-t py-4">
-            <SheetDescription className="text-lg">Account</SheetDescription>
-            <div className="py-4 flex flex-col gap-4">
-              {headerLinks.map(({ name, href }) => (
-                <IconLink
-                  className="w-full"
-                  key={uuid()}
-                  name={name}
-                  href={href}
-                />
-              ))}
+          <SheetFooter>
+            <div className="text-center mr-auto">
+              {`© ${new Date().getFullYear()} Velago™ ${t('legal')}`}
             </div>
-          </div> */}
+          </SheetFooter>
         </div>
-
-        <SheetFooter>
-          <div className="text-center mr-auto">
-            {`© ${new Date().getFullYear()} Velago™ ${t('legal')}`}
-          </div>
-        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

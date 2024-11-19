@@ -34,7 +34,7 @@ export function SheetSection({ name: sectionName, links }: SheetLinkProps) {
           ))}
         </div>
       ) : (
-        <div className="flex gap-x-4">
+        <div className="flex flex-col md:flex-row gap-4">
           <SignInButton className="flex-1" />
           <SignUpButton className="flex-1" />
         </div>

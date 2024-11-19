@@ -10,7 +10,7 @@ import { ThemeModeToggle } from './ThemeModeToggle';
 export async function Header() {
   return (
     <header className="bg-secondary border-b border-primary p-4 flex">
-      <div className="flex flex-1 gap-10">
+      <div className="flex flex-1 gap-8">
         <Link href={'/'} className="flex justify-start items-center gap-x-2">
           <Image
             className="dark:hidden"
