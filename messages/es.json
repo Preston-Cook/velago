@@ -12,13 +12,13 @@
         "text": "Contacto"
       },
       "about": {
-        "text": "Acerca de"
+        "text": "Acerca De"
       },
       "signUp": {
         "text": "Registrarse"
       },
       "signIn": {
-        "text": "Iniciar sesión"
+        "text": "Iniciar Sesión"
       }
     }
   },
@@ -33,13 +33,13 @@
         "text": "Contacto"
       },
       "about": {
-        "text": "Acerca de"
+        "text": "Acerca De"
       },
       "privacy": {
-        "text": "Política de privacidad"
+        "text": "Política De Privacidad"
       },
       "disclaimer": {
-        "text": "Descargo de responsabilidad"
+        "text": "Descargo De Responsabilidad"
       }
     }
   },
@@ -52,7 +52,7 @@
             "text": "Mapa"
           },
           "about": {
-            "text": "Acerca de"
+            "text": "Acerca De"
           },
           "contact": {
             "text": "Contacto"
@@ -63,10 +63,10 @@
         "title": "Legal",
         "links": {
           "privacy": {
-            "text": "Política de privacidad"
+            "text": "Política De Privacidad"
           },
           "disclaimer": {
-            "text": "Descargo de responsabilidad"
+            "text": "Descargo De Responsabilidad"
           }
         }
       },
@@ -74,7 +74,7 @@
         "title": "Cuenta",
         "links": {
           "signIn": {
-            "text": "Iniciar sesión"
+            "text": "Iniciar Sesión"
           },
           "signUp": {
             "text": "Registrarse"
