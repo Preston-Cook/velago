@@ -1,3 +1,5 @@
+'use server';
+
 import ThemeDataProvider from '@/app/context/ThemeProvider';
 import '@/app/globals.css';
 import { cn } from '@/lib/utils';
