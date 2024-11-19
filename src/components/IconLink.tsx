@@ -24,10 +24,10 @@ export function IconLink({
   const t = useTranslations(`${i18nRootKey}.links`);
 
   return (
-    <Link href={href}>
+    <Link href={href} className="w-full">
       <Button variant="outline" className={className}>
         {Icon && <Icon />}
-        <div className="mr-auto">{t(`${name}.text`)}</div>
+        <div>{t(`${name}.text`)}</div>
       </Button>
     </Link>
   );

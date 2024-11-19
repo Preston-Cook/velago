@@ -13,10 +13,10 @@ import { ThemeColors } from '@/types';
 import { useTheme } from 'next-themes';
 
 const availableThemeColors = [
-  { name: 'Rose', light: 'bg-rose-600', dark: 'bg-rose-700' },
-  { name: 'Blue', light: 'bg-blue-600', dark: 'bg-blue-700' },
-  { name: 'Green', light: 'bg-green-600', dark: 'bg-green-500' },
-  { name: 'Orange', light: 'bg-orange-500', dark: 'bg-orange-700' },
+  { name: 'Rose', light: 'bg-[#c27082]', dark: 'bg-[#c27082]' },
+  { name: 'Blue', light: 'bg-[#3366cc]', dark: 'bg-[#3b82f6]' },
+  { name: 'Green', light: 'bg-[#4db372]', dark: 'bg-[#70c28e]' },
+  { name: 'Orange', light: 'bg-[#c7916b]', dark: 'bg-[#b96d46]' },
 ];
 
 export function ThemeColorToggle() {
@@ -35,7 +35,7 @@ export function ThemeColorToggle() {
               theme === 'light' ? light : dark,
             )}
           ></div>
-          <div className="text-sm">{name}</div>
+          <div>{name}</div>
         </div>
       </SelectItem>
     ));
@@ -46,7 +46,7 @@ export function ThemeColorToggle() {
       onValueChange={(value) => setThemeColor(value as ThemeColors)}
       defaultValue={themeColor}
     >
-      <SelectTrigger className="w-[180px] ring-offset-transparent focus:ring-transparent">
+      <SelectTrigger className="ring-offset-transparent focus:ring-transparent">
         <SelectValue placeholder="Select Color" />
       </SelectTrigger>
       <SelectContent className="border-muted">
