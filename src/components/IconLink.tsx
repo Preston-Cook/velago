@@ -9,7 +9,7 @@ import { Button } from './ui/Button';
 interface SheetLinkProps {
   className?: string;
   icon: LucideIcon;
-  href: PathnameConfig;
+  href: keyof PathnameConfig;
   name: string;
   i18nRootKey: string;
 }

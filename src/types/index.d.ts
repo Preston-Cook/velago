@@ -20,7 +20,7 @@ export interface ThemeColorStateParams {
 
 export type IconLink = {
   name: string;
-  href: string;
+  href: keyof PathnameConfig;
   icon: LucideIcon;
 };
 

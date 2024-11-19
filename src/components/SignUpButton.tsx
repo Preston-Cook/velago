@@ -7,9 +7,7 @@ export function SignUpButton() {
 
   return (
     <Link href="/signup/user">
-      <Button>
-        <h3>{t('signUp.text')}</h3>
-      </Button>
+      <Button>{t('signUp.text')}</Button>
     </Link>
   );
 }

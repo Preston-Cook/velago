@@ -11,9 +11,7 @@ export function SignInButton({ className }: SignInButtonProps) {
 
   return (
     <Link className={className} href="/signup/user">
-      <Button variant={'outline'}>
-        <h3>{t('signIn.text')}</h3>
-      </Button>
+      <Button variant={'outline'}>{t('signIn.text')}</Button>
     </Link>
   );
 }

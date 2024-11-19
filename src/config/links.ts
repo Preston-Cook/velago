@@ -7,18 +7,21 @@ import {
   ShieldAlert,
 } from 'lucide-react';
 
-export const headerLinks = [
+export const headerLinks: IconLink[] = [
   {
     name: 'map',
     href: '/map',
+    icon: Map,
   },
   {
     name: 'about',
     href: '/about',
+    icon: BriefcaseBusiness,
   },
   {
     name: 'contact',
     href: '/contact',
+    icon: Phone,
   },
 ];
 
