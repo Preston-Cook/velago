@@ -28,7 +28,7 @@ export async function Footer() {
         />
         <h3 className="text-primary text-2xl w-fit">Velago</h3>
       </Link>
-      <div className="md:max-w-[50%]">{t('description')}</div>
+      <div className="md:max-w-[60%] lg:max-w-[40%]">{t('description')}</div>
       <div className="w-full flex gap-x-5 items-center justify-center flex-wrap">
         {footerLinks.map(({ name, href }) => (
           <Link key={uuid()} href={href as keyof PathnameConfig}>
