@@ -11,6 +11,6 @@ export const config = {
    * - favicon.ico, sitemap.xml, robots.txt (metadata files)
    */
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.webmanifest|.*\\.woff|.*\\.png|.*\\.jpeg|.*\\.jpg).*)',
+    '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.webmanifest|.*\\.woff|.*\\.png|.*\\.jpeg|.*\\.jpg|.*\\.ico).*)',
   ],
 };
