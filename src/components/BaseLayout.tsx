@@ -10,6 +10,7 @@ import { Inter, Roboto } from 'next/font/google';
 import { ReactNode } from 'react';
 import { Footer } from './Footer';
 import { Header } from './Header';
+import { ProgressBar } from './ProgressBar';
 
 interface BaseLayoutProps {
   children: ReactNode;
@@ -51,6 +52,7 @@ export default async function BaseLayout({
             disableTransitionOnChange
           >
             <ThemeDataProvider>
+              <ProgressBar />
               <Header />
               <main className="flex-1">{children}</main>
               <Footer />

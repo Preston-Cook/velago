@@ -11,14 +11,14 @@ export type CustomMiddleware = (
   response: NextResponse,
 ) => NextMiddlewareResult | Promise<NextMiddlewareResult>;
 
-export type ThemeColors = 'Zinc' | 'Rose' | 'Blue' | 'Green' | 'Orange';
+export type ThemeColors = 'Rose' | 'Blue' | 'Green' | 'Orange';
 
 export interface ThemeColorStateParams {
   themeColor: ThemeColors;
   setThemeColor: React.Dispatch<React.SetStateAction<ThemeColors>>;
 }
 
-export type LinkIcon = {
+export type IconLink = {
   name: string;
   href: string;
   icon: LucideIcon;

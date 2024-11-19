@@ -1,4 +1,4 @@
-import { LinkIcon } from '@/types';
+import { IconLink } from '@/types';
 import {
   BriefcaseBusiness,
   Cookie,
@@ -22,7 +22,7 @@ export const headerLinks = [
   },
 ];
 
-export const sheetLinks: LinkIcon[] = [
+export const sheetLinks: IconLink[] = [
   {
     name: 'map',
     href: '/map',
