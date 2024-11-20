@@ -1,3 +1,9 @@
+import { CallToAction } from '@/components/CallToAction';
+
 export default function Home() {
-  return <p className="bg-primary"></p>;
+  return (
+    <>
+      <CallToAction />
+    </>
+  );
 }

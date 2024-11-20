@@ -1,5 +1,6 @@
 'use server';
 
+import { LocationProvider } from '@/app/context/LocationProvider';
 import ThemeDataProvider from '@/app/context/ThemeProvider';
 import '@/app/globals.css';
 import { cn } from '@/lib/utils';
@@ -54,10 +55,12 @@ export default async function BaseLayout({
             disableTransitionOnChange
           >
             <ThemeDataProvider>
-              <ProgressBar />
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
+              <LocationProvider>
+                <ProgressBar />
+                <Header />
+                <main className="flex-1 flex flex-col p-4">{children}</main>
+                <Footer />
+              </LocationProvider>
             </ThemeDataProvider>
           </NextThemesProvider>
         </NextIntlClientProvider>

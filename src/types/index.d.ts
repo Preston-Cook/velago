@@ -18,10 +18,19 @@ export interface ThemeColorStateParams {
   setThemeColor: React.Dispatch<React.SetStateAction<ThemeColors>>;
 }
 
-export type IconLink = {
+export interface IconLink {
   name: string;
   href: keyof PathnameConfig;
   icon: LucideIcon;
-};
+}
 
 export type PathnameConfig = typeof pathnameLocaleMappings;
+
+export interface Suggestion {
+  placePrediction: {
+    placeId: string;
+    text: {
+      text: string;
+    };
+  };
+}

@@ -29,6 +29,7 @@ export function LocaleToggle({ className }: LocaleToggleProps) {
   const router = useRouter();
   const currentLocale = useLocale();
   const params = useParams();
+  console.log(params);
 
   function handleLocaleChange(e: string) {
     startTransition(() => {
