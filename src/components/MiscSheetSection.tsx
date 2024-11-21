@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { ThemeColorToggle } from './ThemeColorToggle';
 import { ThemeModeToggle } from './ThemeModeToggle';
-import { SheetDescription } from './ui/sheet';
+import { SheetDescription } from './ui/Sheet';
 
 export function MiscSheetSection() {
   const t = useTranslations('Sheet.sections.account');

@@ -1,4 +1,4 @@
-import { protectedPageRoutes } from '@/config/protectedPageRoutes';
+import { protectedPageRoutes } from '@/config/protectedRoutes';
 import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {

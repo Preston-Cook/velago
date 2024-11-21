@@ -1,4 +1,17 @@
 {
+  "Home": {
+    "callToAction": {},
+    "partner": {
+      "links": {
+        "medicalServices": {
+          "text": "Medical Services"
+        },
+        "charitableServices": {
+          "text": "Charitable Services"
+        }
+      }
+    }
+  },
   "Header": {
     "localeToggle": {
       "en": "English",

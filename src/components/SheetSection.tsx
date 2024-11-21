@@ -2,7 +2,7 @@ import { sheetLinks } from '@/config/links';
 import { useTranslations } from 'next-intl';
 import { v4 as uuid } from 'uuid';
 import { IconLink } from './IconLink';
-import { SheetDescription } from './ui/sheet';
+import { SheetDescription } from './ui/Sheet';
 
 interface SheetLinkProps {
   name: string;

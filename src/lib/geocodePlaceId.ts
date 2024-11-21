@@ -9,7 +9,7 @@ import { GOOGLE_MAPS_GEOCODING_ENDPOINT } from '@/config/apiEndpoints';
 const GOOGLE_MAPS_API_KEY = process.env
   .NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string;
 
-export async function geocodeAddress(
+export async function geocodePlaceId(
   placeId: string,
 ): Promise<GetCoordinatesReturn> {
   const params = new URLSearchParams({

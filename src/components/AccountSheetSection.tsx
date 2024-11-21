@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { SignInButton } from './SignInButton';
 import { SignUpButton } from './SignUpButton';
-import { SheetDescription } from './ui/sheet';
+import { SheetDescription } from './ui/Sheet';
 
 export function AccountSheetSection() {
   const t = useTranslations('Sheet.sections.account');

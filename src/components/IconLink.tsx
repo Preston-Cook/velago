@@ -8,6 +8,13 @@ import { Button } from './ui/Button';
 
 interface SheetLinkProps {
   className?: string;
+  variant?:
+    | 'outline'
+    | 'link'
+    | 'default'
+    | 'destructive'
+    | 'secondary'
+    | 'ghost';
   icon: LucideIcon;
   href: keyof PathnameConfig;
   name: string;
@@ -20,12 +27,13 @@ export function IconLink({
   name,
   icon: Icon,
   i18nRootKey,
+  variant = 'outline',
 }: SheetLinkProps) {
   const t = useTranslations(`${i18nRootKey}.links`);
 
   return (
     <Link href={href} className="w-full">
-      <Button variant="outline" className={className}>
+      <Button variant={variant} className={className}>
         {Icon && <Icon />}
         <div>{t(`${name}.text`)}</div>
       </Button>

@@ -2,7 +2,7 @@
 
 import { searchPlaceholders } from '@/config/misc';
 import { useRouter } from '@/i18n/routing';
-import { geocodeAddress } from '@/lib/geocodeAddress';
+import { geocodePlaceId } from '@/lib/geocodePlaceId';
 import { start as nprogressStart } from 'nprogress';
 import { useEffect, useState } from 'react';
 import { FilterButton } from './FilterButton';
@@ -31,18 +31,16 @@ export function HomeSearchBar() {
 
   async function handleSelectValue({ placeId }: HandleSelectValueParams) {
     nprogressStart();
-    const { lat, lng, formattedAddress } = await geocodeAddress(placeId);
+    const { lat, lng, formattedAddress } = await geocodePlaceId(placeId);
 
     const urlParams = new URLSearchParams({
+      address: formattedAddress,
       lat: `${lat}`.slice(0, 7),
       lng: `${lng}`.slice(0, 7),
-      address: formattedAddress,
       radius: `${radius}`,
     });
 
-    urlParams.sort();
-
-    // @ts-expect-error This is because the
+    // @ts-expect-error This is because the pathname config doesn't include URL Search params
     router.push(`/map?${urlParams.toString()}`);
   }
 

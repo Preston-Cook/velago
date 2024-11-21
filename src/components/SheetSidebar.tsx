@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 import { AccountSheetSection } from './AccountSheetSection';
 import { MiscSheetSection } from './MiscSheetSection';
 import { SheetSection } from './SheetSection';
-import { SheetFooter, SheetHeader, SheetTitle } from './ui/sheet';
+import { SheetFooter, SheetHeader, SheetTitle } from './ui/Sheet';
 
 export function SheetSidebar() {
   const t = useTranslations('Footer');
