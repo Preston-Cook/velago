@@ -2,13 +2,57 @@
   "Home": {
     "callToAction": {},
     "partner": {
-      "links": {
-        "medicalServices": {
-          "text": "Medical Services"
-        },
-        "charitableServices": {
-          "text": "Charitable Services"
+      "title": "Partner With Us",
+      "medicalServices": {
+        "title": "Medical Services",
+        "description": "'Partner with us to reach more patients in need. Showcase your services and contribute to improving healthcare accessibility. Explore partnership opportunities today!",
+        "links": {
+          "medicalServices": {
+            "text": "Medical Services"
+          }
         }
+      },
+      "charitableServices": {
+        "title": "Charitable Services",
+        "description": "Partner with us to reach more patients in need. Showcase your services and contribute to improving healthcare accessibility. Explore partnership opportunities today!",
+        "links": {
+          "charitableServices": {
+            "text": "Charitable Services"
+          }
+        }
+      }
+    },
+    "info": {
+      "title": "Revolutionizing Access for All",
+      "p1": "Welcome to Velago, where we are revolutionizing access to healthcare and charitable services. Our platform connects underprivileged individuals with Medicare-accepting healthcare providers and compassionate charitable organizations. Through easy search tools and comprehensive listings, users can find the support they need, while providers and organizations can reach a wider audience and make a lasting impact.",
+      "p2": "Join us in creating a world where everyone has access to essential healthcare and support services. Explore, connect, and make a difference with Velago today.",
+      "links": {
+        "about": {
+          "text": "Learn More"
+        }
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions (FAQ)",
+      "question1": {
+        "title": "How can I find healthcare providers or charities near me?",
+        "text": "You can use our search bar to enter your location and discover nearby healthcare providers accepting Medicare and charitable organizations."
+      },
+      "question2": {
+        "title": "What types of services do healthcare providers and charities offer?",
+        "text": "Healthcare providers offer a range of medical services, including primary care, specialist consultations, and preventive screenings. Charitable organizations may provide financial assistance, food distribution, shelter, and other support services."
+      },
+      "question3": {
+        "title": "How do I know if a healthcare provider accepts Medicare?",
+        "text": "Our platform filters healthcare providers based on their acceptance of Medicare. You can easily identify Medicare-accepting providers in your search results."
+      },
+      "question4": {
+        "title": "Can I search for specific types of resources?",
+        "text": "Yes, you can refine your search by specifying the type of healthcare provider (e.g., clinics, hospitals, pharmacies) or the focus area of charitable organizations by filterting the map (e.g., healthcare, education, housing)."
+      },
+      "question5": {
+        "title": "Are there any eligibility criteria for accessing charitable services?",
+        "text": "Eligibility criteria for charitable services vary by organization. Some may have income-based criteria, while others prioritize specific demographics or conditions. You can contact the organizations directly for more information."
       }
     }
   },

@@ -1,30 +1,29 @@
 'use client';
 
-import { HeartHandshake, HeartPulse } from 'lucide-react';
+import { BriefcaseMedical, HandHelping } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { PartnerCard } from './PartnerCard';
 
 export function Partner() {
+  const t = useTranslations('Home.partner');
+
   return (
     <div className="flex flex-col gap-8">
       <h2 className="text-3xl md:text-4xl text-primary mx-auto">
-        Partner With Us
+        {t('title')}
       </h2>
       <div className="flex flex-col gap-8 lg:gap-16 sm:max-w-[90%] md:flex-row md:max-w-[80%] lg:max-w-[60%] mx-auto">
         <PartnerCard
-          icon={HeartHandshake}
-          title={'Healthcare Providers'}
-          description={
-            'Partner with us to reach more patients in need. Showcase your services and contribute to improving healthcare accessibility. Explore partnership opportunities today!'
-          }
+          icon={BriefcaseMedical}
+          title={t('medicalServices.title')}
+          description={t('medicalServices.description')}
           name="medicalServices"
         />
         <PartnerCard
           name="charitableServices"
-          icon={HeartPulse}
-          title={'Healthcare Providers'}
-          description={
-            'Partner with us to reach more patients in need. Showcase your services and contribute to improving healthcare accessibility. Explore partnership opportunities today!'
-          }
+          icon={HandHelping}
+          title={t('charitableServices.title')}
+          description={t('charitableServices.description')}
         />
       </div>
     </div>

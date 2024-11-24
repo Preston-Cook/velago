@@ -33,7 +33,7 @@ export function PartnerCard({
         <IconLink
           className="w-full"
           variant={'default'}
-          i18nRootKey={'Home.partner'}
+          i18nRootKey={`Home.partner.${name}`}
           name={name}
           icon={icon}
           href={'/signup/organization'}

@@ -1,4 +1,28 @@
 {
+  "Home": {
+    "callToAction": {},
+    "partner": {
+      "title": "Asóciese con Nosotros",
+      "medicalServices": {
+        "title": "Servicios Médicos",
+        "description": "¡Asóciese con nosotros para llegar a más pacientes necesitados! Destaque sus servicios y contribuya a mejorar la accesibilidad al cuidado de la salud. ¡Explore oportunidades de asociación hoy!",
+        "links": {
+          "medicalServices": {
+            "text": "Servicios Médicos"
+          }
+        }
+      },
+      "charitableServices": {
+        "title": "Servicios Caritativos",
+        "description": "¡Asóciese con nosotros para llegar a más pacientes necesitados! Destaque sus servicios y contribuya a mejorar la accesibilidad al cuidado de la salud. ¡Explore oportunidades de asociación hoy!",
+        "links": {
+          "charitableServices": {
+            "text": "Servicios Caritativos"
+          }
+        }
+      }
+    }
+  },
   "Header": {
     "localeToggle": {
       "en": "Inglés",
