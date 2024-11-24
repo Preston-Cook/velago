@@ -1,6 +1,5 @@
 {
   "Home": {
-    "callToAction": {},
     "partner": {
       "title": "Asóciese con Nosotros",
       "medicalServices": {
@@ -20,6 +19,39 @@
             "text": "Servicios Caritativos"
           }
         }
+      }
+    },
+    "info": {
+      "title": "Revolucionando el Acceso para Todos",
+      "p1": "Bienvenido a Velago, donde estamos revolucionando el acceso a los servicios de salud y a las organizaciones benéficas. Nuestra plataforma conecta a personas desfavorecidas con proveedores de salud que aceptan Medicare y con organizaciones benéficas compasivas. A través de herramientas de búsqueda fáciles y listados completos, los usuarios pueden encontrar el apoyo que necesitan, mientras que los proveedores y las organizaciones pueden llegar a una audiencia más amplia y generar un impacto duradero.",
+      "p2": "Únete a nosotros para crear un mundo donde todos tengan acceso a servicios esenciales de salud y apoyo. Explora, conéctate y marca la diferencia con Velago hoy mismo.",
+      "links": {
+        "about": {
+          "text": "Saber Más"
+        }
+      }
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes (FAQ)",
+      "question1": {
+        "title": "¿Cómo puedo encontrar proveedores de salud u organizaciones benéficas cerca de mí?",
+        "text": "Puedes usar nuestra barra de búsqueda para ingresar tu ubicación y descubrir proveedores de salud cercanos que aceptan Medicare y organizaciones benéficas."
+      },
+      "question2": {
+        "title": "¿Qué tipos de servicios ofrecen los proveedores de salud y las organizaciones benéficas?",
+        "text": "Los proveedores de salud ofrecen una variedad de servicios médicos, incluyendo atención primaria, consultas con especialistas y exámenes preventivos. Las organizaciones benéficas pueden brindar asistencia financiera, distribución de alimentos, refugio y otros servicios de apoyo."
+      },
+      "question3": {
+        "title": "¿Cómo sé si un proveedor de salud acepta Medicare?",
+        "text": "Nuestra plataforma filtra los proveedores de salud en función de si aceptan Medicare. Puedes identificar fácilmente a los proveedores que aceptan Medicare en tus resultados de búsqueda."
+      },
+      "question4": {
+        "title": "¿Puedo buscar tipos específicos de recursos?",
+        "text": "Sí, puedes refinar tu búsqueda especificando el tipo de proveedor de salud (por ejemplo, clínicas, hospitales, farmacias) o el área de enfoque de las organizaciones benéficas filtrando el mapa (por ejemplo, salud, educación, vivienda)."
+      },
+      "question5": {
+        "title": "¿Existen criterios de elegibilidad para acceder a los servicios benéficos?",
+        "text": "Los criterios de elegibilidad para los servicios benéficos varían según la organización. Algunas pueden tener criterios basados en ingresos, mientras que otras priorizan ciertos grupos demográficos o condiciones. Puedes contactar directamente a las organizaciones para obtener más información."
       }
     }
   },
