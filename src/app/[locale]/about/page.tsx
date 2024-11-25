@@ -8,7 +8,7 @@ export default async function AboutPage() {
   const t = await getTranslations('About');
 
   return (
-    <div className="flex flex-col py-8 gap-12">
+    <div className="flex flex-col py-12 gap-12">
       <div className="flex flex-col gap-8 items-center justify-center">
         <h1 className="text-primary text-4xl md:text-5xl text-center w-full">
           {t('title')}

@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/Separator';
 
 export default function Home() {
   return (
-    <div className="flex flex-col py-8 gap-12">
+    <div className="flex flex-col py-12 gap-12">
       <CallToAction />
       <Separator className="bg-primary sm:max-w-[90%] md:max-w-[80%] lg:max-w-[60%] mx-auto" />
       <Partner />
