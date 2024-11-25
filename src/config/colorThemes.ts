@@ -21,6 +21,11 @@ export const colorThemes = {
       input: '20 5.9% 90%',
       ring: '24.6 45% 60%',
       radius: '0.5rem',
+      chart1: '30 75% 50%',
+      chart2: '15 70% 45%',
+      chart3: '10 65% 55%',
+      chart4: '35 80% 60%',
+      chart5: '0 85% 50%',
     },
     dark: {
       background: '20 14.3% 4.1%',
@@ -42,6 +47,11 @@ export const colorThemes = {
       border: '12 6.5% 15.1%',
       input: '12 6.5% 15.1%',
       ring: '20.5 45% 50%',
+      chart1: '30 75% 50%',
+      chart2: '15 70% 45%',
+      chart3: '10 65% 55%',
+      chart4: '35 80% 60%',
+      chart5: '0 85% 50%',
     },
   },
   Blue: {
@@ -121,6 +131,11 @@ export const colorThemes = {
       input: '240 5.9% 90%',
       ring: '142.1 40% 50%',
       radius: '0.5rem',
+      chart1: '150 60% 45%',
+      chart2: '120 55% 40%',
+      chart3: '90 70% 50%',
+      chart4: '180 65% 55%',
+      chart5: '0 85% 45%',
     },
     dark: {
       background: '20 14.3% 4.1%',
@@ -142,6 +157,11 @@ export const colorThemes = {
       border: '240 3.7% 15.9%',
       input: '240 3.7% 15.9%',
       ring: '142.4 40% 60%',
+      chart1: '150 65% 50%',
+      chart2: '120 60% 45%',
+      chart3: '90 75% 55%',
+      chart4: '180 70% 60%',
+      chart5: '0 95% 50%',
     },
   },
   Rose: {
@@ -166,6 +186,11 @@ export const colorThemes = {
       input: '240 5.9% 90%',
       ring: '346.8 40% 60%',
       radius: '0.5rem',
+      chart1: '340 75% 65%', // Vibrant rose
+      chart2: '330 70% 55%', // Deep pink
+      chart3: '300 60% 50%', // Soft lavender
+      chart4: '10 85% 65%', // Coral-red complement
+      chart5: '20 90% 45%', // Warm orange-red
     },
     dark: {
       background: '20 14.3% 4.1%',
@@ -187,6 +212,11 @@ export const colorThemes = {
       border: '240 3.7% 15.9%',
       input: '240 3.7% 15.9%',
       ring: '346.8 40% 60%',
+      chart1: '340 75% 60%', // Vibrant rose
+      chart2: '330 65% 50%', // Deep pink
+      chart3: '300 50% 45%', // Soft lavender
+      chart4: '10 80% 50%', // Coral-red complement
+      chart5: '20 85% 40%', // Warm orange-red
     },
   },
 };
