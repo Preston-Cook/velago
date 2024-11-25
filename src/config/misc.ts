@@ -1,3 +1,5 @@
+import { Globe, Goal, UserRoundPlus } from 'lucide-react';
+
 export const sheetSectionNames = [
   { name: 'menu', links: ['map', 'about', 'contact'] },
   { name: 'legal', links: ['privacy', 'disclaimer'] },
@@ -13,4 +15,19 @@ export const searchPlaceholders = [
   '12 Grimmauld Place London, United Kingdom',
   '742 Evergreen Terrace Springfield, USA',
   '4 Privet Drive Little Whinging, Surrey, England',
+];
+
+export const aboutSectionIcons = [
+  {
+    section: 1,
+    icon: Goal,
+  },
+  {
+    section: 2,
+    icon: UserRoundPlus,
+  },
+  {
+    section: 3,
+    icon: Globe,
+  },
 ];

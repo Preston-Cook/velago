@@ -1,5 +1,9 @@
 {
   "Home": {
+    "cta": {
+      "heading": "Encuentra Recursos Cerca de Ti",
+      "subheading": "Usa Velago para buscar proveedores de atención médica y organizaciones caritativas cerca de ti"
+    },
     "partner": {
       "title": "Asóciese con Nosotros",
       "medicalServices": {
@@ -53,6 +57,22 @@
         "title": "¿Existen criterios de elegibilidad para acceder a los servicios benéficos?",
         "text": "Los criterios de elegibilidad para los servicios benéficos varían según la organización. Algunas pueden tener criterios basados en ingresos, mientras que otras priorizan ciertos grupos demográficos o condiciones. Puedes contactar directamente a las organizaciones para obtener más información."
       }
+    }
+  },
+  "About": {
+    "title": "¿Qué es Velago?",
+    "subheading": "Conoce más sobre nuestra misión de equipar a comunidades desfavorecidas con el conocimiento para controlar su atención médica",
+    "section1": {
+      "title": "Nuestra Misión",
+      "text": "Bienvenido a Velago, una plataforma dedicada a transformar el acceso a la atención médica y los servicios caritativos. Nuestra misión es conectar a las personas desfavorecidas con proveedores de atención médica que aceptan Medicare y organizaciones caritativas compasivas. En Velago, creemos que todos merecen acceso a atención médica y apoyo de calidad, sin importar su nivel socioeconómico."
+    },
+    "section2": {
+      "title": "Empoderando a los Usuarios",
+      "text": "Nuestra plataforma cuenta con herramientas de búsqueda fáciles de usar y listados completos para ayudar a los usuarios a encontrar el apoyo que necesitan. Ya sea que busquen atención médica, servicios de salud mental o asistencia de organizaciones caritativas, Velago proporciona información detallada y recursos para guiarlos. Nuestro objetivo es empoderar a las personas simplificando el proceso de acceso a cuidados y apoyo esenciales."
+    },
+    "section3": {
+      "title": "Ampliando el Alcance",
+      "text": "Para proveedores de atención médica y organizaciones caritativas, Velago ofrece una oportunidad de llegar a una audiencia más amplia y generar un impacto significativo. Al unirse a nuestra plataforma, los proveedores pueden conectarse con quienes lo necesitan, mientras que las organizaciones pueden ampliar su alcance y potenciar sus esfuerzos. Juntos, podemos crear un mundo donde los servicios esenciales de atención médica y apoyo sean accesibles para todos. Explora, conéctate y contribuye a un mundo más compasivo con Velago hoy."
     }
   },
   "Header": {

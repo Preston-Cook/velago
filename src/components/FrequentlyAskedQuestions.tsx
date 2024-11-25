@@ -1,11 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { v4 as uuid } from 'uuid';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from './ui/Accordion';
+import { FrequentlyAskedQuestionsSection } from './FrequentlyAskedQuestionsSection';
+import { Accordion } from './ui/Accordion';
 
 export function FrequentlyAskedQuestions() {
   const t = useTranslations('Home.faq');
@@ -15,12 +11,21 @@ export function FrequentlyAskedQuestions() {
       <h2 className="text-3xl md:text-4xl text-primary mx-auto text-center">
         {t('title')}
       </h2>
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion
+        type="single"
+        collapsible
+        className="w-full bg-secondary p-4 rounded"
+      >
         {[...Array(5)].map((_, i) => (
-          <AccordionItem key={uuid()} value={`item-${i + 1}`}>
-            <AccordionTrigger>{t(`question${i + 1}.title`)}</AccordionTrigger>
-            <AccordionContent>{t(`question${i + 1}.text`)}</AccordionContent>
-          </AccordionItem>
+          <FrequentlyAskedQuestionsSection
+            className={
+              i !== 0
+                ? 'border border-l-transparent border-b-transparent border-r-transparent border-t-primary'
+                : ''
+            }
+            key={uuid()}
+            idx={i}
+          />
         ))}
       </Accordion>
     </div>

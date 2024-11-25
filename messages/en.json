@@ -1,5 +1,9 @@
 {
   "Home": {
+    "cta": {
+      "heading": "Find Resources Near You",
+      "subheading": "Use Velago to search for healthcare providers and charitable organizations near you"
+    },
     "partner": {
       "title": "Partner With Us",
       "medicalServices": {
@@ -53,6 +57,22 @@
         "title": "Are there any eligibility criteria for accessing charitable services?",
         "text": "Eligibility criteria for charitable services vary by organization. Some may have income-based criteria, while others prioritize specific demographics or conditions. You can contact the organizations directly for more information."
       }
+    }
+  },
+  "About": {
+    "title": "What is Velago?",
+    "subheading": "Learn more about our mission to equip underprivileged communities with the knowledge to control their healthcare",
+    "section1": {
+      "title": "Our Mission",
+      "text": "Welcome to Velago, a platform dedicated to transforming access to healthcare and charitable services. Our mission is to connect underprivileged individuals with Medicare-accepting healthcare providers and compassionate charitable organizations. At Velago, we believe everyone deserves access to quality healthcare and support, regardless of their socio-economic status."
+    },
+    "section2": {
+      "title": "Empowering Users",
+      "text": "Our platform features easy-to-use search tools and comprehensive listings to help users find the support they need. Whether seeking medical care, mental health services, or assistance from charitable organizations, Velago provides detailed information and resources to guide you. We aim to empower individuals by simplifying the process of accessing essential care and support."
+    },
+    "section3": {
+      "title": "Expanding Reach",
+      "text": "For healthcare providers and charitable organizations, Velago offers an opportunity to reach a broader audience and make a significant impact. By joining our platform, providers can connect with those in need, while organizations can extend their reach and amplify their efforts. Together, we can create a world where essential healthcare and support services are accessible to all. Explore, connect, and contribute to a more compassionate world with Velago today."
     }
   },
   "Header": {
