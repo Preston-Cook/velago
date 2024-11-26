@@ -5,15 +5,15 @@ interface SendTextMessageParams {
   body: string;
 }
 
-const TWILIO_MESSAGING_SERVICE_SID = process.env
-  .TWILIO_MESSAGING_SERVICE_SID as string;
+const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER as string;
 
 export async function sendTextMessage({ to, body }: SendTextMessageParams) {
   const twilioClient = getTwilioClient();
   const res = await twilioClient.messages.create({
-    from: '+17372327444',
+    from: TWILIO_PHONE_NUMBER,
     body,
     to,
-    messagingServiceSid: TWILIO_MESSAGING_SERVICE_SID,
   });
+
+  console.log(res);
 }

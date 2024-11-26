@@ -34,13 +34,13 @@ export function ResendCodeButton({ phone }: ResendCodeButtonProps) {
 
       setIsLoading(true);
 
-      console.log(cleanedPhone);
+      
 
       const { error } = await sbBrowserClient.auth.signInWithOtp({
         phone: cleanedPhone,
       });
 
-      console.log(JSON.stringify(error));
+
 
       setIsLoading(false);
 

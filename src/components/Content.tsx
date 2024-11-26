@@ -30,7 +30,7 @@ export default async function Content({ lang }: ContentProps) {
         </div>
       </section>
       <section>
-        <div className="mx-auto max-w-screen-xl px-4 lg:px-6 lg:py-6">
+        <div className="mx-auto max-w-screen-xl px-8 lg:py-6">
           <div className="sm:text-lg">
             <h2 className="mb-4 text-center text-4xl font-bold tracking-tight text-primary">
               {dic.productDescription.title}

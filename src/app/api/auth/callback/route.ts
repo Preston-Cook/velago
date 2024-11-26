@@ -1,7 +1,7 @@
-import prisma from '@/lib/db';
 import { type CookieOptions, createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
+import prisma from '../../../../../prisma/db';
 
 export async function GET(request: Request, _response: Response) {
   const { searchParams, origin } = new URL(request.url);

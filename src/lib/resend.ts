@@ -1,5 +1,5 @@
 import ContactEmailTemplate from '@/emails/ContactTemplate';
-import { ContactSchema } from '@/types/contactSchema';
+import { ContactSchema } from '@/types/ContactSchema';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY as string);
@@ -25,7 +25,7 @@ export async function sendContactEmail(obj: ContactSchema) {
     process.env.APP_EMAIL as string,
     email,
     `Contact Message: ${firstName} ${lastName}`,
-    ContactEmailTemplate(obj),
+    ContactEmailTemplate(),
   );
 }
 

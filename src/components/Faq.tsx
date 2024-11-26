@@ -16,7 +16,7 @@ export default async function FaqSection({ lang }: FaqSectionProps) {
   const dic = (await getDictionary(lang)).pages.home.faq;
 
   return (
-    <section className="px-4" id="faq">
+    <section className="px-6">
       <div className="mx-auto max-w-screen-xl py-6">
         <h2 className="mb-6 lg:mb-8 text-3xl lg:text-4xl font-bold text-center text-primary">
           {dic.title}
@@ -24,7 +24,7 @@ export default async function FaqSection({ lang }: FaqSectionProps) {
         <Accordion
           type="single"
           collapsible
-          className="bg-secondary p-4 rounded-md border"
+          className="bg-secondary p-4 rounded-md border w-[95%] mx-auto"
         >
           {dic.questions.map((q, i) => (
             <AccordionItem

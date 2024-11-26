@@ -1,5 +1,5 @@
-import prisma from '@/lib/db';
 import { NextResponse } from 'next/server';
+import prisma from '../../../../prisma/db';
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -20,7 +20,6 @@ export async function GET(req: Request) {
       include: { role: true },
     });
   } catch (err) {
-    console.log(err);
     return NextResponse.json({ message: 'bad request' }, { status: 400 });
   }
 

@@ -17,7 +17,7 @@ function useOutsideAlerter(ref: any, func: Function) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref]);
+  }, [ref, func]);
 }
 
 function OutsideAlerter(props: OutsideAlerterProps) {

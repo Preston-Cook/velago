@@ -8,16 +8,15 @@ export function chain(
   functions: MiddlewareFactory[],
   index = 0,
 ): CustomMiddleware {
-  const current = functions[index];
-
-  if (current) {
-    const next = chain(functions, index + 1);
-    return current(next);
+  if (index === functions.length) {
+    return async (
+      _request: NextRequest,
+      _event: NextFetchEvent,
+      response: NextResponse,
+    ) => response;
   }
 
-  return (
-    _request: NextRequest,
-    _event: NextFetchEvent,
-    response: NextResponse,
-  ) => response;
+  const current = functions[index];
+  const next = chain(functions, index + 1);
+  return current(next);
 }
