@@ -1,7 +1,10 @@
 import { Locale } from '@/types';
 
 export const pathnameLocaleMappings = {
-  '/': '/',
+  '/': {
+    en: '/',
+    es: '/',
+  },
   '/map': {
     en: '/map',
     es: '/mapa',
@@ -37,6 +40,22 @@ export const pathnameLocaleMappings = {
   '/signup/organization': {
     en: '/signup/organization',
     es: '/registrarse/organizacion',
+  },
+  '/profile': {
+    en: '/profile',
+    es: '/perfil',
+  },
+  '/account': {
+    en: '/account',
+    es: '/cuenta',
+  },
+  '/dashboard': {
+    en: '/dashboard',
+    es: '/tablero',
+  },
+  '/settings': {
+    en: '/settings',
+    es: '/configuracion',
   },
 };
 

@@ -7,6 +7,7 @@ const writePrismaClient = (): PrismaClient => {
         url: process.env.AWS_AURORA_CLUSTER_WRITE_URL as string,
       },
     },
+    log: ['query'],
   });
 };
 
@@ -16,9 +17,7 @@ const globalWritePrisma = globalThis as unknown as {
   writePrisma: WritePrismaClientSingleton | undefined;
 };
 
-const writePrisma = globalWritePrisma.writePrisma ?? writePrismaClient();
-
-export default writePrisma;
+export const writePrisma = globalWritePrisma.writePrisma ?? writePrismaClient();
 
 if (process.env.NODE_ENV !== 'production')
   globalWritePrisma.writePrisma = writePrisma;

@@ -7,6 +7,7 @@ const readPrismaClient = (): PrismaClient => {
         url: process.env.AWS_AURORA_CLUSTER_READ_URL as string,
       },
     },
+    log: ['query'],
   });
 };
 
@@ -16,9 +17,7 @@ const globalReadPrisma = globalThis as unknown as {
   readPrisma: ReadPrismaClientSingleton | undefined;
 };
 
-const readPrisma = globalReadPrisma.readPrisma ?? readPrismaClient();
-
-export default readPrisma;
+export const readPrisma = globalReadPrisma.readPrisma ?? readPrismaClient();
 
 if (process.env.NODE_ENV !== 'production')
   globalReadPrisma.readPrisma = readPrisma;
