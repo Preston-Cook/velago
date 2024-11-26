@@ -11,11 +11,11 @@ export function AboutSection({ idx, icon: Icon }: AboutSectionProps) {
 
   return (
     <div
-      className={`flex gap-8 w-full ${idx % 2 === 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}
+      className={`flex w-full gap-8 rounded bg-secondary p-4 lg:bg-transparent ${idx % 2 === 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}
     >
-      <div className="flex flex-col gap-8 lg:w-[80%]">
+      <div className="flex flex-col gap-8 lg:w-[70%] xl:w-[80%]">
         <h2
-          className={`w-full text-3xl md:text-4xl text-primary flex items-center justify-center  gap-x-2 ${'lg:justify-start'}`}
+          className={`flex w-full items-center justify-center gap-x-2 text-3xl text-primary md:text-4xl ${'lg:justify-start'}`}
         >
           <Icon className="lg:hidden" size={30} />
           {t(`section${idx}.title`)}
@@ -24,8 +24,8 @@ export function AboutSection({ idx, icon: Icon }: AboutSectionProps) {
           {t(`section${idx}.text`)}
         </div>
       </div>
-      <div className="hidden lg:block flex-1 bg-secondary rounded p-8 w-8">
-        <Icon size={30} className="text-primary w-full h-full" />
+      <div className="hidden w-8 flex-1 rounded bg-secondary p-8 lg:block">
+        <Icon size={30} className="h-full w-full text-primary" />
       </div>
     </div>
   );

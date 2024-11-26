@@ -46,7 +46,7 @@ export default async function BaseLayout({
       lang={locale}
       suppressHydrationWarning
     >
-      <body className={cn('min-h-screen antialiased flex flex-col')}>
+      <body className={cn('flex min-h-screen flex-col antialiased')}>
         <NextIntlClientProvider messages={messages}>
           <NextThemesProvider
             attribute={'class'}
@@ -58,7 +58,7 @@ export default async function BaseLayout({
               <LocationProvider>
                 <ProgressBar />
                 <Header />
-                <main className="flex-1 flex flex-col p-4">{children}</main>
+                <main className="flex flex-1 flex-col p-4">{children}</main>
                 <Footer />
               </LocationProvider>
             </ThemeDataProvider>

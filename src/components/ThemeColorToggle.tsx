@@ -26,7 +26,7 @@ export function ThemeColorToggle() {
   const createSelectItems = () => {
     return availableThemeColors.map(({ name, light, dark }) => (
       <SelectItem key={name} value={name}>
-        <div className="flex item-center space-x-3">
+        <div className="item-center flex space-x-3">
           <div
             className={cn(
               'rounded-full',

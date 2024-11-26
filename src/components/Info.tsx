@@ -8,8 +8,8 @@ export function Info() {
   const t = useTranslations('Home.info');
 
   return (
-    <div className="flex flex-col gap-8 sm:max-w-[90%] md:max-w-[80%] lg:max-w-[60%] mx-auto">
-      <h2 className="text-3xl md:text-4xl text-primary mx-auto">
+    <div className="mx-auto flex flex-col gap-8 sm:max-w-[90%] md:max-w-[80%] lg:max-w-[60%]">
+      <h2 className="mx-auto text-3xl text-primary md:text-4xl">
         {t('title')}
       </h2>
       <p>{t('p1')}</p>

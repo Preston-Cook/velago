@@ -21,7 +21,7 @@ export function SheetSection({ name: sectionName, links }: SheetLinkProps) {
         {t(`${sectionName}.title`)}
       </SheetDescription>
       <div
-        className={`flex gap-4 flex-col ${sectionName === 'legal' && 'md:flex-row'}`}
+        className={`flex flex-col gap-4 ${sectionName === 'legal' && 'md:flex-row'}`}
       >
         {sectionLinks.map(({ icon, name: linkName, href }) => (
           <IconLink

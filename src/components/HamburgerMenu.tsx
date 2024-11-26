@@ -15,7 +15,7 @@ export function HamburgerMenu({ className }: HamburgerMenuProps) {
         <Menu />
       </SheetTrigger>
       <SheetContent
-        className="flex flex-col p-4 bg-secondary w-[60%]"
+        className="flex w-[60%] flex-col bg-secondary p-4"
         side={'right'}
       >
         <SheetSidebar />

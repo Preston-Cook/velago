@@ -9,9 +9,9 @@ import { ThemeModeToggle } from './ThemeModeToggle';
 
 export async function Header() {
   return (
-    <header className="bg-secondary border-b border-primary p-4 flex">
+    <header className="flex border-b border-primary bg-secondary p-4">
       <div className="flex flex-1 gap-8">
-        <Link href={'/'} className="flex justify-start items-center gap-x-2">
+        <Link href={'/'} className="flex items-center justify-start gap-x-2">
           <Image
             className="dark:hidden"
             src="/images/logo-black.png"
@@ -28,11 +28,11 @@ export async function Header() {
           />
           <h3 className="text-2xl text-primary">Velago</h3>
         </Link>
-        <div className="hidden lg:flex gap-x-4">
+        <div className="hidden gap-x-4 lg:flex">
           <HeaderLinks />
         </div>
       </div>
-      <div className="flex gap-x-4 items-center">
+      <div className="flex items-center gap-x-4">
         <LocaleToggle />
         <ThemeModeToggle className="hidden md:flex" />
         <SignInButton className="hidden md:flex" />

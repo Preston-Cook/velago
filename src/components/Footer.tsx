@@ -10,8 +10,8 @@ export async function Footer() {
   const t = await getTranslations('Footer');
 
   return (
-    <footer className="bg-secondary border-t border-primary p-4 items-center flex flex-col gap-4 text-center">
-      <Link href={'/'} className="flex justify-center gap-x-2 items-center">
+    <footer className="flex flex-col items-center gap-4 border-t border-primary bg-secondary p-4 text-center">
+      <Link href={'/'} className="flex items-center justify-center gap-x-2">
         <Image
           className="dark:hidden"
           src="/images/logo-black.png"
@@ -26,13 +26,13 @@ export async function Footer() {
           width={30}
           alt="Velago logo"
         />
-        <h3 className="text-primary text-2xl w-fit">Velago</h3>
+        <h3 className="w-fit text-2xl text-primary">Velago</h3>
       </Link>
       <div className="md:max-w-[60%] lg:max-w-[40%]">{t('description')}</div>
-      <div className="w-full flex gap-x-5 items-center justify-center flex-wrap">
+      <div className="flex w-full flex-wrap items-center justify-center gap-x-5">
         {footerLinks.map(({ name, href }) => (
           <Link key={uuid()} href={href as keyof PathnameConfig}>
-            <Button className="font-semibold p-0" variant={'link'}>
+            <Button className="p-0 font-semibold" variant={'link'}>
               {t(`links.${name}.text`)}
             </Button>
           </Link>

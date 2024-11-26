@@ -13,9 +13,9 @@ export function SheetSidebar() {
 
   return (
     <>
-      <SheetHeader className="p-1 ">
+      <SheetHeader className="p-1">
         <div className="flex flex-1">
-          <Link href={'/'} className="flex justify-start items-center gap-x-2">
+          <Link href={'/'} className="flex items-center justify-start gap-x-2">
             <Image
               className="dark:hidden"
               src="/images/logo-black.png"
@@ -34,8 +34,8 @@ export function SheetSidebar() {
           </Link>
         </div>
       </SheetHeader>
-      <div className="flex-1 flex flex-col overflow-y-scroll">
-        <div className="flex-1 flex-col flex gap-4 border-primary border-t py-4">
+      <div className="flex flex-1 flex-col overflow-y-scroll">
+        <div className="flex flex-1 flex-col gap-4 border-t border-primary py-4">
           {sheetSectionNames.map(({ name, links }) => (
             <SheetSection key={uuid()} name={name} links={links} />
           ))}
@@ -44,7 +44,7 @@ export function SheetSidebar() {
         </div>
 
         <SheetFooter>
-          <div className="text-center mr-auto">
+          <div className="mr-auto text-center">
             {`© ${new Date().getFullYear()} Velago™ ${t('legal')}`}
           </div>
         </SheetFooter>

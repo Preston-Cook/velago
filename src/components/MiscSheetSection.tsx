@@ -9,7 +9,7 @@ export function MiscSheetSection() {
   return (
     <div className="flex flex-col gap-4">
       <SheetDescription className="text-lg">{'Miscellaneous'}</SheetDescription>
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col gap-4 md:flex-row">
         <ThemeModeToggle className="w-full" />
         <ThemeColorToggle />
       </div>

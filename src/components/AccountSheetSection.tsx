@@ -9,7 +9,7 @@ export function AccountSheetSection() {
   return (
     <div className="flex flex-col gap-4">
       <SheetDescription className="text-lg">{t('title')}</SheetDescription>
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col gap-4 md:flex-row">
         <SignInButton className="w-full" />
         <SignUpButton className="w-full" />
       </div>

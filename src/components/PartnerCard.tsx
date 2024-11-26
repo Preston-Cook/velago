@@ -26,7 +26,7 @@ export function PartnerCard({
   return (
     <Card className="flex flex-col bg-secondary">
       <CardHeader className="flex flex-col">
-        <CardTitle className="text-primary text-center">{title}</CardTitle>
+        <CardTitle className="text-center text-primary">{title}</CardTitle>
       </CardHeader>
       <CardContent className="text-center">{description}</CardContent>
       <CardFooter className="w-full">
