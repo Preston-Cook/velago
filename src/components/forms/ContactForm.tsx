@@ -44,16 +44,10 @@ export function ContactForm() {
 
   useEffect(() => {
     if (state?.message && !state.issues) {
-      toast.success('Form submitted successfully!', {
-        description: state.message,
+      toast.success(t('Contact.toast.success.title'), {
+        description: t('Contact.toast.success.description'),
       });
-
-      // Optional: Reset the form after successful submission
       form.reset();
-    } else if (state?.issues) {
-      toast.error('Submission failed', {
-        description: state.issues.join(', '),
-      });
     }
   }, [state, form]);
 
@@ -97,11 +91,11 @@ export function ContactForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>First Name</FormLabel>
+                  <FormLabel>{t('Contact.labels.firstName')}</FormLabel>
                   <FormControl>
                     <Input
                       className="bg-secondary"
-                      placeholder="Aaron"
+                      placeholder={t('Contact.placeholders.firstName')}
                       {...field}
                     />
                   </FormControl>
@@ -114,11 +108,11 @@ export function ContactForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem className="w-full">
-                  <FormLabel>Last Name</FormLabel>
+                  <FormLabel>{t('Contact.labels.lastName')}</FormLabel>
                   <FormControl>
                     <Input
                       className="bg-secondary"
-                      placeholder="Swartz"
+                      placeholder={t('Contact.placeholders.lastName')}
                       {...field}
                     />
                   </FormControl>
@@ -132,11 +126,11 @@ export function ContactForm() {
             control={form.control}
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t('Contact.labels.email')}</FormLabel>
                 <FormControl>
                   <Input
                     className="bg-secondary"
-                    placeholder="Email"
+                    placeholder={t('Contact.placeholders.email')}
                     type="email"
                     {...field}
                   />
@@ -150,12 +144,12 @@ export function ContactForm() {
             control={form.control}
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Phone</FormLabel>
+                <FormLabel>{t('Contact.labels.phone')}</FormLabel>
                 <FormControl>
                   <PhoneInput
                     type="phone"
                     defaultCountry="US"
-                    placeholder="(123)-456-7890"
+                    placeholder={t('Contact.placeholders.phone')}
                     {...field}
                   />
                 </FormControl>
@@ -168,11 +162,11 @@ export function ContactForm() {
             control={form.control}
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Message</FormLabel>
+                <FormLabel>{t('Contact.labels.message')}</FormLabel>
                 <FormControl>
                   <Textarea
                     className="bg-secondary"
-                    placeholder="Enter your message here..."
+                    placeholder={t('Contact.placeholders.message')}
                     {...field}
                   />
                 </FormControl>
@@ -186,7 +180,7 @@ export function ContactForm() {
           className="w-full"
           type="submit"
         >
-          {form.formState.isSubmitting ? <Spinner /> : 'Submit'}
+          {form.formState.isSubmitting ? <Spinner /> : t('Contact.submit.text')}
         </Button>
       </form>
     </Form>

@@ -61,7 +61,7 @@ export default async function BaseLayout({
                 <Header />
                 <main className="flex flex-1 flex-col p-4">{children}</main>
                 <Footer />
-                <Toaster closeButton richColors />
+                <Toaster />
               </LocationProvider>
             </ThemeDataProvider>
           </NextThemesProvider>

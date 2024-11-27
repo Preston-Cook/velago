@@ -1,4 +1,31 @@
 {
+  "Contact": {
+    "heading": "Contact Us",
+    "subheading": "Get in touch with us to learn more about our services, partnerships, or any inquiries you may have.",
+    "labels": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message"
+    },
+    "placeholders": {
+      "firstName": "Aaron",
+      "lastName": "Swartz",
+      "email": "Email",
+      "phone": "(123)-456-7890",
+      "message": "Enter your message here..."
+    },
+    "submit": {
+      "text": "Submit"
+    },
+    "toast": {
+      "success": {
+        "title": "Message Sent!",
+        "description": "Message sent successfully"
+      }
+    }
+  },
   "Home": {
     "cta": {
       "heading": "Find Resources Near You",

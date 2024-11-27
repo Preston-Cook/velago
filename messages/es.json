@@ -1,4 +1,31 @@
 {
+  "Contact": {
+    "heading": "Contáctanos",
+    "subheading": "Ponte en contacto con nosotros para obtener más información sobre nuestros servicios, colaboraciones o cualquier consulta que puedas tener.",
+    "labels": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo Electrónico",
+      "phone": "Teléfono",
+      "message": "Mensaje"
+    },
+    "placeholders": {
+      "firstName": "Aaron",
+      "lastName": "Swartz",
+      "email": "Correo Electrónico",
+      "phone": "(123)-456-7890",
+      "message": "Escribe tu mensaje aquí..."
+    },
+    "submit": {
+      "text": "Enviar"
+    },
+    "toast": {
+      "success": {
+        "title": "¡Mensaje Enviado!",
+        "description": "Mensaje enviado con éxito"
+      }
+    }
+  },
   "Home": {
     "cta": {
       "heading": "Encuentra Recursos Cerca de Ti",
