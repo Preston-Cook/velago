@@ -1,4 +1,18 @@
 {
+  "NotFound": {
+    "heading": "¡Ups! Página No Encontrada",
+    "subheading": "No pudimos encontrar la página que estás buscando.",
+    "section1": {
+      "text": "Parece que la página que intentas acceder no existe o ha sido movida."
+    },
+    "section2": {
+      "text": "Si necesitas ayuda o encontraste un error, no dudes en contactarnos",
+      "breakText": "aquí"
+    },
+    "button": {
+      "text": "Volver al Inicio"
+    }
+  },
   "Contact": {
     "heading": "Contáctanos",
     "subheading": "Ponte en contacto con nosotros para obtener más información sobre nuestros servicios, colaboraciones o cualquier consulta que puedas tener.",
