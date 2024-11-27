@@ -30,7 +30,6 @@ export function createContactFormSchema(t: Translator) {
       })
       .refine(
         (value) => {
-          console.log(value);
           return isValidPhoneNumber(value, 'US');
         },
         {

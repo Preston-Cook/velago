@@ -158,9 +158,6 @@ export function LocationProvider({ children }: LocationProviderProps) {
           longitude: position.coords.longitude,
         };
       } catch {
-        console.log(
-          'Browser geolocation failed, trying Google Geolocation API...',
-        );
         coords = await getGoogleGeolocation();
       }
 

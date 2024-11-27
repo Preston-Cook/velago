@@ -64,7 +64,6 @@ const InputComponent = React.forwardRef<
   React.ComponentProps<'input'>
 >(({ className, ...props }, ref) => (
   <Input
-    onChange={(e) => console.log(e)}
     className={cn('rounded bg-secondary', className)}
     {...props}
     ref={ref}

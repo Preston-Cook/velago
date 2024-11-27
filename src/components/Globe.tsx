@@ -5,12 +5,10 @@ import { colorThemes } from '@/config/colorThemes';
 import { hslToRgb } from '@/lib/hslToRgb';
 import createGlobe from 'cobe';
 import { useTheme } from 'next-themes';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-// https://github.com/shuding/cobe
-
-export default function Globe() {
-  const canvasRef = useRef<HTMLCanvasElement>(null); // Specify the type here
+export function Globe() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { themeColor } = useThemeContext();
   const { resolvedTheme } = useTheme();
   const color =
@@ -20,17 +18,31 @@ export default function Globe() {
 
   const rgbColors = hslToRgb(h, s, l);
 
+  const [dimensions, setDimensions] = useState({ width: 600, height: 600 });
+
+  useEffect(() => {
+    const handleResize = () => {
+      const newWidth = Math.min(window.innerWidth * 0.8, 600); // Maximum size 600px
+      setDimensions({
+        width: newWidth,
+        height: newWidth, // Maintain square aspect ratio
+      });
+    };
+
+    handleResize(); // Initialize on mount
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     let phi = 0;
 
-    if (!canvasRef.current) {
-      return;
-    }
+    if (!canvasRef.current) return;
 
     const globe = createGlobe(canvasRef.current, {
       devicePixelRatio: 2,
-      width: 600 * 2,
-      height: 600 * 2,
+      width: dimensions.width * 2,
+      height: dimensions.height * 2,
       phi: 0,
       theta: 0,
       dark: 0,
@@ -42,22 +54,32 @@ export default function Globe() {
       glowColor: [1, 1, 1],
       markers: [],
       onRender: (state) => {
-        // Called on every animation frame.
-        // `state` will be an empty object, return updated params.
         state.phi = phi;
         phi += 0.005;
       },
     });
 
+    setTimeout(() => {
+      if (canvasRef.current) {
+        canvasRef.current.style.opacity = '1';
+      }
+    });
+
     return () => {
       globe.destroy();
     };
-  }, [themeColor, resolvedTheme]);
+  }, [themeColor, resolvedTheme, dimensions, rgbColors]);
 
   return (
     <canvas
       ref={canvasRef}
-      style={{ width: 600, height: 600, maxWidth: '100%', aspectRatio: '1' }}
+      className="mx-auto aspect-square"
+      style={{
+        width: `${dimensions.width}px`,
+        height: `${dimensions.height}px`,
+        opacity: 0,
+        transition: 'opacity 1s ease',
+      }}
     />
   );
 }

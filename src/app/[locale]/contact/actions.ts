@@ -30,7 +30,5 @@ export async function onSubmitAction(
     };
   }
 
-  console.log('success');
-
   return { message: 'success' };
 }
