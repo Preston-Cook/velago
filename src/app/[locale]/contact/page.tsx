@@ -13,11 +13,11 @@ export default async function SignUpUser() {
             <h1 className="w-full text-center text-4xl text-primary md:text-5xl">
               {t('heading')}
             </h1>
-            <p className="text-center">{t('subheading')}</p>
+            <h3 className="text-center">{t('subheading')}</h3>
             <ContactForm />
           </div>
         </div>
-        <div className="hidden flex-1 lg:block">
+        <div className="hidden flex-1 p-4 lg:block">
           <Globe />
         </div>
       </div>
