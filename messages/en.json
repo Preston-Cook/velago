@@ -158,5 +158,34 @@
         }
       }
     }
+  },
+  "Validation": {
+    "contactFormSchema": {
+      "firstName": {
+        "required": "First name is required.",
+        "minLength": "First name must be at least 2 characters long.",
+        "maxLength": "First name must be at most 50 characters long."
+      },
+      "lastName": {
+        "required": "Last name is required.",
+        "minLength": "Last name must be at least 2 characters long.",
+        "maxLength": "Last name must be at most 50 characters long."
+      },
+      "phone": {
+        "required": "Phone number is required.",
+        "invalid": "Please enter a valid US phone number."
+      },
+      "email": {
+        "required": "Email is required.",
+        "invalid": "Please enter a valid email address."
+      },
+      "message": {
+        "required": "Message is required.",
+        "minLength": "Message must be at least 10 characters long.",
+        "maxLength": "Message must be at most 300 characters long."
+      }
+    },
+    "userSignInFormSchema": {},
+    "userSignUpFormSchema": {}
   }
 }

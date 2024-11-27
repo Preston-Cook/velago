@@ -34,3 +34,11 @@ export interface Suggestion {
     };
   };
 }
+
+export type Translator = (arg: string) => string;
+
+export type FormState = {
+  message: string;
+  fields?: Record<string, string>;
+  issues?: string[];
+};

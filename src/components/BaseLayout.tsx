@@ -14,6 +14,7 @@ import { ReactNode } from 'react';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { ProgressBar } from './ProgressBar';
+import { Toaster } from './ui/Sonner';
 
 interface BaseLayoutProps {
   children: ReactNode;
@@ -60,6 +61,7 @@ export default async function BaseLayout({
                 <Header />
                 <main className="flex flex-1 flex-col p-4">{children}</main>
                 <Footer />
+                <Toaster closeButton richColors />
               </LocationProvider>
             </ThemeDataProvider>
           </NextThemesProvider>
