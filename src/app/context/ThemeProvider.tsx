@@ -22,16 +22,16 @@ export default function ThemeDataProvider({ children }: ThemeProviderProps) {
     getSavedThemeColor() as ThemeColors,
   );
   const [isMounted, setIsMounted] = useState(false);
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     localStorage.setItem('themeColor', themeColor);
-    setGlobalColorTheme(theme as 'light' | 'dark', themeColor);
+    setGlobalColorTheme(resolvedTheme as 'light' | 'dark', themeColor);
 
     if (!isMounted) {
       setIsMounted(true);
     }
-  }, [themeColor, theme, isMounted]);
+  }, [themeColor, resolvedTheme, isMounted]);
 
   if (!isMounted) {
     return null;

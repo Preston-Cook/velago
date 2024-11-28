@@ -9,14 +9,14 @@ interface ThemeModeToggleProps {
 }
 
 export function ThemeModeToggle({ className }: ThemeModeToggleProps) {
-  const { setTheme, theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   return (
     <Button
       className={className}
       variant="outline"
       size="icon"
-      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      onClick={() => setTheme(resolvedTheme === 'light' ? 'dark' : 'light')}
     >
       <Sun className="hidden dark:inline-block" />
       <Moon className="dark:hidden" />
