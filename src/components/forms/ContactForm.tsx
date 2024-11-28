@@ -68,8 +68,9 @@ export function ContactForm() {
 
   return (
     <Form {...form}>
+      <li className="flex gap-1">issue</li>
       {state?.issues && (
-        <div className="text-red-500">
+        <div className="text-destructive">
           <ul>
             {state.issues.map((issue) => (
               <li key={issue} className="flex gap-1">

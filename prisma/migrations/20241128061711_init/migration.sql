@@ -1,9 +1,12 @@
+-- CreateExtension
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
 -- CreateEnum
 CREATE TYPE "UserRole" AS ENUM ('USER', 'MEDICAL_ORG', 'NON_MEDICAL_ORG', 'ADMIN');
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "name" TEXT,
     "email" TEXT NOT NULL,
     "email_verified" TIMESTAMP(3),
@@ -18,7 +21,7 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Account" (
-    "user_id" TEXT NOT NULL,
+    "user_id" UUID NOT NULL,
     "type" TEXT NOT NULL,
     "provider" TEXT NOT NULL,
     "provider_account_id" TEXT NOT NULL,

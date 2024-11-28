@@ -5,12 +5,14 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("AWS_AURORA_CLUSTER_WRITE_URL")
+  provider   = "postgresql"
+  extensions = [pgcrypto]
+  url        = env("AWS_AURORA_CLUSTER_WRITE_URL")
 }
 
 enum UserRole {
@@ -21,7 +23,7 @@ enum UserRole {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name          String?
   email         String    @unique
   emailVerified DateTime? @map("email_verified")
@@ -34,7 +36,7 @@ model User {
 }
 
 model Account {
-  userId            String  @map("user_id")
+  userId            String  @map("user_id") @db.Uuid
   type              String
   provider          String
   providerAccountId String  @map("provider_account_id")
