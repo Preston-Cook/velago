@@ -1,0 +1,37 @@
+id,locationId,attention,address1,address2,city,region,stateProvince,postalCode,country,addressType
+df675c75-985b-4833-8a61-b91a9b9561d0,9337bdaf-70ae-4c5e-9f6e-ce201d71f497,,108 East Dean Keeton Street,"Bldg, 3rd",Austin,Travis County,Texas,78712,United States,PHYSICAL
+cd288a3e-7e9d-409a-a3ef-2ac42d68e176,eda02d73-1ecd-45ba-acf7-26242bac6bbd,,100 West Dean Keeton Street,,Austin,Travis County,Texas,78712,United States,PHYSICAL
+e2609e23-60d2-417e-914a-d659f6e0cc91,783274aa-3470-4cd0-a66f-b03fa20c4a2f,,2609 University Avenue,,Austin,Travis County,Texas,78712,United States,PHYSICAL
+dd0c6be9-cd1b-4675-b9cf-98686ecff88c,d5361491-16dc-43d8-84a5-54dc26d839a0,,2504a Whitis Avenue,,Austin,Travis County,Texas,78712,United States,PHYSICAL
+d53d3b7c-6ec8-4610-8176-fc70f61911db,1d5ea3ab-e31c-4ae7-ad05-23760cd145c6,,209 West 27th Street,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+93bc94a8-7c03-4ea5-a77f-4ab00d36ee3e,6d873e3f-9d9e-4968-85ac-330622cf1cd1,,2409 Guadalupe Street,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+0901ef74-50a2-442f-839e-ff8c054ae344,8a9c97ae-2185-40ec-9039-31c77b65483d,,2203 San Antonio Street,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+9927fd27-644c-4613-960a-a344aef5a5f3,84eca541-776e-4a6e-9574-b1219137985b,,101 East 21st Street,,Austin,Travis County,Texas,78712,United States,PHYSICAL
+34ef335d-bcb7-4f04-bbbb-bc2786ca9bf3,ef1af15d-4acc-44b0-afa2-9847fc60e27f,,2405 Robert Dedman Drive,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+84a32351-d2f1-4c3b-bbc7-8ab2e4bcc69b,f02f4dea-ff4f-4516-ba2d-b2bf10945b48,,2313 Red River Street,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+9ad70a89-03c6-4635-bab6-d8b9aea9ca93,2a622e8c-2cda-4d20-8fda-7f292c6b334b,,2026 Guadalupe Street,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+e8761332-2ba6-4ce2-b58b-fe83663d7286,d42ed3ea-7e2b-4268-9675-deb1a21eb5f1,,3100 Red River Street,3,Austin,Travis County,Texas,78705,United States,PHYSICAL
+c94ff529-5fc4-47c4-82d8-8e3c5d3e4b77,7a890ebe-cb8c-4ed9-b474-ac099292ac5e,,2717 Rio Grande Street,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+2d52f964-7ff0-4008-939b-07cf6b7f1c7f,01a2b0e4-e726-43ee-8077-4f0f1f033d66,,919 East 32nd Street,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+4b16e783-b189-485f-9190-d4f70103ff01,cfc1b65d-0dfb-4d23-8eab-ed64172047d9,,1801 North Congress Avenue,11 800,Austin,Travis County,Texas,78701,United States,PHYSICAL
+ff49bcd1-df3b-4f46-b66e-d8e275177df9,e16853e7-48e8-4f0f-a526-8297f2913a16,,1801 Congress Avenue,,Austin,Travis County,Texas,78701,United States,PHYSICAL
+ac500a94-1fbd-43cb-8d1e-f1d44b0a7e8a,3f5f73c4-0400-49ac-894f-b6b672f38824,,1801 Congress Avenue,Suite 10-200,Austin,Travis County,Texas,78701,United States,PHYSICAL
+04e251f9-1122-4137-8a04-1c9834e1a363,e6f97542-84bd-4c55-98d0-b6510ac095e7,,1700 North Congress Avenue,,Austin,Travis County,Texas,78701,United States,PHYSICAL
+33b33588-b0f3-4fab-afe8-7a08bcba3a83,036a2b3e-1625-4069-b431-66ae2056836f,,1716 San Antonio Street,,Austin,Travis County,Texas,78701,United States,PHYSICAL
+bea311d5-3a2a-4257-97df-51d814bb1a93,b5664ce2-57bd-4509-9d35-dd17586bb197,,1005 East 32nd Street,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+641ffbf0-9ce6-4986-b9a3-6bc5445c036c,0fdebc2e-ca0a-4500-b989-6be0a84c755a,,1701 North Congress Avenue,,Austin,Travis County,Texas,78701,United States,PHYSICAL
+3f9ceef1-050d-41d6-a25f-0f4784f3c190,75025bd0-4bdc-40c4-89a5-e0f0030cec1e,,Texas Avenue,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+81006068-d957-4873-8941-b0c5ff29d5ee,9304112d-d3a1-4261-b965-9f3a3fab7885,,1700 Guadalupe Street,5th Floor,Austin,Travis County,Texas,78701,United States,PHYSICAL
+9d18e46a-3d95-413e-a0d7-ba12173adbb5,c48366a0-eb0f-4b5d-b5ef-b47fbb21fdc4,,1601 Congress Avenue,,Austin,Travis County,Texas,78711,United States,PHYSICAL
+f3cdaa80-af22-4d89-9c11-95a1a764c658,40e4ad58-d223-40bf-bb52-d182fc9ec605,,111 East 17th Street,1101,Austin,Travis County,Texas,78701,United States,PHYSICAL
+92e6f5db-44d2-427f-ab6a-192fc586c276,93a29e69-bc0f-436f-9ee5-749dc64ddd03,,1616 Guadalupe Street,,Austin,Travis County,Texas,78701,United States,PHYSICAL
+78314a1a-a3cd-4674-a02a-531ed04ab2c5,6dd4596c-93c4-4995-95ff-aea1dd8d23be,,2818 San Gabriel Street,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+47e37234-f07a-452d-b007-69b69e377376,9ac6d4b0-ac76-4c3b-a6de-05c282bf8c93,,3710 Cedar Street,,Austin,Travis County,Texas,78705,United States,PHYSICAL
+e6b0dbe2-e492-4bf4-bf06-492a16e2f006,dc946b45-e675-46f5-adb2-c1ca5977f772,,3710 Cedar Street,283,Austin,Travis County,Texas,78705,United States,PHYSICAL
+0fe3d220-6939-4618-ac50-ae79ee0b5aa7,8e6941b5-81d1-462f-9097-4e0560e845f4,,1511 Colorado Street,,Austin,Travis County,Texas,78701,United States,PHYSICAL
+c0a93295-418e-404e-b39f-39bf9dda2db7,eda02d73-1ecd-45ba-acf7-26242bac6bbd,,100 West Dean Keeton Street,,Austin,Travis County,Texas,78712,United States,POSTAL
+ae2e1174-c595-4e66-8beb-9c0ea1869e98,8a9c97ae-2185-40ec-9039-31c77b65483d,,2203 San Antonio Street,,Austin,Travis County,Texas,78705,United States,POSTAL
+9ff84f35-a148-451e-9298-a40d94c89fdb,3f5f73c4-0400-49ac-894f-b6b672f38824,,1801 Congress Avenue,Suite 10-200,Austin,Travis County,Texas,78701,United States,POSTAL
+79cdb064-fe71-4966-9907-80c17e34315f,036a2b3e-1625-4069-b431-66ae2056836f,,1716 San Antonio Street,,Austin,Travis County,Texas,78701,United States,POSTAL
+84f62e6a-b463-4d0b-a661-848ded21f888,426f266d-5ce2-4e11-a6d1-22be187a3296,,Red River Street,,Lockhart,Caldwell County,Texas,78644,United States,PHYSICAL
+06e9c534-5250-4411-8547-94090f8d3b39,79691fc2-303f-46f6-b732-3053aa0f8b00,,1081 North Congress Avenue,11 800,Austin,Travis County,Texas,78701,United States,PHYSICAL

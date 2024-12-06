@@ -42,3 +42,7 @@ export type FormState = {
   fields?: Record<string, string>;
   issues?: string[];
 };
+
+export type FieldEnumMapping<T, K> = {
+  [field in keyof T]?: Record<string, K>;
+};

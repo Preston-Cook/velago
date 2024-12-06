@@ -49,7 +49,7 @@ export function ContactForm() {
       });
       form.reset();
     }
-  }, [state, form]);
+  }, [state, form, t]);
 
   const handleFormSubmit = form.handleSubmit((data) => {
     // Convert form data to FormData
