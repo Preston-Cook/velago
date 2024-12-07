@@ -2,7 +2,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- CreateEnum
-CREATE TYPE "UserRole" AS ENUM ('USER', 'MEDICAL_ORG', 'NON_MEDICAL_ORG', 'ADMIN');
+CREATE TYPE "Role" AS ENUM ('USER', 'MEDICAL_ORG', 'NON_MEDICAL_ORG', 'ADMIN');
 
 -- CreateEnum
 CREATE TYPE "status_type" AS ENUM ('ACTIVE', 'INACTIVE', 'DEFUNCT', 'TEMPORARILY_CLOSED');
@@ -17,27 +17,29 @@ CREATE TYPE "PhoneType" AS ENUM ('TEXT', 'VOICE', 'FAX', 'CELL', 'VIDEO', 'PAGER
 CREATE TYPE "extent_type" AS ENUM ('GEOJSON', 'TOPOJSON', 'KML', 'TEXT');
 
 -- CreateTable
-CREATE TABLE "user" (
+CREATE TABLE "User" (
     "id" TEXT NOT NULL DEFAULT uuid_generate_v4(),
     "name" TEXT,
-    "email" TEXT NOT NULL,
-    "email_verified" TIMESTAMP(3),
+    "first_name" TEXT,
+    "last_name" TEXT,
+    "email" TEXT,
+    "emailVerified" TIMESTAMP(3),
     "image" TEXT,
     "password" TEXT,
-    "user_role" "UserRole" NOT NULL DEFAULT 'USER',
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "role" "Role" NOT NULL DEFAULT 'USER',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "user_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "account" (
+CREATE TABLE "Account" (
     "id" TEXT NOT NULL DEFAULT uuid_generate_v4(),
-    "user_id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "provider" TEXT NOT NULL,
-    "provider_account_id" TEXT NOT NULL,
+    "providerAccountId" TEXT NOT NULL,
     "refresh_token" TEXT,
     "access_token" TEXT,
     "expires_at" INTEGER,
@@ -45,10 +47,22 @@ CREATE TABLE "account" (
     "scope" TEXT,
     "id_token" TEXT,
     "session_state" TEXT,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "account_pkey" PRIMARY KEY ("provider","provider_account_id","id")
+    CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "sms_otp" (
+    "id" TEXT NOT NULL DEFAULT uuid_generate_v4(),
+    "phone" TEXT NOT NULL,
+    "otp_hash" TEXT NOT NULL,
+    "expiration_time" TIMESTAMP(3) NOT NULL,
+    "is_used" BOOLEAN NOT NULL DEFAULT false,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "sms_otp_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -399,7 +413,13 @@ CREATE TABLE "_ProgramToService" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Account_provider_providerAccountId_key" ON "Account"("provider", "providerAccountId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "sms_otp_phone_key" ON "sms_otp"("phone");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "program_organization_id_key" ON "program"("organization_id");
@@ -432,7 +452,7 @@ CREATE UNIQUE INDEX "taxonomy_term_taxonomy_id_key" ON "taxonomy_term"("taxonomy
 CREATE INDEX "_ProgramToService_B_index" ON "_ProgramToService"("B");
 
 -- AddForeignKey
-ALTER TABLE "account" ADD CONSTRAINT "account_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "organization" ADD CONSTRAINT "organization_parent_organization_id_fkey" FOREIGN KEY ("parent_organization_id") REFERENCES "organization"("id") ON DELETE SET NULL ON UPDATE CASCADE;

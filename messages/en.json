@@ -40,6 +40,47 @@
       }
     }
   },
+  "UserSignIn": {
+    "heading": "Sign In",
+    "subheading": "Sign in to access a personalized list of nearby charitable resources and services, designed to meet your needs.",
+    "dialog": {
+      "title": "Velago Code",
+      "description": "Enter your code for Velago below",
+      "resend": "Resend"
+    },
+    "labels": {
+      "phone": "Phone",
+      "code": "Code"
+    },
+    "placeholders": {
+      "phone": "(123)-456-7890"
+    },
+    "toast": {
+      "success": {
+        "title": "Code Sent!",
+        "description": "Code sent successfully!"
+      },
+      "error": {
+        "title": "Error",
+        "description": "Failed to request Code"
+      },
+      "errorOtp": {
+        "title": "Error",
+        "description": "Invalid or Expired Code"
+      }
+    },
+    "google": "Sign In with Google",
+    "authLinks": {
+      "link1": {
+        "text": "Want an Account?",
+        "link": "Sign Up"
+      },
+      "link2": {
+        "text": "Have an Organization Account?",
+        "link": "Sign In"
+      }
+    }
+  },
   "UserSignUp": {
     "heading": "Sign Up",
     "subheading": "Sign up to access a comprehensive list of nearby charitable resources and services, tailored to support your needs.",
@@ -73,6 +114,17 @@
       "errorOtp": {
         "title": "Error",
         "description": "Invalid or Expired Code"
+      }
+    },
+    "google": "Sign Up with Google",
+    "authLinks": {
+      "link1": {
+        "text": "Already Have an Account?",
+        "link": "Sign In"
+      },
+      "link2": {
+        "text": "Want an Organization Account?",
+        "link": "Sign Up"
       }
     }
   },
@@ -266,22 +318,13 @@
       }
     },
     "userSignInFormSchema": {
-      "firstName": {
-        "required": "First name is required.",
-        "minLength": "First name must be at least 2 characters long.",
-        "maxLength": "First name must be at most 50 characters long."
-      },
-      "lastName": {
-        "required": "Last name is required.",
-        "minLength": "Last name must be at least 2 characters long.",
-        "maxLength": "Last name must be at most 50 characters long."
-      },
       "phone": {
         "required": "Phone number is required.",
         "invalid": "Please enter a valid US phone number."
       },
-      "email": {
-        "invalid": "Please enter a valid email address."
+      "code": {
+        "required": "Code is required.",
+        "invalid": "Code must be six digits."
       }
     },
     "userSignUpFormSchema": {

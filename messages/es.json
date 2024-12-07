@@ -13,6 +13,47 @@
       "text": "Volver al Inicio"
     }
   },
+  "UserSignIn": {
+    "heading": "Iniciar sesión",
+    "subheading": "Inicia sesión para acceder a una lista personalizada de recursos y servicios benéficos cercanos, diseñados para satisfacer tus necesidades.",
+    "dialog": {
+      "title": "Código Velago",
+      "description": "Ingresa tu código de Velago a continuación",
+      "resend": "Reenviar"
+    },
+    "labels": {
+      "phone": "Teléfono",
+      "code": "Código"
+    },
+    "placeholders": {
+      "phone": "(123)-456-7890"
+    },
+    "toast": {
+      "success": {
+        "title": "¡Código Enviado!",
+        "description": "¡Código enviado con éxito!"
+      },
+      "error": {
+        "title": "Error",
+        "description": "No se pudo solicitar el código"
+      },
+      "errorOtp": {
+        "title": "Error",
+        "description": "Código inválido o caducado"
+      }
+    },
+    "google": "Iniciar sesión con Google",
+    "authLinks": {
+      "link1": {
+        "text": "¿Quieres una cuenta?",
+        "link": "Regístrate"
+      },
+      "link2": {
+        "text": "¿Tienes una cuenta de organización?",
+        "link": "Iniciar sesión"
+      }
+    }
+  },
   "UserSignUp": {
     "heading": "Registrarse",
     "subheading": "Regístrate para acceder a una lista completa de recursos y servicios benéficos cercanos, adaptados para apoyar tus necesidades.",
@@ -46,6 +87,17 @@
       "errorOtp": {
         "title": "Error",
         "description": "Código inválido o expirado"
+      }
+    },
+    "google": "Regístrate con Google",
+    "authLinks": {
+      "link1": {
+        "text": "¿Ya tienes una cuenta?",
+        "link": "Iniciar sesión"
+      },
+      "link2": {
+        "text": "¿Quieres una cuenta de organización?",
+        "link": "Regístrate"
       }
     }
   },
@@ -240,6 +292,16 @@
     }
   },
   "Validation": {
+    "userSignInFormSchema": {
+      "phone": {
+        "required": "El número de teléfono es obligatorio.",
+        "invalid": "Por favor, introduce un número de teléfono válido de EE. UU."
+      },
+      "code": {
+        "required": "El código es obligatorio.",
+        "invalid": "El código debe tener seis dígitos."
+      }
+    },
     "userSignUpFormSchema": {
       "firstName": {
         "required": "El nombre es obligatorio.",

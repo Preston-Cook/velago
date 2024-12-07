@@ -17,7 +17,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/Dialog';
 import { Link } from '@/i18n/routing';
-import { createSignUpUserSchema } from '@/schemas/userSignUpFormSchema';
+import { createUserSignInSchema } from '@/schemas/userSignInFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { isRedirectError } from 'next/dist/client/components/redirect';
@@ -25,7 +25,7 @@ import { useEffect, useRef, useState } from 'react'; // Import startTransition
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { GoogleSignUpButton } from '../GoogleSignUpButton';
+import { GoogleSignInButton } from '../GoogleSignInButton';
 import {
   Form,
   FormControl,
@@ -34,25 +34,19 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/Form';
-import { Input } from '../ui/Input';
 import { PhoneInput } from '../ui/PhoneInput';
 import { Separator } from '../ui/Separator';
 
-export function SignUpUserForm() {
+export function SignInUserForm() {
   const t = useTranslations();
   const formRef = useRef<HTMLFormElement>(null);
   const [hasSentCode, setHasSentCode] = useState(false);
   const [isSubmittingRequest, setIsSubmittingRequest] = useState(false);
 
-  const signUpUserSchema = createSignUpUserSchema(t);
+  const signUpUserSchema = createUserSignInSchema(t);
 
   async function handleRequestOtp() {
-    const isValid = await form.trigger([
-      'phone',
-      'firstName',
-      'lastName',
-      'email',
-    ]);
+    const isValid = await form.trigger(['phone']);
 
     if (!isValid) {
       return;
@@ -66,18 +60,18 @@ export function SignUpUserForm() {
       const res = await requestOtp(phone);
 
       if (res.message === 'success') {
-        toast.success(t('UserSignUp.toast.success.title'), {
-          description: t('UserSignUp.toast.success.description'),
+        toast.success(t('UserSignIn.toast.success.title'), {
+          description: t('UserSignIn.toast.success.description'),
         });
         setHasSentCode(true);
       } else {
-        toast.error(t('UserSignUp.toast.error.title'), {
-          description: t('UserSignUp.toast.error.description'),
+        toast.error(t('UserSignIn.toast.error.title'), {
+          description: t('UserSignIn.toast.error.description'),
         });
       }
     } catch {
-      toast.error(t('UserSignUp.toast.error.title'), {
-        description: t('UserSignUp.toast.error.description'),
+      toast.error(t('UserSignIn.toast.error.title'), {
+        description: t('UserSignIn.toast.error.description'),
       });
     } finally {
       setIsSubmittingRequest(false);
@@ -87,9 +81,6 @@ export function SignUpUserForm() {
   const form = useForm<z.infer<typeof signUpUserSchema>>({
     resolver: zodResolver(signUpUserSchema),
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
       phone: '',
       code: '',
     },
@@ -110,14 +101,14 @@ export function SignUpUserForm() {
         return;
       }
 
-      const { firstName, lastName, email, phone, code: otp } = form.getValues();
+      const { phone, code: otp } = form.getValues();
 
       try {
-        await verifyOtp({ firstName, lastName, email, phone, otp });
+        await verifyOtp({ phone, otp });
       } catch (err) {
         if (!isRedirectError(err)) {
-          toast.error(t('UserSignUp.toast.errorOtp.title'), {
-            description: t('UserSignUp.toast.errorOtp.description'),
+          toast.error(t('UserSignIn.toast.errorOtp.title'), {
+            description: t('UserSignIn.toast.errorOtp.description'),
           });
         }
       }
@@ -128,71 +119,17 @@ export function SignUpUserForm() {
     <Form {...form}>
       <form ref={formRef} className="flex flex-col gap-8">
         <div className="flex flex-col gap-4">
-          <div className="flex gap-8">
-            <FormField
-              name="firstName"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>{t('UserSignUp.labels.firstName')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      className="bg-secondary"
-                      placeholder={t('UserSignUp.placeholders.firstName')}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              name="lastName"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormLabel>{t('UserSignUp.labels.lastName')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      className="bg-secondary"
-                      placeholder={t('UserSignUp.placeholders.lastName')}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <FormField
-            name="email"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>{'Email (Optional)'}</FormLabel>
-                <FormControl>
-                  <Input
-                    className="bg-secondary"
-                    placeholder={t('UserSignUp.placeholders.email')}
-                    type="email"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <FormField
             name="phone"
             control={form.control}
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>{t('UserSignUp.labels.phone')}</FormLabel>
+                <FormLabel>{t('UserSignIn.labels.phone')}</FormLabel>
                 <FormControl>
                   <PhoneInput
                     type="phone"
                     defaultCountry="US"
-                    placeholder={t('UserSignUp.placeholders.phone')}
+                    placeholder={t('UserSignIn.placeholders.phone')}
                     {...field}
                   />
                 </FormControl>
@@ -215,10 +152,10 @@ export function SignUpUserForm() {
           <DialogContent className="max-w-[425px]">
             <DialogHeader>
               <DialogTitle className="text-left">
-                {t('UserSignUp.dialog.title')}
+                {t('UserSignIn.dialog.title')}
               </DialogTitle>
               <DialogDescription className="text-left">
-                {t('UserSignUp.dialog.description')}
+                {t('UserSignIn.dialog.description')}
               </DialogDescription>
               <FormField
                 name="code"
@@ -226,7 +163,7 @@ export function SignUpUserForm() {
                 render={({ field }) => (
                   <FormItem className="w-full text-left">
                     <FormLabel className="text-left">
-                      {t('UserSignUp.labels.code')}
+                      {t('UserSignIn.labels.code')}
                     </FormLabel>
                     <FormControl>
                       <div className="flex items-center justify-between">
@@ -243,24 +180,24 @@ export function SignUpUserForm() {
           </DialogContent>
         </Dialog>
         <Separator className="mx-auto w-[80%] bg-primary" />
-        <GoogleSignUpButton />
+        <GoogleSignInButton />
         <div className="flex flex-col gap-4 text-center">
           <div className="flex items-center justify-center">
-            <div>{t('UserSignUp.authLinks.link1.text')}</div>
+            <div>{t('UserSignIn.authLinks.link1.text')}</div>
             <div>
-              <Link className="inline" href="/signin/user">
+              <Link className="inline" href="/signup/user">
                 <Button variant="link">
-                  {t('UserSignUp.authLinks.link1.link')}
+                  {t('UserSignIn.authLinks.link1.link')}
                 </Button>
               </Link>
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <div>{t('UserSignUp.authLinks.link2.text')}</div>
+            <div>{t('UserSignIn.authLinks.link2.text')}</div>
             <div>
-              <Link className="inline" href="/signup/organization">
+              <Link className="inline" href="/signin/organization">
                 <Button variant="link">
-                  {t('UserSignUp.authLinks.link2.link')}
+                  {t('UserSignIn.authLinks.link2.link')}
                 </Button>
               </Link>
             </div>

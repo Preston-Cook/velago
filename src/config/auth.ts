@@ -7,6 +7,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import bcrypt from 'bcryptjs';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import Google from 'next-auth/providers/google';
 
 export const {
   handlers: { GET, POST },
@@ -50,7 +51,21 @@ export const {
   session: {
     strategy: 'jwt',
   },
+  events: {
+    async linkAccount({ user }) {
+      await writePrisma.user.update({
+        where: { id: user.id },
+        data: {
+          emailVerified: new Date(),
+        },
+      });
+    },
+  },
   providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
     Credentials({
       id: 'otp',
       name: 'OTP Login',

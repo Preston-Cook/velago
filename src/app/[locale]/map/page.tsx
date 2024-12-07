@@ -1,3 +1,7 @@
+import { auth } from '@/config/auth';
+
 export default async function MapPage() {
-  return <div></div>;
+  const session = await auth();
+
+  return <div>{JSON.stringify(session)}</div>;
 }

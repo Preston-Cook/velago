@@ -25,42 +25,37 @@ enum Role {
 model User {
   id            String    @id @default(dbgenerated("uuid_generate_v4()"))
   name          String?
+  phone         String?
   firstName     String?   @map("first_name")
   lastName      String?   @map("last_name")
-  phone         String?   @unique
   email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
+  emailVerified DateTime?
   image         String?
   password      String?
-  role          Role      @default(USER) @map("role")
+  role          Role      @default(USER)
   accounts      Account[]
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @default(now()) @updatedAt @map("updated_at")
-
-  @@map("user")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @default(now())
 }
 
 model Account {
-  id                String  @default(dbgenerated("uuid_generate_v4()")) // this is added for the metadata trigger which assumes all tables have an id field
-  userId            String  @map("user_id")
+  id                String   @id @default(dbgenerated("uuid_generate_v4()"))
+  userId            String
   type              String
   provider          String
-  providerAccountId String  @map("provider_account_id")
-  refresh_token     String?
-  access_token      String?
+  providerAccountId String
+  refresh_token     String?  @db.Text
+  access_token      String?  @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?
+  id_token          String?  @db.Text
   session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @default(now())
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([provider, providerAccountId, id])
-  @@map("account")
+  @@unique([provider, providerAccountId])
 }
 
 model SmsOtp {
