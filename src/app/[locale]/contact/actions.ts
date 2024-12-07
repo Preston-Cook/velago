@@ -12,7 +12,9 @@ export async function onSubmitAction(
   prevState: FormState,
   data: FormData,
 ): Promise<FormState> {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   const formData = Object.fromEntries(data);
+
   const t = await getTranslations();
   const contactFormSchema = createContactFormSchema(t);
 
@@ -29,6 +31,14 @@ export async function onSubmitAction(
       issues: parsed.error.issues.map((issue) => issue.message),
     };
   }
+
+  // send email to velago
+  // await resendClient.emails.send({
+  //   from: process.env.VELAGO_APP_EMAIL as string,
+  //   to: 'velagomail@gmail.com',
+  //   subject: 'Hello',
+  //   text: 'asdfasdf',
+  // });
 
   return { message: 'success' };
 }

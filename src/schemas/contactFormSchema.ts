@@ -1,3 +1,4 @@
+import { phoneRegex } from '@/lib/regex';
 import { Translator } from '@/types';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import { z } from 'zod';
@@ -8,6 +9,7 @@ export function createContactFormSchema(t: Translator) {
       .string({
         message: t('Validation.contactFormSchema.firstName.required'),
       })
+      .min(1, { message: t('Validation.contactFormSchema.firstName.required') })
       .min(2, {
         message: t('Validation.contactFormSchema.firstName.minLength'),
       })
@@ -16,6 +18,9 @@ export function createContactFormSchema(t: Translator) {
       }),
     lastName: z
       .string({
+        message: t('Validation.contactFormSchema.lastName.required'),
+      })
+      .min(1, {
         message: t('Validation.contactFormSchema.lastName.required'),
       })
       .min(2, {
@@ -28,9 +33,12 @@ export function createContactFormSchema(t: Translator) {
       .string({
         message: t('Validation.contactFormSchema.phone.required'),
       })
+      .min(1, {
+        message: t('Validation.contactFormSchema.phone.required'),
+      })
       .refine(
         (value) => {
-          return isValidPhoneNumber(value, 'US');
+          return isValidPhoneNumber(value, 'US') && phoneRegex.test(value);
         },
         {
           message: t('Validation.contactFormSchema.phone.invalid'),
@@ -40,11 +48,17 @@ export function createContactFormSchema(t: Translator) {
       .string({
         message: t('Validation.contactFormSchema.email.required'),
       })
+      .min(1, {
+        message: t('Validation.contactFormSchema.email.required'),
+      })
       .email({
         message: t('Validation.contactFormSchema.email.invalid'),
       }),
     message: z
       .string({
+        message: t('Validation.contactFormSchema.message.required'),
+      })
+      .min(1, {
         message: t('Validation.contactFormSchema.message.required'),
       })
       .min(10, {

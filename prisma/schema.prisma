@@ -15,7 +15,7 @@ datasource db {
   url        = env("AWS_AURORA_CLUSTER_WRITE_URL")
 }
 
-enum UserRole {
+enum Role {
   USER
   MEDICAL_ORG
   NON_MEDICAL_ORG
@@ -25,11 +25,14 @@ enum UserRole {
 model User {
   id            String    @id @default(dbgenerated("uuid_generate_v4()"))
   name          String?
-  email         String    @unique
+  firstName     String?   @map("first_name")
+  lastName      String?   @map("last_name")
+  phone         String?   @unique
+  email         String?   @unique
   emailVerified DateTime? @map("email_verified")
   image         String?
   password      String?
-  userRole      UserRole  @default(USER) @map("user_role")
+  role          Role      @default(USER) @map("role")
   accounts      Account[]
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @default(now()) @updatedAt @map("updated_at")
@@ -58,6 +61,17 @@ model Account {
 
   @@id([provider, providerAccountId, id])
   @@map("account")
+}
+
+model SmsOtp {
+  id             String   @id @default(dbgenerated("uuid_generate_v4()"))
+  phone          String   @unique
+  otpHash        String   @map("otp_hash")
+  expirationTime DateTime @map("expiration_time")
+  isUsed         Boolean  @default(false) @map("is_used")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("sms_otp")
 }
 
 model Organization {

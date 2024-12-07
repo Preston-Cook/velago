@@ -40,6 +40,42 @@
       }
     }
   },
+  "UserSignUp": {
+    "heading": "Sign Up",
+    "subheading": "Sign up to access a comprehensive list of nearby charitable resources and services, tailored to support your needs.",
+    "dialog": {
+      "title": "Velago Code",
+      "description": "Enter your code for Velago below",
+      "resend": "Resend"
+    },
+    "labels": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email (Optional)",
+      "phone": "Phone",
+      "code": "Code"
+    },
+    "placeholders": {
+      "firstName": "Aaron",
+      "lastName": "Swartz",
+      "email": "Email",
+      "phone": "(123)-456-7890"
+    },
+    "toast": {
+      "success": {
+        "title": "Code Sent!",
+        "description": "Code sent successfully!"
+      },
+      "error": {
+        "title": "Error",
+        "description": "Failed to request Code"
+      },
+      "errorOtp": {
+        "title": "Error",
+        "description": "Invalid or Expired Code"
+      }
+    }
+  },
   "Home": {
     "cta": {
       "heading": "Find Resources Near You",
@@ -136,6 +172,9 @@
       },
       "signIn": {
         "text": "Sign In"
+      },
+      "signOut": {
+        "text": "Sign Out"
       }
     }
   },
@@ -226,7 +265,47 @@
         "maxLength": "Message must be at most 300 characters long."
       }
     },
-    "userSignInFormSchema": {},
-    "userSignUpFormSchema": {}
+    "userSignInFormSchema": {
+      "firstName": {
+        "required": "First name is required.",
+        "minLength": "First name must be at least 2 characters long.",
+        "maxLength": "First name must be at most 50 characters long."
+      },
+      "lastName": {
+        "required": "Last name is required.",
+        "minLength": "Last name must be at least 2 characters long.",
+        "maxLength": "Last name must be at most 50 characters long."
+      },
+      "phone": {
+        "required": "Phone number is required.",
+        "invalid": "Please enter a valid US phone number."
+      },
+      "email": {
+        "invalid": "Please enter a valid email address."
+      }
+    },
+    "userSignUpFormSchema": {
+      "firstName": {
+        "required": "First name is required.",
+        "minLength": "First name must be at least 2 characters long.",
+        "maxLength": "First name must be at most 50 characters long."
+      },
+      "lastName": {
+        "required": "Last name is required.",
+        "minLength": "Last name must be at least 2 characters long.",
+        "maxLength": "Last name must be at most 50 characters long."
+      },
+      "phone": {
+        "required": "Phone number is required.",
+        "invalid": "Please enter a valid US phone number."
+      },
+      "email": {
+        "invalid": "Please enter a valid email address."
+      },
+      "code": {
+        "required": "Code is required.",
+        "invalid": "Code must be six digits."
+      }
+    }
   }
 }

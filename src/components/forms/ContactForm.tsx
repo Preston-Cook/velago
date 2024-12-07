@@ -4,7 +4,13 @@ import { onSubmitAction } from '@/app/[locale]/contact/actions';
 import { createContactFormSchema } from '@/schemas/contactFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { startTransition, useActionState, useEffect, useRef } from 'react'; // Import startTransition
+import {
+  startTransition,
+  useActionState,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'; // Import startTransition
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -28,47 +34,46 @@ export function ContactForm() {
     message: '',
   });
   const formRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Add this state
 
   const contactFormSchema = createContactFormSchema(t);
 
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      firstName: state?.fields?.firstName ?? '',
-      lastName: state?.fields?.lastName ?? '',
-      email: state?.fields?.email ?? '',
-      phone: state?.fields?.phone ?? '',
-      message: state?.fields?.message ?? '',
+      firstName: state?.fields?.firstName || '',
+      lastName: state?.fields?.lastName || '',
+      email: state?.fields?.email || '',
+      phone: state?.fields?.phone || '',
+      message: state?.fields?.message || '',
     },
   });
 
   useEffect(() => {
-    if (state?.message && !state.issues) {
+    if (state?.message === 'success') {
       toast.success(t('Contact.toast.success.title'), {
         description: t('Contact.toast.success.description'),
       });
       form.reset();
+      setIsSubmitting(false); // Reset submitting state
     }
   }, [state, form, t]);
 
   const handleFormSubmit = form.handleSubmit((data) => {
-    // Convert form data to FormData
     const formData = new FormData();
 
-    // Append each field's value to FormData
     for (const [key, value] of Object.entries(data)) {
       formData.append(key, value);
     }
 
-    // Dispatch the async action inside startTransition
+    setIsSubmitting(true); // Set submitting state before action
     startTransition(() => {
-      formAction(formData); // Execute the async action
+      formAction(formData);
     });
   });
 
   return (
     <Form {...form}>
-      <li className="flex gap-1">issue</li>
       {state?.issues && (
         <div className="text-destructive">
           <ul>
@@ -95,6 +100,7 @@ export function ContactForm() {
                   <FormLabel>{t('Contact.labels.firstName')}</FormLabel>
                   <FormControl>
                     <Input
+                      disabled={isSubmitting}
                       className="bg-secondary"
                       placeholder={t('Contact.placeholders.firstName')}
                       {...field}
@@ -112,6 +118,7 @@ export function ContactForm() {
                   <FormLabel>{t('Contact.labels.lastName')}</FormLabel>
                   <FormControl>
                     <Input
+                      disabled={isSubmitting}
                       className="bg-secondary"
                       placeholder={t('Contact.placeholders.lastName')}
                       {...field}
@@ -130,6 +137,7 @@ export function ContactForm() {
                 <FormLabel>{t('Contact.labels.email')}</FormLabel>
                 <FormControl>
                   <Input
+                    disabled={isSubmitting}
                     className="bg-secondary"
                     placeholder={t('Contact.placeholders.email')}
                     type="email"
@@ -148,6 +156,7 @@ export function ContactForm() {
                 <FormLabel>{t('Contact.labels.phone')}</FormLabel>
                 <FormControl>
                   <PhoneInput
+                    disabled={isSubmitting}
                     type="phone"
                     defaultCountry="US"
                     placeholder={t('Contact.placeholders.phone')}
@@ -166,6 +175,7 @@ export function ContactForm() {
                 <FormLabel>{t('Contact.labels.message')}</FormLabel>
                 <FormControl>
                   <Textarea
+                    disabled={isSubmitting}
                     className="bg-secondary"
                     placeholder={t('Contact.placeholders.message')}
                     {...field}
@@ -176,12 +186,8 @@ export function ContactForm() {
             )}
           />
         </div>
-        <Button
-          disabled={form.formState.isSubmitting}
-          className="w-full"
-          type="submit"
-        >
-          {form.formState.isSubmitting ? <Spinner /> : t('Contact.submit.text')}
+        <Button disabled={isSubmitting} className="w-full" type="submit">
+          {isSubmitting ? <Spinner /> : t('Contact.submit.text')}
         </Button>
       </form>
     </Form>

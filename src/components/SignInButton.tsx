@@ -11,7 +11,7 @@ export function SignInButton({ className }: SignInButtonProps) {
   const t = useTranslations('Header.links');
 
   return (
-    <Link className={className} href="/signup/user">
+    <Link className={className} href="/signin/user">
       <Button className="w-full" variant={'outline'}>
         <Key /> {t('signIn.text')}
       </Button>

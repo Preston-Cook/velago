@@ -2,7 +2,7 @@ import { ContactForm } from '@/components/forms/ContactForm';
 import { Globe } from '@/components/Globe';
 import { getTranslations } from 'next-intl/server';
 
-export default async function SignUpUser() {
+export default async function Contact() {
   const t = await getTranslations('Contact');
 
   return (
@@ -17,7 +17,7 @@ export default async function SignUpUser() {
             <ContactForm />
           </div>
         </div>
-        <div className="hidden flex-1 p-4 lg:block">
+        <div className="hidden flex-1 lg:block">
           <Globe />
         </div>
       </div>
