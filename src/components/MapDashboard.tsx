@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
-import { MapSidebar } from './MapSidebar';
 import { Spinner } from './Spinner';
 
 export function MapDashboard() {
@@ -17,8 +16,7 @@ export function MapDashboard() {
 
   return (
     <>
-      <MapSidebar />
-      <div className="w-full bg-secondary">
+      <div className="w-full flex-1">
         <LeafletMap />
       </div>
     </>

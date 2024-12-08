@@ -9,7 +9,7 @@ const ThemeContext = createContext<ThemeColorStateParams>(
   {} as ThemeColorStateParams,
 );
 
-export default function ThemeDataProvider({ children }: ThemeProviderProps) {
+export function ThemeDataProvider({ children }: ThemeProviderProps) {
   const getSavedThemeColor = () => {
     try {
       return (localStorage.getItem('themeColor') as ThemeColors) || 'Blue';

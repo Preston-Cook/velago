@@ -1,6 +1,5 @@
 'use client';
 
-import { useThemeContext } from '@/app/context/ThemeProvider';
 import {
   Select,
   SelectContent,
@@ -8,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/Select';
+import { useThemeContext } from '@/context/ThemeProvider';
 import { cn } from '@/lib/utils';
 import { ThemeColors } from '@/types';
 import { useTheme } from 'next-themes';

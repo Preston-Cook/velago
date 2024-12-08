@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocationApproximation } from '@/app/context/LocationProvider';
+import { useLocationApproximation } from '@/context/LocationProvider';
 import { getLocationSuggestions } from '@/lib/getLocationSuggestions';
 import { Locale, Suggestion } from '@/types';
 import { useParams } from 'next/navigation';

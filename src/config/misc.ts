@@ -31,3 +31,21 @@ export const aboutSectionIcons = [
     icon: Globe,
   },
 ];
+
+export const serviceCategories = [
+  'Consumer Services',
+  'Criminal Jusitice and Legal Services',
+  'Education',
+  'Environment and Public Health/Safety',
+  'Food',
+  'Healthcare',
+  'Housing/Shelter',
+  'Income Support and Employment',
+  'Individual and Family Life',
+  'Material Goods',
+  'Mental Health and Substance Use',
+  'Organizational/Community Services',
+  'Target Populations',
+  'Transportation',
+  'Utilities',
+];

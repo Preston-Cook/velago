@@ -1,8 +1,8 @@
 'use server';
 
-import { LocationProvider } from '@/app/context/LocationProvider';
-import ThemeDataProvider from '@/app/context/ThemeProvider';
 import '@/app/globals.css';
+import { LocationProvider } from '@/context/LocationProvider';
+import { ThemeDataProvider } from '@/context/ThemeProvider';
 import { cn } from '@/lib/utils';
 import { Locale } from '@/types';
 import { Analytics } from '@vercel/analytics/next';

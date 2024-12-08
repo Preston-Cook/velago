@@ -1,7 +1,7 @@
 'use client';
 
-import { useThemeContext } from '@/app/context/ThemeProvider';
 import { colorThemes } from '@/config/colorThemes';
+import { useThemeContext } from '@/context/ThemeProvider';
 import { hslToHex } from '@/lib/hslToHex';
 import { useTheme } from 'next-themes';
 import NextTopLoader from 'nextjs-toploader';

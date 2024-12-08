@@ -12,15 +12,19 @@ import { Input } from '@/components/ui/Input';
 import { Label } from '@/components/ui/Label';
 import { Filter } from 'lucide-react';
 
-export function FilterMenu() {
+interface FilterMenuProps {
+  className?: string;
+}
+
+export function FilterMenu({ className }: FilterMenuProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>
+        <Button className={className}>
           <Filter />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className={'sm:max-w-[425px]'}>
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
           <DialogDescription>

@@ -1,7 +1,7 @@
 'use client';
 
-import { useThemeContext } from '@/app/context/ThemeProvider';
 import { colorThemes } from '@/config/colorThemes';
+import { useThemeContext } from '@/context/ThemeProvider';
 import { hslToRgb } from '@/lib/hslToRgb';
 import createGlobe from 'cobe';
 import { useTheme } from 'next-themes';
