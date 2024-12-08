@@ -16,7 +16,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/Dialog';
-import { Link } from '@/i18n/routing';
 import { createUserSignInSchema } from '@/schemas/userSignInFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
@@ -149,7 +148,7 @@ export function SignInUserForm() {
               {isSubmittingRequest ? <Spinner size={4} /> : 'Request Code'}
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-[425px]">
+          <DialogContent className="max-w-[425px] border-primary bg-secondary">
             <DialogHeader>
               <DialogTitle className="text-left">
                 {t('UserSignIn.dialog.title')}
@@ -181,28 +180,6 @@ export function SignInUserForm() {
         </Dialog>
         <Separator className="mx-auto w-[80%] bg-primary" />
         <GoogleSignInButton />
-        <div className="flex flex-col gap-4 text-center">
-          <div className="flex items-center justify-center">
-            <div>{t('UserSignIn.authLinks.link1.text')}</div>
-            <div>
-              <Link className="inline" href="/signup/user">
-                <Button variant="link">
-                  {t('UserSignIn.authLinks.link1.link')}
-                </Button>
-              </Link>
-            </div>
-          </div>
-          <div className="flex items-center justify-center">
-            <div>{t('UserSignIn.authLinks.link2.text')}</div>
-            <div>
-              <Link className="inline" href="/signin/organization">
-                <Button variant="link">
-                  {t('UserSignIn.authLinks.link2.link')}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
       </form>
     </Form>
   );

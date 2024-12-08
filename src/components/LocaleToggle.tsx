@@ -49,7 +49,10 @@ export function LocaleToggle({ className }: LocaleToggleProps) {
           <Languages />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="bg-background p-0">
+      <DropdownMenuContent
+        align="start"
+        className="border border-primary bg-secondary p-0"
+      >
         <div className="border-none">
           <DropdownMenuRadioGroup
             onValueChange={handleLocaleChange}

@@ -4,6 +4,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/Popover';
 import { Filter } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Button } from './ui/Button';
 import { Label } from './ui/Label';
 import { Slider } from './ui/Slider';
@@ -14,6 +15,8 @@ interface FilterButtonProps {
 }
 
 export function FilterButton({ handleChange, radius }: FilterButtonProps) {
+  const t = useTranslations('Home');
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -21,24 +24,27 @@ export function FilterButton({ handleChange, radius }: FilterButtonProps) {
           <Filter className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="mt-1 w-80 bg-background" align="start">
+      <PopoverContent
+        className="mt-1 w-80 border border-primary bg-secondary"
+        align="start"
+      >
         <div className="grid gap-4">
           <div className="space-y-2">
-            <h4 className="font-bold text-primary">Filters</h4>
+            <h4 className="font-bold">{t('filters.title')}</h4>
             <p className="text-sm text-muted-foreground">
-              Set Filters for Search
+              {t('filters.subheading')}
             </p>
           </div>
           <div className="grid gap-2">
             <div className="grid grid-cols-3 items-center gap-4">
               <Label className="text-left text-sm" htmlFor="width">
-                Radius: <br />
-                &lt; {radius}mi.
+                {t('filters.radius')}: <br />
+                &lt; {radius} mi.
               </Label>
               <Slider
                 onValueChange={handleChange}
                 step={5}
-                className="col-span-2 hover:cursor-pointer"
+                className="col-span-2"
                 defaultValue={[10]}
                 max={25}
                 min={5}

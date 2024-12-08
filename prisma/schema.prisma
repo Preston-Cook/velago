@@ -58,6 +58,17 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+model ContactMessages {
+  id        String @id @default(dbgenerated("uuid_generate_v4()"))
+  firstName String @map("first_name")
+  lastName  String @map("last_name")
+  email     String
+  phone     String
+  message   String
+
+  @@map("contact_messages")
+}
+
 model SmsOtp {
   id             String   @id @default(dbgenerated("uuid_generate_v4()"))
   phone          String   @unique

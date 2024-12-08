@@ -1,4 +1,5 @@
 'use server';
+import { writePrisma } from '@/config/prismaWriteClient';
 import { createContactFormSchema } from '@/schemas/contactFormSchema';
 import { getTranslations } from 'next-intl/server';
 
@@ -31,6 +32,11 @@ export async function onSubmitAction(
       issues: parsed.error.issues.map((issue) => issue.message),
     };
   }
+
+  // create contact message in db
+  await writePrisma.contactMessages.create({
+    data: parsed.data,
+  });
 
   // send email to velago
   // await resendClient.emails.send({

@@ -6,6 +6,7 @@ import '@/app/globals.css';
 import { cn } from '@/lib/utils';
 import { Locale } from '@/types';
 import { Analytics } from '@vercel/analytics/next';
+import 'leaflet/dist/leaflet.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';

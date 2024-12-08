@@ -20,6 +20,7 @@ CREATE TYPE "extent_type" AS ENUM ('GEOJSON', 'TOPOJSON', 'KML', 'TEXT');
 CREATE TABLE "User" (
     "id" TEXT NOT NULL DEFAULT uuid_generate_v4(),
     "name" TEXT,
+    "phone" TEXT,
     "first_name" TEXT,
     "last_name" TEXT,
     "email" TEXT,
@@ -51,6 +52,18 @@ CREATE TABLE "Account" (
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "contact_messages" (
+    "id" TEXT NOT NULL DEFAULT uuid_generate_v4(),
+    "first_name" TEXT NOT NULL,
+    "last_name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "phone" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
+
+    CONSTRAINT "contact_messages_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable

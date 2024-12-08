@@ -40,6 +40,10 @@
       }
     }
   },
+  "SignInOrganization": {
+    "heading": "Sign In",
+    "subheading": "Sign in to manage referrals and connect your patients with essential medical and non-medical resources in your community."
+  },
   "UserSignIn": {
     "heading": "Sign In",
     "subheading": "Sign in to access a personalized list of nearby charitable resources and services, designed to meet your needs.",
@@ -186,6 +190,11 @@
         "title": "Are there any eligibility criteria for accessing charitable services?",
         "text": "Eligibility criteria for charitable services vary by organization. Some may have income-based criteria, while others prioritize specific demographics or conditions. You can contact the organizations directly for more information."
       }
+    },
+    "filters": {
+      "title": "Radius",
+      "subheading": "Set Filters for Search",
+      "radius": "Radius"
     }
   },
   "About": {

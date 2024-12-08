@@ -10,7 +10,7 @@ import {
   useEffect,
   useRef,
   useState,
-} from 'react'; // Import startTransition
+} from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -33,9 +33,9 @@ export function ContactForm() {
   const [state, formAction] = useActionState(onSubmitAction, {
     message: '',
   });
+
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false); // Add this state
-
   const contactFormSchema = createContactFormSchema(t);
 
   const form = useForm<z.infer<typeof contactFormSchema>>({
@@ -47,6 +47,7 @@ export function ContactForm() {
       phone: state?.fields?.phone || '',
       message: state?.fields?.message || '',
     },
+    mode: 'onChange',
   });
 
   useEffect(() => {
@@ -186,7 +187,11 @@ export function ContactForm() {
             )}
           />
         </div>
-        <Button disabled={isSubmitting} className="w-full" type="submit">
+        <Button
+          disabled={!form.formState.isValid || isSubmitting}
+          className="w-full"
+          type="submit"
+        >
           {isSubmitting ? <Spinner /> : t('Contact.submit.text')}
         </Button>
       </form>

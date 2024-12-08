@@ -1,7 +1,10 @@
-import { auth } from '@/config/auth';
+import { MapHeader } from '@/components/MapHeader';
 
-export default async function MapPage() {
-  const session = await auth();
-
-  return <div>{JSON.stringify(session)}</div>;
+export default function Map() {
+  return (
+    <div className="-m-4 flex flex-col">
+      <MapHeader />
+      <div className="-m-4 flex h-[80vh]">{/* <MapDashboard /> */}</div>
+    </div>
+  );
 }

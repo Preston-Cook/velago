@@ -81,7 +81,6 @@ type CountrySelectProps = {
 };
 
 const CountrySelect = ({
-  disabled,
   value: selectedCountry,
   options: countryList,
   onChange,

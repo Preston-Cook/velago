@@ -186,6 +186,11 @@
         "title": "¿Existen criterios de elegibilidad para acceder a los servicios benéficos?",
         "text": "Los criterios de elegibilidad para los servicios benéficos varían según la organización. Algunas pueden tener criterios basados en ingresos, mientras que otras priorizan ciertos grupos demográficos o condiciones. Puedes contactar directamente a las organizaciones para obtener más información."
       }
+    },
+    "filters": {
+      "title": "Radio",
+      "subheading": "Establecer filtros para la búsqueda",
+      "radius": "Radio"
     }
   },
   "About": {

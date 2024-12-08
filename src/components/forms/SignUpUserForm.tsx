@@ -16,7 +16,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/Dialog';
-import { Link } from '@/i18n/routing';
 import { createSignUpUserSchema } from '@/schemas/userSignUpFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
@@ -212,7 +211,7 @@ export function SignUpUserForm() {
               {isSubmittingRequest ? <Spinner size={4} /> : 'Request Code'}
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-[425px]">
+          <DialogContent className="max-w-[425px] border border-primary bg-secondary">
             <DialogHeader>
               <DialogTitle className="text-left">
                 {t('UserSignUp.dialog.title')}
@@ -244,28 +243,6 @@ export function SignUpUserForm() {
         </Dialog>
         <Separator className="mx-auto w-[80%] bg-primary" />
         <GoogleSignUpButton />
-        <div className="flex flex-col gap-4 text-center">
-          <div className="flex items-center justify-center">
-            <div>{t('UserSignUp.authLinks.link1.text')}</div>
-            <div>
-              <Link className="inline" href="/signin/user">
-                <Button variant="link">
-                  {t('UserSignUp.authLinks.link1.link')}
-                </Button>
-              </Link>
-            </div>
-          </div>
-          <div className="flex items-center justify-center">
-            <div>{t('UserSignUp.authLinks.link2.text')}</div>
-            <div>
-              <Link className="inline" href="/signup/organization">
-                <Button variant="link">
-                  {t('UserSignUp.authLinks.link2.link')}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
       </form>
     </Form>
   );

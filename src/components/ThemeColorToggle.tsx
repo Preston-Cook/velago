@@ -25,10 +25,11 @@ export function ThemeColorToggle() {
 
   const createSelectItems = () => {
     return availableThemeColors.map(({ name, light, dark }) => (
-      <SelectItem key={name} value={name}>
+      <SelectItem className="cursor-pointer" key={name} value={name}>
         <div className="item-center flex space-x-3">
           <div
             className={cn(
+              'cursor-pointer',
               'rounded-full',
               'w-[20px]',
               'h-[20px]',
@@ -49,7 +50,7 @@ export function ThemeColorToggle() {
       <SelectTrigger className="ring-offset-transparent focus:ring-transparent">
         <SelectValue placeholder="Select Color" />
       </SelectTrigger>
-      <SelectContent className="border-muted">
+      <SelectContent className="border border-primary bg-background p-0">
         {createSelectItems()}
       </SelectContent>
     </Select>
