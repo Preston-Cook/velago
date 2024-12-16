@@ -56,7 +56,7 @@ export type ReadonlyKeys<T extends readonly (string | number | symbol)[]> =
 
 export type ServiceCategory = ReadonlyKeys<typeof serviceCategories>;
 
-export type ResourceData = Prisma.LocationGetPayload<{
+export type Resource = Prisma.LocationGetPayload<{
   include: {
     serviceAtLocation: {
       include: { service: { include: { requiredDocuments: true } } };
@@ -66,3 +66,8 @@ export type ResourceData = Prisma.LocationGetPayload<{
     phones: true;
   };
 }>;
+
+export type Point = {
+  latitude: number;
+  longitude: number;
+};

@@ -1,16 +1,13 @@
 'use client';
 
-import { ResourceData } from '@/types';
+import { useResourceContext } from '@/context/ResourceProvider';
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import { Spinner } from './Spinner';
 
-interface MapContainerProps {
-  resources: ResourceData[];
-  isLoadingResources: boolean;
-}
+export function MapContainer() {
+  const { isLoading } = useResourceContext();
 
-export function MapContainer({ isLoadingResources }: MapContainerProps) {
   const LeafletMap = useMemo(
     () =>
       dynamic(() => import('@/components/LeafletMap'), {
@@ -23,7 +20,7 @@ export function MapContainer({ isLoadingResources }: MapContainerProps) {
   return (
     <>
       <div className="w-full flex-1 bg-background">
-        {isLoadingResources ? <Spinner size={2} /> : <LeafletMap />}
+        {isLoading ? <Spinner size={2} /> : <LeafletMap />}
       </div>
     </>
   );

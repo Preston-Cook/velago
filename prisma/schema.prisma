@@ -259,8 +259,8 @@ model Location {
   alternateName          String?         @map("alternate_name")
   description            String?
   transportation         String?
-  latitude               Float?
-  longitude              Float?
+  latitude               Float
+  longitude              Float
   externalIdentifier     String?         @map("external_identifier")
   externalIdentifierType String?         @map("external_identifier_type")
   languages              Language[]

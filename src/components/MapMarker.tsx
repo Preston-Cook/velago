@@ -1,41 +1,30 @@
-import { serviceCategoryIcons } from '@/config/misc';
-import { ResourceData } from '@/types';
-import { Prisma } from '@prisma/client';
-import L from 'leaflet';
-import { Marker, Popup } from 'react-leaflet';
+import { Resource } from '@/types';
+import { Marker } from 'react-leaflet';
+import { MapMarkerPopup } from './MapMarkerPopup';
 
 interface MapMarkerProps {
-  resource: ResourceData;
+  resource: Resource;
 }
 
 export function MapMarker({ resource }: MapMarkerProps) {
-  const service: Prisma.ServiceGetPayload<{
-    include: { requiredDocuments: true };
-  }> | null = resource.serviceAtLocation[0].service;
-  const category = service?.category as string;
+  const { latitude, longitude, serviceAtLocation } = resource;
 
-  const iconName =
-    serviceCategoryIcons[category as keyof typeof serviceCategoryIcons];
-
-  const keys = Object.keys(serviceCategoryIcons);
-
-  if (!keys.includes(category)) {
-    console.log(category, '<-----');
+  if (latitude === null || longitude === null) {
+    console.error('Invalid latitude or longitude for resource:', {
+      latitude,
+      longitude,
+    });
+    return null;
   }
 
-  const iconUrl = `/images/${iconName}.png`;
-
-  const { latitude, longitude } = resource;
-
-  const icon = L.icon({
-    iconUrl,
-    iconSize: [48, 48],
-    iconAnchor: [12, 41],
-  });
+  if (serviceAtLocation.length === 0) {
+    console.error('There must be at least one valid service at the location');
+    return null;
+  }
 
   return (
-    <Marker position={[latitude as number, longitude as number]} icon={icon}>
-      <Popup>{category}</Popup>
+    <Marker position={[latitude, longitude]}>
+      <MapMarkerPopup />
     </Marker>
   );
 }

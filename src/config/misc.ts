@@ -86,3 +86,8 @@ export const serviceCategoryIcons = {
   Transportation: 'car', // Symbolic of transit and transportation services.
   Utilities: 'plug', // Represents electricity and essential services.
 };
+
+export const defaultCoords = {
+  latitude: 30.28565,
+  longitude: -97.73921,
+} as const;

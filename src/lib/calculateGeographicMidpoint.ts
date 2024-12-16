@@ -1,13 +1,13 @@
-import { LatLngExpression } from 'leaflet';
+import { Point } from '@/types';
 
 interface CalculateGeographicMidpointParams {
-  coords: LatLngExpression[];
+  coords: Point[];
 }
 
 export function calculateGeographicMidpoint({
   coords,
-}: CalculateGeographicMidpointParams): LatLngExpression | null {
-  if (coords.length === 0) return null; // Handle edge case: no input coordinates
+}: CalculateGeographicMidpointParams): Point | null {
+  if (coords.length === 0) return null;
 
   // Convert degrees to radians
   const toRadians = (deg: number) => (deg * Math.PI) / 180;
@@ -17,9 +17,9 @@ export function calculateGeographicMidpoint({
     y = 0,
     z = 0;
 
-  for (const { lat, lng } of coords) {
-    const latRad = toRadians(lat);
-    const lngRad = toRadians(lng);
+  for (const { latitude, longitude } of coords) {
+    const latRad = toRadians(latitude as number);
+    const lngRad = toRadians(longitude as number);
 
     x += Math.cos(latRad) * Math.cos(lngRad);
     y += Math.cos(latRad) * Math.sin(lngRad);
@@ -35,5 +35,5 @@ export function calculateGeographicMidpoint({
   const lat = toDegrees(Math.atan2(z, hyp));
   const lng = toDegrees(Math.atan2(y, x));
 
-  return { lat, lng };
+  return { latitude: lat, longitude: lng };
 }
