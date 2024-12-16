@@ -14,6 +14,7 @@ interface HandleSelectValueParams {
 }
 
 export function HomeSearchBar() {
+  const [numResources, setNumResources] = useState(10);
   const [radius, setRadius] = useState<number>(10);
   const [query, setQuery] = useState<string>('');
   const router = useRouter();
@@ -29,6 +30,10 @@ export function HomeSearchBar() {
     setRadius(e[0]);
   }
 
+  function handleNumResourcesChange(e: number[]) {
+    setNumResources(e[0]);
+  }
+
   async function handleSelectValue({ placeId }: HandleSelectValueParams) {
     nprogressStart();
     const { lat, lng, formattedAddress } = await geocodePlaceId(placeId);
@@ -38,6 +43,7 @@ export function HomeSearchBar() {
       lat: `${lat}`.slice(0, 7),
       lng: `${lng}`.slice(0, 7),
       radius: `${radius}`,
+      num_resources: `${numResources}`,
     });
 
     // @ts-expect-error This is because the pathname config doesn't include URL Search params
@@ -50,7 +56,12 @@ export function HomeSearchBar() {
 
   return (
     <div className="mx-auto flex max-w-md items-center justify-center gap-2">
-      <FilterButton handleChange={handleRadiusChange} radius={radius} />
+      <FilterButton
+        handleNumResourcesChange={handleNumResourcesChange}
+        numResources={numResources}
+        handleRadiusChange={handleRadiusChange}
+        radius={radius}
+      />
       <div className="mx-auto flex-1">
         <div className="relative">
           <LocationSearch

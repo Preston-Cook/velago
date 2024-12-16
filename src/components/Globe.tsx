@@ -1,11 +1,12 @@
 'use client';
 
 import { colorThemes } from '@/config/colorThemes';
+import { useLocationCoordinates } from '@/context/LocationCoordinatesProvider';
 import { useThemeContext } from '@/context/ThemeProvider';
 import { hslToRgb } from '@/lib/hslToRgb';
 import createGlobe from 'cobe';
 import { useTheme } from 'next-themes';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 export function Globe() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -13,6 +14,20 @@ export function Globe() {
   const { resolvedTheme } = useTheme();
   const color =
     colorThemes[themeColor][resolvedTheme as 'light' | 'dark'].primary;
+  const locationCoordinates = useLocationCoordinates();
+
+  const memoizedLocations = useMemo(() => {
+    const { coordinates } = locationCoordinates;
+
+    const markers = coordinates.map(({ latitude, longitude }) => ({
+      location: [latitude, longitude] as [number, number],
+      size: 0.03,
+    }));
+
+    return markers;
+  }, []);
+
+  console.log(locationCoordinates);
 
   const [h, s, l] = color.split(' ').map((el) => Number(el.replace('%', '')));
 
@@ -52,7 +67,7 @@ export function Globe() {
       baseColor: rgbColors,
       markerColor: [0.1, 0.8, 1],
       glowColor: [1, 1, 1],
-      markers: [],
+      markers: memoizedLocations,
       onRender: (state) => {
         state.phi = phi;
         phi += 0.005;

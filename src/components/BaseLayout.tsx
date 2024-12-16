@@ -1,6 +1,7 @@
 'use server';
 
 import '@/app/globals.css';
+import { LocationCoordinatesProvider } from '@/context/LocationCoordinatesProvider';
 import { LocationProvider } from '@/context/LocationProvider';
 import { ThemeDataProvider } from '@/context/ThemeProvider';
 import { cn } from '@/lib/utils';
@@ -58,11 +59,13 @@ export default async function BaseLayout({
           >
             <ThemeDataProvider>
               <LocationProvider>
-                <ProgressBar />
-                <Header />
-                <main className="flex flex-1 flex-col p-4">{children}</main>
-                <Footer />
-                <Toaster />
+                <LocationCoordinatesProvider>
+                  <ProgressBar />
+                  <Header />
+                  <main className="flex flex-1 flex-col p-4">{children}</main>
+                  <Footer />
+                  <Toaster />
+                </LocationCoordinatesProvider>
               </LocationProvider>
             </ThemeDataProvider>
           </NextThemesProvider>

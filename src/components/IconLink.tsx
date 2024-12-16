@@ -1,7 +1,7 @@
 'use client';
 
 import { Link } from '@/i18n/routing';
-import { PathnameConfig } from '@/types';
+import { DelocalizedPathname } from '@/types';
 import { LucideIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from './ui/Button';
@@ -16,7 +16,7 @@ interface SheetLinkProps {
     | 'secondary'
     | 'ghost';
   icon: LucideIcon;
-  href: keyof PathnameConfig;
+  href: DelocalizedPathname;
   name: string;
   i18nRootKey: string;
 }

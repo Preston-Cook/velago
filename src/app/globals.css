@@ -94,3 +94,19 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-inter);
 }
+
+.request-popup .leaflet-popup-content-wrapper {
+  border-radius: 4px;
+  background-color: hsl(var(--secondary));
+
+}
+
+.leaflet-popup-tip {
+  background-color: hsl(var(--secondary)) !important;
+  padding: 0;
+}
+
+.leaflet-popup-pane {
+  background-color: beige !important;
+  padding: 0;
+}

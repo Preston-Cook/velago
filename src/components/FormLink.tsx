@@ -1,11 +1,11 @@
 import { Link } from '@/i18n/routing';
-import { PathnameConfig } from '@/types';
+import { DelocalizedPathname } from '@/types';
 import { Button } from './ui/Button';
 
 interface FormLinkProps {
   text: string;
   linkText: string;
-  href: keyof PathnameConfig;
+  href: DelocalizedPathname;
 }
 
 export function FormLink({ text, linkText, href }: FormLinkProps) {

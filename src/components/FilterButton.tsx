@@ -3,7 +3,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/Popover';
-import { Filter } from 'lucide-react';
+import { Filter, FilterIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Button } from './ui/Button';
 import { Label } from './ui/Label';
@@ -11,10 +11,17 @@ import { Slider } from './ui/Slider';
 
 interface FilterButtonProps {
   radius: number;
-  handleChange(e: number[]): void;
+  numResources: number;
+  handleRadiusChange(e: number[]): void;
+  handleNumResourcesChange(e: number[]): void;
 }
 
-export function FilterButton({ handleChange, radius }: FilterButtonProps) {
+export function FilterButton({
+  handleNumResourcesChange,
+  handleRadiusChange,
+  radius,
+  numResources,
+}: FilterButtonProps) {
   const t = useTranslations('Home');
 
   return (
@@ -30,7 +37,10 @@ export function FilterButton({ handleChange, radius }: FilterButtonProps) {
       >
         <div className="grid gap-4">
           <div className="space-y-2">
-            <h4 className="font-bold">{t('filters.title')}</h4>
+            <h4 className="flex gap-x-4 font-bold">
+              <FilterIcon />
+              {t('filters.title')}
+            </h4>
             <p className="text-sm text-muted-foreground">
               {t('filters.subheading')}
             </p>
@@ -38,11 +48,23 @@ export function FilterButton({ handleChange, radius }: FilterButtonProps) {
           <div className="grid gap-2">
             <div className="grid grid-cols-3 items-center gap-4">
               <Label className="text-left text-sm" htmlFor="width">
+                Num. Resources: <br />
+                {numResources}
+              </Label>
+              <Slider
+                onValueChange={handleNumResourcesChange}
+                step={1}
+                className="col-span-2"
+                defaultValue={[10]}
+                max={10}
+                min={1}
+              />
+              <Label className="text-left text-sm" htmlFor="width">
                 {t('filters.radius')}: <br />
                 &lt; {radius} mi.
               </Label>
               <Slider
-                onValueChange={handleChange}
+                onValueChange={handleRadiusChange}
                 step={5}
                 className="col-span-2"
                 defaultValue={[10]}

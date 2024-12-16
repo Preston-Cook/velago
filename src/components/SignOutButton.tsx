@@ -25,7 +25,7 @@ export function SignOutButton({ className }: SignInButtonProps) {
   return (
     <Button onClick={handleClick} className={cn('w-[125px] px-2', className)}>
       {isLoading ? (
-        <Spinner size={4} />
+        <Spinner size={1} />
       ) : (
         <>
           <LogOut /> {t('signOut.text')}

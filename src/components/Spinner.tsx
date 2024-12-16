@@ -1,8 +1,10 @@
 interface SpinnerProps {
-  size?: number;
+  size?: number; // size in rem
 }
 
-export function Spinner({ size = 4 }: SpinnerProps) {
+export function Spinner({ size = 1 }: SpinnerProps) {
+  const spinnerSize = `${size}rem`;
+
   return (
     <div
       className="flex h-full w-full items-center justify-center"
@@ -10,7 +12,8 @@ export function Spinner({ size = 4 }: SpinnerProps) {
       aria-label="loading"
     >
       <div
-        className={`inline-block size-${size} animate-spin rounded-full border-[2px] border-current border-t-transparent text-foreground`}
+        style={{ width: spinnerSize, height: spinnerSize }}
+        className="inline-block animate-spin rounded-full border-2 border-current border-t-transparent text-foreground"
         role="status"
         aria-label="loading"
       >

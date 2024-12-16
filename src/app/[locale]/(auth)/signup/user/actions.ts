@@ -1,10 +1,16 @@
 'use server';
 
 import { signIn } from '@/config/auth';
+import { getPathname } from '@/i18n/routing';
 import { phoneRegex } from '@/lib/regex';
 import { isValidPhoneNumber } from 'libphonenumber-js';
+import { getLocale } from 'next-intl/server';
 
-export async function requestOtp(phone: string) {
+interface RequestOtpParams {
+  phone: string;
+}
+
+export async function requestOtp({ phone }: RequestOtpParams) {
   if (!isValidPhoneNumber(phone) || !phoneRegex.test(phone)) {
     return { message: 'error' };
   }
@@ -22,5 +28,12 @@ interface VerifyOtpParams {
 }
 
 export async function verifyOtp(params: VerifyOtpParams) {
-  await signIn('otp', { ...params, redirect: true, redirectTo: '/map' });
+  const locale = await getLocale();
+  const localizedRedirectUrl = getPathname({ href: '/map', locale });
+
+  await signIn('otp', {
+    ...params,
+    redirect: true,
+    redirectTo: localizedRedirectUrl,
+  });
 }

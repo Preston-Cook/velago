@@ -17,8 +17,7 @@ datasource db {
 
 enum Role {
   USER
-  MEDICAL_ORG
-  NON_MEDICAL_ORG
+  ORGANIZATION
   ADMIN
 }
 
@@ -31,6 +30,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  locale        String    @default("en")
   password      String?
   role          Role      @default(USER)
   accounts      Account[]

@@ -192,7 +192,7 @@
       }
     },
     "filters": {
-      "title": "Radius",
+      "title": "Filters",
       "subheading": "Set Filters for Search",
       "radius": "Radius"
     }

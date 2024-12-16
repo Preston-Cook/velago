@@ -1,6 +1,6 @@
 import { footerLinks } from '@/config/links';
 import { Link } from '@/i18n/routing';
-import type { PathnameConfig } from '@/types';
+import type { DelocalizedPathname } from '@/types';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { v4 as uuid } from 'uuid';
@@ -31,7 +31,7 @@ export async function Footer() {
       <div className="md:max-w-[60%] lg:max-w-[40%]">{t('description')}</div>
       <div className="flex w-full flex-wrap items-center justify-center gap-x-5">
         {footerLinks.map(({ name, href }) => (
-          <Link key={uuid()} href={href as keyof PathnameConfig}>
+          <Link key={uuid()} href={href as DelocalizedPathname}>
             <Button className="p-0 font-semibold" variant={'link'}>
               {t(`links.${name}.text`)}
             </Button>

@@ -1,3 +1,5 @@
+import { DelocalizedPathname } from '@/types';
+import { Role } from '@prisma/client';
 import { Globe, Goal, UserRoundPlus } from 'lucide-react';
 
 export const sheetSectionNames = [
@@ -48,4 +50,39 @@ export const serviceCategories = [
   'Target Populations',
   'Transportation',
   'Utilities',
+] as const;
+
+export const authPages = [
+  '/en/signup/user',
+  '/en/signin/user',
+  '/en/signup/organization',
+  '/en/signin/organization',
+  '/es/registrarse/usuario',
+  '/es/iniciar-sesion/usuario',
+  '/es/registrarse/organizacion',
+  '/es/iniciar-sesion/organizacion',
 ];
+
+export const defaultRedirect: Record<Role, DelocalizedPathname> = {
+  USER: '/map',
+  ORGANIZATION: '/dashboard',
+  ADMIN: '/dashboard',
+};
+
+export const serviceCategoryIcons = {
+  'Consumer Services': 'shopping-bag', // Represents commerce and consumer-oriented services.
+  'Criminal Justice and Legal Services': 'gavel', // Symbolic of justice and legal matters.
+  Education: 'book-open', // Represents learning and educational services.
+  'Environment and Public Health/Safety': 'shield-check', // Suggests safety and public well-being.
+  Food: 'utensils-crossed', // Commonly associated with meals and food services.
+  'Health Care': 'heart-pulse', // Universal symbol for medical care.
+  'Housing/Shelter': 'home', // Represents shelter and housing.
+  'Income Support and Employment': 'briefcase-business', // Relates to jobs and financial support.
+  'Individual and Family Life': 'users', // Symbolizes people and family groups.
+  'Material Goods': 'package', // Represents tangible goods and resources.
+  'Mental Health and Substance Abuse': 'brain', // Relates to mental wellness and substance use.
+  'Organizational/Community Services': 'handshake', // Suggests collaboration and service.
+  'Target Populations': 'target', // Represents focused groups or demographics.
+  Transportation: 'car', // Symbolic of transit and transportation services.
+  Utilities: 'plug', // Represents electricity and essential services.
+};

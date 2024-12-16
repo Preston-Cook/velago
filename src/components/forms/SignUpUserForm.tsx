@@ -62,7 +62,7 @@ export function SignUpUserForm() {
     setIsSubmittingRequest(true);
 
     try {
-      const res = await requestOtp(phone);
+      const res = await requestOtp({ phone });
 
       if (res.message === 'success') {
         toast.success(t('UserSignUp.toast.success.title'), {
@@ -208,7 +208,7 @@ export function SignUpUserForm() {
         >
           <DialogTrigger asChild>
             <Button disabled={isSubmittingRequest} onClick={handleRequestOtp}>
-              {isSubmittingRequest ? <Spinner size={4} /> : 'Request Code'}
+              {isSubmittingRequest ? <Spinner size={1} /> : 'Request Code'}
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-[425px] border border-primary bg-secondary">

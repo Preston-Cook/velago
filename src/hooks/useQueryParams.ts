@@ -1,34 +1,68 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { debounce } from 'lodash';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useCallback, useMemo } from 'react';
 
 export function useQueryParams() {
   const pathname = usePathname();
-  const router = useRouter();
   const searchParams = useSearchParams();
 
-  const currentParams = new URLSearchParams(Array.from(searchParams.entries()));
+  // Memoize the current params to prevent unnecessary recreations
+  const currentParams = useMemo(
+    () => new URLSearchParams(Array.from(searchParams.entries())),
+    [searchParams],
+  );
 
-  function getQueryParam(key: string) {
-    const val = currentParams.get(key);
-    return val;
-  }
+  const updateUrl = useCallback((url: string) => {
+    // Use history.replaceState to update URL without triggering a reload
+    window.history.replaceState(null, '', url);
+  }, []);
 
-  function setQueryParam(key: string, value: string) {
-    currentParams.set(key, value);
-    currentParams.sort();
+  const debouncedReplace = useMemo(() => debounce(updateUrl, 300), [updateUrl]);
 
-    const query = currentParams.toString();
+  // Use useCallback to memoize functions and prevent unnecessary re-renders
+  const getQueryParam = useCallback(
+    (key: string) => {
+      return currentParams.get(key);
+    },
+    [currentParams],
+  );
 
-    router.replace(`${pathname}?${query}`);
-  }
+  const setQueryParam = useCallback(
+    (key: string, value: string) => {
+      const newParams = new URLSearchParams(currentParams);
+      newParams.set(key, value);
+      newParams.sort();
 
-  function deleteQueryParam(key: string) {
-    currentParams.delete(key);
+      const query = newParams.toString();
+      debouncedReplace(`${pathname}?${query}`);
+    },
+    [pathname, currentParams, debouncedReplace],
+  );
 
-    const search = currentParams.toString();
-    const query = search ? `?${search}` : '';
+  const deleteQueryParam = useCallback(
+    (key: string) => {
+      // Create a new URLSearchParams to avoid mutating the original
+      const newParams = new URLSearchParams(currentParams);
+      newParams.delete(key);
 
-    router.replace(`${pathname}${query}`);
-  }
+      const search = newParams.toString();
+      const query = search ? `?${search}` : '';
 
-  return { getQueryParam, setQueryParam, deleteQueryParam };
+      // Use history.replaceState to update URL
+      updateUrl(`${pathname}${query}`);
+    },
+    [pathname, updateUrl, currentParams],
+  );
+
+  // Optionally add a method to reset all query params
+  const resetQueryParams = useCallback(() => {
+    updateUrl(pathname);
+  }, [pathname, updateUrl]);
+
+  return {
+    getQueryParam,
+    setQueryParam,
+    deleteQueryParam,
+    resetQueryParams,
+  };
 }

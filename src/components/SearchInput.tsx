@@ -35,7 +35,7 @@ export function SearchInput({
 }: SearchInputProps) {
   return (
     <div className="absolute -top-[22px] z-[50] w-full">
-      <Command className="rounded-lg border bg-secondary focus-within:border-primary">
+      <Command className="rounded-lg border border-primary bg-secondary focus-within:border-primary">
         <CommandInput
           name="q"
           onFocus={handleFocus}

@@ -5,8 +5,8 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 export default function LeafletMap() {
   return (
     <MapContainer
-      center={[30.269501, -97.715942]}
-      zoom={10}
+      center={[30.2672, -97.7431]}
+      zoom={15}
       className="z-[40] h-full w-full"
     >
       <TileLayer

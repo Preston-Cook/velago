@@ -59,6 +59,6 @@ export const pathnameLocaleMappings = {
   },
 };
 
-export const defaultLocale: Locale = 'en';
+export const defaultLocale = 'en' as const;
 
 export const supportedLocales: Locale[] = ['en', 'es'];

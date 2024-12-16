@@ -188,7 +188,7 @@
       }
     },
     "filters": {
-      "title": "Radio",
+      "title": "Filtros",
       "subheading": "Establecer filtros para la búsqueda",
       "radius": "Radio"
     }
