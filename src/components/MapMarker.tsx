@@ -49,7 +49,7 @@ export function MapMarker({ resource }: MapMarkerProps) {
 
   return (
     <Marker position={[latitude, longitude]} icon={icon}>
-      <Popup minWidth={325} closeButton={false}>
+      <Popup minWidth={325} maxHeight={400} closeButton={false}>
         <MapMarkerPopupContent
           resource={resource}
           serviceAtLocationIdx={serviceAtLocationIdx}

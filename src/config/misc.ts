@@ -1,6 +1,25 @@
 import { DelocalizedPathname } from '@/types';
 import { Role } from '@prisma/client';
-import { Globe, Goal, UserRoundPlus } from 'lucide-react';
+import {
+  BookOpen,
+  Brain,
+  BriefcaseBusiness,
+  Car,
+  Gavel,
+  Globe,
+  Goal,
+  Handshake,
+  HeartPulse,
+  Home,
+  Package,
+  Plug,
+  ShieldCheck,
+  ShoppingBag,
+  Target,
+  UserRoundPlus,
+  Users,
+  UtensilsCrossed,
+} from 'lucide-react';
 
 export const sheetSectionNames = [
   { name: 'menu', links: ['map', 'about', 'contact'] },
@@ -85,6 +104,24 @@ export const serviceCategoryIcons = {
   'Target Populations': 'target', // Represents focused groups or demographics.
   Transportation: 'car', // Symbolic of transit and transportation services.
   Utilities: 'plug', // Represents electricity and essential services.
+};
+
+export const serviceCategoryIconsLucide = {
+  'Consumer Services': ShoppingBag,
+  'Criminal Justice and Legal Services': Gavel,
+  Education: BookOpen,
+  'Environment and Public Health/Safety': ShieldCheck,
+  Food: UtensilsCrossed,
+  'Health Care': HeartPulse,
+  'Housing/Shelter': Home,
+  'Income Support and Employment': BriefcaseBusiness,
+  'Individual and Family Life': Users,
+  'Material Goods': Package,
+  'Mental Health and Substance Abuse': Brain,
+  'Organizational/Community Services': Handshake,
+  'Target Populations': Target,
+  Transportation: Car,
+  Utilities: Plug,
 };
 
 export const defaultCoords = {

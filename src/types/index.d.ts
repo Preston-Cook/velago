@@ -64,7 +64,12 @@ export type Resource = Prisma.LocationGetPayload<{
     addresses: true;
     accessability: true;
     phones: true;
+    organization: true;
   };
+}>;
+
+export type CompleteService = Prisma.ServiceGetPayload<{
+  include: { requiredDocuments: true };
 }>;
 
 export type Point = {

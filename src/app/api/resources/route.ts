@@ -18,6 +18,7 @@ export async function GET(request: NextRequest) {
         },
       },
       include: {
+        organization: true,
         serviceAtLocation: {
           where: {
             service: {
