@@ -91,3 +91,5 @@ export const defaultCoords = {
   latitude: 30.28565,
   longitude: -97.73921,
 } as const;
+
+export const mapIconSize = 35 as const;

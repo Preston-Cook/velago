@@ -139,7 +139,7 @@ model Service {
   requiredDocuments      RequiredDocument[]
   contacts               Contact[]
   capacities             ServiceCapacity[]
-  category               String?
+  category               String
 
   @@map("service")
 }
