@@ -1,4 +1,5 @@
 import { serviceCategoryIconsLucide } from '@/config/misc';
+import { useResourceContext } from '@/context/ResourceProvider';
 import { formatAddress } from '@/lib/formatAddress';
 import { CompleteService, Resource } from '@/types';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
@@ -10,7 +11,9 @@ import {
   MapPinned,
   Phone,
 } from 'lucide-react';
+import React, { useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
+import { Button } from './ui/Button';
 import { Separator } from './ui/Separator';
 
 interface MapMarkerPopupProps {
@@ -20,20 +23,29 @@ interface MapMarkerPopupProps {
   handleForwardClick(): void;
 }
 
-export function MapMarkerPopupContent({
+export const MapMarkerPopupContent = React.memo(function MapMarkerPopupContent({
   resource,
   serviceAtLocationIdx,
   handleBackClick,
   handleForwardClick,
 }: MapMarkerPopupProps) {
-  const { name, serviceAtLocation, phones, addresses, organization } = resource;
+  const { selectedResources, addSelectedResource, deleteSelectedResource } =
+    useResourceContext();
 
-  const formattedPhones = phones.map(({ number: phoneNum }) =>
-    parsePhoneNumberFromString(phoneNum, 'US')?.formatNational(),
+  const { id, name, serviceAtLocation, phones, addresses, organization } =
+    resource;
+
+  const formattedPhones = useMemo(
+    () =>
+      phones.map(({ number: phoneNum }) =>
+        parsePhoneNumberFromString(phoneNum, 'US')?.formatNational(),
+      ),
+    [phones],
   );
 
-  const formattedAddresses = addresses.map((address) =>
-    formatAddress({ address }),
+  const formattedAddresses = useMemo(
+    () => addresses.map((address) => formatAddress({ address })),
+    [addresses],
   );
 
   const { service } = serviceAtLocation[serviceAtLocationIdx];
@@ -44,7 +56,7 @@ export function MapMarkerPopupContent({
     ];
 
   return (
-    <div className="flex flex-col gap-4 text-white">
+    <div className="flex flex-col gap-4 text-foreground">
       <div className="flex items-center justify-center gap-4">
         <div className="w-6">
           <ArrowLeft
@@ -52,7 +64,7 @@ export function MapMarkerPopupContent({
             className={`cursor-pointer text-primary hover:text-primary/90 ${serviceAtLocationIdx === 0 && 'hidden'}`}
           />
         </div>
-        <h3 className="flex-1 text-center text-lg text-white">{name}</h3>
+        <h3 className="flex-1 text-center text-lg text-foreground">{name}</h3>
         <div className="w-6">
           <ArrowRight
             onClick={handleForwardClick}
@@ -116,6 +128,31 @@ export function MapMarkerPopupContent({
           )}
         </div>
       </section>
+      <section>
+        {selectedResources.some(
+          (res) =>
+            res.locationId === id &&
+            res.serviceAtLocationIdx === serviceAtLocationIdx,
+        ) ? (
+          <Button
+            onClick={() =>
+              deleteSelectedResource({ locationId: id, serviceAtLocationIdx })
+            }
+            className="w-full"
+          >
+            Unselect Resource
+          </Button>
+        ) : (
+          <Button
+            onClick={() =>
+              addSelectedResource({ locationId: id, serviceAtLocationIdx })
+            }
+            className="w-full"
+          >
+            Select Resource
+          </Button>
+        )}
+      </section>
     </div>
   );
-}
+});

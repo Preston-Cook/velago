@@ -27,8 +27,6 @@ export function Globe() {
     return markers;
   }, []);
 
-  console.log(locationCoordinates);
-
   const [h, s, l] = color.split(' ').map((el) => Number(el.replace('%', '')));
 
   const rgbColors = hslToRgb(h, s, l);

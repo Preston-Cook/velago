@@ -29,6 +29,7 @@ interface VerifyOtpParams {
 
 export async function verifyOtp(params: VerifyOtpParams) {
   const locale = await getLocale();
+
   const localizedRedirectUrl = getPathname({ href: '/map', locale });
 
   await signIn('otp', {

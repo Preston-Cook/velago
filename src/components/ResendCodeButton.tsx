@@ -21,7 +21,6 @@ export function ResendCodeButton({
   useEffect(() => {
     if (seconds > 0) {
       const timerId = setTimeout(() => {
-        console.log(`Timer decrementing: ${seconds - 1}`);
         setSeconds((prev) => prev - 1); // Use functional update to avoid stale state
       }, 1000);
 
@@ -42,7 +41,7 @@ export function ResendCodeButton({
 
     startTransition(async () => {
       try {
-        const response = await requestOtp(phone);
+        const response = await requestOtp({ phone });
         if (response?.message !== 'success') {
           throw new Error('Failed to send OTP.');
         }

@@ -3,7 +3,7 @@ import { User } from '@prisma/client';
 import { getToken } from 'next-auth/jwt';
 import { NextRequest } from 'next/server';
 
-const AUTH_SECRET = process.env.AUTH_SECRETl;
+const AUTH_SECRET = process.env.AUTH_SECRET as string;
 
 export async function detectLocale(req: NextRequest) {
   const token = await getToken({ req, secret: AUTH_SECRET });

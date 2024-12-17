@@ -1,16 +1,16 @@
 import { BaseFilters } from './BaseFilters';
+import { MapSidebarSelectedResources } from './MapSidebarSelectedResources';
 import { ResourceFilters } from './ResourceFilters';
-import { SelectedResources } from './SelectedResources';
 import { Separator } from './ui/Separator';
 
-export function MapSidebarFitlers() {
+export function MapSidebarFilters() {
   return (
     <div>
       <BaseFilters />
       <Separator className="bg-primary" />
       <ResourceFilters />
       <Separator className="bg-primary" />
-      <SelectedResources />
+      <MapSidebarSelectedResources />
     </div>
   );
 }

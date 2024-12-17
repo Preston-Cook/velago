@@ -7,7 +7,7 @@ import {
 } from '@/config/protectedRoutes';
 import { getPathname, routing } from '@/i18n/routing';
 import { detectLocale } from '@/lib/detectLocale';
-import { User } from '@prisma/client';
+import { Role } from '@prisma/client';
 import { getToken } from 'next-auth/jwt';
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
@@ -26,7 +26,9 @@ const authMiddleware = auth((req) => {
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const token = await getToken({ req, secret: AUTH_SECRET });
-  const currentUser = token?.user as User | undefined;
+
+  // @ts-ignore
+  const userRole = token?.token?.role;
 
   let locale = await detectLocale(req);
   locale = supportedLocalesArr.includes(locale) ? locale : defaultLocale;
@@ -49,12 +51,11 @@ export default async function middleware(req: NextRequest) {
     // public route
 
     // if user trying to go to auth page while already authenticated
-    if (currentUser) {
-      const { role } = currentUser;
-
-      if (authPages.includes(pathname)) {
+    if (token) {
+      if (req.method === 'GET' && authPages.includes(pathname)) {
         const urlClone = req.nextUrl.clone();
-        const href = defaultRedirect[role];
+        const href = defaultRedirect[userRole as Role];
+
         const localizedPath = getPathname({ href, locale });
         urlClone.pathname = localizedPath;
 

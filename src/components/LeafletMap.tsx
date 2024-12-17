@@ -3,6 +3,7 @@
 import { defaultCoords } from '@/config/misc';
 import { useLocationApproximation } from '@/context/LocationProvider';
 import { useResourceContext } from '@/context/ResourceProvider';
+import { useQueryParams } from '@/hooks/useQueryParams';
 import { calculateGeographicMidpoint } from '@/lib/calculateGeographicMidpoint';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { v4 as uuid } from 'uuid';
@@ -11,6 +12,9 @@ import { MapMarker } from './MapMarker';
 export default function LeafletMap() {
   const { resources } = useResourceContext();
   const { lat, lng } = useLocationApproximation();
+  const { getQueryParam } = useQueryParams();
+  const numResources = Number(getQueryParam('num_resources'));
+  const serviceCategories = getQueryParam('resource_types')?.split(',');
 
   const coords = resources.map(({ latitude, longitude }) => ({
     latitude,

@@ -1,4 +1,5 @@
-// ResourceContext.tsx
+'use client';
+
 import { Resource } from '@/types';
 import {
   createContext,
@@ -10,6 +11,9 @@ import {
 
 type ResourceContextType = {
   resources: Resource[];
+  selectedResources: SelectedResources[];
+  addSelectedResource(resourceIdentifier: SelectedResources): void;
+  deleteSelectedResource(resourceIdentifier: SelectedResources): void;
   isLoading: boolean;
   error: string | null;
 };
@@ -34,10 +38,43 @@ type ResourceProviderProps = {
   children: ReactNode;
 };
 
+export interface SelectedResources {
+  locationId: string;
+  serviceAtLocationIdx: number;
+}
+
 export const ResourceProvider = ({ children }: ResourceProviderProps) => {
   const [resources, setResources] = useState<Resource[]>([]);
+  const [selectedResources, setSelectedResources] = useState<
+    SelectedResources[]
+  >([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Add a resource if it does not already exist (ensuring uniqueness)
+  function addSelectedResource(resourceIdentifier: SelectedResources) {
+    setSelectedResources((prev) => {
+      const exists = prev.some(
+        (r) =>
+          r.locationId === resourceIdentifier.locationId &&
+          r.serviceAtLocationIdx === resourceIdentifier.serviceAtLocationIdx,
+      );
+
+      // Add only if it doesn't exist
+      return exists ? prev : [...prev, resourceIdentifier];
+    });
+  }
+
+  // Remove a resource
+  function deleteSelectedResource(resourceIdentifier: SelectedResources) {
+    setSelectedResources((prev) =>
+      prev.filter(
+        (r) =>
+          r.locationId !== resourceIdentifier.locationId ||
+          r.serviceAtLocationIdx !== resourceIdentifier.serviceAtLocationIdx,
+      ),
+    );
+  }
 
   useEffect(() => {
     const fetchResources = async () => {
@@ -60,7 +97,16 @@ export const ResourceProvider = ({ children }: ResourceProviderProps) => {
   }, []);
 
   return (
-    <ResourceContext.Provider value={{ resources, isLoading, error }}>
+    <ResourceContext.Provider
+      value={{
+        resources,
+        isLoading,
+        error,
+        addSelectedResource,
+        deleteSelectedResource,
+        selectedResources,
+      }}
+    >
       {children}
     </ResourceContext.Provider>
   );
