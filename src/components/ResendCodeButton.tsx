@@ -6,7 +6,7 @@ import { startTransition, useEffect, useState } from 'react';
 
 interface ResendCodeButtonProps {
   phone: string;
-  cooldown?: number; // Optional cooldown duration
+  cooldown?: number; //
 }
 
 export function ResendCodeButton({
@@ -17,18 +17,19 @@ export function ResendCodeButton({
   const [seconds, setSeconds] = useState<number>(0);
   const t = useTranslations();
 
-  // Countdown logic
-  useEffect(() => {
-    if (seconds > 0) {
-      const timerId = setTimeout(() => {
-        setSeconds((prev) => prev - 1); // Use functional update to avoid stale state
-      }, 1000);
+  useEffect(
+    function () {
+      if (seconds > 0) {
+        const timerId = setTimeout(() => {
+          setSeconds((prev) => prev - 1);
+        }, 1000);
 
-      return () => clearTimeout(timerId); // Cleanup the timer
-    }
-  }, [seconds]);
+        return () => clearTimeout(timerId);
+      }
+    },
+    [seconds],
+  );
 
-  // Handle click and request OTP
   async function handleClick() {
     if (!phone || phone.trim() === '') {
       console.error('Phone number is required');
@@ -61,7 +62,7 @@ export function ResendCodeButton({
       className="w-20"
     >
       {isLoading ? (
-        <Spinner size={4} />
+        <Spinner size={2} />
       ) : seconds === 0 ? (
         `${t('UserSignUp.dialog.resend')}`
       ) : (

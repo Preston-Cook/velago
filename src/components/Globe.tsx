@@ -63,7 +63,7 @@ export function Globe() {
       mapSamples: 16000,
       mapBrightness: 6,
       baseColor: rgbColors,
-      markerColor: [0.1, 0.8, 1],
+      markerColor: [1, 1, 1],
       glowColor: [1, 1, 1],
       markers: memoizedLocations,
       onRender: (state) => {
