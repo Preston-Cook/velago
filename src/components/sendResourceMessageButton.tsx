@@ -11,7 +11,6 @@ export function SendMessageButton() {
 
   async function handleClick() {
     setIsLoading(true);
-    await fetch('/api/message', { method: 'POST' });
     setIsLoading(false);
     toast.success('Message sent Successfully!', {
       description: 'Your message was sent.',

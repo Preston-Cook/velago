@@ -26,9 +26,7 @@ const authMiddleware = auth((req) => {
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const token = await getToken({ req, secret: AUTH_SECRET });
-
-  // @ts-ignore
-  const userRole = token?.token?.role;
+  const userRole = token?.role;
 
   let locale = await detectLocale(req);
   locale = supportedLocalesArr.includes(locale) ? locale : defaultLocale;

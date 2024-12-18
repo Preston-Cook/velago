@@ -1,9 +1,5 @@
 'use client';
 
-import {
-  requestOtp,
-  verifyOtp,
-} from '@/app/[locale]/(auth)/signup/user/actions';
 import { CodeInput } from '@/components/CodeInput';
 import { ResendCodeButton } from '@/components/ResendCodeButton';
 import { Spinner } from '@/components/Spinner';
@@ -16,10 +12,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/Dialog';
+import { useRouter } from '@/i18n/routing';
 import { createUserSignInSchema } from '@/schemas/userSignInFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
-import { isRedirectError } from 'next/dist/client/components/redirect';
 import { useEffect, useRef, useState } from 'react'; // Import startTransition
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -41,32 +38,26 @@ export function SignInUserForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [hasSentCode, setHasSentCode] = useState(false);
   const [isSubmittingRequest, setIsSubmittingRequest] = useState(false);
-
   const signUpUserSchema = createUserSignInSchema(t);
+  const router = useRouter();
 
   async function handleRequestOtp() {
     const isValid = await form.trigger(['phone']);
-
-    if (!isValid) {
-      return;
-    }
+    if (!isValid) return;
 
     const phone = form.getValues('phone');
-
     setIsSubmittingRequest(true);
 
     try {
-      const res = await requestOtp({ phone });
+      const response = await signIn('otp', { phone, redirect: false });
 
-      if (res.message === 'success') {
+      if (!response?.error) {
         toast.success(t('UserSignIn.toast.success.title'), {
           description: t('UserSignIn.toast.success.description'),
         });
         setHasSentCode(true);
       } else {
-        toast.error(t('UserSignIn.toast.error.title'), {
-          description: t('UserSignIn.toast.error.description'),
-        });
+        throw new Error('OTP request failed');
       }
     } catch {
       toast.error(t('UserSignIn.toast.error.title'), {
@@ -88,31 +79,35 @@ export function SignInUserForm() {
 
   const codeValue = form.watch('code');
 
-  useEffect(() => {
-    if (codeValue?.length === 6) {
-      handleCodeComplete();
-    }
+  useEffect(
+    function () {
+      async function handleCodeComplete() {
+        const isValid = await form.trigger('code');
+        if (!isValid) return;
 
-    async function handleCodeComplete() {
-      const isValid = await form.trigger('code');
+        const { phone, code: otp } = form.getValues();
 
-      if (!isValid) {
-        return;
-      }
+        const res = await signIn('otp', {
+          phone,
+          otp,
+          redirect: false,
+        });
 
-      const { phone, code: otp } = form.getValues();
-
-      try {
-        await verifyOtp({ phone, otp });
-      } catch (err) {
-        if (!isRedirectError(err)) {
+        if (!res?.error) {
+          router.push('/map');
+        } else {
           toast.error(t('UserSignIn.toast.errorOtp.title'), {
             description: t('UserSignIn.toast.errorOtp.description'),
           });
         }
       }
-    }
-  }, [codeValue, form, t]);
+
+      if (codeValue?.length === 6) {
+        handleCodeComplete();
+      }
+    },
+    [codeValue, form, t, router],
+  );
 
   return (
     <Form {...form}>

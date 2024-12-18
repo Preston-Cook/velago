@@ -3,6 +3,7 @@
 import { onSubmitAction } from '@/app/[locale]/contact/actions';
 import { createContactFormSchema } from '@/schemas/contactFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import {
   startTransition,
@@ -33,6 +34,7 @@ export function ContactForm() {
   const [state, formAction] = useActionState(onSubmitAction, {
     message: '',
   });
+  const { data, status } = useSession();
 
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false); // Add this state
@@ -49,6 +51,22 @@ export function ContactForm() {
     },
     mode: 'onChange',
   });
+
+  useEffect(
+    function () {
+      if (status === 'authenticated' && data.user) {
+        const {
+          user: { firstName, lastName, email, phone },
+        } = data;
+
+        form.setValue('firstName', firstName ?? '');
+        form.setValue('lastName', lastName ?? '');
+        form.setValue('email', email ?? '');
+        form.setValue('phone', phone ?? '');
+      }
+    },
+    [status, data?.user],
+  );
 
   useEffect(() => {
     if (state?.message === 'success') {

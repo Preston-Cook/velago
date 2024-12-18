@@ -62,7 +62,7 @@ export function ResendCodeButton({
       className="w-20"
     >
       {isLoading ? (
-        <Spinner size={2} />
+        <Spinner size={1} />
       ) : seconds === 0 ? (
         `${t('UserSignUp.dialog.resend')}`
       ) : (

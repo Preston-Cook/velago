@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { Locale } from '@/types';
 import { Analytics } from '@vercel/analytics/next';
 import 'leaflet/dist/leaflet.css';
+import { SessionProvider } from 'next-auth/react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
@@ -60,11 +61,13 @@ export default async function BaseLayout({
             <ThemeDataProvider>
               <LocationProvider>
                 <LocationCoordinatesProvider>
-                  <ProgressBar />
-                  <Header />
-                  <main className="flex flex-1 flex-col p-4">{children}</main>
-                  <Footer />
-                  <Toaster />
+                  <SessionProvider>
+                    <ProgressBar />
+                    <Header />
+                    <main className="flex flex-1 flex-col p-4">{children}</main>
+                    <Footer />
+                    <Toaster />
+                  </SessionProvider>
                 </LocationCoordinatesProvider>
               </LocationProvider>
             </ThemeDataProvider>

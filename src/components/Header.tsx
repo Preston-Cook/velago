@@ -1,7 +1,4 @@
-import { SignInButton } from '@/components/SignInButton';
-import { SignOutButton } from '@/components/SignOutButton';
-import { SignUpButton } from '@/components/SignUpButton';
-import { auth } from '@/config/auth';
+import { AuthButtons } from '@/components/AuthButtons';
 import { Link } from '@/i18n/routing';
 import Image from 'next/image';
 import { HamburgerMenu } from './HamburgerMenu';
@@ -10,8 +7,6 @@ import { LocaleToggle } from './LocaleToggle';
 import { ThemeModeToggle } from './ThemeModeToggle';
 
 export async function Header() {
-  const session = await auth();
-
   return (
     <header className="flex border-b border-primary bg-secondary p-4">
       <div className="flex flex-1 gap-8">
@@ -39,14 +34,7 @@ export async function Header() {
       <div className="flex items-center gap-x-4">
         <LocaleToggle />
         <ThemeModeToggle className="hidden p-4 md:flex" />
-        {session ? (
-          <SignOutButton />
-        ) : (
-          <>
-            <SignInButton className="hidden md:flex" />
-            <SignUpButton />
-          </>
-        )}
+        <AuthButtons />
         <HamburgerMenu className="lg:hidden" />
       </div>
     </header>

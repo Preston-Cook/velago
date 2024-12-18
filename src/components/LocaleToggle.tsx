@@ -12,6 +12,7 @@ import { usePathname, useRouter } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { DropdownMenuRadioItem } from '@radix-ui/react-dropdown-menu';
 import { Languages } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
@@ -29,6 +30,7 @@ export function LocaleToggle({ className }: LocaleToggleProps) {
   const router = useRouter();
   const currentLocale = useLocale();
   const params = useParams();
+  const session = useSession();
 
   function handleLocaleChange(e: string) {
     startTransition(() => {

@@ -1,6 +1,7 @@
 'use client';
 
 import { Link } from '@/i18n/routing';
+import { cn } from '@/lib/utils';
 import { DelocalizedPathname } from '@/types';
 import { LucideIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -32,8 +33,8 @@ export function IconLink({
   const t = useTranslations(`${i18nRootKey}.links`);
 
   return (
-    <Link href={href} className="w-full">
-      <Button variant={variant} className={className}>
+    <Link href={href} className={cn('w-28', className)}>
+      <Button variant={variant} className="w-full">
         {Icon && <Icon />}
         <div>{t(`${name}.text`)}</div>
       </Button>

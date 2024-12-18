@@ -2,8 +2,27 @@ import { pathnameLocaleMappings } from '@/config/locales';
 import { serviceCategories } from '@/config/misc';
 import { Prisma } from '@prisma/client';
 import { LucideIcon } from 'lucide-react';
+import { DefaultSession } from 'next-auth';
 import { NextMiddlewareResult } from 'next/dist/server/web/types';
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
+{
+  DefaultSession;
+}
+
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id: string | undefined;
+      role: string | undefined;
+      phone: string | undefined;
+      locale: string | undefined;
+      email: string | undefined;
+      lastName: string | undefined;
+      firstName: string | undefined;
+      name: string;
+    } & DefaultSession['user'];
+  }
+}
 
 export type Locale = 'en' | 'es';
 

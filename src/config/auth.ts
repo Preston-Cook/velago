@@ -1,5 +1,6 @@
 import { readPrisma } from '@/config/prismaReadClient';
 import { writePrisma } from '@/config/prismaWriteClient';
+import { InvalidOrExpiredOtpError, OtpSendError } from '@/lib/customErrors';
 import { generateOtp } from '@/lib/generateOtp';
 import { sendText } from '@/lib/sendText';
 import { otpSchema } from '@/schemas/otpSchema';
@@ -17,32 +18,41 @@ export const {
 } = NextAuth({
   callbacks: {
     async session({ token, session }) {
-      // @ts-expect-error next auth has not properly implemented its typing system for v5
-      if (session.user && token.token.token.sub) {
-        // @ts-expect-error next auth has not properly implemented its typing system for v5
-        session.user.id = token.token.token.sub;
-        // @ts-expect-error next auth has not properly implemented its typing system for v5
-        session.user.role = token.token.token.role;
+      if (session.user) {
+        const { firstName, lastName, role, phone, locale } = token;
+        session.user.firstName = firstName as string | undefined;
+        session.user.lastName = lastName as string | undefined;
+        session.user.role = role as string | undefined;
+        session.user.phone = phone as string | undefined;
+        session.user.locale = locale as string | undefined;
       }
 
       return session;
     },
-    async jwt(token) {
-      if (!token.token.sub) {
+    async jwt({ token }) {
+      const { sub } = token;
+
+      if (!token.sub) {
         return token;
       }
 
-      const { sub } = token.token;
-
-      const existingUser = await readPrisma.user.findFirst({
+      const currentUser = await readPrisma.user.findFirst({
         where: { id: sub },
       });
 
-      if (!existingUser) {
+      if (!currentUser) {
         return token;
       }
 
-      token.token.role = existingUser.role;
+      const { locale, phone, role, email, firstName, lastName } = currentUser;
+
+      token.locale = locale;
+      token.phone = phone;
+      token.role = role;
+      token.email = email;
+      token.firstName = firstName;
+      token.lastName = lastName;
+      token.name = `${firstName} ${lastName}` || undefined;
 
       return token;
     },
@@ -94,9 +104,8 @@ export const {
             return {
               message: 'success',
             };
-          } catch (error) {
-            console.error('OTP Send Error:', error);
-            throw new Error('Failed to send OTP');
+          } catch {
+            throw new OtpSendError();
           }
         }
 
@@ -123,7 +132,7 @@ export const {
         }
 
         // Invalid OTP
-        throw new Error('Invalid or expired OTP');
+        throw new InvalidOrExpiredOtpError();
       },
     }),
   ],

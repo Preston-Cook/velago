@@ -3,7 +3,7 @@
 import { useResourceContext } from '@/context/ResourceProvider';
 import { MapPinCheck } from 'lucide-react';
 import { SelectedLocationContainer } from './SelectedLocationContainer';
-import { SendMessageButton } from './SendMessageButton';
+import { SendMessageButton } from './sendResourceMessageButton';
 import { Separator } from './ui/Separator';
 
 export function MapSidebarSelectedResources() {

@@ -1,6 +1,9 @@
+import { Spinner } from '@/components/Spinner';
 import { Button } from '@/components/ui/Button';
 import { Link } from '@/i18n/routing';
+import { cn } from '@/lib/utils';
 import { User } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
 interface SignUpButtonProps {
@@ -9,11 +12,18 @@ interface SignUpButtonProps {
 
 export function SignUpButton({ className }: SignUpButtonProps) {
   const t = useTranslations('Header.links');
+  const { status } = useSession();
 
   return (
-    <Link className={className} href="/signup/user">
+    <Link className={cn('w-28', className)} href="/signup/user">
       <Button className="w-full">
-        <User /> {t('signUp.text')}
+        {status === 'loading' ? (
+          <Spinner size={1} />
+        ) : (
+          <>
+            <User /> {t('signUp.text')}
+          </>
+        )}
       </Button>
     </Link>
   );

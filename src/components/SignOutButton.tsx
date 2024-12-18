@@ -1,11 +1,12 @@
 'use client';
 
-import { destroySession } from '@/app/actions';
 import { Spinner } from '@/components/Spinner';
 import { Button } from '@/components/ui/Button';
+import { getPathname } from '@/i18n/routing';
 import { cn } from '@/lib/utils'; // Import a utility function for class names
 import { LogOut } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { signOut } from 'next-auth/react';
+import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 interface SignInButtonProps {
@@ -15,15 +16,17 @@ interface SignInButtonProps {
 export function SignOutButton({ className }: SignInButtonProps) {
   const t = useTranslations('Header.links');
   const [isLoading, setIsLoading] = useState(false);
+  const locale = useLocale();
+  const localizedPathname = getPathname({ href: '/', locale });
 
   async function handleClick() {
     setIsLoading(true);
-    await destroySession();
-    setIsLoading(false);
+    await signOut({ redirectTo: localizedPathname });
+    // no need to set loading to false, because of page refetch
   }
 
   return (
-    <Button onClick={handleClick} className={cn('w-[125px] px-2', className)}>
+    <Button onClick={handleClick} className={cn('w-28 px-2', className)}>
       {isLoading ? (
         <Spinner size={1} />
       ) : (
