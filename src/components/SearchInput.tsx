@@ -45,7 +45,7 @@ export function SearchInput({
         />
         <CommandList className="z-50">
           {error ? (
-            <CommandItem className="text-destructive" disabled>
+            <CommandItem className="text-red-700" disabled>
               <span className="mr-2">
                 <CircleAlert />
               </span>

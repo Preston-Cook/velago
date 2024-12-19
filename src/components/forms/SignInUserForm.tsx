@@ -151,26 +151,25 @@ export function SignInUserForm() {
               <DialogDescription className="text-left">
                 {t('UserSignIn.dialog.description')}
               </DialogDescription>
-              <FormField
-                name="code"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem className="w-full text-left">
-                    <FormLabel className="text-left">
-                      {t('UserSignIn.labels.code')}
-                    </FormLabel>
-                    <FormControl>
-                      <div className="flex items-center justify-between">
-                        <CodeInput {...field} />
-                        <ResendCodeButton phone={form.getValues('phone')} />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
             </DialogHeader>
-            <div className="grid gap-4 py-4"></div>
+            <FormField
+              name="code"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem className="w-full text-left">
+                  <FormLabel className="text-left">
+                    {t('UserSignIn.labels.code')}
+                  </FormLabel>
+                  <FormControl>
+                    <div className="flex items-center justify-between">
+                      <CodeInput {...field} />
+                      <ResendCodeButton phone={form.getValues('phone')} />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </DialogContent>
         </Dialog>
         <Separator className="mx-auto w-[80%] bg-primary" />

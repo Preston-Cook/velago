@@ -19,7 +19,7 @@
     --muted-foreground: 215.4 16.3% 46.9%; /* Warm gray for muted text */
     --accent: 210 15% 92%; /* Matches secondary */
     --accent-foreground: 222.2 47.4% 11.2%; /* Matches foreground */
-    --destructive: 0 60% 35%; /* Darker red for less stark contrast */
+    --destructive: 0 60% 30%; /* Darker red for less stark contrast */
     --destructive-foreground: 210 15% 92%; /* Matches foreground */
     --border: 210 15% 85%; /* Softer, less bright border */
     --input: 210 15% 85%; /* Matches border */
@@ -47,7 +47,7 @@
     --muted-foreground: 215 20.2% 65.1%;
     --accent: 222.2 25% 18%;
     --accent-foreground: 210 15% 85%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62.8% 35.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 222.2 25% 18%;
     --input: 222.2 25% 18%;

@@ -74,8 +74,8 @@ export function ContactForm() {
         description: t('Contact.toast.success.description'),
       });
       form.reset();
-      setIsSubmitting(false); // Reset submitting state
     }
+    setIsSubmitting(false);
   }, [state, form, t]);
 
   const handleFormSubmit = form.handleSubmit((data) => {
@@ -94,7 +94,7 @@ export function ContactForm() {
   return (
     <Form {...form}>
       {state?.issues && (
-        <div className="text-destructive">
+        <div className="text-red-700">
           <ul>
             {state.issues.map((issue) => (
               <li key={issue} className="flex gap-1">

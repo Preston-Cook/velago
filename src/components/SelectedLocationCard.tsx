@@ -1,7 +1,7 @@
 import { serviceCategoryIconsLucide } from '@/config/misc';
 import { useResourceContext } from '@/context/ResourceProvider';
 import { Resource } from '@/types';
-import { CircleX } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface SelectedLocationContainerProps {
   resource: Resource;
@@ -28,11 +28,11 @@ export function SelectedLocationContainer({
       <div className="w-full">
         <h3 className="flex items-center justify-between">
           Name:
-          <CircleX
+          <X
             onClick={() =>
               deleteSelectedResource({ locationId: id, serviceAtLocationIdx })
             }
-            className="cursor-pointer transition hover:text-primary/90"
+            className="cursor-pointer rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
             size={20}
           />
         </h3>

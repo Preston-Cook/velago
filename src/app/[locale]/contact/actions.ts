@@ -13,7 +13,6 @@ export async function onSubmitAction(
   prevState: FormState,
   data: FormData,
 ): Promise<FormState> {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
   const formData = Object.fromEntries(data);
 
   const t = await getTranslations();

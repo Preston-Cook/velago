@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 import { Spinner } from './Spinner';
 
 export function MapContainer() {
-  const { isLoading } = useResourceContext();
+  const { isLoading: isLoadingResource } = useResourceContext();
 
   const LeafletMap = useMemo(
     () =>
@@ -18,10 +18,8 @@ export function MapContainer() {
   );
 
   return (
-    <>
-      <div className="w-full flex-1 bg-background">
-        {isLoading ? <Spinner size={2} /> : <LeafletMap />}
-      </div>
-    </>
+    <div className="w-full flex-1 bg-background">
+      {isLoadingResource ? <Spinner size={2} /> : <LeafletMap />}
+    </div>
   );
 }

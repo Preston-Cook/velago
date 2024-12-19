@@ -2,7 +2,7 @@
 
 import { useResourceContext } from '@/context/ResourceProvider';
 import { MapPinCheck } from 'lucide-react';
-import { SelectedLocationContainer } from './SelectedLocationContainer';
+import { SelectedLocationContainer } from './SelectedLocationCard';
 import { SendMessageButton } from './sendResourceMessageButton';
 import { Separator } from './ui/Separator';
 

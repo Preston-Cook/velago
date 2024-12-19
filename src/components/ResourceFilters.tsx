@@ -50,7 +50,7 @@ export function ResourceFilters() {
         Resource Filters
       </h3>
       <Separator className="bg-primary" />
-      <div className="flex max-h-[160px] flex-col gap-4 overflow-x-hidden overflow-y-scroll">
+      <div className="flex max-h-[180px] flex-col gap-4 overflow-x-hidden overflow-y-scroll">
         <div className="flex items-center gap-4">
           <Checkbox
             checked={isAllSelected}
