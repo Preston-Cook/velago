@@ -1,6 +1,7 @@
 'use client';
 
 import { serviceCategories } from '@/config/misc';
+import { useLocationApproximation } from '@/context/LocationProvider';
 import { ResourceProvider } from '@/context/ResourceProvider';
 import { useQueryParams } from '@/hooks/useQueryParams';
 import { useEffect } from 'react';
@@ -9,30 +10,64 @@ import { MapHeader } from './MapHeader';
 import { MapSidebar } from './MapSidebar';
 
 export function MapDashboard() {
-  const { setQueryParam, getQueryParam } = useQueryParams();
-
+  const { setQueryParamPriority, getQueryParam } = useQueryParams();
+  const {
+    lat: approximateLat,
+    lng: approximateLng,
+    region,
+    city,
+    isLoading: isLoadingApproximate,
+  } = useLocationApproximation();
   const radius = getQueryParam('radius');
   const numResources = getQueryParam('num_resources');
   const resourceTypes = getQueryParam('resource_types');
+  const lat = getQueryParam('lat');
+  const lng = getQueryParam('lng');
+  const address = getQueryParam('address');
 
   useEffect(
     function () {
       if (!radius) {
-        setQueryParam('radius', '10');
+        setQueryParamPriority('radius', '10');
       }
 
       if (!numResources) {
-        setQueryParam('num_resources', '10');
+        setQueryParamPriority('num_resources', '10');
       }
 
       if (resourceTypes === null) {
-        setQueryParam(
+        setQueryParamPriority(
           'resource_types',
           [...serviceCategories].sort().join(','),
         );
       }
+
+      if (!address) {
+        setQueryParamPriority('address', `${city}, ${region}`);
+      }
+
+      if (!lat && !isLoadingApproximate) {
+        setQueryParamPriority('lat', `${approximateLat as number}`);
+      }
+
+      if (!lng && !isLoadingApproximate) {
+        setQueryParamPriority('lng', `${approximateLng as number}`);
+      }
     },
-    [radius, numResources, resourceTypes, setQueryParam],
+    [
+      radius,
+      numResources,
+      resourceTypes,
+      setQueryParamPriority,
+      approximateLat,
+      approximateLng,
+      isLoadingApproximate,
+      lat,
+      lng,
+      city,
+      region,
+      address,
+    ],
   );
 
   return (

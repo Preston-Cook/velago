@@ -11,6 +11,7 @@ export function SendMessageButton() {
 
   async function handleClick() {
     setIsLoading(true);
+    // TODO:
     setIsLoading(false);
     toast.success('Message sent Successfully!', {
       description: 'Your message was sent.',
@@ -20,7 +21,6 @@ export function SendMessageButton() {
   return (
     <Button
       className="w-full"
-      onClickCapture={handleClick}
       disabled={selectedResources.length === 0 || isLoading}
       onClick={handleClick}
     >

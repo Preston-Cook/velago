@@ -15,8 +15,11 @@ export function SignInButton({ className }: SignInButtonProps) {
   const { status } = useSession();
 
   return (
-    <Link className={cn('w-28', className)} href="/signin/user">
-      <Button className="w-full" variant={'outline'}>
+    <Link className={cn('hidden w-28 md:block', className)} href="/signin/user">
+      <Button
+        className="flex w-full items-center justify-center"
+        variant={'outline'}
+      >
         {status === 'loading' ? (
           <Spinner size={1} />
         ) : (

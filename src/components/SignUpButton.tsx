@@ -16,7 +16,7 @@ export function SignUpButton({ className }: SignUpButtonProps) {
 
   return (
     <Link className={cn('w-28', className)} href="/signup/user">
-      <Button className="w-full">
+      <Button className="flex w-full items-center justify-center">
         {status === 'loading' ? (
           <Spinner size={1} />
         ) : (

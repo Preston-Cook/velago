@@ -39,6 +39,18 @@ export function useQueryParams() {
     [pathname, currentParams, debouncedReplace],
   );
 
+  const setQueryParamPriority = useCallback(
+    (key: string, value: string) => {
+      const newParams = new URLSearchParams(currentParams);
+      newParams.set(key, value);
+      newParams.sort();
+
+      const query = newParams.toString();
+      updateUrl(`${pathname}?${query}`);
+    },
+    [currentParams, pathname, updateUrl],
+  );
+
   const deleteQueryParam = useCallback(
     (key: string) => {
       // Create a new URLSearchParams to avoid mutating the original
@@ -60,6 +72,7 @@ export function useQueryParams() {
   }, [pathname, updateUrl]);
 
   return {
+    setQueryParamPriority,
     getQueryParam,
     setQueryParam,
     deleteQueryParam,

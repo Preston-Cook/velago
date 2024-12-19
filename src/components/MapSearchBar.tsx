@@ -1,9 +1,10 @@
 'use client';
 
-import { useQueryParams } from '@/hooks/useQueryParams';
 import { geocodePlaceId } from '@/lib/geocodePlaceId';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { LocationSearch } from './LocationSearch';
+
 interface MapSearchBar {
   placeholder: string;
 }
@@ -14,7 +15,8 @@ interface HandleSelectValueParams {
 }
 
 export function MapSearchBar({ placeholder }: MapSearchBar) {
-  const { setQueryParam } = useQueryParams();
+  const searchParams = new URLSearchParams(useSearchParams());
+  const router = useRouter();
 
   const [query, setQuery] = useState<string>('');
 
@@ -24,10 +26,16 @@ export function MapSearchBar({ placeholder }: MapSearchBar) {
 
   async function handleSelectValue({ placeId, text }: HandleSelectValueParams) {
     const { lat, lng, formattedAddress } = await geocodePlaceId(placeId);
+
+    searchParams.set('lat', `${lat}`);
+    searchParams.set('lng', `${lng}`);
+    searchParams.set('address', `${formattedAddress}`);
+
+    const queryString = searchParams.toString();
+    const url = queryString ? `?${queryString}` : '';
+
     setQuery(text);
-    setQueryParam('address', formattedAddress);
-    setQueryParam('lat', `${lat}`);
-    setQueryParam('lng', `${lng}`);
+    router.replace(`${window.location.pathname}${url}`);
   }
 
   return (

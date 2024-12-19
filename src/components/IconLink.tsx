@@ -34,7 +34,10 @@ export function IconLink({
 
   return (
     <Link href={href} className={cn('w-28', className)}>
-      <Button variant={variant} className="w-full">
+      <Button
+        variant={variant}
+        className="flex w-full items-center justify-center"
+      >
         {Icon && <Icon />}
         <div>{t(`${name}.text`)}</div>
       </Button>

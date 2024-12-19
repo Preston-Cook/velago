@@ -6,7 +6,6 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import {
   ArrowLeft,
   ArrowRight,
-  HeartHandshake,
   HelpingHand,
   MapPinned,
   Phone,
@@ -57,6 +56,10 @@ export const MapMarkerPopupContent = React.memo(function MapMarkerPopupContent({
 
   return (
     <div className="flex flex-col gap-4 text-foreground">
+      <h3 className="text-center text-lg font-semibold text-foreground">
+        {organization?.name}
+      </h3>
+      <Separator className="bg-primary" />
       <div className="flex items-center justify-center gap-4">
         <div className="w-6">
           <ArrowLeft
@@ -64,7 +67,12 @@ export const MapMarkerPopupContent = React.memo(function MapMarkerPopupContent({
             className={`cursor-pointer text-primary hover:text-primary/90 ${serviceAtLocationIdx === 0 && 'hidden'}`}
           />
         </div>
-        <h3 className="flex-1 text-center text-lg text-foreground">{name}</h3>
+        <div className="flex-1">
+          <p className="text-center font-semibold">
+            {name}: {service?.name}
+          </p>
+        </div>
+
         <div className="w-6">
           <ArrowRight
             onClick={handleForwardClick}
@@ -80,14 +88,9 @@ export const MapMarkerPopupContent = React.memo(function MapMarkerPopupContent({
         <Separator className="bg-primary" />
         <div className="grid grid-cols-[35px,80px,1fr] items-start gap-x-2">
           <p className="self-center">
-            <HeartHandshake size={15} />
-          </p>
-          <p className="self-center font-medium">Name:</p>
-          <p className="self-center">{service?.name}</p>
-
-          <p className="self-center">
             <CategoryIcon size={15} />
           </p>
+
           <p className="self-center font-medium">Category:</p>
           <p className="self-center">{category}</p>
 

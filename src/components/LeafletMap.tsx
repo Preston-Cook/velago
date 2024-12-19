@@ -1,44 +1,43 @@
 'use client';
 
 import { defaultCoords } from '@/config/misc';
-import { useLocationApproximation } from '@/context/LocationProvider';
 import { useResourceContext } from '@/context/ResourceProvider';
 import { useQueryParams } from '@/hooks/useQueryParams';
-import { calculateGeographicMidpoint } from '@/lib/calculateGeographicMidpoint';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { Point } from '@/types';
+import { useEffect } from 'react';
+import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import { v4 as uuid } from 'uuid';
 import { MapMarker } from './MapMarker';
 
+function MapUpdater({ latitude, longitude }: Point) {
+  const map = useMap();
+
+  useEffect(() => {
+    map.flyTo([latitude, longitude]);
+  }, [latitude, longitude, map]);
+
+  return null;
+}
+
 export default function LeafletMap() {
   const { resources } = useResourceContext();
-  const { lat, lng } = useLocationApproximation();
   const { getQueryParam } = useQueryParams();
-  const numResources = Number(getQueryParam('num_resources'));
-  const serviceCategories = getQueryParam('resource_types')?.split(',');
+  // const numResources = Number(getQueryParam('num_resources'));
+  // const serviceCategories = getQueryParam('resource_types')?.split(',');
 
-  const coords = resources.map(({ latitude, longitude }) => ({
-    latitude,
-    longitude,
-  }));
+  const urlLat = getQueryParam('lat');
+  const urlLng = getQueryParam('lng');
 
-  const res = calculateGeographicMidpoint({ coords });
-
-  let center: [number, number] | null = null;
-
-  if (coords.length > 0 && res?.latitude && res?.longitude) {
-    center = [res.latitude, res.longitude];
-  }
-
-  if (!center && lat !== null && lng !== null) {
-    center = [lat, lng];
-  }
-
-  if (!center) {
-    center = [defaultCoords.latitude, defaultCoords.longitude];
-  }
+  const centerLat = urlLat !== null ? Number(urlLat) : defaultCoords.latitude;
+  const centerLng = urlLng !== null ? Number(urlLng) : defaultCoords.longitude;
 
   return (
-    <MapContainer center={center} zoom={15} className="z-[40] h-full w-full">
+    <MapContainer
+      center={[centerLat, centerLng]}
+      zoom={15}
+      className="z-[40] h-full w-full"
+    >
+      <MapUpdater latitude={centerLat} longitude={centerLng} />
       {resources.map((resource) => (
         <MapMarker resource={resource} key={uuid()} />
       ))}

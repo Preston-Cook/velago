@@ -26,7 +26,10 @@ export function SignOutButton({ className }: SignInButtonProps) {
   }
 
   return (
-    <Button onClick={handleClick} className={cn('w-28 px-2', className)}>
+    <Button
+      onClick={handleClick}
+      className={cn('flex w-28 items-center justify-center px-2', className)}
+    >
       {isLoading ? (
         <Spinner size={1} />
       ) : (
