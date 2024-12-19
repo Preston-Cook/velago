@@ -24,7 +24,8 @@ export function MapSearchBar({ placeholder }: MapSearchBar) {
     setQuery(() => q);
   }
 
-  async function handleSelectValue({ placeId, text }: HandleSelectValueParams) {
+  async function handleSelectValue({ placeId }: HandleSelectValueParams) {
+    setQuery('');
     const { lat, lng, formattedAddress } = await geocodePlaceId(placeId);
 
     searchParams.set('lat', `${lat}`);
@@ -34,7 +35,6 @@ export function MapSearchBar({ placeholder }: MapSearchBar) {
     const queryString = searchParams.toString();
     const url = queryString ? `?${queryString}` : '';
 
-    setQuery(text);
     router.replace(`${window.location.pathname}${url}`);
   }
 
