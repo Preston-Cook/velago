@@ -26,6 +26,7 @@ export function MapSearchBar({ placeholder }: MapSearchBar) {
 
   async function handleSelectValue({ placeId }: HandleSelectValueParams) {
     setQuery('');
+
     const { lat, lng, formattedAddress } = await geocodePlaceId(placeId);
 
     searchParams.set('lat', `${lat}`);
