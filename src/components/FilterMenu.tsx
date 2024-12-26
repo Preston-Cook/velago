@@ -1,14 +1,13 @@
+import { MapSidebarFilters } from '@/components/MapSidebarFilters';
 import { Button } from '@/components/ui/Button';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/Dialog';
-import { Filter } from 'lucide-react';
+import { Filter, FilterIcon } from 'lucide-react';
 
 interface FilterMenuProps {
   className?: string;
@@ -22,11 +21,20 @@ export function FilterMenu({ className }: FilterMenuProps) {
           <Filter />
         </Button>
       </DialogTrigger>
-      <DialogContent className={'sm:max-w-[425px]'}>
-        <DialogHeader>
-          <DialogTitle>Filters</DialogTitle>
-          <DialogDescription>Set Filters Here</DialogDescription>
+      <DialogContent
+        className={
+          'max-h-[80vh] overflow-y-scroll border border-primary bg-secondary sm:max-w-[425px]'
+        }
+      >
+        <DialogHeader className="flex flex-col gap-4">
+          <DialogTitle className="flex items-center justify-center gap-2">
+            <FilterIcon /> Filters
+          </DialogTitle>
         </DialogHeader>
+        <section className="border border-primary border-l-transparent border-r-transparent">
+          <MapSidebarFilters />
+        </section>
+
         {/* <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
@@ -49,9 +57,6 @@ export function FilterMenu({ className }: FilterMenuProps) {
             />
           </div>
         </div> */}
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

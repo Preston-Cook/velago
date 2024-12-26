@@ -11,10 +11,10 @@ export function MapHeader() {
   }, []);
 
   return (
-    <div className="w-full border border-b-primary p-4">
+    <div className="w-full border border-b-primary p-3">
       <div className="flex items-center justify-center gap-4">
         <FilterMenu className="md:hidden" />
-        <div className="hidden h-[39px] md:block" />
+        <div className="hidden h-[37px] md:block" />
         <div className="relative w-full max-w-[500px]">
           <MapSearchBar placeholder={placeholder} />
         </div>

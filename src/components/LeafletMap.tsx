@@ -66,6 +66,7 @@ export default function LeafletMap() {
 
   return (
     <MapContainer
+      zoomControl={false}
       center={[centerLat, centerLng]}
       zoom={15}
       className="z-[40] h-full w-full"

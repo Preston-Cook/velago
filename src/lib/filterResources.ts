@@ -44,7 +44,7 @@ export function filterResources({
       point2: { latitude: resource.latitude, longitude: resource.longitude },
     });
 
-    if (dist > radius) continue;
+    if (dist >= radius) continue;
 
     hashmap.set(resource.id, dist);
     minHeap.add(resource);
