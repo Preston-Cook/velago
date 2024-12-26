@@ -37,7 +37,7 @@ export async function onSubmitAction(
   }
 
   // create contact message in db
-  await writePrisma.contactMessages.create({
+  await writePrisma.contactMessage.create({
     data: parsed.data,
   });
 

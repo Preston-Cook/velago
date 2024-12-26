@@ -13,6 +13,33 @@
       "text": "Volver al Inicio"
     }
   },
+  "SignUpOrganization": {
+    "heading": "Solicitar Cuenta",
+    "subheading": "Únete a Velago para agilizar referencias, mejorar la coordinación del cuidado y conectarte con nuestra comunidad de socios.",
+    "labels": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo Electrónico",
+      "phone": "Teléfono",
+      "message": "Mensaje"
+    },
+    "placeholders": {
+      "firstName": "Aaron",
+      "lastName": "Swartz",
+      "email": "Correo Electrónico",
+      "phone": "(123)-456-7890",
+      "message": "Escribe tu mensaje aquí..."
+    },
+    "submit": {
+      "text": "Enviar"
+    },
+    "toast": {
+      "success": {
+        "title": "¡Tu solicitud fue enviada!",
+        "description": "Solicitud enviada exitosamente"
+      }
+    }
+  },
   "UserSignIn": {
     "heading": "Iniciar sesión",
     "subheading": "Inicia sesión para acceder a una lista personalizada de recursos y servicios benéficos cercanos, diseñados para satisfacer tus necesidades.",
@@ -337,6 +364,31 @@
       }
     },
     "contactFormSchema": {
+      "firstName": {
+        "required": "Se requiere el nombre.",
+        "minLength": "El nombre debe tener al menos 2 caracteres.",
+        "maxLength": "El nombre debe tener como máximo 50 caracteres."
+      },
+      "lastName": {
+        "required": "Se requiere el apellido.",
+        "minLength": "El apellido debe tener al menos 2 caracteres.",
+        "maxLength": "El apellido debe tener como máximo 50 caracteres."
+      },
+      "phone": {
+        "required": "Se requiere un número de teléfono.",
+        "invalid": "Por favor, ingrese un número de teléfono válido de EE. UU."
+      },
+      "email": {
+        "required": "Se requiere el correo electrónico.",
+        "invalid": "Por favor, ingresa una dirección de correo electrónico válida."
+      },
+      "message": {
+        "required": "Se requiere un mensaje.",
+        "minLength": "El mensaje debe tener al menos 10 caracteres.",
+        "maxLength": "El mensaje debe tener como máximo 300 caracteres."
+      }
+    },
+    "organizationSignUpSchema": {
       "firstName": {
         "required": "Se requiere el nombre.",
         "minLength": "El nombre debe tener al menos 2 caracteres.",

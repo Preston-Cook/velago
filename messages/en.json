@@ -54,6 +54,33 @@
       }
     }
   },
+  "SignUpOrganization": {
+    "heading": "Request Account",
+    "subheading": "Join Velago to streamline referrals, enhance care coordination, and connect with our community of partners.",
+    "labels": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message"
+    },
+    "placeholders": {
+      "firstName": "Aaron",
+      "lastName": "Swartz",
+      "email": "Email",
+      "phone": "(123)-456-7890",
+      "message": "Enter your message here..."
+    },
+    "submit": {
+      "text": "Submit"
+    },
+    "toast": {
+      "success": {
+        "title": "Your Request was Sent!",
+        "description": "Request sent Successfully"
+      }
+    }
+  },
   "SignInOrganization": {
     "heading": "Sign In",
     "subheading": "Sign in to manage referrals and connect your patients with essential medical and non-medical resources in your community."
@@ -322,6 +349,31 @@
       }
     },
     "contactFormSchema": {
+      "firstName": {
+        "required": "First name is required.",
+        "minLength": "First name must be at least 2 characters long.",
+        "maxLength": "First name must be at most 50 characters long."
+      },
+      "lastName": {
+        "required": "Last name is required.",
+        "minLength": "Last name must be at least 2 characters long.",
+        "maxLength": "Last name must be at most 50 characters long."
+      },
+      "phone": {
+        "required": "Phone number is required.",
+        "invalid": "Please enter a valid US phone number."
+      },
+      "email": {
+        "required": "Email is required.",
+        "invalid": "Please enter a valid email address."
+      },
+      "message": {
+        "required": "Message is required.",
+        "minLength": "Message must be at least 10 characters long.",
+        "maxLength": "Message must be at most 300 characters long."
+      }
+    },
+    "organizationSignUpSchema": {
       "firstName": {
         "required": "First name is required.",
         "minLength": "First name must be at least 2 characters long.",

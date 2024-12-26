@@ -1,9 +1,9 @@
-import { ContactForm } from '@/components/forms/ContactForm';
+import { SignUpOrganizationForm } from '@/components/forms/SignUpOrganizationForm';
 import { Globe } from '@/components/Globe';
 import { getTranslations } from 'next-intl/server';
 
-export default async function Contact() {
-  const t = await getTranslations('Contact');
+export default async function SignUpOrganization() {
+  const t = await getTranslations('SignUpOrganization');
 
   return (
     <div className="flex flex-1 flex-col items-center gap-12 py-12">
@@ -14,10 +14,10 @@ export default async function Contact() {
               {t('heading')}
             </h1>
             <h3 className="text-center">{t('subheading')}</h3>
-            <ContactForm />
+            <SignUpOrganizationForm />
           </div>
         </div>
-        <div className="hidden flex-1 lg:block">
+        <div className="hidden flex-1 items-center justify-center md:flex lg:block">
           <Globe />
         </div>
       </div>

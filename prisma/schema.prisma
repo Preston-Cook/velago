@@ -58,15 +58,28 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model ContactMessages {
-  id        String @id @default(dbgenerated("uuid_generate_v4()"))
-  firstName String @map("first_name")
-  lastName  String @map("last_name")
+model ContactMessage {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()"))
+  firstName String   @map("first_name")
+  lastName  String   @map("last_name")
   email     String
   phone     String
   message   String
+  createdAt DateTime @default(now())
 
-  @@map("contact_messages")
+  @@map("contact_message")
+}
+
+model AccountRequestMessage {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()"))
+  firstName String   @map("first_name")
+  lastName  String   @map("last_name")
+  email     String
+  phone     String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@map("account_request_message")
 }
 
 model SmsOtp {
