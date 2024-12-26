@@ -1,5 +1,6 @@
 'use server';
 import { writePrisma } from '@/config/prismaWriteClient';
+import { resendClient } from '@/config/resendClient';
 import { createContactFormSchema } from '@/schemas/contactFormSchema';
 import { getTranslations } from 'next-intl/server';
 
@@ -8,6 +9,9 @@ export type FormState = {
   fields?: Record<string, string>;
   issues?: string[];
 };
+
+const APP_EMAIL = process.env.APP_EMAIL as string;
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL as string;
 
 export async function onSubmitAction(
   prevState: FormState,
@@ -37,13 +41,26 @@ export async function onSubmitAction(
     data: parsed.data,
   });
 
+  console.log(APP_EMAIL, CONTACT_EMAIL);
+
+  const { firstName, lastName, message, phone, email } = parsed.data;
+
   // send email to velago
-  // await resendClient.emails.send({
-  //   from: process.env.VELAGO_APP_EMAIL as string,
-  //   to: 'velagomail@gmail.com',
-  //   subject: 'Hello',
-  //   text: 'asdfasdf',
-  // });
+  const { error } = await resendClient.emails.send({
+    from: APP_EMAIL,
+    to: CONTACT_EMAIL,
+    subject: `Contact Message - ${firstName} ${lastName}`,
+    text: `
+Name: ${firstName} ${lastName}
+Phone: ${phone}
+Email: ${email}
+Message: ${message}
+`,
+  });
+
+  if (error) {
+    return { message: 'something went wrong' };
+  }
 
   return { message: 'success' };
 }
