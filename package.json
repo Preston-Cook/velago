@@ -11,6 +11,7 @@
     "migrate:dev": "dotenv -e .env.development -- prisma migrate dev",
     "migrate:reset": "dotenv -e .env.development -- prisma migrate reset",
     "generate": "prisma generate",
+    "depcheck": "depcheck",
     "studio:dev": "dotenv -e .env.development -- prisma studio",
     "studio:prod": "dotenv -e .env.production -- prisma studio",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
@@ -19,6 +20,7 @@
     "seed": "ts-node -r tsconfig-paths/register seed/seed.ts"
   },
   "dependencies": {
+    "@auth/core": "^0.37.4",
     "@auth/prisma-adapter": "^2.7.4",
     "@aws-sdk/client-sns": "^3.699.0",
     "@hookform/resolvers": "^3.9.1",
@@ -43,6 +45,8 @@
     "cmdk": "1.0.0",
     "cobe": "^0.6.3",
     "csv-parser": "^3.0.0",
+    "errors": "link:@auth/core/errors",
+    "heap-js": "^2.5.0",
     "input-otp": "^1.4.1",
     "leaflet": "^1.9.4",
     "libphonenumber-js": "^1.11.16",
@@ -76,6 +80,7 @@
     "@types/pg": "^8.11.10",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^18.3.2",
+    "depcheck": "^1.4.7",
     "dotenv-cli": "^7.4.4",
     "dotenv-safe": "^9.1.0",
     "eslint": "^8.57.1",

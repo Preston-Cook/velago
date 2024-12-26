@@ -17,7 +17,7 @@ import { createUserSignInSchema } from '@/schemas/userSignInFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
-import { useEffect, useRef, useState } from 'react'; // Import startTransition
+import { useEffect, useState } from 'react'; // Import startTransition
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -35,11 +35,11 @@ import { Separator } from '../ui/Separator';
 
 export function SignInUserForm() {
   const t = useTranslations();
-  const formRef = useRef<HTMLFormElement>(null);
   const [hasSentCode, setHasSentCode] = useState(false);
   const [isSubmittingRequest, setIsSubmittingRequest] = useState(false);
-  const signUpUserSchema = createUserSignInSchema(t);
   const router = useRouter();
+
+  const signUpUserSchema = createUserSignInSchema(t);
 
   async function handleRequestOtp() {
     const isValid = await form.trigger(['phone']);
@@ -49,13 +49,21 @@ export function SignInUserForm() {
     setIsSubmittingRequest(true);
 
     try {
-      const response = await signIn('otp', { phone, redirect: false });
+      const response = await signIn('otp', {
+        phone,
+        action: 'signin',
+        redirect: false,
+      });
 
-      if (!response?.error) {
+      if (response?.code === '200') {
         toast.success(t('UserSignIn.toast.success.title'), {
           description: t('UserSignIn.toast.success.description'),
         });
         setHasSentCode(true);
+      } else if (response?.code === '404') {
+        toast.error('User does not exist', {
+          description: 'There is no user with this phone number',
+        });
       } else {
         throw new Error('OTP request failed');
       }
@@ -90,6 +98,7 @@ export function SignInUserForm() {
         const res = await signIn('otp', {
           phone,
           otp,
+          action: 'signin',
           redirect: false,
         });
 
@@ -111,7 +120,7 @@ export function SignInUserForm() {
 
   return (
     <Form {...form}>
-      <form ref={formRef} className="flex flex-col gap-8">
+      <form className="flex flex-col gap-8">
         <div className="flex flex-col gap-4">
           <FormField
             name="phone"

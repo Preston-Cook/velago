@@ -65,7 +65,7 @@ export function ContactForm() {
         form.setValue('phone', phone ?? '');
       }
     },
-    [status, data?.user],
+    [status, data?.user, data, form],
   );
 
   useEffect(() => {

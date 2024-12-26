@@ -5,9 +5,6 @@ import { LucideIcon } from 'lucide-react';
 import { DefaultSession } from 'next-auth';
 import { NextMiddlewareResult } from 'next/dist/server/web/types';
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
-{
-  DefaultSession;
-}
 
 declare module 'next-auth' {
   interface Session {

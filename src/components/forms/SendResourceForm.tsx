@@ -56,7 +56,7 @@ export function SendResourceForm({ handleClose }: SendResourceFormProps) {
         form.setValue('phone', phone ?? '');
       }
     },
-    [status, data?.user],
+    [status, data?.user, data, form],
   );
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export function SendResourceForm({ handleClose }: SendResourceFormProps) {
       handleClose();
     }
     setIsSubmitting(false);
-  }, [state, form, t]);
+  }, [state, form, t, handleClose]);
 
   const handleFormSubmit = form.handleSubmit((data) => {
     const formData = new FormData();

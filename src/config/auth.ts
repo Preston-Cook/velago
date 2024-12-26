@@ -1,6 +1,12 @@
 import { readPrisma } from '@/config/prismaReadClient';
 import { writePrisma } from '@/config/prismaWriteClient';
-import { InvalidOrExpiredOtpError, OtpSendError } from '@/lib/customErrors';
+import {
+  InvalidOrExpiredOtpError,
+  OtpSendError,
+  SendingOtp,
+  UserAlreadyExistsError,
+  UserNotFoundError,
+} from '@/lib/customErrors';
 import { generateOtp } from '@/lib/generateOtp';
 import { sendText } from '@/lib/sendText';
 import { otpSchema } from '@/schemas/otpSchema';
@@ -86,7 +92,12 @@ export const {
       async authorize(credentials) {
         const validatedFields = otpSchema.parse(credentials);
 
-        const { phone, otp } = validatedFields;
+        const { phone, otp, action, email, firstName, lastName } =
+          validatedFields;
+
+        const user = await readPrisma.user.findFirst({
+          where: { OR: [{ email }, { phone }] },
+        });
 
         // OTP Request Flow
         if (otp === undefined) {
@@ -94,17 +105,34 @@ export const {
             // Generate OTP
             const otp = generateOtp();
 
+            if (action === 'signup' && user !== null) {
+              throw new UserAlreadyExistsError();
+            }
+
+            if (action === 'signin' && user === null) {
+              throw new UserNotFoundError();
+            }
+
             // Store OTP
             await storeOtp({ phone, otp });
 
-            // Send OTP via your preferred method (SMS, etc.)
             await sendOtp({ phone, otp });
 
-            // Return phone to indicate OTP request success
-            return {
-              message: 'success',
-            };
-          } catch {
+            throw new SendingOtp(); // this prevents user from being authorized
+          } catch (err) {
+            if (err instanceof UserAlreadyExistsError) {
+              throw new UserAlreadyExistsError();
+            }
+
+            if (err instanceof UserNotFoundError) {
+              throw new UserNotFoundError();
+            }
+
+            if (err instanceof SendingOtp) {
+              throw new SendingOtp();
+            }
+
+            // default error
             throw new OtpSendError();
           }
         }
@@ -114,8 +142,6 @@ export const {
           phone,
           otp,
         });
-
-        const { firstName, lastName, email } = validatedFields;
 
         if (isValidOTP) {
           const user = await findOrCreateUserByPhone({
@@ -221,7 +247,7 @@ async function verifyOtp({ otp, phone }: VerifyOtpParams) {
     return false;
   }
 
-  // delete old otp and return return true
+  // delete old otp and return true
   await writePrisma.smsOtp.delete({
     where: {
       id,
@@ -251,6 +277,7 @@ async function findOrCreateUserByPhone({
     where: { phone },
   });
 
+  // user is signing up
   if (!user) {
     user = await writePrisma.user.create({
       data: {
@@ -260,6 +287,8 @@ async function findOrCreateUserByPhone({
         email,
       },
     });
+  } else {
+    // user is signing in
   }
 
   return user;

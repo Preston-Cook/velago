@@ -104,7 +104,7 @@ export function SignInOrganizationForm() {
       const { phone, code: otp } = form.getValues();
 
       try {
-        await verifyOtp({ phone, otp });
+        await verifyOtp({ phone, otp, action: 'signin' });
       } catch (err) {
         if (!isRedirectError(err)) {
           toast.error(t('UserSignIn.toast.errorOtp.title'), {

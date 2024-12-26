@@ -2,7 +2,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('USER', 'MEDICAL_ORG', 'NON_MEDICAL_ORG', 'ADMIN');
+CREATE TYPE "Role" AS ENUM ('USER', 'ORGANIZATION', 'ADMIN');
 
 -- CreateEnum
 CREATE TYPE "status_type" AS ENUM ('ACTIVE', 'INACTIVE', 'DEFUNCT', 'TEMPORARILY_CLOSED');
@@ -26,6 +26,7 @@ CREATE TABLE "User" (
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,
+    "locale" TEXT NOT NULL DEFAULT 'en',
     "password" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -116,7 +117,7 @@ CREATE TABLE "service" (
     "alert" TEXT,
     "last_modified" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "organization_id" TEXT,
-    "category" TEXT,
+    "category" TEXT NOT NULL,
 
     CONSTRAINT "service_pkey" PRIMARY KEY ("id")
 );
@@ -219,8 +220,8 @@ CREATE TABLE "location" (
     "alternate_name" TEXT,
     "description" TEXT,
     "transportation" TEXT,
-    "latitude" DOUBLE PRECISION,
-    "longitude" DOUBLE PRECISION,
+    "latitude" DOUBLE PRECISION NOT NULL,
+    "longitude" DOUBLE PRECISION NOT NULL,
     "external_identifier" TEXT,
     "external_identifier_type" TEXT,
 

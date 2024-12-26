@@ -1,21 +1,27 @@
-import { requestOtp } from '@/app/[locale]/(auth)/signup/user/actions';
 import { Spinner } from '@/components/Spinner';
 import { Button } from '@/components/ui/Button';
+import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
-import { startTransition, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 interface ResendCodeButtonProps {
   phone: string;
-  cooldown?: number; //
+  email?: string;
+  cooldown?: number;
 }
 
 export function ResendCodeButton({
+  email,
   phone,
   cooldown = 10,
 }: ResendCodeButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [seconds, setSeconds] = useState<number>(0);
   const t = useTranslations();
+  const pathname = usePathname();
+  const action = pathname.split('/')[2];
 
   useEffect(
     function () {
@@ -40,19 +46,35 @@ export function ResendCodeButton({
 
     setIsLoading(true);
 
-    startTransition(async () => {
-      try {
-        const response = await requestOtp({ phone });
-        if (response?.message !== 'success') {
-          throw new Error('Failed to send OTP.');
-        }
-      } catch (error) {
-        console.error('Error sending OTP:', error);
-      } finally {
-        setIsLoading(false);
-        setSeconds(cooldown);
+    const options =
+      action === 'signin' ? { action, phone } : { action, phone, email };
+
+    try {
+      const res = await signIn('otp', { ...options, redirect: false });
+
+      if (res?.code === '200') {
+        toast.success(t('UserSignIn.toast.success.title'), {
+          description: t('UserSignIn.toast.success.description'),
+        });
+      } else if (res?.code === '409') {
+        toast.error('User already exists', {
+          description: 'A user already exists with this email or phone number',
+        });
+      } else if (res?.code === '404') {
+        toast.error('User does not exist', {
+          description: 'There is no user with this phone number',
+        });
+      } else {
+        throw new Error('OTP request failed');
       }
-    });
+    } catch {
+      toast.error(t('UserSignIn.toast.error.title'), {
+        description: t('UserSignIn.toast.error.description'),
+      });
+    } finally {
+      setIsLoading(false);
+      setSeconds(cooldown);
+    }
   }
 
   return (

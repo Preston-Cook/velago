@@ -30,7 +30,9 @@ export function SheetSidebar() {
               width={30}
               alt="Velago logo"
             />
-            <SheetTitle className="text-2xl text-primary">Velago</SheetTitle>
+            <SheetTitle className="text-2xl font-normal text-primary">
+              Velago
+            </SheetTitle>
           </Link>
         </div>
       </SheetHeader>

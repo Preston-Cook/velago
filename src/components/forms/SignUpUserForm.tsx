@@ -1,9 +1,5 @@
 'use client';
 
-import {
-  requestOtp,
-  verifyOtp,
-} from '@/app/[locale]/(auth)/signup/user/actions';
 import { CodeInput } from '@/components/CodeInput';
 import { ResendCodeButton } from '@/components/ResendCodeButton';
 import { Spinner } from '@/components/Spinner';
@@ -16,10 +12,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/Dialog';
+import { useRouter } from '@/i18n/routing';
 import { createSignUpUserSchema } from '@/schemas/userSignUpFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
-import { isRedirectError } from 'next/dist/client/components/redirect';
 import { useEffect, useRef, useState } from 'react'; // Import startTransition
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -42,6 +39,7 @@ export function SignUpUserForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [hasSentCode, setHasSentCode] = useState(false);
   const [isSubmittingRequest, setIsSubmittingRequest] = useState(false);
+  const router = useRouter();
 
   const signUpUserSchema = createSignUpUserSchema(t);
 
@@ -58,25 +56,33 @@ export function SignUpUserForm() {
     }
 
     const phone = form.getValues('phone');
+    const email = form.getValues('email');
 
     setIsSubmittingRequest(true);
 
     try {
-      const res = await requestOtp({ phone });
+      const response = await signIn('otp', {
+        email,
+        phone,
+        action: 'signup',
+        redirect: false,
+      });
 
-      if (res.message === 'success') {
-        toast.success(t('UserSignUp.toast.success.title'), {
-          description: t('UserSignUp.toast.success.description'),
+      if (response?.code === '200') {
+        toast.success(t('UserSignIn.toast.success.title'), {
+          description: t('UserSignIn.toast.success.description'),
         });
         setHasSentCode(true);
-      } else {
-        toast.error(t('UserSignUp.toast.error.title'), {
-          description: t('UserSignUp.toast.error.description'),
+      } else if (response?.code === '409') {
+        toast.error('User already exists', {
+          description: 'A user already exists with this email or phone number',
         });
+      } else {
+        throw new Error('OTP request failed');
       }
     } catch {
-      toast.error(t('UserSignUp.toast.error.title'), {
-        description: t('UserSignUp.toast.error.description'),
+      toast.error(t('UserSignIn.toast.error.title'), {
+        description: t('UserSignIn.toast.error.description'),
       });
     } finally {
       setIsSubmittingRequest(false);
@@ -111,17 +117,25 @@ export function SignUpUserForm() {
 
       const { firstName, lastName, email, phone, code: otp } = form.getValues();
 
-      try {
-        await verifyOtp({ firstName, lastName, email, phone, otp });
-      } catch (err) {
-        if (!isRedirectError(err)) {
-          toast.error(t('UserSignUp.toast.errorOtp.title'), {
-            description: t('UserSignUp.toast.errorOtp.description'),
-          });
-        }
+      const res = await signIn('otp', {
+        firstName,
+        lastName,
+        email,
+        phone,
+        otp,
+        action: 'signup',
+        redirect: false,
+      });
+
+      if (!res?.error) {
+        router.push('/map');
+      } else {
+        toast.error(t('UserSignUp.toast.errorOtp.title'), {
+          description: t('UserSignUp.toast.errorOtp.description'),
+        });
       }
     }
-  }, [codeValue, form, t]);
+  }, [codeValue, form, t, router]);
 
   return (
     <Form {...form}>
@@ -230,7 +244,10 @@ export function SignUpUserForm() {
                     <FormControl>
                       <div className="flex items-center justify-between">
                         <CodeInput {...field} />
-                        <ResendCodeButton phone={form.getValues('phone')} />
+                        <ResendCodeButton
+                          email={form.getValues('email')}
+                          phone={form.getValues('phone')}
+                        />
                       </div>
                     </FormControl>
                     <FormMessage />

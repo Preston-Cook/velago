@@ -13,6 +13,20 @@
       "text": "Go Back Home"
     }
   },
+  "Map": {
+    "toast": {
+      "success": {
+        "title": "Message Sent!",
+        "description": "Message sent successfully"
+      }
+    },
+    "labels": {
+      "phone": "Phone"
+    },
+    "placeholders": {
+      "phone": "(123)-456-7890"
+    }
+  },
   "Contact": {
     "heading": "Contact Us",
     "subheading": "Get in touch with us to learn more about our services, partnerships, or any inquiries you may have.",
@@ -301,6 +315,12 @@
     }
   },
   "Validation": {
+    "sendResourceSchema": {
+      "phone": {
+        "required": "Phone number is required.",
+        "invalid": "Please enter a valid US phone number."
+      }
+    },
     "contactFormSchema": {
       "firstName": {
         "required": "First name is required.",

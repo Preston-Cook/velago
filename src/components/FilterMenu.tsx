@@ -8,8 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/Dialog';
-import { Input } from '@/components/ui/Input';
-import { Label } from '@/components/ui/Label';
 import { Filter } from 'lucide-react';
 
 interface FilterMenuProps {
@@ -26,12 +24,10 @@ export function FilterMenu({ className }: FilterMenuProps) {
       </DialogTrigger>
       <DialogContent className={'sm:max-w-[425px]'}>
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
-          </DialogDescription>
+          <DialogTitle>Filters</DialogTitle>
+          <DialogDescription>Set Filters Here</DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        {/* <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
               Name
@@ -52,7 +48,7 @@ export function FilterMenu({ className }: FilterMenuProps) {
               className="col-span-3"
             />
           </div>
-        </div>
+        </div> */}
         <DialogFooter>
           <Button type="submit">Save changes</Button>
         </DialogFooter>

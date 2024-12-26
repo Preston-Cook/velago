@@ -43,7 +43,7 @@ export class OtpSendError extends CustomError {
 }
 
 export class InvalidOrExpiredOtpError extends CustomError {
-  message: string = 'Invalid or Expired OTP';
+  message: string = 'Invalid or expired OTP';
   code: string = '401';
   type:
     | 'AccessDenied'
@@ -82,6 +82,82 @@ export class InvalidOrExpiredOtpError extends CustomError {
 
 export class UserNotFoundError extends CustomError {
   code: string = '404';
+  type:
+    | 'AccessDenied'
+    | 'AdapterError'
+    | 'CallbackRouteError'
+    | 'ErrorPageLoop'
+    | 'EventError'
+    | 'InvalidCallbackUrl'
+    | 'CredentialsSignin'
+    | 'InvalidEndpoints'
+    | 'InvalidCheck'
+    | 'JWTSessionError'
+    | 'MissingAdapter'
+    | 'MissingAdapterMethods'
+    | 'MissingAuthorize'
+    | 'MissingSecret'
+    | 'OAuthAccountNotLinked'
+    | 'OAuthCallbackError'
+    | 'OAuthProfileParseError'
+    | 'SessionTokenError'
+    | 'OAuthSignInError'
+    | 'EmailSignInError'
+    | 'SignOutError'
+    | 'UnknownAction'
+    | 'UnsupportedStrategy'
+    | 'InvalidProvider'
+    | 'UntrustedHost'
+    | 'Verification'
+    | 'MissingCSRF'
+    | 'AccountNotLinked'
+    | 'DuplicateConditionalUI'
+    | 'MissingWebAuthnAutocomplete'
+    | 'WebAuthnVerificationError'
+    | 'ExperimentalFeatureNotEnabled' = 'Verification';
+}
+
+export class UserAlreadyExistsError extends CustomError {
+  message: string = 'User already exists';
+  code: string = '409';
+  type:
+    | 'AccessDenied'
+    | 'AdapterError'
+    | 'CallbackRouteError'
+    | 'ErrorPageLoop'
+    | 'EventError'
+    | 'InvalidCallbackUrl'
+    | 'CredentialsSignin'
+    | 'InvalidEndpoints'
+    | 'InvalidCheck'
+    | 'JWTSessionError'
+    | 'MissingAdapter'
+    | 'MissingAdapterMethods'
+    | 'MissingAuthorize'
+    | 'MissingSecret'
+    | 'OAuthAccountNotLinked'
+    | 'OAuthCallbackError'
+    | 'OAuthProfileParseError'
+    | 'SessionTokenError'
+    | 'OAuthSignInError'
+    | 'EmailSignInError'
+    | 'SignOutError'
+    | 'UnknownAction'
+    | 'UnsupportedStrategy'
+    | 'InvalidProvider'
+    | 'UntrustedHost'
+    | 'Verification'
+    | 'MissingCSRF'
+    | 'AccountNotLinked'
+    | 'DuplicateConditionalUI'
+    | 'MissingWebAuthnAutocomplete'
+    | 'WebAuthnVerificationError'
+    | 'ExperimentalFeatureNotEnabled' = 'InvalidCheck';
+}
+
+export class SendingOtp extends CustomError {
+  message: string = 'Successfully sent OTP';
+  code: string = '200';
   type:
     | 'AccessDenied'
     | 'AdapterError'

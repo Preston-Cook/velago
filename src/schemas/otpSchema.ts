@@ -7,4 +7,5 @@ export const otpSchema = z.object({
   lastName: z.string().optional(),
   email: z.union([z.string().email(), z.literal('')]).optional(),
   otp: z.string().optional(),
+  action: z.enum(['signin', 'signup']),
 });
