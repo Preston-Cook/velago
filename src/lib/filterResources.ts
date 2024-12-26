@@ -25,13 +25,12 @@ export function filterResources({
 
   const resourceTypesSet = new Set(resourceTypes);
   const minHeap = new Heap<Resource>(customHeapCompare);
-
   minHeap.setLimit(numResources);
 
-  for (const resource of resources) {
+  for (const resource of structuredClone(resources)) {
     resource.serviceAtLocation = resource.serviceAtLocation.filter(
-      (sericeAtLocation) => {
-        const serviceCategory = sericeAtLocation.service?.category as string;
+      (serviceAtLocation) => {
+        const serviceCategory = serviceAtLocation.service?.category as string;
         return resourceTypesSet.has(serviceCategory);
       },
     );

@@ -11,7 +11,6 @@ export function generateResourceMessage({
 }: GenerateResourceMessageParams) {
   const messages = resourceData.map((resource) => {
     const {
-      name,
       phones,
       serviceAtLocation,
       organization,
@@ -26,8 +25,6 @@ export function generateResourceMessage({
     const address = unformattedAddresses.map((unformattedAddress) =>
       formatAddress({ address: unformattedAddress }),
     );
-
-    console.log(JSON.stringify(service));
 
     const requiredDocuments = service?.requiredDocuments.map(
       (el) => el.document,
