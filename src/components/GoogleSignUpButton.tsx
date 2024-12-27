@@ -3,7 +3,7 @@
 import { getPathname, usePathname } from '@/i18n/routing';
 import { signIn } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
-import { isRedirectError } from 'next/dist/client/components/redirect';
+import { isRedirectError } from 'next/dist/client/components/redirect-error';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Spinner } from './Spinner';
