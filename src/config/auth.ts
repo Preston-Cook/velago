@@ -23,8 +23,8 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
-    async authorized({ request, auth }) {
-      const { pathname } = request.nextUrl;
+    async authorized({ auth }) {
+      // const { pathname } = request.nextUrl;
 
       console.log(auth?.user);
 

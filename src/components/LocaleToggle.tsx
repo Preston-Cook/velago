@@ -12,7 +12,6 @@ import { usePathname, useRouter } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 import { DropdownMenuRadioItem } from '@radix-ui/react-dropdown-menu';
 import { Languages } from 'lucide-react';
-import { useSession } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
@@ -30,9 +29,23 @@ export function LocaleToggle({ className }: LocaleToggleProps) {
   const router = useRouter();
   const currentLocale = useLocale();
   const params = useParams();
-  const session = useSession();
+  // const session = useSession();
+
+  // useEffect(
+  //   function () {
+  //     if (session.status === 'authenticated' && session.data?.user) {
+  //       const { locale } = session.data.user;
+
+  //       if (!locale) return;
+  //       handleLocaleChange(locale);
+  //     }
+  //   },
+  //   [session],
+  // );
 
   function handleLocaleChange(e: string) {
+    // TODO: if user is logged in, reset their default locale
+
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`
