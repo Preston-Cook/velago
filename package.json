@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "prisma generate",
     "seed": "dotenv -e .env.development -- prisma db seed",
     "dev": "dotenv -e .env.development -- next dev --turbo",
     "build": "dotenv -e .env.production -- next build",
