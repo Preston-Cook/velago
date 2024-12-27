@@ -79,11 +79,18 @@
         "title": "Your Request was Sent!",
         "description": "Request sent Successfully"
       }
+    },
+
+    "authLinks": {
+      "link1": {
+        "text": "Already have an Organization Account?",
+        "link": "Sign In"
+      },
+      "link2": {
+        "text": "Want a Standard Account?",
+        "link": "Sign Up"
+      }
     }
-  },
-  "SignInOrganization": {
-    "heading": "Sign In",
-    "subheading": "Sign in to manage referrals and connect your patients with essential medical and non-medical resources in your community."
   },
   "UserSignIn": {
     "heading": "Sign In",
@@ -170,6 +177,28 @@
       "link2": {
         "text": "Want an Organization Account?",
         "link": "Sign Up"
+      }
+    }
+  },
+  "OrganizationSignIn": {
+    "heading": "Org Sign In",
+    "subheading": "Sign in to manage referrals and connect your patients with essential medical and non-medical resources in your community.",
+    "labels": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "placeholders": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "authLinks": {
+      "link1": {
+        "text": "Want an Organization Account?",
+        "link": "Sign Up"
+      },
+      "link2": {
+        "text": "Have a Standard Account?",
+        "link": "Sign In"
       }
     }
   },
@@ -371,6 +400,15 @@
         "required": "Message is required.",
         "minLength": "Message must be at least 10 characters long.",
         "maxLength": "Message must be at most 300 characters long."
+      }
+    },
+    "organizationSignInSchema": {
+      "email": {
+        "required": "Email is required.",
+        "invalid": "Please enter a valid email address."
+      },
+      "password": {
+        "required": "Password is required."
       }
     },
     "organizationSignUpSchema": {

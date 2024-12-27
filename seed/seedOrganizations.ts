@@ -1,4 +1,4 @@
-import { writePrisma } from '@/config/prismaWriteClient';
+import { prisma } from '@/config/prisma';
 import { readCsv } from '@/lib/readCsv';
 import { Organization } from '@prisma/client';
 import * as path from 'path';
@@ -14,7 +14,7 @@ export async function seedOrganizations() {
     return row;
   });
 
-  await writePrisma.organization.createMany({
+  await prisma.organization.createMany({
     data: organizationData,
   });
 }

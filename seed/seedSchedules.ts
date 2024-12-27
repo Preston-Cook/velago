@@ -1,4 +1,4 @@
-import { writePrisma } from '@/config/prismaWriteClient';
+import { prisma } from '@/config/prisma';
 import { readCsv } from '@/lib/readCsv';
 import { Schedule } from '@prisma/client';
 import * as path from 'path';
@@ -19,7 +19,7 @@ export async function seedSchedules() {
     return row;
   });
 
-  await writePrisma.schedule.createMany({
+  await prisma.schedule.createMany({
     data: scheduleData,
   });
 }

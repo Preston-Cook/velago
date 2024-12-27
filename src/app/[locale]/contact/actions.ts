@@ -1,5 +1,5 @@
 'use server';
-import { writePrisma } from '@/config/prismaWriteClient';
+import { prisma } from '@/config/prisma';
 import { resendClient } from '@/config/resendClient';
 import { createContactFormSchema } from '@/schemas/contactFormSchema';
 import { getTranslations } from 'next-intl/server';
@@ -37,7 +37,7 @@ export async function onSubmitAction(
   }
 
   // create contact message in db
-  await writePrisma.contactMessage.create({
+  await prisma.contactMessage.create({
     data: parsed.data,
   });
 

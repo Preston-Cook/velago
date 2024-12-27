@@ -1,6 +1,6 @@
 'use server';
 
-import { readPrisma } from '@/config/prismaReadClient';
+import { prisma } from '@/config/prisma';
 import { generateResourceMessage } from '@/lib/generateResourceMessage';
 import { sendText } from '@/lib/sendText';
 import { createSendResourceSchema } from '@/schemas/sendResourceFormSchema';
@@ -92,7 +92,7 @@ export async function onSubmitAction(
 
   let resourceData;
   try {
-    resourceData = await readPrisma.location.findMany({
+    resourceData = await prisma.location.findMany({
       where: {
         id: {
           in: locationIds,

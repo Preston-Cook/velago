@@ -1,4 +1,4 @@
-import { writePrisma } from '@/config/prismaWriteClient';
+import { prisma } from '@/config/prisma';
 import { readCsv } from '@/lib/readCsv';
 import { Location, LocationType } from '@prisma/client';
 import * as path from 'path';
@@ -26,7 +26,7 @@ export async function seedLocations() {
     return row;
   });
 
-  await writePrisma.location.createMany({
+  await prisma.location.createMany({
     data: locationData,
   });
 }

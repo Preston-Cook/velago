@@ -27,6 +27,7 @@ import {
 } from '../ui/Form';
 import { Input } from '../ui/Input';
 import { PhoneInput } from '../ui/PhoneInput';
+import { Separator } from '../ui/Separator';
 import { Textarea } from '../ui/Textarea';
 
 export function SignUpOrganizationForm() {
@@ -220,6 +221,7 @@ export function SignUpOrganizationForm() {
         >
           {isSubmitting ? <Spinner /> : t('SignUpOrganization.submit.text')}
         </Button>
+        <Separator className="mx-auto w-[80%] bg-primary" />
       </form>
     </Form>
   );

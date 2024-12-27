@@ -1,4 +1,4 @@
-import { writePrisma } from '@/config/prismaWriteClient';
+import { prisma } from '@/config/prisma';
 import { readCsv } from '@/lib/readCsv';
 import { Phone } from '@prisma/client';
 import * as path from 'path';
@@ -23,7 +23,7 @@ export async function seedPhones() {
     return row;
   });
 
-  return await writePrisma.phone.createMany({
+  return await prisma.phone.createMany({
     data: phoneData,
   });
 }

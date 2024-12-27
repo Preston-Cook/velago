@@ -1,4 +1,4 @@
-import { writePrisma } from '@/config/prismaWriteClient';
+import { prisma } from '@/config/prisma';
 import { readCsv } from '@/lib/readCsv';
 import { OrganizationIdentifier } from '@prisma/client';
 import * as path from 'path';
@@ -12,7 +12,7 @@ export async function seedOrganizationIdentifiers() {
   const organizationIdentifierData =
     await readCsv<OrganizationIdentifier>(filePath);
 
-  return await writePrisma.organizationIdentifier.createMany({
+  return await prisma.organizationIdentifier.createMany({
     data: organizationIdentifierData,
   });
 }

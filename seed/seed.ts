@@ -1,4 +1,4 @@
-import { writePrisma } from '@/config/prismaWriteClient';
+import { prisma } from '@/config/prisma';
 import { seedAccessability } from './seedAccessability';
 import { seedAccounts } from './seedAccounts';
 import { seedAddresses } from './seedAddresses';
@@ -105,7 +105,7 @@ main()
   })
   .finally(async () => {
     try {
-      await writePrisma.$disconnect();
+      await prisma.$disconnect();
     } catch (disconnectError) {
       console.error('Failed to disconnect from Prisma:', disconnectError);
     }

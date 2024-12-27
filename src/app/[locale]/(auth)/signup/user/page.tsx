@@ -30,7 +30,7 @@ export default async function SignUpUser() {
             </div>
           </div>
         </div>
-        <div className="hidden flex-1 items-center justify-center lg:flex">
+        <div className="my-auto hidden flex-1 items-center justify-center lg:flex">
           <Globe />
         </div>
       </div>

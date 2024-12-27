@@ -17,7 +17,7 @@ export default async function Contact() {
             <ContactForm />
           </div>
         </div>
-        <div className="hidden flex-1 lg:block">
+        <div className="my-auto hidden flex-1 lg:block">
           <Globe />
         </div>
       </div>

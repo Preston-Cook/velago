@@ -1,4 +1,4 @@
-import { writePrisma } from '@/config/prismaWriteClient';
+import { prisma } from '@/config/prisma';
 import { readCsv } from '@/lib/readCsv';
 import { FieldEnumMapping } from '@/types';
 import { Address, LocationType } from '@prisma/client';
@@ -22,7 +22,7 @@ export async function seedAddresses() {
     addressEnumMappings,
   );
 
-  await writePrisma.address.createMany({
+  await prisma.address.createMany({
     data: addressData,
   });
 }

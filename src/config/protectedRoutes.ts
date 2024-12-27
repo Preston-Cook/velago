@@ -1,8 +1,5 @@
-export const protectedApiRoutes: string[] = [];
+export const protectedApiRoutes: string[] = ['/api/auth/signup/organization'];
 
-export const protectedPageRoutes: string[] = [
-  '/profile',
-  '/account',
-  '/dashboard',
-  '/settings',
-];
+export const protectedPageRoutes: string[] = [];
+
+export const adminApiRoutes: string[] = ['/api/auth/signup/organization'];

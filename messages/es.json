@@ -15,7 +15,7 @@
   },
   "SignUpOrganization": {
     "heading": "Solicitar Cuenta",
-    "subheading": "Únete a Velago para agilizar referencias, mejorar la coordinación del cuidado y conectarte con nuestra comunidad de socios.",
+    "subheading": "Únete a Velago para agilizar las referencias, mejorar la coordinación del cuidado y conectarte con nuestra comunidad de socios.",
     "labels": {
       "firstName": "Nombre",
       "lastName": "Apellido",
@@ -37,6 +37,16 @@
       "success": {
         "title": "¡Tu solicitud fue enviada!",
         "description": "Solicitud enviada exitosamente"
+      }
+    },
+    "authLinks": {
+      "link1": {
+        "text": "¿Ya tienes una cuenta de organización?",
+        "link": "Iniciar Sesión"
+      },
+      "link2": {
+        "text": "¿Deseas una cuenta estándar?",
+        "link": "Registrarse"
       }
     }
   },

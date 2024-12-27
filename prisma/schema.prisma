@@ -6,13 +6,13 @@
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["postgresqlExtensions"]
+  previewFeatures = ["postgresqlExtensions", "driverAdapters"]
 }
 
 datasource db {
   provider   = "postgresql"
   extensions = [uuid_ossp(map: "uuid-ossp")]
-  url        = env("AWS_AURORA_CLUSTER_WRITE_URL")
+  url        = env("DATABASE_URL")
 }
 
 enum Role {

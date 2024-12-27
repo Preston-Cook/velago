@@ -25,7 +25,7 @@ export function Globe() {
     }));
 
     return markers;
-  }, []);
+  }, [locationCoordinates]);
 
   const [h, s, l] = color.split(' ').map((el) => Number(el.replace('%', '')));
 
@@ -81,18 +81,20 @@ export function Globe() {
     return () => {
       globe.destroy();
     };
-  }, [themeColor, resolvedTheme, dimensions, rgbColors]);
+  }, [themeColor, resolvedTheme, dimensions, rgbColors, memoizedLocations]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="mx-auto aspect-square"
-      style={{
-        width: `${dimensions.width}px`,
-        height: `${dimensions.height}px`,
-        opacity: 0,
-        transition: 'opacity 1s ease',
-      }}
-    />
+    <div>
+      <canvas
+        ref={canvasRef}
+        className="mx-auto aspect-square"
+        style={{
+          width: `${dimensions.width}px`,
+          height: `${dimensions.height}px`,
+          opacity: 0,
+          transition: 'opacity 1s ease',
+        }}
+      />
+    </div>
   );
 }

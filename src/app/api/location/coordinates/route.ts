@@ -1,8 +1,8 @@
-import { readPrisma } from '@/config/prismaReadClient';
+import { prisma } from '@/config/prisma';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const data = await readPrisma.location.findMany({
+  const data = await prisma.location.findMany({
     select: {
       latitude: true,
       longitude: true,

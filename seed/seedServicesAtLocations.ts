@@ -1,4 +1,4 @@
-import { writePrisma } from '@/config/prismaWriteClient';
+import { prisma } from '@/config/prisma';
 import { readCsv } from '@/lib/readCsv';
 import { ServiceAtLocation } from '@prisma/client';
 import * as path from 'path';
@@ -11,7 +11,7 @@ const filePath = path.resolve(
 export async function seedServicesAtLocations() {
   const servicesAtLocationsData = await readCsv<ServiceAtLocation>(filePath);
 
-  return await writePrisma.serviceAtLocation.createMany({
+  return await prisma.serviceAtLocation.createMany({
     data: servicesAtLocationsData,
   });
 }

@@ -1,4 +1,4 @@
-import { writePrisma } from '@/config/prismaWriteClient';
+import { prisma } from '@/config/prisma';
 import { readCsv } from '@/lib/readCsv';
 import { MetaTableDescription } from '@prisma/client';
 import * as path from 'path';
@@ -11,7 +11,7 @@ const filePath = path.resolve(
 export async function seedMetaTableDescriptions() {
   const metaTableDescription = await readCsv<MetaTableDescription>(filePath);
 
-  return await writePrisma.metaTableDescription.createMany({
+  return await prisma.metaTableDescription.createMany({
     data: metaTableDescription,
   });
 }

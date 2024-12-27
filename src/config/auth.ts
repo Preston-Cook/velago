@@ -1,5 +1,4 @@
-import { readPrisma } from '@/config/prismaReadClient';
-import { writePrisma } from '@/config/prismaWriteClient';
+import { prisma } from '@/config/prisma';
 import {
   InvalidOrExpiredOtpError,
   OtpSendError,
@@ -9,6 +8,7 @@ import {
 } from '@/lib/customErrors';
 import { generateOtp } from '@/lib/generateOtp';
 import { sendText } from '@/lib/sendText';
+import { organizationSignInSchema } from '@/schemas/organizationSignInSchema';
 import { otpSchema } from '@/schemas/otpSchema';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import bcrypt from 'bcryptjs';
@@ -23,6 +23,13 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
+    async authorized({ request, auth }) {
+      const { pathname } = request.nextUrl;
+
+      console.log(auth?.user);
+
+      return true;
+    },
     async session({ token, session }) {
       if (session.user) {
         const { firstName, lastName, role, phone, locale } = token;
@@ -42,7 +49,7 @@ export const {
         return token;
       }
 
-      const currentUser = await readPrisma.user.findFirst({
+      const currentUser = await prisma.user.findFirst({
         where: { id: sub },
       });
 
@@ -63,13 +70,13 @@ export const {
       return token;
     },
   },
-  adapter: PrismaAdapter(writePrisma),
+  adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt',
   },
   events: {
     async linkAccount({ user }) {
-      await writePrisma.user.update({
+      await prisma.user.update({
         where: { id: user.id },
         data: {
           emailVerified: new Date(),
@@ -95,7 +102,7 @@ export const {
         const { phone, otp, action, email, firstName, lastName } =
           validatedFields;
 
-        const user = await readPrisma.user.findFirst({
+        const user = await prisma.user.findFirst({
           where: { OR: [{ email }, { phone }] },
         });
 
@@ -153,12 +160,31 @@ export const {
 
           return {
             id: user.id,
-            phone: phone,
+            phone,
+            firstName,
+            lastName,
           };
         }
 
         // Invalid OTP
         throw new InvalidOrExpiredOtpError();
+      },
+    }),
+    Credentials({
+      id: 'organization',
+      name: 'organization-sign-in',
+      credentials: {
+        email: { label: 'Email', type: 'text' },
+        password: { label: 'Password', type: 'text' },
+      },
+      authorize(credentials) {
+        const validatedFields = organizationSignInSchema.parse(credentials);
+
+        const { email, password } = validatedFields;
+
+        console.log(email, password);
+
+        return null;
       },
     }),
   ],
@@ -184,7 +210,7 @@ async function storeOtp({ otp, phone }: StoreOtpParams) {
   };
 
   // user could be rerequesting an OTP or asking for one the first time
-  await writePrisma.smsOtp.upsert({
+  await prisma.smsOtp.upsert({
     where: {
       phone,
     },
@@ -213,7 +239,7 @@ interface VerifyOtpParams {
 }
 
 async function verifyOtp({ otp, phone }: VerifyOtpParams) {
-  const smsRecord = await readPrisma.smsOtp.findFirst({
+  const smsRecord = await prisma.smsOtp.findFirst({
     where: {
       phone,
     },
@@ -228,7 +254,7 @@ async function verifyOtp({ otp, phone }: VerifyOtpParams) {
   // check if sms expired and delete if has
   if (smsRecord.expirationTime.getTime() < new Date().getTime()) {
     // delete old otp
-    await writePrisma.smsOtp.delete({
+    await prisma.smsOtp.delete({
       where: {
         id,
       },
@@ -248,7 +274,7 @@ async function verifyOtp({ otp, phone }: VerifyOtpParams) {
   }
 
   // delete old otp and return true
-  await writePrisma.smsOtp.delete({
+  await prisma.smsOtp.delete({
     where: {
       id,
     },
@@ -273,13 +299,13 @@ async function findOrCreateUserByPhone({
   // try to find user by phone
   let user;
 
-  user = await readPrisma.user.findFirst({
+  user = await prisma.user.findFirst({
     where: { phone },
   });
 
   // user is signing up
   if (!user) {
-    user = await writePrisma.user.create({
+    user = await prisma.user.create({
       data: {
         phone,
         firstName,

@@ -1,17 +1,11 @@
-import { readPrisma } from '@/config/prismaReadClient';
+import { prisma } from '@/config/prisma';
 import { StatusType } from '@prisma/client';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
-  const url = new URL(request.url);
-
-  const searchParams = url.searchParams;
-
-  // TODO: incorporate search params
-
+export async function GET() {
   let data;
   try {
-    data = await readPrisma.location.findMany({
+    data = await prisma.location.findMany({
       where: {
         serviceAtLocation: {
           some: {},

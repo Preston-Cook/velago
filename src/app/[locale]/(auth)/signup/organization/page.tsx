@@ -1,3 +1,4 @@
+import { FormLink } from '@/components/FormLink';
 import { SignUpOrganizationForm } from '@/components/forms/SignUpOrganizationForm';
 import { Globe } from '@/components/Globe';
 import { getTranslations } from 'next-intl/server';
@@ -15,9 +16,21 @@ export default async function SignUpOrganization() {
             </h1>
             <h3 className="text-center">{t('subheading')}</h3>
             <SignUpOrganizationForm />
+            <div className="flex flex-col text-center">
+              <FormLink
+                href="/signin/organization"
+                text={t('authLinks.link1.text')}
+                linkText={t('authLinks.link1.link')}
+              />
+              <FormLink
+                href="/signup/user"
+                text={t('authLinks.link2.text')}
+                linkText={t('authLinks.link2.link')}
+              />
+            </div>
           </div>
         </div>
-        <div className="hidden flex-1 items-center justify-center md:flex lg:block">
+        <div className="my-auto hidden flex-1 lg:block">
           <Globe />
         </div>
       </div>
