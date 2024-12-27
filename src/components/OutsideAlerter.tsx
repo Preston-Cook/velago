@@ -6,7 +6,7 @@ interface OutsideAlerterProps {
 }
 
 function useOutsideAlerter(
-  ref: React.RefObject<HTMLDivElement>,
+  ref: React.RefObject<HTMLDivElement | null>,
   func: () => void,
 ) {
   useEffect(() => {
@@ -24,7 +24,7 @@ function useOutsideAlerter(
 }
 
 export function OutsideAlerter(props: OutsideAlerterProps) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   useOutsideAlerter(wrapperRef, props.func);
 
