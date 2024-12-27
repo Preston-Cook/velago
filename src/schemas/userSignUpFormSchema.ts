@@ -1,4 +1,4 @@
-import { codeRegex, phoneRegex } from '@/lib/regex';
+import { codeRegex, phoneRegex } from '@/config/regex';
 import { Translator } from '@/types';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import { z } from 'zod';
@@ -27,11 +27,9 @@ export function createSignUpUserSchema(t: Translator) {
       }),
     email: z
       .union([
-        z
-          .string()
-          .email({
-            message: t('Validation.userSignUpFormSchema.email.invalid'),
-          }),
+        z.string().email({
+          message: t('Validation.userSignUpFormSchema.email.invalid'),
+        }),
         z.literal(''),
       ])
       .optional(),

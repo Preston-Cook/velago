@@ -1,5 +1,5 @@
 import { snsClient } from '@/config/awsSnsClient';
-import { phoneRegex } from '@/lib/regex';
+import { phoneRegex } from '@/config/regex';
 import { PublishCommand, PublishCommandInput } from '@aws-sdk/client-sns';
 
 import { isValidPhoneNumber } from 'libphonenumber-js';

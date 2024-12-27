@@ -1,4 +1,4 @@
-import { codeRegex, phoneRegex } from '@/lib/regex';
+import { codeRegex, phoneRegex } from '@/config/regex';
 import { Translator } from '@/types';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import { z } from 'zod';

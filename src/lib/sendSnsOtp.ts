@@ -1,4 +1,4 @@
-import { snsClient } from '@/config/awsConfig';
+import { snsClient } from '@/config/awsSnsClient';
 import { PublishCommand } from '@aws-sdk/client-sns';
 
 export const sendSnsOtp = async (phoneNumber: string, otp: string) => {

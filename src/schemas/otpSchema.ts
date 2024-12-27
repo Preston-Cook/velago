@@ -1,4 +1,4 @@
-import { phoneRegex } from '@/lib/regex';
+import { phoneRegex } from '@/config/regex';
 import { z } from 'zod';
 
 export const otpSchema = z.object({
