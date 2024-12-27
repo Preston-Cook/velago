@@ -7,7 +7,7 @@
     "dev": "dotenv -e .env.development -- next dev --turbo",
     "build": "dotenv -e .env.production -- next build",
     "start": "dotenv -e .env.production -- next start",
-    "lint": "next lint",
+    "lint": "dotenv -e .env.development -- next lint",
     "migrate:dev": "dotenv -e .env.development -- prisma migrate dev",
     "migrate:reset": "dotenv -e .env.development -- prisma migrate reset",
     "generate": "prisma generate",
