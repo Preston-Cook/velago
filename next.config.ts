@@ -1,12 +1,12 @@
 import { config } from 'dotenv-safe';
 import createNextIntlPlugin from 'next-intl/plugin';
 
-config({
-  path:
-    process.env.NODE_ENV === 'development'
-      ? '.env.development'
-      : '.env.production',
-});
+if (process.env.NODE_ENV === 'development') {
+  config({
+    path: '.env.development',
+  });
+}
+
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
