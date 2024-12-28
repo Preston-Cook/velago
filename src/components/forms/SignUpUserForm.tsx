@@ -226,7 +226,10 @@ export function SignUpUserForm() {
           open={hasSentCode}
         >
           <DialogTrigger asChild>
-            <Button disabled={isSubmittingRequest} onClick={handleRequestOtp}>
+            <Button
+              disabled={isSubmittingRequest || isLoadingGoogle}
+              onClick={handleRequestOtp}
+            >
               {isSubmittingRequest ? <Spinner size={1} /> : 'Request Code'}
             </Button>
           </DialogTrigger>
