@@ -7,6 +7,7 @@ import { ThemeDataProvider } from '@/context/ThemeProvider';
 import { cn } from '@/lib/utils';
 import { Locale } from '@/types';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import 'leaflet/dist/leaflet.css';
 import { SessionProvider } from 'next-auth/react';
 import { NextIntlClientProvider } from 'next-intl';
@@ -74,6 +75,7 @@ export default async function BaseLayout({
           </NextThemesProvider>
         </NextIntlClientProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
