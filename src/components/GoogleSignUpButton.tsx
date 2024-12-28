@@ -33,7 +33,12 @@ export function GoogleSignUpButton() {
   }
 
   return (
-    <Button type="button" variant={'outline'} onClick={handleClick}>
+    <Button
+      disabled={isLoading}
+      type="button"
+      variant={'outline'}
+      onClick={handleClick}
+    >
       {isLoading ? (
         <Spinner size={1} />
       ) : (

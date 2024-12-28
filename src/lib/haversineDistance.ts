@@ -9,7 +9,7 @@ export function haversineDistance({
   point1,
   point2,
 }: HaversineDistanceParams): number {
-  const R = 3959;
+  const R = 3959; // radius of earth in miles
 
   const lat1 = toRadians(point1.latitude);
   const lon1 = toRadians(point1.longitude);

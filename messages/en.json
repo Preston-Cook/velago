@@ -13,6 +13,20 @@
       "text": "Go Back Home"
     }
   },
+  "Unauthorized": {
+    "heading": "Access Denied",
+    "subheading": "You don't have permission to view this page.",
+    "section1": {
+      "text": "It seems you're trying to access a restricted area. Please ensure you have the proper permissions."
+    },
+    "section2": {
+      "text": "If you believe this is an error or need assistance, contact our support team",
+      "breakText": "here"
+    },
+    "button": {
+      "text": "Return to Homepage"
+    }
+  },
   "Map": {
     "toast": {
       "success": {

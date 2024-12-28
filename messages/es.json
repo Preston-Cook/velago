@@ -13,6 +13,20 @@
       "text": "Volver al Inicio"
     }
   },
+  "Unauthorized": {
+    "heading": "Acceso Denegado",
+    "subheading": "No tienes permiso para ver esta página.",
+    "section1": {
+      "text": "Parece que estás intentando acceder a un área restringida. Por favor, asegúrate de tener los permisos adecuados."
+    },
+    "section2": {
+      "text": "Si crees que esto es un error o necesitas ayuda, contacta a nuestro equipo de soporte",
+      "breakText": "aquí"
+    },
+    "button": {
+      "text": "Volver a la Página Principal"
+    }
+  },
   "SignUpOrganization": {
     "heading": "Solicitar Cuenta",
     "subheading": "Únete a Velago para agilizar las referencias, mejorar la coordinación del cuidado y conectarte con nuestra comunidad de socios.",

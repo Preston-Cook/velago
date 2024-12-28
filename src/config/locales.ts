@@ -57,6 +57,10 @@ export const pathnameLocaleMappings = {
     en: '/settings',
     es: '/configuracion',
   },
+  '/unauthorized': {
+    en: '/unauthorized',
+    es: '/no-autorizado',
+  },
 };
 
 export const defaultLocale = 'en' as const;

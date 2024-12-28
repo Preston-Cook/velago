@@ -1,4 +1,5 @@
 import { prisma } from '@/config/prisma';
+import { protectedRoutes } from '@/config/protectedRoutes';
 import {
   InvalidOrExpiredOtpError,
   OtpSendError,
@@ -11,6 +12,7 @@ import { sendText } from '@/lib/sendText';
 import { organizationSignInSchema } from '@/schemas/organizationSignInSchema';
 import { otpSchema } from '@/schemas/otpSchema';
 import { PrismaAdapter } from '@auth/prisma-adapter';
+import { Role } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
@@ -23,10 +25,22 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
-    async authorized({ auth }) {
-      // const { pathname } = request.nextUrl;
+    async authorized({ auth, request }) {
+      const { pathname } = request.nextUrl;
 
-      console.log(auth?.user);
+      if (!auth?.user) {
+        return false;
+      }
+
+      const { role } = auth.user;
+
+      if (
+        !protectedRoutes[role as Role][
+          pathname.startsWith('/api') ? 'api' : 'pages'
+        ].includes(pathname)
+      ) {
+        return false;
+      }
 
       return true;
     },

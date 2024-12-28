@@ -5,8 +5,6 @@ import { Partner } from '@/components/Partner';
 import { Separator } from '@/components/ui/Separator';
 
 export default async function Home() {
-  console.log(process.env.DATABASE_URL);
-
   return (
     <div className="flex flex-col gap-12 py-12">
       <CallToAction />

@@ -4,6 +4,7 @@ import { authPages, defaultRedirect } from '@/config/misc';
 import {
   protectedApiRoutes,
   protectedPageRoutes,
+  protectedRoutes,
 } from '@/config/protectedRoutes';
 import { getPathname, routing } from '@/i18n/routing';
 import { detectLocale } from '@/lib/detectLocale';
@@ -17,7 +18,27 @@ const supportedLocalesArr: string[] = supportedLocales;
 
 const handleI18nRouting = createMiddleware(routing);
 
-const authMiddleware = auth((req) => {
+const authMiddleware = auth(async (req) => {
+  const { pathname } = req.nextUrl;
+  const { auth } = req;
+
+  let locale = await detectLocale(req);
+  locale = supportedLocalesArr.includes(locale) ? locale : defaultLocale;
+
+  if (
+    !auth?.user ||
+    !protectedRoutes[auth.user.role as Role][
+      pathname.startsWith('/api') ? 'api' : 'pages'
+    ].includes(pathname)
+  ) {
+    const urlClone = req.nextUrl.clone();
+    const localizedPath = getPathname({ href: '/unauthorized', locale });
+
+    urlClone.pathname = localizedPath;
+
+    return NextResponse.redirect(urlClone);
+  }
+
   // This is fine because the two libraries aren't designed to work with each other and have different types.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return handleI18nRouting(req as any);

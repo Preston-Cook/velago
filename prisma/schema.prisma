@@ -421,7 +421,6 @@ model Schedule {
   @@map("schedule")
 }
 
-// TODO:
 model Language {
   id         String    @id @default(dbgenerated("uuid_generate_v4()"))
   serviceId  String?   @map("service_id")
