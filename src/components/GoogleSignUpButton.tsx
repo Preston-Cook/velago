@@ -5,12 +5,18 @@ import { signIn } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { isRedirectError } from 'next/dist/client/components/redirect-error';
 import Image from 'next/image';
-import { useState } from 'react';
 import { Spinner } from './Spinner';
 import { Button } from './ui/Button';
 
-export function GoogleSignUpButton() {
-  const [isLoading, setIsLoading] = useState(false);
+interface GoogleSignUpButtonProps {
+  isLoading: boolean;
+  setIsLoading: (value: boolean | ((prevState: boolean) => boolean)) => void;
+}
+
+export function GoogleSignUpButton({
+  isLoading,
+  setIsLoading,
+}: GoogleSignUpButtonProps) {
   const t = useTranslations('UserSignUp');
   const locale = useLocale();
   const pathname = usePathname();

@@ -38,6 +38,7 @@ export function SignInUserForm() {
   const [hasSentCode, setHasSentCode] = useState(false);
   const [isSubmittingRequest, setIsSubmittingRequest] = useState(false);
   const router = useRouter();
+  const [isLoadingGoogle, setIsLoadingGoogle] = useState(false);
 
   const signUpUserSchema = createUserSignInSchema(t);
 
@@ -130,6 +131,7 @@ export function SignInUserForm() {
                 <FormLabel>{t('UserSignIn.labels.phone')}</FormLabel>
                 <FormControl>
                   <PhoneInput
+                    disabled={isSubmittingRequest || isLoadingGoogle}
                     type="phone"
                     defaultCountry="US"
                     placeholder={t('UserSignIn.placeholders.phone')}
@@ -148,7 +150,10 @@ export function SignInUserForm() {
           open={hasSentCode}
         >
           <DialogTrigger asChild>
-            <Button disabled={isSubmittingRequest} onClick={handleRequestOtp}>
+            <Button
+              disabled={isSubmittingRequest || isLoadingGoogle}
+              onClick={handleRequestOtp}
+            >
               {isSubmittingRequest ? <Spinner size={1} /> : 'Request Code'}
             </Button>
           </DialogTrigger>
@@ -171,8 +176,14 @@ export function SignInUserForm() {
                   </FormLabel>
                   <FormControl>
                     <div className="flex items-center justify-between">
-                      <CodeInput {...field} />
-                      <ResendCodeButton phone={form.getValues('phone')} />
+                      <CodeInput
+                        disabled={isLoadingGoogle || isSubmittingRequest}
+                        {...field}
+                      />
+                      <ResendCodeButton
+                        disabled={isLoadingGoogle || isSubmittingRequest}
+                        phone={form.getValues('phone')}
+                      />
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -182,7 +193,10 @@ export function SignInUserForm() {
           </DialogContent>
         </Dialog>
         <Separator className="mx-auto w-[80%] bg-primary" />
-        <GoogleSignInButton />
+        <GoogleSignInButton
+          setIsLoading={setIsLoadingGoogle}
+          isLoading={isLoadingGoogle}
+        />
       </form>
     </Form>
   );

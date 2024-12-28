@@ -10,12 +10,14 @@ interface ResendCodeButtonProps {
   phone: string;
   email?: string;
   cooldown?: number;
+  disabled: boolean;
 }
 
 export function ResendCodeButton({
   email,
   phone,
   cooldown = 10,
+  disabled = false,
 }: ResendCodeButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [seconds, setSeconds] = useState<number>(0);
@@ -80,7 +82,7 @@ export function ResendCodeButton({
   return (
     <Button
       onClick={handleClick}
-      disabled={isLoading || seconds > 0}
+      disabled={disabled || isLoading || seconds > 0}
       className="w-20"
     >
       {isLoading ? (

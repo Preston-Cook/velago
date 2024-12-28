@@ -39,6 +39,7 @@ export function SignUpUserForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [hasSentCode, setHasSentCode] = useState(false);
   const [isSubmittingRequest, setIsSubmittingRequest] = useState(false);
+  const [isLoadingGoogle, setIsLoadingGoogle] = useState(false);
   const router = useRouter();
 
   const signUpUserSchema = createSignUpUserSchema(t);
@@ -150,6 +151,7 @@ export function SignUpUserForm() {
                   <FormLabel>{t('UserSignUp.labels.firstName')}</FormLabel>
                   <FormControl>
                     <Input
+                      disabled={isSubmittingRequest || isLoadingGoogle}
                       className="bg-secondary"
                       placeholder={t('UserSignUp.placeholders.firstName')}
                       {...field}
@@ -167,6 +169,7 @@ export function SignUpUserForm() {
                   <FormLabel>{t('UserSignUp.labels.lastName')}</FormLabel>
                   <FormControl>
                     <Input
+                      disabled={isSubmittingRequest || isLoadingGoogle}
                       className="bg-secondary"
                       placeholder={t('UserSignUp.placeholders.lastName')}
                       {...field}
@@ -185,6 +188,7 @@ export function SignUpUserForm() {
                 <FormLabel>{'Email (Optional)'}</FormLabel>
                 <FormControl>
                   <Input
+                    disabled={isSubmittingRequest || isLoadingGoogle}
                     className="bg-secondary"
                     placeholder={t('UserSignUp.placeholders.email')}
                     type="email"
@@ -203,6 +207,7 @@ export function SignUpUserForm() {
                 <FormLabel>{t('UserSignUp.labels.phone')}</FormLabel>
                 <FormControl>
                   <PhoneInput
+                    disabled={isSubmittingRequest || isLoadingGoogle}
                     type="phone"
                     defaultCountry="US"
                     placeholder={t('UserSignUp.placeholders.phone')}
@@ -243,8 +248,12 @@ export function SignUpUserForm() {
                     </FormLabel>
                     <FormControl>
                       <div className="flex items-center justify-between">
-                        <CodeInput {...field} />
+                        <CodeInput
+                          disabled={isSubmittingRequest || isLoadingGoogle}
+                          {...field}
+                        />
                         <ResendCodeButton
+                          disabled={isSubmittingRequest || isLoadingGoogle}
                           email={form.getValues('email')}
                           phone={form.getValues('phone')}
                         />
@@ -259,7 +268,10 @@ export function SignUpUserForm() {
           </DialogContent>
         </Dialog>
         <Separator className="mx-auto w-[80%] bg-primary" />
-        <GoogleSignUpButton />
+        <GoogleSignUpButton
+          isLoading={isLoadingGoogle}
+          setIsLoading={setIsLoadingGoogle}
+        />
       </form>
     </Form>
   );
