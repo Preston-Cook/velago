@@ -72,6 +72,9 @@ export default async function middleware(req: NextRequest) {
     // if user trying to go to auth page while already authenticated
     if (token) {
       if (req.method === 'GET' && authPages.includes(pathname)) {
+        // redirect user to default locale
+        locale = token.locale as string;
+
         const urlClone = req.nextUrl.clone();
         const href = defaultRedirect[userRole as Role];
 

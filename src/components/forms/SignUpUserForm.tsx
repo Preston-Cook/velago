@@ -13,10 +13,11 @@ import {
   DialogTrigger,
 } from '@/components/ui/Dialog';
 import { useRouter } from '@/i18n/routing';
+import { getCreatedSession } from '@/lib/getCreatedSession';
 import { createSignUpUserSchema } from '@/schemas/userSignUpFormSchema';
 import { Locale } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { getSession, signIn } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react'; // Import startTransition
 import { useForm } from 'react-hook-form';
@@ -130,7 +131,12 @@ export function SignUpUserForm() {
       });
 
       if (!res?.error) {
-        const session = await getSession();
+        const session = await getCreatedSession();
+
+        if (!session) {
+          throw new Error('Unable to fetch session');
+        }
+
         const locale = session?.user.locale as Locale;
 
         // no need to check for default redirect because this login is always for standard users

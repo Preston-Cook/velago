@@ -340,3 +340,5 @@ async function findOrCreateUserByPhone({
 export const HASH_SALT_ROUNDS = 10;
 
 export const OTP_LENGTH = 6;
+
+export const SESSION_REFETCH_ATTEMPTS = 10;

@@ -1,8 +1,8 @@
 import { defaultRedirect } from '@/config/misc';
 import { useRouter } from '@/i18n/routing';
-import { Locale } from '@/types';
+import { getCreatedSession } from '@/lib/getCreatedSession';
 import { Role } from '@prisma/client';
-import { getSession, signIn } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { isRedirectError } from 'next/dist/client/components/redirect-error';
 import Image from 'next/image';
@@ -30,11 +30,17 @@ export function GoogleSignInButton({
         redirect: false,
       });
 
-      const session = await getSession();
-      const locale = session?.user.locale as Locale;
-      const role = session?.user.role as Role;
+      const session = await getCreatedSession();
 
-      router.replace(defaultRedirect[role], { locale });
+      if (!session) {
+        throw new Error('Unable to fetch session');
+      }
+
+      const {
+        user: { locale, role },
+      } = session;
+
+      router.replace(defaultRedirect[role as Role], { locale });
     } catch (err) {
       if (!isRedirectError(err)) {
         setIsLoading(false);
