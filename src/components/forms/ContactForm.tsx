@@ -54,7 +54,7 @@ export function ContactForm() {
 
   useEffect(
     function () {
-      if (status === 'authenticated' && data.user) {
+      if (status === 'authenticated' && data?.user) {
         const {
           user: { firstName, lastName, email, phone },
         } = data;

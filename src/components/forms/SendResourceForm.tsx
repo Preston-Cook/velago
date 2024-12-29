@@ -48,7 +48,7 @@ export function SendResourceForm({ handleClose }: SendResourceFormProps) {
 
   useEffect(
     function () {
-      if (status === 'authenticated' && data.user) {
+      if (status === 'authenticated' && data?.user) {
         const {
           user: { phone },
         } = data;

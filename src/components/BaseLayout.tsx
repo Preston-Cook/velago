@@ -1,6 +1,7 @@
 'use server';
 
 import '@/app/globals.css';
+import { auth } from '@/config/auth';
 import { LocationCoordinatesProvider } from '@/context/LocationCoordinatesProvider';
 import { LocationProvider } from '@/context/LocationProvider';
 import { ThemeDataProvider } from '@/context/ThemeProvider';
@@ -44,6 +45,7 @@ export default async function BaseLayout({
   locale,
 }: BaseLayoutProps) {
   const messages = await getMessages();
+  const session = await auth();
 
   return (
     <html
@@ -62,7 +64,7 @@ export default async function BaseLayout({
             <ThemeDataProvider>
               <LocationProvider>
                 <LocationCoordinatesProvider>
-                  <SessionProvider>
+                  <SessionProvider session={session}>
                     <ProgressBar />
                     <Header />
                     <main className="flex flex-1 flex-col p-4">{children}</main>
