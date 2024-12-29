@@ -42,7 +42,7 @@ export function MapDashboard() {
         );
       }
 
-      if (!address) {
+      if (!address && !isLoadingApproximate) {
         setQueryParamPriority('address', `${city}, ${region}`);
       }
 
