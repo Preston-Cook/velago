@@ -1,5 +1,6 @@
 'use client';
 
+import { updateLocale } from '@/app/actions';
 import { Button } from '@/components/ui/Button';
 import {
   DropdownMenu,
@@ -10,13 +11,16 @@ import {
 import { supportedLocales } from '@/config/locales';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
+import { Locale } from '@/types';
 import { DropdownMenuRadioItem } from '@radix-ui/react-dropdown-menu';
 import { Languages } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { v4 as uuid } from 'uuid';
+import { Spinner } from './Spinner';
 
 interface LocaleToggleProps {
   className?: string;
@@ -29,27 +33,17 @@ export function LocaleToggle({ className }: LocaleToggleProps) {
   const router = useRouter();
   const currentLocale = useLocale();
   const params = useParams();
-  // const session = useSession();
+  const { status } = useSession();
 
-  // useEffect(
-  //   function () {
-  //     if (session.status === 'authenticated' && session.data?.user) {
-  //       const { locale } = session.data.user;
-
-  //       if (!locale) return;
-  //       handleLocaleChange(locale);
-  //     }
-  //   },
-  //   [session],
-  // );
-
-  function handleLocaleChange(e: string) {
-    // TODO: if user is logged in, reset their default locale
+  async function handleLocaleChange(e: string) {
+    if (status === 'authenticated') {
+      await updateLocale({ locale: e as Locale });
+    }
 
     startTransition(() => {
       router.replace(
-        // @ts-expect-error -- TypeScript will validate that only known `params`
-        // are used in combination with a given `pathname`. Since the two will
+        // @ts-expect-error -- TypeScript will validate that only known params
+        // are used in combination with a given pathname. Since the two will
         // always match for the current route, we can skip runtime checks.
         { pathname, params },
         { locale: e },
@@ -60,8 +54,12 @@ export function LocaleToggle({ className }: LocaleToggleProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className={cn('p-3', className)} variant={'outline'}>
-          <Languages />
+        <Button
+          disabled={isPending}
+          className={cn('p-3', className)}
+          variant={'outline'}
+        >
+          {isPending ? <Spinner size={1} /> : <Languages />}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent

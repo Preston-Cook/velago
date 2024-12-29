@@ -46,7 +46,9 @@ export const {
     },
     async session({ token, session }) {
       if (session.user) {
-        const { firstName, lastName, role, phone, locale } = token;
+        const { id, firstName, lastName, role, phone, locale } = token;
+
+        session.user.id = id as string;
         session.user.firstName = firstName as string | undefined;
         session.user.lastName = lastName as string | undefined;
         session.user.role = role as string | undefined;
@@ -71,15 +73,16 @@ export const {
         return token;
       }
 
-      const { locale, phone, role, email, firstName, lastName } = currentUser;
+      const { id, locale, phone, role, email, firstName, lastName } =
+        currentUser;
 
+      token.id = id;
       token.locale = locale;
       token.phone = phone;
       token.role = role;
       token.email = email;
       token.firstName = firstName;
       token.lastName = lastName;
-      token.name = `${firstName} ${lastName}` || undefined;
 
       return token;
     },
