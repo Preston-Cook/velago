@@ -15,7 +15,7 @@ import {
 import { useRouter } from '@/i18n/routing';
 import { createUserSignInSchema } from '@/schemas/userSignInFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react'; // Import startTransition
 import { useForm } from 'react-hook-form';
@@ -39,7 +39,6 @@ export function SignInUserForm() {
   const [isSubmittingRequest, setIsSubmittingRequest] = useState(false);
   const router = useRouter();
   const [isLoadingGoogle, setIsLoadingGoogle] = useState(false);
-
   const signUpUserSchema = createUserSignInSchema(t);
 
   async function handleRequestOtp() {
@@ -104,7 +103,11 @@ export function SignInUserForm() {
         });
 
         if (!res?.error) {
-          router.push('/map');
+          const session = await getSession();
+          const locale = session?.user.locale as string;
+
+          // no need to check for default redirect because this login is always for standard users
+          router.replace('/map', { locale });
         } else {
           toast.error(t('UserSignIn.toast.errorOtp.title'), {
             description: t('UserSignIn.toast.errorOtp.description'),
@@ -194,6 +197,7 @@ export function SignInUserForm() {
         </Dialog>
         <Separator className="mx-auto w-[80%] bg-primary" />
         <GoogleSignInButton
+          disabled={isSubmittingRequest}
           setIsLoading={setIsLoadingGoogle}
           isLoading={isLoadingGoogle}
         />

@@ -14,8 +14,9 @@ import {
 } from '@/components/ui/Dialog';
 import { useRouter } from '@/i18n/routing';
 import { createSignUpUserSchema } from '@/schemas/userSignUpFormSchema';
+import { Locale } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react'; // Import startTransition
 import { useForm } from 'react-hook-form';
@@ -129,7 +130,11 @@ export function SignUpUserForm() {
       });
 
       if (!res?.error) {
-        router.push('/map');
+        const session = await getSession();
+        const locale = session?.user.locale as Locale;
+
+        // no need to check for default redirect because this login is always for standard users
+        router.replace('/map', { locale });
       } else {
         toast.error(t('UserSignUp.toast.errorOtp.title'), {
           description: t('UserSignUp.toast.errorOtp.description'),
@@ -272,6 +277,7 @@ export function SignUpUserForm() {
         </Dialog>
         <Separator className="mx-auto w-[80%] bg-primary" />
         <GoogleSignUpButton
+          disabled={isSubmittingRequest}
           isLoading={isLoadingGoogle}
           setIsLoading={setIsLoadingGoogle}
         />
