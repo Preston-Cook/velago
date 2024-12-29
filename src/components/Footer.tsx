@@ -13,6 +13,7 @@ export async function Footer() {
     <footer className="flex flex-col items-center gap-4 border-t border-primary bg-secondary p-4 text-center">
       <Link href={'/'} className="flex items-center justify-center gap-x-2">
         <Image
+          loading="eager"
           className="dark:hidden"
           src="/images/logo-black.png"
           height={30}
@@ -20,6 +21,7 @@ export async function Footer() {
           alt="Velago logo"
         />
         <Image
+          loading="eager"
           className="hidden dark:block"
           src="/images/logo-white.png"
           height={30}

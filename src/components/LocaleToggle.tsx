@@ -82,6 +82,7 @@ export function LocaleToggle({ className }: LocaleToggleProps) {
               >
                 {t(locale)}
                 <Image
+                  loading="eager"
                   src={`/images/${locale}.png`}
                   height={25}
                   width={25}

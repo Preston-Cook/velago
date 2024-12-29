@@ -12,6 +12,7 @@ export async function Header() {
       <div className="flex flex-1 gap-8">
         <Link href={'/'} className="flex items-center justify-start gap-x-2">
           <Image
+            loading="eager"
             className="dark:hidden"
             src="/images/logo-black.png"
             height={30}
@@ -19,6 +20,7 @@ export async function Header() {
             alt="Velago logo"
           />
           <Image
+            loading="eager"
             className="hidden dark:block"
             src="/images/logo-white.png"
             height={30}

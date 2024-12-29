@@ -17,6 +17,7 @@ export function SheetSidebar() {
         <div className="flex flex-1">
           <Link href={'/'} className="flex items-center justify-start gap-x-2">
             <Image
+              loading="eager"
               className="dark:hidden"
               src="/images/logo-black.png"
               height={30}
@@ -24,6 +25,7 @@ export function SheetSidebar() {
               alt="Velago logo"
             />
             <Image
+              loading="eager"
               className="hidden dark:block"
               src="/images/logo-white.png"
               height={30}

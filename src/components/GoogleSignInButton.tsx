@@ -48,6 +48,7 @@ export function GoogleSignInButton({
       ) : (
         <>
           <Image
+            loading="eager"
             alt="Google Logo"
             src={'/images/google-logo.png'}
             height={30}
