@@ -130,3 +130,8 @@ export const defaultCoords = {
 } as const;
 
 export const mapIconSize = 35 as const;
+
+export const iconUrls = {
+  light: '/images/logo-black.png',
+  dark: '/images/logo-white.png',
+} as const;

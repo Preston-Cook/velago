@@ -16,6 +16,7 @@ import { getMessages } from 'next-intl/server';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { Inter, Roboto } from 'next/font/google';
 import { ReactNode } from 'react';
+import { FaviconToggle } from './FaviconToggle';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { ProgressBar } from './ProgressBar';
@@ -62,6 +63,7 @@ export default async function BaseLayout({
             disableTransitionOnChange
           >
             <ThemeDataProvider>
+              <FaviconToggle />
               <LocationProvider>
                 <LocationCoordinatesProvider>
                   <SessionProvider session={session}>
