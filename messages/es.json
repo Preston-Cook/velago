@@ -1,5 +1,6 @@
 {
   "NotFound": {
+    "title": "Página No Encontrada",
     "heading": "¡Ups! Página No Encontrada",
     "subheading": "No pudimos encontrar la página que estás buscando.",
     "section1": {
@@ -14,6 +15,7 @@
     }
   },
   "Unauthorized": {
+    "title": "Acceso Denegado",
     "heading": "Acceso Denegado",
     "subheading": "No tienes permiso para ver esta página.",
     "section1": {
@@ -28,6 +30,7 @@
     }
   },
   "OrganizationSignUp": {
+    "title": "Solicitar Cuenta de Organización",
     "heading": "Solicitar Cuenta",
     "subheading": "Únete a Velago para agilizar las referencias, mejorar la coordinación del cuidado y conectarte con nuestra comunidad de socios.",
     "labels": {
@@ -65,6 +68,7 @@
     }
   },
   "UserSignIn": {
+    "title": "Iniciar Sesión",
     "heading": "Iniciar sesión",
     "subheading": "Inicia sesión para acceder a una lista personalizada de recursos y servicios benéficos cercanos, diseñados para satisfacer tus necesidades.",
     "dialog": {
@@ -106,6 +110,7 @@
     }
   },
   "UserSignUp": {
+    "title": "Registrarse",
     "heading": "Registrarse",
     "subheading": "Regístrate para acceder a una lista completa de recursos y servicios benéficos cercanos, adaptados para apoyar tus necesidades.",
     "dialog": {
@@ -153,6 +158,7 @@
     }
   },
   "Contact": {
+    "title": "Contáctanos",
     "heading": "Contáctanos",
     "subheading": "Ponte en contacto con nosotros para obtener más información sobre nuestros servicios, colaboraciones o cualquier consulta que puedas tener.",
     "labels": {
@@ -180,6 +186,7 @@
     }
   },
   "Home": {
+    "title": "Inicio",
     "cta": {
       "heading": "Encuentra Recursos Cerca de Ti",
       "subheading": "Usa Velago para buscar proveedores de atención médica y organizaciones caritativas cerca de ti"
@@ -245,7 +252,7 @@
     }
   },
   "About": {
-    "title": "Sobre",
+    "title": "Sobre Velago",
     "heading": "¿Qué es Velago?",
     "subheading": "Conoce más sobre nuestra misión de equipar a comunidades desfavorecidas con el conocimiento para controlar su atención médica",
     "section1": {
