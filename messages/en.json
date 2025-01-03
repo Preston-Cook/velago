@@ -112,6 +112,7 @@
     }
   },
   "UserSignIn": {
+    "title": "User Sign In",
     "heading": "Sign In",
     "subheading": "Sign in to access a personalized list of nearby charitable resources and services, designed to meet your needs.",
     "dialog": {
@@ -153,6 +154,7 @@
     }
   },
   "UserSignUp": {
+    "title": "User Sign Up",
     "heading": "Sign Up",
     "subheading": "Sign up to access a comprehensive list of nearby charitable resources and services, tailored to support your needs.",
     "dialog": {
@@ -200,6 +202,7 @@
     }
   },
   "OrganizationSignIn": {
+    "title": "Organization Sign In",
     "heading": "Org Sign In",
     "subheading": "Sign in to manage referrals and connect your patients with essential medical and non-medical resources in your community.",
     "labels": {
@@ -222,6 +225,7 @@
     }
   },
   "Home": {
+    "title": "Home",
     "cta": {
       "heading": "Find Resources Near You",
       "subheading": "Use Velago to search for healthcare providers and charitable organizations near you"
