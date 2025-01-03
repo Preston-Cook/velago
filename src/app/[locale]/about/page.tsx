@@ -1,8 +1,16 @@
 import { AboutSection } from '@/components/AboutSection';
 import { Separator } from '@/components/ui/Separator';
 import { aboutSectionIcons } from '@/config/misc';
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { v4 as uuid } from 'uuid';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('About');
+  return {
+    title: `Velago | ${t('title')}`,
+  };
+}
 
 export default async function AboutPage() {
   const t = await getTranslations('About');
@@ -11,7 +19,7 @@ export default async function AboutPage() {
     <div className="flex flex-col gap-12 py-12">
       <div className="flex flex-col items-center justify-center gap-8">
         <h1 className="w-full text-center text-4xl text-primary md:text-5xl">
-          {t('title')}
+          {t('heading')}
         </h1>
         <h3 className="mx-auto text-center text-lg sm:max-w-[90%] md:max-w-[80%] md:flex-row lg:max-w-[60%]">
           {t('subheading')}

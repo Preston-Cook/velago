@@ -1,9 +1,18 @@
 import { FormLink } from '@/components/FormLink';
 import { SignUpOrganizationForm } from '@/components/forms/SignUpOrganizationForm';
 import { Globe } from '@/components/Globe';
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-export default async function SignUpOrganization() {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('OrganizationSignUp');
+
+  return {
+    title: `Velago | ${t('title')}`,
+  };
+}
+
+export default async function OrganizationSignUp() {
   const t = await getTranslations('SignUpOrganization');
 
   return (

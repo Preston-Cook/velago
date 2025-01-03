@@ -1,5 +1,6 @@
 {
   "NotFound": {
+    "title": "Not Found",
     "heading": "Oops Page Not Found!",
     "subheading": "We couldn't find the page you're looking for.",
     "section1": {
@@ -14,6 +15,7 @@
     }
   },
   "Unauthorized": {
+    "title": "Unauthorized",
     "heading": "Access Denied",
     "subheading": "You don't have permission to view this page.",
     "section1": {
@@ -28,6 +30,7 @@
     }
   },
   "Map": {
+    "title": "Map",
     "toast": {
       "success": {
         "title": "Message Sent!",
@@ -42,6 +45,7 @@
     }
   },
   "Contact": {
+    "title": "Contact",
     "heading": "Contact Us",
     "subheading": "Get in touch with us to learn more about our services, partnerships, or any inquiries you may have.",
     "labels": {
@@ -68,7 +72,8 @@
       }
     }
   },
-  "SignUpOrganization": {
+  "OrganizationSignUp": {
+    "title": "Organization Sign Up",
     "heading": "Request Account",
     "subheading": "Join Velago to streamline referrals, enhance care coordination, and connect with our community of partners.",
     "labels": {
@@ -282,7 +287,8 @@
     }
   },
   "About": {
-    "title": "What is Velago?",
+    "title": "About",
+    "heading": "What is Velago?",
     "subheading": "Learn more about our mission to equip underprivileged communities with the knowledge to control their healthcare",
     "section1": {
       "title": "Our Mission",

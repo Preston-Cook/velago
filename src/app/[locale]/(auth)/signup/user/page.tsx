@@ -1,7 +1,16 @@
 import { FormLink } from '@/components/FormLink';
 import { SignUpUserForm } from '@/components/forms/SignUpUserForm';
 import { Globe } from '@/components/Globe';
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('UserSignUp');
+
+  return {
+    title: `Velago | ${t('title')}`,
+  };
+}
 
 export default async function SignUpUser() {
   const t = await getTranslations('UserSignUp');

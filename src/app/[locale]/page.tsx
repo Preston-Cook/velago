@@ -3,6 +3,16 @@ import { FrequentlyAskedQuestions } from '@/components/FrequentlyAskedQuestions'
 import { Info } from '@/components/Info';
 import { Partner } from '@/components/Partner';
 import { Separator } from '@/components/ui/Separator';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('Home');
+
+  return {
+    title: `Velago | ${t('title')}`,
+  };
+}
 
 export default async function Home() {
   return (

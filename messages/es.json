@@ -27,7 +27,7 @@
       "text": "Volver a la Página Principal"
     }
   },
-  "SignUpOrganization": {
+  "OrganizationSignUp": {
     "heading": "Solicitar Cuenta",
     "subheading": "Únete a Velago para agilizar las referencias, mejorar la coordinación del cuidado y conectarte con nuestra comunidad de socios.",
     "labels": {
@@ -245,7 +245,8 @@
     }
   },
   "About": {
-    "title": "¿Qué es Velago?",
+    "title": "Sobre",
+    "heading": "¿Qué es Velago?",
     "subheading": "Conoce más sobre nuestra misión de equipar a comunidades desfavorecidas con el conocimiento para controlar su atención médica",
     "section1": {
       "title": "Nuestra Misión",
