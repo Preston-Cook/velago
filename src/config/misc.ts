@@ -131,7 +131,7 @@ export const defaultCoords = {
 
 export const mapIconSize = 35 as const;
 
-export const iconUrls = {
-  light: '/images/logo-black.png',
-  dark: '/images/logo-white.png',
+export const faviconUrls = {
+  light: '/images/favicon-black.png',
+  dark: '/images/favicon-white.png',
 } as const;
