@@ -286,6 +286,9 @@
         }
       }
     },
+    "Spinner": {
+      "sr": "Cargando..."
+    },
     "SignUpButton": {
       "text": "Regístrate"
     },
@@ -296,7 +299,10 @@
       "text": "Cerrar Sesión"
     },
     "ThemeModeToggle": {
-      "sr": "Alternar Tema"
+      "sr": "Alternar tema"
+    },
+    "Dialog": {
+      "sr": "Cerrar"
     },
     "Footer": {
       "legal": "Derechos reservados",
@@ -360,7 +366,8 @@
         "miscellaneous": {
           "title": "Misceláneo"
         }
-      }
+      },
+      "sr": "Cerrar"
     }
   },
 

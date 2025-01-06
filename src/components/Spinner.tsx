@@ -20,7 +20,7 @@ export function Spinner({ size = 1 }: SpinnerProps) {
         role="status"
         aria-label="loading"
       >
-        <span className="sr-only">{t('text')}</span>
+        <span className="sr-only">{t('sr')}</span>
       </div>
     </div>
   );
