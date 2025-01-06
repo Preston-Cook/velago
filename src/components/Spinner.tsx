@@ -1,8 +1,11 @@
+import { useTranslations } from 'next-intl';
+
 interface SpinnerProps {
   size?: number; // size in rem
 }
 
 export function Spinner({ size = 1 }: SpinnerProps) {
+  const t = useTranslations('Components.Spinner');
   const spinnerSize = `${size}rem`;
 
   return (
@@ -17,7 +20,7 @@ export function Spinner({ size = 1 }: SpinnerProps) {
         role="status"
         aria-label="loading"
       >
-        <span className="sr-only">Loading...</span>
+        <span className="sr-only">{t('text')}</span>
       </div>
     </div>
   );

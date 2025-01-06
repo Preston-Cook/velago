@@ -13,7 +13,7 @@ export function HeaderLinks() {
           href={href}
           name={name}
           icon={icon}
-          i18nRootKey="Header"
+          i18nRootKey="Components.Header"
         />
       ))}
     </>

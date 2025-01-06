@@ -7,7 +7,7 @@ import { v4 as uuid } from 'uuid';
 import { Button } from './ui/Button';
 
 export async function Footer() {
-  const t = await getTranslations('Footer');
+  const t = await getTranslations('Components.Footer');
 
   return (
     <footer className="flex flex-col items-center gap-4 border-t border-primary bg-secondary p-4 text-center">

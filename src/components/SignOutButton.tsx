@@ -14,7 +14,7 @@ interface SignInButtonProps {
 }
 
 export function SignOutButton({ className }: SignInButtonProps) {
-  const t = useTranslations('Header.links');
+  const t = useTranslations('Components.SignOutButton');
   const [isLoading, setIsLoading] = useState(false);
   const locale = useLocale();
   const localizedPathname = getPathname({ href: '/', locale });
@@ -34,7 +34,7 @@ export function SignOutButton({ className }: SignInButtonProps) {
         <Spinner size={1} />
       ) : (
         <>
-          <LogOut /> {t('signOut.text')}
+          <LogOut /> {t('text')}
         </>
       )}
     </Button>

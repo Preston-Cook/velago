@@ -268,93 +268,102 @@
       "text": "Para proveedores de atención médica y organizaciones caritativas, Velago ofrece una oportunidad de llegar a una audiencia más amplia y generar un impacto significativo. Al unirse a nuestra plataforma, los proveedores pueden conectarse con quienes lo necesitan, mientras que las organizaciones pueden ampliar su alcance y potenciar sus esfuerzos. Juntos, podemos crear un mundo donde los servicios esenciales de atención médica y apoyo sean accesibles para todos. Explora, conéctate y contribuye a un mundo más compasivo con Velago hoy."
     }
   },
-  "Header": {
-    "localeToggle": {
-      "en": "Inglés",
-      "es": "Español"
+  "Components": {
+    "Header": {
+      "localeToggle": {
+        "en": "Inglés",
+        "es": "Español"
+      },
+      "links": {
+        "map": {
+          "text": "Mapa"
+        },
+        "contact": {
+          "text": "Contacto"
+        },
+        "about": {
+          "text": "Sobre"
+        }
+      }
     },
-    "links": {
-      "map": {
-        "text": "Mapa"
-      },
-      "contact": {
-        "text": "Contacto"
-      },
-      "about": {
-        "text": "Sobre"
-      },
-      "signUp": {
-        "text": "Regístrate"
-      },
-      "signIn": {
-        "text": "Iniciar"
-      },
-      "signOut": {
-        "text": "Cerrar Sesión"
-      }
-    }
-  },
-  "Footer": {
-    "legal": "Derechos reservados",
-    "description": "Empoderando a individuos desfavorecidos conectándolos con proveedores de atención médica que aceptan Medicare y organizaciones benéficas.",
-    "links": {
-      "map": {
-        "text": "Mapa"
-      },
-      "contact": {
-        "text": "Contacto"
-      },
-      "about": {
-        "text": "Sobre"
-      },
-      "privacy": {
-        "text": "Privacidad"
-      },
-      "disclaimer": {
-        "text": "Descargo"
-      }
-    }
-  },
-  "Sheet": {
-    "sections": {
-      "menu": {
-        "title": "Menú",
-        "links": {
-          "map": {
-            "text": "Mapa"
-          },
-          "about": {
-            "text": "Sobre"
-          },
-          "contact": {
-            "text": "Contacto"
-          }
+    "SignUpButton": {
+      "text": "Regístrate"
+    },
+    "SignInButton": {
+      "text": "Iniciar"
+    },
+    "SignOutButton": {
+      "text": "Cerrar Sesión"
+    },
+    "ThemeModeToggle": {
+      "sr": "Alternar Tema"
+    },
+    "Footer": {
+      "legal": "Derechos reservados",
+      "description": "Empoderando a individuos desfavorecidos conectándolos con proveedores de atención médica que aceptan Medicare y organizaciones benéficas.",
+      "links": {
+        "map": {
+          "text": "Mapa"
+        },
+        "contact": {
+          "text": "Contacto"
+        },
+        "about": {
+          "text": "Sobre"
+        },
+        "privacy": {
+          "text": "Privacidad"
+        },
+        "disclaimer": {
+          "text": "Descargo"
         }
-      },
-      "legal": {
-        "title": "Legal",
-        "links": {
-          "privacy": {
-            "text": "Privacidad"
-          },
-          "disclaimer": {
-            "text": "Descargo"
+      }
+    },
+    "Sheet": {
+      "sections": {
+        "menu": {
+          "title": "Menú",
+          "links": {
+            "map": {
+              "text": "Mapa"
+            },
+            "about": {
+              "text": "Sobre"
+            },
+            "contact": {
+              "text": "Contacto"
+            }
           }
-        }
-      },
-      "account": {
-        "title": "Cuenta",
-        "links": {
-          "signIn": {
-            "text": "Iniciar"
-          },
-          "signUp": {
-            "text": "Regístrate"
+        },
+        "legal": {
+          "title": "Legal",
+          "links": {
+            "privacy": {
+              "text": "Privacidad"
+            },
+            "disclaimer": {
+              "text": "Descargo"
+            }
           }
+        },
+        "account": {
+          "title": "Cuenta",
+          "links": {
+            "signIn": {
+              "text": "Iniciar"
+            },
+            "signUp": {
+              "text": "Regístrate"
+            }
+          }
+        },
+        "miscellaneous": {
+          "title": "Misceláneo"
         }
       }
     }
   },
+
   "Validation": {
     "sendResourceSchema": {
       "phone": {

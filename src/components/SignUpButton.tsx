@@ -11,7 +11,7 @@ interface SignUpButtonProps {
 }
 
 export function SignUpButton({ className }: SignUpButtonProps) {
-  const t = useTranslations('Header.links');
+  const t = useTranslations('Components.SignUpButton');
   const { status } = useSession();
 
   return (
@@ -21,7 +21,7 @@ export function SignUpButton({ className }: SignUpButtonProps) {
           <Spinner size={1} />
         ) : (
           <>
-            <User /> {t('signUp.text')}
+            <User /> {t('text')}
           </>
         )}
       </Button>

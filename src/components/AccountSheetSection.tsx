@@ -4,7 +4,7 @@ import { SignUpButton } from './SignUpButton';
 import { SheetDescription } from './ui/Sheet';
 
 export function AccountSheetSection() {
-  const t = useTranslations('Sheet.sections.account');
+  const t = useTranslations('Components.Sheet.sections.account');
 
   return (
     <div className="flex flex-col gap-4">

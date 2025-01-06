@@ -307,92 +307,107 @@
       "text": "For healthcare providers and charitable organizations, Velago offers an opportunity to reach a broader audience and make a significant impact. By joining our platform, providers can connect with those in need, while organizations can extend their reach and amplify their efforts. Together, we can create a world where essential healthcare and support services are accessible to all. Explore, connect, and contribute to a more compassionate world with Velago today."
     }
   },
-  "Header": {
-    "localeToggle": {
-      "en": "English",
-      "es": "Spanish"
+  "Components": {
+    "Header": {
+      "localeToggle": {
+        "en": "English",
+        "es": "Spanish"
+      },
+      "links": {
+        "map": {
+          "text": "Map"
+        },
+        "contact": {
+          "text": "Contact"
+        },
+        "about": {
+          "text": "About"
+        }
+      }
     },
-    "links": {
-      "map": {
-        "text": "Map"
-      },
-      "contact": {
-        "text": "Contact"
-      },
-      "about": {
-        "text": "About"
-      },
-      "signUp": {
-        "text": "Sign Up"
-      },
-      "signIn": {
-        "text": "Sign In"
-      },
-      "signOut": {
-        "text": "Sign Out"
-      }
-    }
-  },
-  "Footer": {
-    "legal": "All Rights Reserved",
-    "description": "Empowering underprivileged individuals by connecting them with Medicare-accepting healthcare providers and charitable organizations.",
-    "links": {
-      "map": {
-        "text": "Map"
-      },
-      "contact": {
-        "text": "Contact"
-      },
-      "about": {
-        "text": "About"
-      },
-      "privacy": {
-        "text": "Privacy Policy"
-      },
-      "disclaimer": {
-        "text": "Disclaimer"
-      }
-    }
-  },
-  "Sheet": {
-    "sections": {
-      "menu": {
-        "title": "Menu",
-        "links": {
-          "map": {
-            "text": "Map"
-          },
-          "about": {
-            "text": "About"
-          },
-          "contact": {
-            "text": "Contact"
-          }
-        }
-      },
-      "legal": {
-        "title": "Legal",
-        "links": {
-          "privacy": {
-            "text": "Privacy Policy"
-          },
-          "disclaimer": {
-            "text": "Disclaimer"
-          }
-        }
-      },
-      "account": {
-        "title": "Account",
-        "links": {
-          "signIn": {
-            "text": "Sign In"
-          },
-          "signUp": {
-            "text": "Sign Up"
-          }
+    "Spinner": {
+      "sr": "Loading..."
+    },
+    "SignUpButton": {
+      "text": "Sign Up"
+    },
+    "SignInButton": {
+      "text": "Sign In"
+    },
+    "SignOutButton": {
+      "text": "Sign Out"
+    },
+    "ThemeModeToggle": {
+      "sr": "Toggle Theme"
+    },
+    "Dialog": {
+      "sr": "Close"
+    },
+    "Footer": {
+      "legal": "All Rights Reserved",
+      "description": "Empowering underprivileged individuals by connecting them with Medicare-accepting healthcare providers and charitable organizations.",
+      "links": {
+        "map": {
+          "text": "Map"
+        },
+        "contact": {
+          "text": "Contact"
+        },
+        "about": {
+          "text": "About"
+        },
+        "privacy": {
+          "text": "Privacy Policy"
+        },
+        "disclaimer": {
+          "text": "Disclaimer"
         }
       }
-    }
+    },
+    "Sheet": {
+      "sections": {
+        "menu": {
+          "title": "Menu",
+          "links": {
+            "map": {
+              "text": "Map"
+            },
+            "about": {
+              "text": "About"
+            },
+            "contact": {
+              "text": "Contact"
+            }
+          }
+        },
+        "legal": {
+          "title": "Legal",
+          "links": {
+            "privacy": {
+              "text": "Privacy Policy"
+            },
+            "disclaimer": {
+              "text": "Disclaimer"
+            }
+          }
+        },
+        "account": {
+          "title": "Account",
+          "links": {
+            "signIn": {
+              "text": "Sign In"
+            },
+            "signUp": {
+              "text": "Sign Up"
+            }
+          }
+        },
+        "miscellaneous": {
+          "title": "Miscellaneous"
+        }
+      }
+    },
+    "sr": "Close"
   },
   "Validation": {
     "sendResourceSchema": {

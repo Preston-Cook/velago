@@ -9,7 +9,7 @@ import { SheetSection } from './SheetSection';
 import { SheetFooter, SheetHeader, SheetTitle } from './ui/Sheet';
 
 export function SheetSidebar() {
-  const t = useTranslations('Footer');
+  const t = useTranslations('Components.Footer');
 
   return (
     <>

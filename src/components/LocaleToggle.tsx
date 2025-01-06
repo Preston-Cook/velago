@@ -27,7 +27,7 @@ interface LocaleToggleProps {
 }
 
 export function LocaleToggle({ className }: LocaleToggleProps) {
-  const t = useTranslations('Header.localeToggle');
+  const t = useTranslations('Components.Header.localeToggle');
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
   const router = useRouter();

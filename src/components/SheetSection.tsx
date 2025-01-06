@@ -10,7 +10,7 @@ interface SheetLinkProps {
 }
 
 export function SheetSection({ name: sectionName, links }: SheetLinkProps) {
-  const t = useTranslations('Sheet.sections');
+  const t = useTranslations('Components.Sheet.sections');
   const sectionLinks = sheetLinks.filter(({ name }) => links.includes(name));
 
   return (
@@ -26,7 +26,7 @@ export function SheetSection({ name: sectionName, links }: SheetLinkProps) {
         {sectionLinks.map(({ icon, name: linkName, href }) => (
           <IconLink
             className="w-full"
-            i18nRootKey={`Sheet.sections.${sectionName}`}
+            i18nRootKey={`Components.Sheet.sections.${sectionName}`}
             icon={icon}
             name={linkName}
             href={href}

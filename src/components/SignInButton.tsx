@@ -11,7 +11,7 @@ interface SignInButtonProps {
 }
 
 export function SignInButton({ className }: SignInButtonProps) {
-  const t = useTranslations('Header.links');
+  const t = useTranslations('Components.SignInButton');
   const { status } = useSession();
 
   return (
@@ -24,7 +24,7 @@ export function SignInButton({ className }: SignInButtonProps) {
           <Spinner size={1} />
         ) : (
           <>
-            <Key /> {t('signIn.text')}
+            <Key /> {t('text')}
           </>
         )}
       </Button>
